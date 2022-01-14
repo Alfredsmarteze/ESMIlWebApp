@@ -20,49 +20,49 @@ namespace Infrastructure.Service
         public async Task<bool> AddOrUpdatePrayerUnit(PrayerUnitDTOData model)
         {
             bool result;
-            if (model.Id <1)
+            if (model.id <1)
             {
                 var pData = new PrayerUnit
                 {
-                    Surname = model.Surname,
-                    Firstname = model.Firstname,
-                    Middlename = model.Middlename,
-                    PhoneNumber01 = model.PhoneNumber01,
-                    PhoneNumber02 = model.PhoneNumber02,
-                    Email = model.Email,
-                    HomeAddress = model.HomeAddress,
-                    HostelAddress = model.HostelAddress,
-                    CourseOfStudy = model.CourseOfStudy,
-                    Unit = model.Unit,
-                    DateOfBirth = model.DateOfBirth,
-                    PreviousUnit = model.PreviousUnit,
-                    PositionInFamily = model.PositionInFamily,
-                    SocialMediaAddress = model.SocialMediaAddress
+                    Surname = model.surname,
+                    Firstname = model.firstname,
+                    Middlename = model.middlename,
+                    PhoneNumber01 = model.phoneNumber01,
+                    PhoneNumber02 = model.phoneNumber02,
+                    Email = model.email,
+                    HomeAddress = model.homeAddress,
+                    HostelAddress = model.hostelAddress,
+                    CourseOfStudy = model.courseOfStudy,
+                    Unit = model.unit,
+                    DateOfBirth = model.dateOfBirth,
+                    PreviousUnit = model.previousUnit,
+                    PositionInFamily = model.positionInFamily,
+                    SocialMediaAddress = model.socialMediaAddress
                 };
                 _context.prayerUnit.Add(pData);
                 result = await _context.SaveChangesAsync() > 0;
             }
             else
             {
-                var prayerData = _context.prayerUnit.Find(model.Id);
+                var prayerData = _context.prayerUnit.Find(model.id);
                 if (prayerData is null)
                 {
                     throw new("Not found");
                 }
-                    prayerData.Surname = model.Surname;
-                    prayerData.Firstname = model.Firstname;
-                    prayerData.Middlename = model.Middlename;
-                    prayerData.PhoneNumber01 = model.PhoneNumber01;
-                    prayerData.PhoneNumber02 = model.PhoneNumber02;
-                    prayerData.Email = model.Email;
-                    prayerData.HomeAddress = model.HomeAddress;
-                    prayerData.HostelAddress = model.HostelAddress;
-                    prayerData.CourseOfStudy = model.CourseOfStudy;
-                    prayerData.Unit = model.Unit;
-                    prayerData.DateOfBirth = model.DateOfBirth;
-                    prayerData.PreviousUnit = model.PreviousUnit;
-                    prayerData.PositionInFamily = model.PositionInFamily;
-                    prayerData.SocialMediaAddress = model.SocialMediaAddress;
+                    prayerData.Surname = model.surname;
+                    prayerData.Firstname = model.firstname;
+                    prayerData.Middlename = model.middlename;
+                    prayerData.PhoneNumber01 = model.phoneNumber01;
+                    prayerData.PhoneNumber02 = model.phoneNumber02;
+                    prayerData.Email = model.email;
+                    prayerData.HomeAddress = model.homeAddress;
+                    prayerData.HostelAddress = model.hostelAddress;
+                    prayerData.CourseOfStudy = model.courseOfStudy;
+                    prayerData.Unit = model.unit;
+                    prayerData.DateOfBirth = model.dateOfBirth;
+                    prayerData.PreviousUnit = model.previousUnit;
+                    prayerData.PositionInFamily = model.positionInFamily;
+                    prayerData.SocialMediaAddress = model.socialMediaAddress;
                     result = await _context.SaveChangesAsync() > 0;
             }
             return result;

@@ -1,8 +1,13 @@
+using Infrastructure.Interface;
+using Infrastructure.Service;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+//builder.Services.AddScoped<IUnitRepository, UnitRepository>();
+
 
 var app = builder.Build();
 
@@ -21,8 +26,21 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+//app.MapControllerRoute(
 
+//endpoints.MapControllerRoute(
+//              name: "areas",
+//              pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+//name: "default",
+//    pattern: "{controller=UnitManagement}/{action=CreateNewPrayer}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+                  name: "unit",
+                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapControllerRoute(
+        name: "unit",
+        pattern: "{controller=UnitManagement}/{action=CreateNewPrayer}/{id?}");
+});
 app.Run();

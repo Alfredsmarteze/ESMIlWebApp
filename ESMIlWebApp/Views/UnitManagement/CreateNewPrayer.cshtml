@@ -1,0 +1,61 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class=row>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Surname</label>
+            <input id="rowId" type="hidden">
+            <input class="form-control" id="txtSurname" type="text" placeholder="Surname">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Firstname</label>
+            <input class="form-control" id="txtFirstname" type="text" placeholder="Firstname">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Middlename</label>
+            <input class="form-control" id="txtMiddlename" type="text" placeholder="Middlename">
+            </div>
+        </div>
+        <button class="btn btn-close" type="submit" id="saveRecord">Save</button>
+    </div>
+</div>
+@*@section scripts{*@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        
+        var saveUrl="@Url.Action("AddOrUpdatePrayerUnitData","PrayerUnit", new {area="Unit"})";
+
+        $("#saveRecord").click(function(e)
+        {
+            e.preventDefault();
+            var body={
+            id:$("#rowId").val() == "" ? 0: $.trim($("#rowId").val()),
+            surname:$.trim($("#txtSurname").val()),
+            firstname:$.trim($("#txtFirstname").val()),
+            middlename:$.trim($("#txtMiddlename").val()),
+            }
+
+            $.ajax({
+              type: "POST",
+              url:saveUrl,
+              data:JSON.stringify(body),
+              dataType:"json",
+              success: function(event)
+              {
+              alert(event.message)
+              },
+              error:function()
+              {
+              alert("An error occured")
+              }
+            });
+        });
+       
+    </script>
+@*}*@
