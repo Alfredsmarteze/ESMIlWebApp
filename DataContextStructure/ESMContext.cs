@@ -2,14 +2,17 @@
 using DataStructure.Entites;
 namespace DataContextStructure
 {
-        public class ESMContext:DbContext
+    public class ESMContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)=>optionsBuilder.UseSqlServer(@"Server=DESKTOP-GV6K069;Database=ESMPSDb;Trusted_Connection=True"); 
-        
+        public ESMContext(DbContextOptions<ESMContext> option) : base(option)
+        {
+            // var contextOptions = new DbContextOptionsBuilder<ESMContext>().("Data:ConnectionString:Connection").Options;
+
+
+            // using var context = new ESMContext(contextOptions);
+
+        }
         public DbSet<PrayerUnit> prayerUnit { get; set; }
-
-
-          
 
     }
 }

@@ -1,12 +1,19 @@
+using DataContextStructure;
 using Infrastructure.Interface;
 using Infrastructure.Service;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
+builder.Services.AddDbContext<ESMContext>(options =>
+{
+    options.UseSqlServer("Connection");
+});
+
 builder.Services.AddControllersWithViews();
-//builder.Services.AddScoped<IUnitRepository, UnitRepository>();
+builder.Services.AddTransient<IUnitRepository, UnitRepository>();
 
 
 var app = builder.Build();
