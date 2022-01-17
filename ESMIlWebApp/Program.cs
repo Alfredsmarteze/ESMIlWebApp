@@ -7,10 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
-builder.Services.AddDbContext<ESMContext>(options =>
-{
-    options.UseSqlServer("Connection");
-});
+var connectionString = builder.Configuration.GetConnectionString("Connection");
+builder.Services.AddDbContext<ESMContext>(x => x.UseSqlServer(connectionString));
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IUnitRepository, UnitRepository>();
