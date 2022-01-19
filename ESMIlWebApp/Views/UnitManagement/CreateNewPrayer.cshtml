@@ -46,8 +46,8 @@
             console.log(body);
             var modelData=JSON.stringify(body);
             var payload=SiteUtils.encrypt(JSON.stringify(body)).toString();
-            SiteUtils.post({payload:payload}, saveUrl).then(function  (){
-            if(Response.hasError==false)
+            SiteUtils.post({payload:payload}, saveUrl).then(function (response){
+            if(response.hasError==false)
             {
                 alert("Success");
             }

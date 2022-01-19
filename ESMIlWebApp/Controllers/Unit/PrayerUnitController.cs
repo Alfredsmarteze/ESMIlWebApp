@@ -23,7 +23,7 @@ namespace ESMIlWebApp.Controllers.Unit
             return View();
         }
        
-       [HttpPost]
+      // [HttpPost]
         public async Task<IActionResult> AddOrUpdatePrayerUnitData(string payload)
         {
             try
@@ -37,7 +37,7 @@ namespace ESMIlWebApp.Controllers.Unit
                 
                 if (savePrayerUnitData)
              {
-                    return Json(new ResponseModel { hasError = false, message = "Operation Successful", statusaCode = (int)HttpStatusCode.OK }, System.Web.Mvc.JsonRequestBehavior.AllowGet);
+                    return Json(new ResponseModel { hasError = false, message = "Operation successful", statusaCode = (int)HttpStatusCode.OK }, System.Web.Mvc.JsonRequestBehavior.AllowGet);
              }
                 else
                 {

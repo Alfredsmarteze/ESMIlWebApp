@@ -15,7 +15,7 @@ namespace DataStructure.ViewModel
         public string PhoneNumber01 { get; set; }
         public string PhoneNumber02 { get; set; }
         public string Email { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public string HostelAddress { get; set; }
         public string HomeAddress { get; set; }
         public string CourseOfStudy { get; set; }

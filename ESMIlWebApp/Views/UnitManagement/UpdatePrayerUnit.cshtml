@@ -1,0 +1,62 @@
+﻿@model DataStructure.ViewModel.PrayerUnitDTO
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label class="form-control-label">Surname</label>
+                <input id="rowId" class=form-control type="hidden" value=@Model.Id>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label class="form-control">Surname</label>
+                <input id="txtSurname" type="text" value=@Model.Surname>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label class="form-control">Firstname</label>
+                <input id="txtFirstname" type="text" value=@Model.Firstname>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label class="form-control">Middlename</label>
+                <input id="txtMiddlename" type="text" value=@Model.Middlename>
+            </div>
+        </div>
+    </div>
+    <button class="btn" id="btnSaveRecord float-right">Save</button>
+</div>
+@section scripts{
+<script>
+    var saveUrl="@Url.Action("AddOrUpdatePrayerUnitData","PrayerUnit", new {area="Unit"})";
+    
+    $("#btnSaveRecord").click(function(e){
+        e.preventDefault();
+    var body={
+            id:$("#rowId").val() == "" ? 0: $.trim($("#rowId").val()),
+            surname:$.trim($("#txtSurname").val()),
+            firstname:$.trim($("#txtFirstname").val()),
+            middlename:$.trim($("#txtMiddlename").val()),
+    }
+    var payload= SiteUtils.encrypt(JSON.stringify(body)).toStirng();
+    SiteUtils.post({payload:payload},saveUrl).then(function(response){
+        if(response.hasError==false)
+        {
+            alert("Success");
+        }
+        else
+        {
+            alert("Error")
+        }
+    })
+    });
+</script>
+}

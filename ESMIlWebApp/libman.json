@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "datatables.net-bs@2.1.1",
+      "destination": "wwwroot/lib/datatables.net-bs/"
+    },
+    {
+      "library": "datatables-responsive@2.2.9",
+      "destination": "wwwroot/lib/datatables-responsive/"
+    },
+    {
+      "library": "datatables.net@2.1.1",
+      "destination": "wwwroot/lib/datatables.net/"
+    },
+    {
+      "library": "bootstrap-ui-datetime-picker@2.6.4",
+      "destination": "wwwroot/lib/bootstrap-ui-datetime-picker/"
+    }
+  ]
+}

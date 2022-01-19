@@ -33,13 +33,13 @@ namespace Infrastructure.Service
                     Email = model.email,
                     HomeAddress = model.homeAddress,
                     HostelAddress = model.hostelAddress,
-                    CourseOfStudy = "Maths",
-                    //CourseOfStudy = model.courseOfStudy,
+                    CourseOfStudy = model.courseOfStudy,
                     Unit = model.unit,
                     DateOfBirth = model.dateOfBirth,
                     PreviousUnit = model.previousUnit,
                     PositionInFamily = model.positionInFamily,
                     SocialMediaAddress = model.socialMediaAddress
+                    
                 };
                 _context.prayerUnit.Add(pData);
                 result = await _context.SaveChangesAsync() > 0;
@@ -68,6 +68,29 @@ namespace Infrastructure.Service
                     result = await _context.SaveChangesAsync() > 0;
             }
             return result;
+        }
+
+        public IQueryable<PrayerUnitDTO> ListAllPrayerUnitData()
+        {
+            return (from s in _context.prayerUnit
+                    select new PrayerUnitDTO
+                    {
+                        Id = s.Id,
+                        Surname = s.Surname,
+                        Firstname= s.Firstname,
+                        Middlename= s.Middlename,
+                        Unit= s.Unit,
+                        CourseOfStudy= s.CourseOfStudy,
+                        Email= s.Email,
+                        PhoneNumber01= s.PhoneNumber01,
+                        PhoneNumber02= s.PhoneNumber02,
+                        HomeAddress= s.HomeAddress,
+                        HostelAddress= s.HostelAddress,
+                        PreviousUnit =s.PreviousUnit,
+                        DateOfBirth=s.DateOfBirth,
+                        PositionInFamily=s.PositionInFamily,
+                        SocialMediaAddress=s.SocialMediaAddress,
+                    });
         }
     }
 }

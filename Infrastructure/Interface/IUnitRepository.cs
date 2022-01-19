@@ -10,5 +10,6 @@ namespace Infrastructure.Interface
     public interface IUnitRepository
     {
         Task<bool> AddOrUpdatePrayerUnitAsync(PrayerUnitDTOData prayerUnitDTO);
+        IQueryable<PrayerUnitDTO> ListAllPrayerUnitData();
     }
 }
