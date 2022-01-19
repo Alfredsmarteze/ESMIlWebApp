@@ -17,6 +17,9 @@ namespace ESMIlWebApp.Controllers.UnitManagement
             return View();
         }
         [HttpGet]
+        public IActionResult PrayerUnit()=>View();
+
+        [HttpGet]
         public IActionResult CreateNewPrayer() => View();
 
         public IActionResult UpdateprayerUnit()

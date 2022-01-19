@@ -22,8 +22,39 @@ namespace ESMIlWebApp.Controllers.Unit
         {
             return View();
         }
-       
-      // [HttpPost]
+
+        public IActionResult GetAllPrayerUnit()
+        {
+            try
+            {
+                var length = Request.Form["length"].FirstOrDefault();
+                var draw= Request.Form["draw"].FirstOrDefault();
+                var start=Request.Form["start"].FirstOrDefault();
+
+                var search=Request.Form["search[value]"].FirstOrDefault().FirstOrDefault();
+
+                int pageSize = length != null ? int.Parse(length) : 0;
+                int size = start != null ? int.Parse(start) : 0;
+                int totalRecord = 0;
+
+                var prayerRecord=_repository.ListAllPrayerUnitData().ToList();
+
+                if (!string.IsNullOrWhiteSpace(search.ToString()))
+                {
+                    prayerRecord = prayerRecord.Where(s => s.Surname.ToLower().Contains(search)
+                      || s.Firstname.ToLower().Contains(search)
+                      || s.Middlename.ToLower().Contains(search)
+                      || s.PhoneNumber01.ToLower().Contains(search)
+                      || s.PhoneNumber02.ToLower().Contains(search)
+                      ||s.Email.ToLower().Contains(search)).ToList();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public async Task<IActionResult> AddOrUpdatePrayerUnitData(string payload)
         {
             try
