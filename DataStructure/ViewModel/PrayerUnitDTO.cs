@@ -13,7 +13,7 @@ namespace DataStructure.ViewModel
         public string Firstname { get; set; }
         public string Middlename { get; set; }
         public string PhoneNumber01 { get; set; }
-        public string? PhoneNumber02 { get; set; }
+        public string PhoneNumber02 { get; set; }
         public string Email { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string HostelAddress { get; set; }
@@ -33,8 +33,8 @@ namespace DataStructure.ViewModel
         public string firstname { get; set; }
         public string middlename { get; set; }
         public string phoneNumber01 { get; set; }
-        public string? phoneNumber02 { get; set; }
-        public string email { get; set; }
+        public string phoneNumber02 { get; set; }
+        public string? email { get; set; }
         public DateTime dateOfBirth { get; set; }
         public string hostelAddress { get; set; }
         public string homeAddress { get; set; }

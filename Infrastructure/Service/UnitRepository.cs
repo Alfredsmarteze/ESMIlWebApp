@@ -17,8 +17,9 @@ namespace Infrastructure.Service
         {
             _context = context;
         }
-        public async Task<bool> AddOrUpdatePrayerUnit(PrayerUnitDTOData model)
+        public async Task<bool> AddOrUpdatePrayerUnitAsync(PrayerUnitDTOData model)
         {
+            
             bool result;
             if (model.id <1)
             {
@@ -32,7 +33,8 @@ namespace Infrastructure.Service
                     Email = model.email,
                     HomeAddress = model.homeAddress,
                     HostelAddress = model.hostelAddress,
-                    CourseOfStudy = model.courseOfStudy,
+                    CourseOfStudy = "Maths",
+                    //CourseOfStudy = model.courseOfStudy,
                     Unit = model.unit,
                     DateOfBirth = model.dateOfBirth,
                     PreviousUnit = model.previousUnit,

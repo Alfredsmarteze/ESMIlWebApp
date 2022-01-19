@@ -3,30 +3,33 @@
 }
 <div class="container">
     <div class=row>
+        <form>
         <div class="col-4">
             <div class="form-group">
-            <label class="form-label">Surname</label>
+            <label class="form-label"></label>
             <input id="rowId" type="hidden">
             <input class="form-control" id="txtSurname" type="text" placeholder="Surname">
             </div>
         </div>
         <div class="col-4">
             <div class="form-group">
-            <label class="form-label">Firstname</label>
+            <label class="form-label"></label>
             <input class="form-control" id="txtFirstname" type="text" placeholder="Firstname">
             </div>
         </div>
         <div class="col-4">
             <div class="form-group">
-            <label class="form-label">Middlename</label>
+            <label class="form-label"></label>
             <input class="form-control" id="txtMiddlename" type="text" placeholder="Middlename">
             </div>
         </div>
-        <button class="btn btn-close" type="submit" id="saveRecord">Save</button>
+        <button class="btn" type="submit" onclick id="saveRecord">Save</button>
+        </form>
     </div>
 </div>
-@*@section scripts{*@
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
     <script>
         
         var saveUrl="@Url.Action("AddOrUpdatePrayerUnitData","PrayerUnit", new {area="Unit"})";
@@ -40,22 +43,34 @@
             firstname:$.trim($("#txtFirstname").val()),
             middlename:$.trim($("#txtMiddlename").val()),
             }
-
-            $.ajax({
-              type: "POST",
-              url:saveUrl,
-              data:JSON.stringify(body),
-              dataType:"json",
-              success: function(event)
-              {
-              alert(event.message)
-              },
-              error:function()
-              {
-              alert("An error occured")
-              }
-            });
+            console.log(body);
+            var modelData=JSON.stringify(body);
+            var payload=SiteUtils.encrypt(JSON.stringify(body)).toString();
+            SiteUtils.post({payload:payload}, saveUrl).then(function  (){
+            if(Response.hasError==false)
+            {
+                alert("Success");
+            }
+            else{
+            alert("Error");
+            }
+            })
+            //$.ajax({
+            //  type: "POST",
+            //  url:saveUrl,
+            //  data:body,
+            //  dataType:'json',
+            //  //contentType:'application/json; charset=utf-8',
+            //  success: function(data)
+            //  {
+            //  alert(data.message)
+            //  },
+            //  error:function()
+            //  {
+            //  alert("An error occured")
+            //  }
+            //});
         });
-       
+                   
     </script>
-@*}*@
+}

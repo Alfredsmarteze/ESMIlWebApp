@@ -9,6 +9,6 @@ namespace Infrastructure.Interface
 {
     public interface IUnitRepository
     {
-        Task<bool> AddOrUpdatePrayerUnit(PrayerUnitDTOData model);
+        Task<bool> AddOrUpdatePrayerUnitAsync(PrayerUnitDTOData prayerUnitDTO);
     }
 }
