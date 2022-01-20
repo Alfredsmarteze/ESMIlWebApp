@@ -1,5 +1,163 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Prayer unit";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<div class="table-responsive">
+    <div style="overflow-x:scroll">
+        <table id="prayerTable" width="100%" class="nowrap">
+            <thead>
+                <tr>
+                    <th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>
+                    <th>ID</th>
+                    <th></th>
+                    <th>Surname</th>
+                    <th>Firstname</th>
+                    <th>Middlename</th>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th><input class="form-control search-input" data-column="" type="text"></th>
+                    <th><input class="form-control search-input" data-column="" type="text"></th>
+                    <th><input class="form-control search-input" data-column="" type="text"></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="invoice-footer">
+        <div class="invoice-logo">
+            <div class="row">
+                <div id="paginationLength">
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    <div id="paginationInfo"></div>
+                </div>
+            </div>
+            <div class="invoice-info">
+                <div class="dataTables_paginate paging_simple_numbers" id="pagination"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using(Html.BeginForm("ViewPrayerUnit","UnitManagement",FormMethod.Post, new { id="viewPrayerForm", target="_blank"}))
+{
+    <input type="hidden" name="viewRecordId" id="viewRecordId">
+}
+@using(Html.BeginForm("UpdatePrayerUnit","UnitManagement",FormMethod.Post, new { id="updatePrayerForm", target="_blank"}))
+{
+    <input type="hidden" name="updateRecordId" id="updateRecordId">
+}
+
+
+@section scripts{
+    <script>
+        var arraysOfIds =[];
+        var table=$("#prayerTable").DataTable({
+        "lenghtMenu":[[10,20,25,50, -1],[10,20,25,50,"All"]],
+        "processing": true, // for show progress bar
+        "serverSide": true, // for process server side
+        "filter": true, // this is for disable filter (search box)
+        "orderMulti": false, // for disable multiple column at once
+        colReorder: false,
+        rowReorder:false,
+        //select: true,
+        //dom: 'Bfrtip',
+        "ajax":{
+        "url":"@Url.Action("GetAllPrayerUnit","PrayerUnit", new{area="Unit"})",
+        "type":"POST",
+        "dataType":"json",
+        "data":function(arg){}
+        },
+        "columns":[
+            {
+                'data':"Id",
+                'targets':0,
+                'searchable':false,
+                'orderable':false,
+                'className':'dt-body-center',
+                'render':function(data,type,full,meta){
+                    return '<input type="checkbox" name="id[]" value="'+$('<div/>').Text(data).html() + '">';
+                }
+            },
+            {'data':"Id", "name":"Id", "autoWidth":false},
+            {'data':null, "name":"Action", "defaultContent":'<div class="btn-group mr-1 mb-1">'+
+            "<button aria-expanded='false' aria-haspopup='true' class='btn btn-white dropdown-toggle' data-toggle='dropdown' id='dropdownMenuDetail' type='button'></button>"+
+            "<div aria-labelledby='dropdownMenuButton6' class='dropdown-menu'>"+
+            "<a class='dropdown-item' href='#' id='changeRecord' title='Update record'><i class='fa fa-edit'></i>&nbsp; Update record</a>"+
+            "<a class='dropdown-item' href='#' id='viewRecord' title='View record'><i class='fa fa-info-circle'></i>&nbsp; View record</a>"+
+            "</div>"+
+            '</div>'
+        },
+        {'data':"surname", "name":"Surname", "autoWidth":false},
+        {'data':"firstname", "name":"firstname", "autoWidth":false},
+        {'data':"middlename", "name":"middlename", "autoWidth":false},
+        ],
+
+        initComplete: function () {
+                    $('#prayerTable_length').appendTo($('#paginationLenght'))
+                    $('#prayerTable_filter').appendTo($('#Search'))
+                    $('#prayerTable_paginate').appendTo($('#pagination'))
+                    $('#prayerTable_info').appendTo($('#paginationInfo'))
+                    //$('#bankTable_').appendTo($('#export'))
+                },
+        });
+
+        $('.search-input').on('keyup change', function(){
+        var index=$(this).attr('data-column'),
+        val=$(this).val();
+        table.columns(index).search(val.trim()).draw();
+        });
+
+        $('#example-select-all').on('click', function(){
+            var rows=table.rows({'search':'applied'}).nodes() //All rows with search applied
+            $('input[type="checkbox"]', rows).prop('checked', this.checked); //check and uncheck for all rows in the table
+            getSelectedRowsId();
+        });
+        // Handle click on checkbox to set state of "Select all" control
+        $("#prayerTable tbody").on('change','input[type="check"Box]', function(){
+            if(!this.checked)// If checkbox is not checked
+            {
+                var el=$('#example-select-all').get(0);
+                if(el && el.checked &&('indeterminate' in el))// If "Select all" control is checked and has 'indeterminate' property
+                {
+                    el.indeterminate=true;
+                }
+            }
+            getSelectedRowsId();
+        })
+
+        function getSelectedRowsId()
+        {
+         arraysOfIds=[];
+         table.$('inpu[type="checkbox"]').each(function(){
+            if(this.checked){
+             arraysOfIds.push(this.value);
+            }
+         });
+        }
+
+         $('#prayerTable tbody').on('click', '#viewRecord', function (e) {
+                e.preventDefault();
+                var data = table.row($(this).parents('tr')).data();
+                $("#viewRecordId").val(data.Id);
+                $("#viewPrayerForm").submit();
+
+            });
+
+            $('#prayerTable tbody').on('click', '#changeRecord', function (e) {
+                e.preventDefault();
+                var data = table.row($(this).parents('tr')).data();
+                $("#updateRecordId").val(data.Id);
+                $("#updatePrayerForm").submit();
+
+                console.log(data.Id)
+            });
+
+    </script>
 }

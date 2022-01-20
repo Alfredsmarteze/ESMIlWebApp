@@ -34,7 +34,7 @@ namespace ESMIlWebApp.Controllers.Unit
                 var search=Request.Form["search[value]"].FirstOrDefault().FirstOrDefault();
 
                 int pageSize = length != null ? int.Parse(length) : 0;
-                int size = start != null ? int.Parse(start) : 0;
+                int skip = start != null ? int.Parse(start) : 0;
                 int totalRecord = 0;
 
                 var prayerRecord=_repository.ListAllPrayerUnitData().ToList();
@@ -48,12 +48,21 @@ namespace ESMIlWebApp.Controllers.Unit
                       || s.PhoneNumber02.ToLower().Contains(search)
                       ||s.Email.ToLower().Contains(search)).ToList();
                 }
+                totalRecord = prayerRecord.Count;
+                prayerRecord=prayerRecord.OrderByDescending(s=>s.Id).ToList();
+                if (pageSize !=-1)
+                {
+                    prayerRecord = prayerRecord.OrderByDescending(s => s.Id).Skip(skip).Take(pageSize).ToList();
+                }
+                return Json(new { draw = draw, recordsFiltered = totalRecord, recordTotal = totalRecord, data = prayerRecord });
+
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                throw;
+               errorMessage = e.Message;
             }
+            return Json(new ResponseModel{ message = $" Error:\a {errorMessage}" });
         }
         public async Task<IActionResult> AddOrUpdatePrayerUnitData(string payload)
         {

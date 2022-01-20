@@ -46,6 +46,6 @@ app.UseEndpoints(endpoints =>
                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
     endpoints.MapControllerRoute(
         name: "unit",
-        pattern: "{controller=UnitManagement}/{action=UpdatePrayerUnit}/{id?}");
+        pattern: "{controller=UnitManagement}/{action=PrayerUnit}/{id?}");
 });
 app.Run();
