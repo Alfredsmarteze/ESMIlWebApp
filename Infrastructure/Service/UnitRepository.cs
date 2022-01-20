@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Threading.Tasks;
 using DataStructure.ViewModel;
 using DataStructure.Entites;
 using DataContextStructure;
 using Infrastructure.Interface;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Service
 {
@@ -68,6 +71,16 @@ namespace Infrastructure.Service
                     result = await _context.SaveChangesAsync() > 0;
             }
             return result;
+        }
+
+        public string DeletePrayerUnit(int[] ids)
+        {
+            foreach (var id in ids)
+            {
+                var query = $"Delete from Prayerunit where Id={id}";
+                _context.Database.ExecuteSqlRaw(query);
+            }
+            return "";
         }
 
         public IQueryable<PrayerUnitDTO> ListAllPrayerUnitData()

@@ -11,5 +11,6 @@ namespace Infrastructure.Interface
     {
         Task<bool> AddOrUpdatePrayerUnitAsync(PrayerUnitDTOData prayerUnitDTO);
         IQueryable<PrayerUnitDTO> ListAllPrayerUnitData();
+        string DeletePrayerUnit(int [] ids);
     }
 }

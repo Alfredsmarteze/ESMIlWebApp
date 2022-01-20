@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Infrastructure.Interface;
 using ESMIlWebApp.Ultilities;
+using ESMIlWebApp.Models;
 using DataStructure.ViewModel;
 using System.Net;
 using Newtonsoft.Json;
@@ -12,11 +13,13 @@ namespace ESMIlWebApp.Controllers.Unit
     public class PrayerUnitController : Controller
     {
         private readonly IUnitRepository _repository;
+        private readonly ILogger<PrayerUnitController> _logger;
         private string errorMessage=string.Empty;
 
-        public PrayerUnitController(IUnitRepository repository)
+        public PrayerUnitController(IUnitRepository repository, ILogger<PrayerUnitController> logger)
         {
             _repository = repository;
+            _logger = logger;
         }
         public IActionResult Index()
         {
@@ -59,7 +62,7 @@ namespace ESMIlWebApp.Controllers.Unit
             }
             catch (Exception e)
             {
-
+                _logger.LogError("Error", e.Message);
                errorMessage = e.Message;
             }
             return Json(new ResponseModel{ message = $" Error:\a {errorMessage}" });
@@ -77,18 +80,60 @@ namespace ESMIlWebApp.Controllers.Unit
                 
                 if (savePrayerUnitData)
              {
-                    return Json(new ResponseModel { hasError = false, message = "Operation successful", statusaCode = (int)HttpStatusCode.OK }, System.Web.Mvc.JsonRequestBehavior.AllowGet);
+                    return Json(new ResponseModel { hasError = false, message = "Operation successful", statusCode = (int)HttpStatusCode.OK }, System.Web.Mvc.JsonRequestBehavior.AllowGet);
              }
                 else
                 {
-                    return Json(new ResponseModel { hasError = true, message = "Operation not successful", statusaCode = (int)HttpStatusCode.InternalServerError });
+                    return Json(new ResponseModel { hasError = true, message = "Operation not successful", statusCode = (int)HttpStatusCode.InternalServerError });
                 }
             }
             catch (Exception ex)
             {
+                _logger.LogError("Error", ex.Message);
                 errorMessage = ex.Message;
             }
-            return Json(new ResponseModel { message = $"Error: {errorMessage}", statusaCode = (int)HttpStatusCode.Conflict });
+            return Json(new ResponseModel { message = $"Error: {errorMessage}", statusCode = (int)HttpStatusCode.Conflict });
+        }
+
+        public ActionResult ActionButton(string payload)
+        {
+            var exceptionMessage = string.Empty;
+
+            //UserAction para
+            try
+            {
+                if (string.IsNullOrWhiteSpace(payload))
+                {
+                    return Json(new ResponseModel { message = "Bad request"});
+                }
+
+                payload = EncryptionExtensions.DecryptStringAES(payload);
+
+                var Model = JsonConvert.DeserializeObject<UserAction>(payload);
+
+                if (Model.actionType == null || Model.ids == null)
+                {
+                    return Json(new ResponseModel { message = "Bad request" });
+                }
+
+                int[] ids = Array.ConvertAll(Model.ids.ToArray(), p => Convert.ToInt32(p));
+
+                switch (Model.actionType)
+                {
+                    case "btnDelete":
+                        _repository.DeletePrayerUnit(ids);
+                        break;
+                    default:
+                        break;
+                }
+                return Json(new ResponseModel { hasError = false, message = "Operation completed successfully", statusCode=(int)HttpStatusCode.OK });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error", ex);
+                errorMessage = ex.Message;
+            }
+            return Json(new ResponseModel { message = $" Errror: {errorMessage}", statusCode=(int)HttpStatusCode.NotImplemented});
         }
     }
 }

@@ -17,6 +17,14 @@
     {
       "library": "bootstrap-ui-datetime-picker@2.6.4",
       "destination": "wwwroot/lib/bootstrap-ui-datetime-picker/"
+    },
+    {
+      "library": "bootbox.js@5.5.2",
+      "destination": "wwwroot/lib/bootbox.js/"
+    },
+    {
+      "library": "font-awesome@5.15.4",
+      "destination": "wwwroot/lib/font-awesome/"
     }
   ]
 }
