@@ -34,7 +34,7 @@ namespace ESMIlWebApp.Controllers.Unit
                 var draw= Request.Form["draw"].FirstOrDefault();
                 var start=Request.Form["start"].FirstOrDefault();
 
-                var search=Request.Form["search[value]"].FirstOrDefault().FirstOrDefault();
+                var search=Request.Form["search[value]"].FirstOrDefault();
 
                 int pageSize = length != null ? int.Parse(length) : 0;
                 int skip = start != null ? int.Parse(start) : 0;
@@ -57,7 +57,8 @@ namespace ESMIlWebApp.Controllers.Unit
                 {
                     prayerRecord = prayerRecord.OrderByDescending(s => s.Id).Skip(skip).Take(pageSize).ToList();
                 }
-                return Json(new { draw = draw, recordsFiltered = totalRecord, recordTotal = totalRecord, data = prayerRecord });
+                return Json(new { draw = draw, recordsFiltered = totalRecord, recordTotal = totalRecord, 
+                    data = prayerRecord});
 
             }
             catch (Exception e)
@@ -80,7 +81,7 @@ namespace ESMIlWebApp.Controllers.Unit
                 
                 if (savePrayerUnitData)
              {
-                    return Json(new ResponseModel { hasError = false, message = "Operation successful", statusCode = (int)HttpStatusCode.OK }, System.Web.Mvc.JsonRequestBehavior.AllowGet);
+                    return Json(new ResponseModel { hasError = false, message = "Operation successful", statusCode = (int)HttpStatusCode.OK });
              }
                 else
                 {

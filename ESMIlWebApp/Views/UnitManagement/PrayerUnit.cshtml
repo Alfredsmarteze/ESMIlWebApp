@@ -4,7 +4,7 @@
 }
 
 <div class="controls-below-table">
-            <div class="table-records-info">
+           @* <div class="table-records-info">
                 <div class="col-auto">
                     <div class="input-group">
                         <button aria-expanded="false" aria-haspopup="true" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton1" type="button" style="min-width:100px;left: unset;top:auto !important;text-align: left">Action</button>
@@ -20,7 +20,7 @@
                     </div>
                     
                 </div>
-            </div>
+            </div>*@
             <div class="table-records-pages">
                 <form class="row g-3">
                     
@@ -29,9 +29,9 @@
 
                         </div>
                     </div>
-                    <div class="col-auto" style="padding-right:20px !important">
-                        <a asp-action="CreatePrayerUnit" asp-controller="UnitManagement" asp-area="unit" class="btn btn-primary float-right"><i class="fa fa-plus"></i> | &nbsp;<span> &nbsp;&nbsp;&nbsp; </span></a>
-                    </div>
+                   @* <div class="col-auto" style="padding-right:20px !important">
+                        <a asp-action="CreatePrayerUnit" asp-controller="UnitManagement" asp-area="Unit" class="btn btn-primary float-right"><i class="fa fa-plus"></i> | &nbsp;<span> &nbsp;&nbsp;&nbsp; </span></a>
+                    </div>*@
                 </form>
             </div>
         </div>
@@ -41,7 +41,7 @@
         <table id="prayerTable" width="100%" class="nowrap">
             <thead>
                 <tr>
-                    <th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>
+                    @*<th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>*@
                     <th>ID</th>
                     <th></th>
                     <th>Surname</th>
@@ -49,33 +49,33 @@
                     <th>Middlename</th>
                 </tr>
             </thead>
-            <thead>
+            @*<thead>
                 <tr>
-                    <th></th>
+                    @*<th></th>
                     <th></th>
                     <th></th>
                     <th><input class="form-control search-input" data-column="" type="text"></th>
                     <th><input class="form-control search-input" data-column="" type="text"></th>
                     <th><input class="form-control search-input" data-column="" type="text"></th>
                 </tr>
-            </thead>
+            </thead>*@
             <tbody>
             </tbody>
         </table>
     </div>
-    <div class="invoice-footer">
-        <div class="invoice-logo">
-            <div class="row">
-                <div id="paginationLength">
-                    <div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                    <div id="paginationInfo"></div>
+   @*<div class="invoice-footer">
+       <div class="invoice-logo">
+           <div class="row">
+               <div id="paginationLenght">
                 </div>
-            </div>
-            <div class="invoice-info">
-                <div class="dataTables_paginate paging_simple_numbers" id="pagination"></div>
-            </div>
-        </div>
-    </div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                <div id="paginationInfo"></div>
+           </div>
+       </div>
+       <div class=invoice-info>
+           <div class="dataTables_paginate paging_simple_numbers" id="pagination"></div>
+       </div>
+   </div>*@
 </div>
 
 @using(Html.BeginForm("ViewPrayerUnit","UnitManagement",FormMethod.Post, new { id="viewPrayerForm", target="_blank"}))
@@ -91,7 +91,7 @@
 @section scripts{
     <script>
         var arraysOfIds =[];
-
+        
         function Action_Click(option) {
             $('.ActionType').val(option);
             if (option == 'btnForVerification') {
@@ -135,17 +135,17 @@
         "data":function(arg){}
         },
         "columns":[
-            {
-                'data':"Id",
-                'targets':0,
-                'searchable':false,
-                'orderable':false,
-                'className':'dt-body-center',
-                'render':function(data,type,full,meta){
-                    return '<input type="checkbox" name="id[]" value="'+$('<div/>').Text(data).html() + '">';
-                }
-            },
-            {'data':"Id", "name":"Id", "autoWidth":false},
+            //{
+            //    'data':"id",
+            //    'targets':0,
+            //    'searchable':false,
+            //    'orderable':false,
+            //    'className':'dt-body-center',
+            //    'render':function(data,type,full,meta){
+            //        return '<input type="checkbox" name="id[]" value="'+$('<div/>').Text(data).html() + '">';
+            //    }
+            //},
+            {'data':"id", "name":"Id", "autoWidth":false},
             {'data':null, "name":"Action", "defaultContent":'<div class="btn-group mr-1 mb-1">'+
             "<button aria-expanded='false' aria-haspopup='true' class='btn btn-white dropdown-toggle' data-toggle='dropdown' id='dropdownMenuDetail' type='button'></button>"+
             "<div aria-labelledby='dropdownMenuButton1' class='dropdown-menu'>"+
@@ -153,22 +153,20 @@
             "<a class='dropdown-item' href='#' id='viewRecord' title='View record'><i class='fa fa-info-circle'></i>&nbsp; View record</a>"+
             "<a class='dropdown-item show_in_pending' href='#' id='deleteRecord' title='Delete Record'><i class='fa fa-trash-o'></i>&nbsp;Delete Record</a>" +
             "</div>"+
-            '</div>'
-        },
-        {'data':"surname", "name":"Surname", "autoWidth":false},
+            '</div>'  },
+        {'data':"surname", "name":"surname", "autoWidth":false},
         {'data':"firstname", "name":"firstname", "autoWidth":false},
         {'data':"middlename", "name":"middlename", "autoWidth":false},
         ],
 
         initComplete: function () {
-                    $('#prayerTable_length').appendTo($('#paginationLenght'))
-                    $('#prayerTable_filter').appendTo($('#Search'))
-                    $('#prayerTable_paginate').appendTo($('#pagination'))
-                    $('#prayerTable_info').appendTo($('#paginationInfo'))
+                   // $('#prayerTable_length').appendTo($('#paginationLenght'))
+                  //  $('#prayerTable_filter').appendTo($('#Search'))
+                  //  $('#prayerTable_paginate').appendTo($('#pagination'))
+                  //  $('#prayerTable_info').appendTo($('#paginationInfo'))
                     //$('#bankTable_').appendTo($('#export'))
                 },
         });
-
         $('.search-input').on('keyup change', function(){
         var index=$(this).attr('data-column'),
         val=$(this).val();
@@ -190,7 +188,9 @@
                     el.indeterminate=true;
                 }
             }
-            getSelectedRowsId();
+            g
+            
+            etSelectedRowsId();
         })
 
         function getSelectedRowsId()
