@@ -1,9 +1,10 @@
-﻿@{
+﻿@model DataStructure.Entites.PrayerUnit;
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container">
-    <div class=row>
-        <form>
+    <div class="row mg-b-25">
+        <form enctype="multipart/form-data" asp-action="AddOrUpdatePrayerUnitData" asp-controller="PrayerUnit">
         <div class="col-4">
             <div class="form-group">
             <label class="form-label"></label>
@@ -23,16 +24,128 @@
             <input class="form-control" id="txtMiddlename" type="text" placeholder="Middlename">
             </div>
         </div>
-        <button class="btn" type="submit" onclick id="saveRecord">Save</button>
+         @*<div class="col-4">
+            <div class="form-group">
+            <label class="form-label"></label>
+            <input id="rowId" type="hidden">
+            <input class="form-control" id="txtPhoneNumber01" type="text" placeholder="Phone Number 01">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label"></label>
+            <input class="form-control" id="txtPhoneNumber02" type="text" placeholder="Phone Number 02">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label"></label>
+            <input class="form-control" id="txtEmail" type="text" placeholder="Email">
+            </div>
+        </div>*@
+        <div class="col-lg-4">
+                            <div class="form-group mg-b-10-force">
+                                <label for="">Date Of Birth</label>
+                                <div class="date-input">
+                                    <div class="date-input">
+                                        <input class="date form-control" placeholder="Date Of Birth" id="txtEmployDate" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- col-4 -->
+        @*<div class="col-4">
+            <div class="form-group">
+            <label class="form-label"></label>
+            <input class="form-control" id="txtHostelAddress" type="text" placeholder="Hostel Address">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label"></label>
+            <input class="form-control" id="txtHomeAddress" type="text" placeholder="Home Address">
+            </div>
+        </div>*@
+      @*  <div class="col-4">
+            <div class="form-group custom-file" id="imgPhot">
+            <label class="form-label custom-file-label">Choose File...</label>
+            <input  asclass="form-control custom-file-input input" id="imgPhoto" type="file" placeholder="">
+            </div>
+        </div> *@    
+         <div class="form-group custom-file">
+                <input asp-for="Photo" class="form-control custom-file-input input" type="file" />
+                <label asp-for="Photo" class="custom-file-label">Choose File...</label>
+                @*<span asp-validation-for="Photo" class="text-danger"></span>*@
+            </div>
+        @*<div class="col-4">
+            <div class="form-group">
+        <div id="file">Choose file</div>
+        <input type="file" name="file" style="display:none;"/>
+        </div>
+        </div>*@
+         <div class="col-4">
+            <div class="form-group">
+            <label class="form-label"></label>
+            <input class="form-control" id="txtCourseOfStudy" type="text" placeholder="Course Of Study">
+            </div>
+        </div>
+        @*<div class="col-4">
+            <div class="form-group">
+            <label class="form-label"></label>
+            <input class="form-control" id="txtUnit" type="text" placeholder="Unit">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label"></label>
+            <input class="form-control" id="txtPreviousUnit" type="text" placeholder="Previous Unit">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label"></label>
+            <input class="form-control" id="txtPositionInFamily" type="text" placeholder="Position In Family">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label"></label>
+            <input class="form-control" id="txtSocialMediaAddress" type="text" placeholder="Social Media Address">
+            </div>
+        </div>*@
+
+        <button class="btn" type="submit" id="saveRecord">Save</button>
         </form>
     </div>
 </div>
+
 @section scripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
     @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
     <script>
         
         var saveUrl="@Url.Action("AddOrUpdatePrayerUnitData","PrayerUnit", new {area="Unit"})";
+
+         $('.input').on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileName);
+            })
+
+
+               // var wrapper = $('<div/>').css({height:0,width:0,'overflow':'hidden'});
+               // var fileInput = $(':file').wrap(wrapper);
+               // var text;
+
+               // fileInput.change(function(){
+               // $this = $(this);
+               // $('#file').html($this.val());
+               // text = $('#file').html();
+               // text = text.substring(text.lastIndexOf("\\") + 1, text.length);
+               // $('#file').html(text);
+               // });
+
+               //$('#file').click(function(){
+               //fileInput.click();
+               //}).show();
 
         $("#saveRecord").click(function(e)
         {
@@ -42,8 +155,11 @@
             surname:$.trim($("#txtSurname").val()),
             firstname:$.trim($("#txtFirstname").val()),
             middlename:$.trim($("#txtMiddlename").val()),
+            dateOfBirth:$.trim($("#txtEmployDate").val()),
+          //  image:$.trim($("#imgPhoto").val())
+            
             }
-            console.log(body);
+            console.log(body.photo);
             var modelData=JSON.stringify(body);
             var payload=SiteUtils.encrypt(JSON.stringify(body)).toString();
             SiteUtils.post({payload:payload}, saveUrl).then(function (response){
@@ -71,6 +187,11 @@
             //  }
             //});
         });
-                   
+           
+          jQuery(".date").datetimepicker({
+            timepicker: false,
+            format: 'd/m/Y'
+        });
+
     </script>
 }

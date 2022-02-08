@@ -14,12 +14,14 @@ namespace ESMIlWebApp.Controllers.Unit
     {
         private readonly IUnitRepository _repository;
         private readonly ILogger<PrayerUnitController> _logger;
+        private readonly IWebHostEnvironment _iWebHostEnvironment;
         private string errorMessage=string.Empty;
 
-        public PrayerUnitController(IUnitRepository repository, ILogger<PrayerUnitController> logger)
+        public PrayerUnitController(IUnitRepository repository, ILogger<PrayerUnitController> logger, IWebHostEnvironment webHostEnvironment)
         {
             _repository = repository;
             _logger = logger;
+            _iWebHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
@@ -36,8 +38,8 @@ namespace ESMIlWebApp.Controllers.Unit
 
                 var search=Request.Form["search[value]"].FirstOrDefault();
 
-                int pageSize = length != null ? int.Parse(length) : 0;
-                int skip = start != null ? int.Parse(start) : 0;
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                int skip = start != null ? Convert.ToInt32(start) : 0;
                 int totalRecord = 0;
 
                 var prayerRecord=_repository.ListAllPrayerUnitData().ToList();
@@ -49,16 +51,21 @@ namespace ESMIlWebApp.Controllers.Unit
                       || s.Middlename.ToLower().Contains(search)
                       || s.PhoneNumber01.ToLower().Contains(search)
                       || s.PhoneNumber02.ToLower().Contains(search)
-                      ||s.Email.ToLower().Contains(search)).ToList();
+                      || s.Email.ToLower().Contains(search)).ToList();
                 }
-                totalRecord = prayerRecord.Count;
+                totalRecord = prayerRecord.Count();
                 prayerRecord=prayerRecord.OrderByDescending(s=>s.Id).ToList();
                 if (pageSize !=-1)
                 {
                     prayerRecord = prayerRecord.OrderByDescending(s => s.Id).Skip(skip).Take(pageSize).ToList();
                 }
-                return Json(new { draw = draw, recordsFiltered = totalRecord, recordTotal = totalRecord, 
-                    data = prayerRecord});
+                return Json(new 
+                { 
+                    draw = draw, 
+                    recordsFiltered = totalRecord, 
+                    recordsTotal = totalRecord, 
+                    data = prayerRecord
+                });
 
             }
             catch (Exception e)
@@ -73,10 +80,12 @@ namespace ESMIlWebApp.Controllers.Unit
             try
             {
                 var model = new PrayerUnitDTOData();
-
+                
                 payload = EncryptionExtensions.DecryptStringAES(payload);
                 var newModel = JsonConvert.DeserializeObject<PrayerUnitDTOData>(payload);
-
+                string uniqueFileName = null;
+                uniqueFileName = ProcessImageUpload(newModel, uniqueFileName);
+                newModel.photo = uniqueFileName;
                 var savePrayerUnitData = await _repository.AddOrUpdatePrayerUnitAsync(newModel);
                 
                 if (savePrayerUnitData)
@@ -95,7 +104,20 @@ namespace ESMIlWebApp.Controllers.Unit
             }
             return Json(new ResponseModel { message = $"Error: {errorMessage}", statusCode = (int)HttpStatusCode.Conflict });
         }
-
+        private string ProcessImageUpload(PrayerUnitDTOData unitDTOData, string uniqueFileName)
+        {
+            if (unitDTOData.Image != null)
+            {
+                string upload = Path.Combine(_iWebHostEnvironment.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + unitDTOData.Image.FileName;
+                string filePath = Path.Combine(upload, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    unitDTOData.Image.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
+        }
         public ActionResult ActionButton(string payload)
         {
             var exceptionMessage = string.Empty;

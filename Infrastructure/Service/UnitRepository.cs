@@ -10,6 +10,7 @@ using DataContextStructure;
 using Infrastructure.Interface;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Infrastructure.Service
 {
@@ -26,6 +27,7 @@ namespace Infrastructure.Service
             bool result;
             if (model.id <1)
             {
+                
                 var pData = new PrayerUnit
                 {
                     Surname = model.surname,
@@ -41,7 +43,8 @@ namespace Infrastructure.Service
                     DateOfBirth = model.dateOfBirth,
                     PreviousUnit = model.previousUnit,
                     PositionInFamily = model.positionInFamily,
-                    SocialMediaAddress = model.socialMediaAddress
+                    SocialMediaAddress = model.socialMediaAddress,
+                    Photo = model.photo,
                     
                 };
                 _context.prayerUnit.Add(pData);
@@ -50,6 +53,7 @@ namespace Infrastructure.Service
             else
             {
                 var prayerData = _context.prayerUnit.Find(model.id);
+               
                 if (prayerData is null)
                 {
                     throw new("Not found");
@@ -68,11 +72,13 @@ namespace Infrastructure.Service
                     prayerData.PreviousUnit = model.previousUnit;
                     prayerData.PositionInFamily = model.positionInFamily;
                     prayerData.SocialMediaAddress = model.socialMediaAddress;
+                  //  prayerData.Photo = uniqueFileName;
                     result = await _context.SaveChangesAsync() > 0;
             }
             return result;
         }
 
+      
         public string DeletePrayerUnit(int[] ids)
         {
             foreach (var id in ids)
@@ -89,20 +95,21 @@ namespace Infrastructure.Service
                     select new PrayerUnitDTO
                     {
                         Id = s.Id,
-                        Surname = s.Surname,
-                        Firstname= s.Firstname,
-                        Middlename= s.Middlename,
-                        Unit= s.Unit,
-                        CourseOfStudy= s.CourseOfStudy,
-                        Email= s.Email,
-                        PhoneNumber01= s.PhoneNumber01,
-                        PhoneNumber02= s.PhoneNumber02,
-                        HomeAddress= s.HomeAddress,
-                        HostelAddress= s.HostelAddress,
-                        PreviousUnit =s.PreviousUnit,
-                        DateOfBirth=s.DateOfBirth,
-                        PositionInFamily=s.PositionInFamily,
-                        SocialMediaAddress=s.SocialMediaAddress,
+                        Surname = s.Surname==null ? "": s.Surname,
+                        Firstname= s.Firstname == null ? "" : s.Firstname,
+                        Middlename= s.Middlename == null ? "" : s.Middlename,
+                        Unit= s.Unit == null ? "" : s.Unit,
+                        CourseOfStudy= s.CourseOfStudy == null ? "" : s.CourseOfStudy,
+                        Email= s.Email == null ? "" : s.Email,
+                        PhoneNumber01= s.PhoneNumber01 == null ? "" : s.PhoneNumber01,
+                        PhoneNumber02= s.PhoneNumber02 == null ? "" : s.PhoneNumber02,
+                        HomeAddress= s.HomeAddress == null ? "" : s.HomeAddress,
+                        HostelAddress= s.HostelAddress == null ? "" : s.HostelAddress,
+                        PreviousUnit =s.PreviousUnit == null ? "" : s.PreviousUnit,
+                        DateOfBirth=s.DateOfBirth == null ? null : s.DateOfBirth,
+                        PositionInFamily=s.PositionInFamily == null ? "" : s.PositionInFamily,
+                        SocialMediaAddress=s.SocialMediaAddress == null ? "" : s.SocialMediaAddress,
+                        Photo= s.Photo == null ? "":s.Photo,
                     });
         }
     }

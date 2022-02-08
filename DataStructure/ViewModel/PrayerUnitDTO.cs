@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,8 @@ namespace DataStructure.ViewModel
         public string PositionInFamily { get; set; }
         public string SocialMediaAddress { get; set; }
         public string Photo { get; set; }
+         
+        public string strDateOfBirth { get { if (DateOfBirth.HasValue) { return DateOfBirth.Value.ToString("dd/MM/yyyy"); } else { return string.Empty; } } }
     }
 
     public class PrayerUnitDTOData
@@ -43,6 +46,7 @@ namespace DataStructure.ViewModel
         public string previousUnit { get; set; }
         public string positionInFamily { get; set; }
         public string socialMediaAddress { get; set; }
+        public IFormFile Image { get; set; }
         public string photo { get; set; }
     }
 }
