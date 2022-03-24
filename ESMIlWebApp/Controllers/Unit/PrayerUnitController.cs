@@ -32,9 +32,12 @@ namespace ESMIlWebApp.Controllers.Unit
         {
             try
             {
+                //var length = Request.Form["length"].FirstOrDefault();
+                //var draw= Request.Form["draw"].FirstOrDefault();
+                //var start=Request.Form["start"].FirstOrDefault();
+                var draw = Request.Form["draw"].FirstOrDefault();
+                var start = Request.Form["start"].FirstOrDefault();
                 var length = Request.Form["length"].FirstOrDefault();
-                var draw= Request.Form["draw"].FirstOrDefault();
-                var start=Request.Form["start"].FirstOrDefault();
 
                 var search=Request.Form["search[value]"].FirstOrDefault();
 
@@ -83,9 +86,9 @@ namespace ESMIlWebApp.Controllers.Unit
                 
                 payload = EncryptionExtensions.DecryptStringAES(payload);
                 var newModel = JsonConvert.DeserializeObject<PrayerUnitDTOData>(payload);
-                string uniqueFileName = null;
-                uniqueFileName = ProcessImageUpload(newModel, uniqueFileName);
-                newModel.photo = uniqueFileName;
+              //  string uniqueFileName = null;
+             //   uniqueFileName = ProcessImageUpload(newModel, uniqueFileName);
+             //   newModel.photo = uniqueFileName;
                 var savePrayerUnitData = await _repository.AddOrUpdatePrayerUnitAsync(newModel);
                 
                 if (savePrayerUnitData)
@@ -104,20 +107,21 @@ namespace ESMIlWebApp.Controllers.Unit
             }
             return Json(new ResponseModel { message = $"Error: {errorMessage}", statusCode = (int)HttpStatusCode.Conflict });
         }
-        private string ProcessImageUpload(PrayerUnitDTOData unitDTOData, string uniqueFileName)
-        {
-            if (unitDTOData.Image != null)
-            {
-                string upload = Path.Combine(_iWebHostEnvironment.WebRootPath, "images");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + unitDTOData.Image.FileName;
-                string filePath = Path.Combine(upload, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    unitDTOData.Image.CopyTo(fileStream);
-                }
-            }
-            return uniqueFileName;
-        }
+        //private string ProcessImageUpload(PrayerUnitDTOData unitDTOData, string uniqueFileName)
+        //{
+
+        //    if (unitDTOData.Image != null)
+        //    {
+        //        string upload = Path.Combine(_iWebHostEnvironment.WebRootPath, "images");
+        //        uniqueFileName = Guid.NewGuid().ToString() + "_" + unitDTOData.Image.FileName;
+        //        string filePath = Path.Combine(upload, uniqueFileName);
+        //        using (var fileStream = new FileStream(filePath, FileMode.Create))
+        //        {
+        //            unitDTOData.Image.CopyTo(fileStream);
+        //        }
+        //    }
+        //    return uniqueFileName;
+        //}
         public ActionResult ActionButton(string payload)
         {
             var exceptionMessage = string.Empty;

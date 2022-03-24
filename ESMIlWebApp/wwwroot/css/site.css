@@ -19,7 +19,25 @@ body {
 
 
 
+.btn-group,
+.btn-group-vertical {
+    position: relative;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    vertical-align: middle;
+}
+    .btn-group > .btn:not(:last-child):not(.dropdown-toggle), .all-wrapper .btn-group > .fc-button:not(:last-child):not(.dropdown-toggle),
+    .btn-group > .btn-group:not(:last-child) > .btn, .all-wrapper
+    .btn-group > .btn-group:not(:last-child) > .fc-button {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
 
-
-
-
+.btn-primary:not(:disabled):not(.disabled):active, .all-wrapper .fc-button.fc-state-active:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .all-wrapper .fc-button.fc-state-active:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle, .all-wrapper
+.show > .dropdown-toggle.fc-button.fc-state-active {
+    color: #fff;
+    background-color: #0362c6;
+    border-color: #035cb9;
+}

@@ -1,0 +1,12 @@
+﻿@model List<ESMIlWebApp.Models.GenderModel>
+
+   <select class="form-control select2" placeholder="Gender" id="drpGender">
+
+    @foreach (var item in Model)
+    {
+        <option value="@item.value">
+            @item.type
+        </option>
+    }
+
+</select>

@@ -4,6 +4,17 @@ html {
     overflow-x: hidden;
 }
 
+
+.invoice-footer .invoice-info span {
+    display: inline-block;
+}
+
+    .invoice-footer .invoice-info span + span {
+        margin-left: 1rem;
+        padding-left: 1rem;
+        border-left: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
 .content-box {
     padding: 2rem 10rem !important;
 }

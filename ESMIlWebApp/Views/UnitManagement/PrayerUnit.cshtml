@@ -3,7 +3,22 @@
     Layout = "~/Views/Shared/_layout.cshtml";
 }
 
+<style>
+    .dataTables_wrapper .row:first-child {
+        border-bottom: 0;
+        margin-bottom: 0;
+        margin-top: 0;
+        padding-bottom: 0;
+    }
 
+    div.dataTables_wrapper div.dataTables_length select {
+        width: 170px;
+    }
+
+    .btnn{
+        margin-top:1.4rem;
+    }
+</style>
 
 <div class="controls-below-table">
             @*<div class="table-records-info">
@@ -39,14 +54,14 @@
         </div>
 
 <div class="table-responsive">
-    <div style="overflow-x:scroll">
-        <table id="prayerTable" width="100%" class="nowrap table-striped">
+    @*<div style="overflow-x:scroll">*@
+        <table id="prayerTable" width="100%" class="table-compact table-condensed table-striped">
             <thead>
                 <tr>
                     <th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>
-                    <th>Photo Passport
+                   <th>Action</th>
+                    <th>Photo Passport</th>
                     <th>ID</th>
-                    <th>Action</th>
                     <th>Surname</th>
                     <th>Firstname</th>
                     <th>Middlename</th>
@@ -66,7 +81,8 @@
             <tbody>
             </tbody>
         </table>
-    </div>
+    @*</div>*@
+    
    @*<div class="invoice-footer">
        <div class="invoice-logo">
            <div class="row">
@@ -92,7 +108,7 @@
 }
 
 
-@section scripts{
+@section scripts{           
     <script>
         var arraysOfIds =[];
         
@@ -128,6 +144,7 @@
         "serverSide": true, // for process server side
         "filter": true, // this is for disable filter (search box)
         "orderMulti": false, // for disable multiple column at once
+        "paginate":true,
        // colReorder: false,
       //  rowReorder:false,
         //select: true,
@@ -135,7 +152,7 @@
         "ajax":{
         "url":"@Url.Action("GetAllPrayerUnit","PrayerUnit", new{area="Unit"})",
         "type":"POST",
-        "dataType":"json",
+        "datatype":"json",
         "data":function(arg){}
         },
         "columns":[
@@ -149,44 +166,42 @@
                     return '<input type="checkbox" name="id[]" value="'+$('<div/>').text(data).html() + '">';
                 }
             },
-            {'data':"photo", 
-            'searchable':false,
-            'orderable':false,
-            'render':function(data, type, row, full, meta){
-        return '<img src="'+data.photo+'" alt="Passport" style="height:50px; width:50px;"/>';
-        }},
-            {'data':"id", "name":"Id", "autoWidth":false},
-            {'data':null, "name":"Action", "defaultContent":'<div class="btn-group mr-1 mb-1">'+
+            {
+            "data": null, "name":"Action", "defaultContent":'<div class="btn-group mr-1 mb-1">'+
             "<button aria-expanded='false' aria-haspopup='true' class='btn btn-white dropdown-toggle' data-toggle='dropdown' id='dropdownMenuDetail' type='button'></button>"+
             "<div aria-labelledby='dropdownMenuButton6' class='dropdown-menu'>"+
             "<a class='dropdown-item' href='#' id='changeRecord' title='Update record'><i class='fa fa-edit'></i>&nbsp; Update record</a>"+
             "<a class='dropdown-item' href='#' id='viewRecord' title='View record'><i class='fa fa-info-circle'></i>&nbsp; View record</a>"+
             "<a class='dropdown-item' href='#' id='deleteRecord' title='Delete Record'><i class='fa fa-trash-o'></i>&nbsp;Delete Record</a>" +
             "</div>"+
-            '</div>'},
+            '</div>'
+        },
+            {'data':"photo", 
+            'searchable':false,
+            'orderable':false,
+            'render':function(data, type, row, full, meta){
+        return '<img src="'+data.photo+'" alt="Passport" style="height:50px; width:50px;"/>';
+        }},
+        {'data':"id", "name":"Id", "autoWidth":false},
         {'data':"surname", "name":"surname", "autoWidth":false},
         {'data':"firstname", "name":"firstname", "autoWidth":false},
         {'data':"middlename", "name":"middlename", "autoWidth":false},
         {'data':"strDateOfBirth", "name":"dateofbirth", "autoWidth":false},
         ],
 
-
-       // initComplete: function () {  return '<img src="'+data+'" style="height:100px; width:100px;"/>';
-             //     $('#prayerTable_length').appendTo($('#paginationLenght'))
-                 //   $('#prayerTable_filter').appendTo($('#Search'))
-           //         $('#prayerTable_paginate').appendTo($('#pagination'))
-         //           $('#prayerTable_info').appendTo($('#paginationInfo'))
-                    //$('#bankTable_').appendTo($('#export'))
-        // },C:\fakepath\CaptureImageDisplay.PNG
-
+       
+       // initComplete: function (){ 
+       //             $('#prayerTable_length').appendTo($('#paginationLenght'))
+       //             $('#prayerTable_filter').appendTo($('#search'))
+       //             $('#prayerTable_paginate').appendTo($('#pagination'))
+       //             $('#prayerTable_info').appendTo($('#paginationInfo'))
+       //},
          "footerCallback": function (row, data, start, end, display) {
                     var api = this.api(), data;
 
                     var json = api.ajax.json();
 
-                    //console.log(json.data);
-
-
+                   
           },
           "order": [[2, 'desc']]
         });
@@ -213,7 +228,9 @@
             }
             getSelectedRowsId();
         })
-
+        $("#dropdownMenuDetail").on("click", function(){
+            alert("Hi");
+        });
         function getSelectedRowsId()
         {
          arraysOfIds=[];

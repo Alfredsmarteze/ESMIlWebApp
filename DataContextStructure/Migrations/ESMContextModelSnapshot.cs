@@ -82,6 +82,23 @@ namespace DataContextStructure.Migrations
 
                     b.ToTable("prayerUnit");
                 });
+
+            modelBuilder.Entity("DataStructure.Entites.State", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("StateName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("state");
+                });
 #pragma warning restore 612, 618
         }
     }

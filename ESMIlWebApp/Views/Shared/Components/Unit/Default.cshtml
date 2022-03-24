@@ -1,0 +1,12 @@
+﻿@model List<ESMIlWebApp.Models.UnitModel>
+
+   <select class="form-control select2" placeholder="Unit" id="drpUnit">
+
+    @foreach (var item in Model)
+    {
+        <option value="@item.Value">
+            @item.Value
+        </option>
+    }
+
+</select>

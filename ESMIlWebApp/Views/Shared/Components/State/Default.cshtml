@@ -1,0 +1,12 @@
+﻿@model List<DataStructure.ViewModel.StateDTO>
+
+   <select class="form-control select2" placeholder="State" id="drpState">
+
+    @foreach (var item in Model)
+    {
+        <option value="@item.StateName">
+            @item.StateName
+        </option>
+    }
+
+</select>

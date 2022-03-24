@@ -17,9 +17,19 @@ namespace Infrastructure.Service
     public class UnitRepository:IUnitRepository
     {
         private readonly ESMContext _context;
-        public UnitRepository(ESMContext context)
+        private readonly IHostingEnvironment _environment;
+        public UnitRepository(ESMContext context, IHostingEnvironment environment)
         {
             _context = context;
+            this._environment = environment;
+        }
+        public IQueryable<StateDTO> ListState()
+        {
+            return _context.state.AsNoTracking().Select(s => new StateDTO
+            {
+                StateName=s.StateName
+            });
+                    
         }
         public async Task<bool> AddOrUpdatePrayerUnitAsync(PrayerUnitDTOData model)
         {
@@ -72,13 +82,29 @@ namespace Infrastructure.Service
                     prayerData.PreviousUnit = model.previousUnit;
                     prayerData.PositionInFamily = model.positionInFamily;
                     prayerData.SocialMediaAddress = model.socialMediaAddress;
-                  //  prayerData.Photo = uniqueFileName;
+                    prayerData.Photo =model.photo;
                     result = await _context.SaveChangesAsync() > 0;
             }
             return result;
         }
 
-      
+        private string UploadedFile(PrayerUnitDTOData model)
+        {
+            string uniqueFileName = null;
+
+            if (model.Image != null)
+            {
+                string uploadsFolder = Path.Combine(_environment.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.Image.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
+        }
+
         public string DeletePrayerUnit(int[] ids)
         {
             foreach (var id in ids)
@@ -112,5 +138,7 @@ namespace Infrastructure.Service
                         Photo= s.Photo == null ? "":s.Photo,
                     });
         }
+
+       
     }
 }

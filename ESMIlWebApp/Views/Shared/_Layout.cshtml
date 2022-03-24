@@ -4,8 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ESMIlWebApp</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/select2/css/select2.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/datatables/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="~/lib/datatables/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    @*<link rel="stylesheet" href="~/lib/select2/css/select2.css" />*@
+    @*<link rel="stylesheet" href=~/css/custom.css/>*@
+    @*<link rel="stylesheet" href=~/css/main.css>*@
+    <link rel="stylesheet" href=~/css/StyleSheet.css/>
     @*<link rel="stylesheet" href="~/lib/datatables.net-bs5/dataTables.bootstrap5.css.min.css" />*@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ESMIlWebApp.styles.css" asp-append-version="true" />
@@ -44,20 +50,35 @@
             &copy; 2022 - ESMIlWebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/js/select2/js/select2.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    @*<script src="~/lib/datatables.net/jquery.dataTables.js" ></script>*@
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js" ></script>
+    @*<script src="~/lib/datatables/js/dataTables.dataTables.min.js" ></script>*@
+ <script src="~/lib/datatables/js/datatables.bootstrap4.min.js" ></script>
+    <script src=~/lib/bootstrap/dist/js/bootstrap.min.js></script>
+    @*<script src="~/lib/popper.js/popper.min.js"></script>
+    @*<script src="~/js/select2/js/select2.js"></script>*@
+  
+@*    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+    
     @*<scrip src="~/lib/datatables.net-bs5/dataTables.bootstrap5.min.js"></scrip>*@
+    @*<script src="~/lib/datatables.net-bs/dataTables.bootstrap.js"></script>*@
     @*<scrip src="~/lib/datatables.net-bs5/dataTables.bootstrap5.min.js"></scrip>*@
-    <script src="~/lib/dropdown.js/jquery.dropdown.js"></script>
-    <script src="~/js/dependencies.min.js"></script>
+    @*<script src="~/lib/dropdown.js/jquery.dropdown.js"></script>*@
+    @*<script src="~/js/dependencies.min.js"></script>*@
     <script src="~/js/JavaScriptUtils.js"></script>
     
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/lib/datatables.net/jquery.dataTables.min.js" ></script>
+    
+    
+    
     <script src="~/lib/bootbox.js/bootbox.min.js"></script>
-    <script src="~/lib/datatables.net-bs/dataTables.bootstrap.min.js"></script>
     <script src="~/lib/font-awesome/js/all.min.js"></script>
+
+  @*  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>*@
     
     @await RenderSectionAsync("Scripts", required: false)
 </body>

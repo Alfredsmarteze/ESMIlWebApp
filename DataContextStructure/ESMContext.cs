@@ -17,6 +17,7 @@ namespace DataContextStructure
 
 
         public DbSet<PrayerUnit> prayerUnit { get; set; }
+        public DbSet<State> state { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
