@@ -7,56 +7,220 @@
 
 <div class="container">
     <div class="row">
-        <div class="col">
+        <form >
+        <div class="row">
+        <div class="col-4">
             <div class="form-group">
-                <label class="form-control-label">Surname</label>
-                <input id="rowId" class=form-control type="hidden" value=@Model.Id>
+            <label class="form-label">Surname</label>
+            <input id="rowId" type="hidden">
+            <input class="form-control" id="txtSurname" type="text" value="@Model.Surname" placeholder="">
+            </div>
+           
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Firstname</label>
+            <input class="form-control" id="txtFirstname" type="text" value="@Model.Firstname" placeholder="">
             </div>
         </div>
-        <div class="col">
+        <div class="col-4">
             <div class="form-group">
-                <label class="form-control">Surname</label>
-                <input id="txtSurname" type="text" value=@Model.Surname>
+            <label class="form-label">Middlename</label>
+            <input class="form-control" id="txtMiddlename" type="text" value="@Model.Middlename" placeholder="">
             </div>
         </div>
-        <div class="col">
+        </div>
+        <br/>
+        <div class="row">
+        <div class="col-lg-4">
+           <div class="form-group mg-b-10-force">
+              <label class="form-control-label">Gender</label>
+          <vc:gender></vc:gender> 
+          </div>
+        </div>
+        <div class="col-lg-4">
+                            <div class="form-group mg-b-10-force">
+                                <label for="">Date Of Birth</label>
+                                <div class="date-input">
+                                    <div class="date-input">
+                                        <input type="date" class="date form-control" placeholder="" id="txtDateofBirth" value="@Model.DateOfBirth">
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- col-4 -->
+        </div>
+        <br>
+        <div class="row">
+        <div class="col-lg-4">
+           <div class="form-group mg-b-10-force">
+              <label class="form-control-label">State of origin</label>
+          <vc:gender></vc:gender> 
+          </div>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-lg-4">
+           <div class="form-group mg-b-10-force">
+              <label class="form-control-label">LGA</label>
+          <vc:gender></vc:gender> 
+          </div>
+        </div>
+        </div>
+        <br/>
+        <div class="row">
+         <div class="col-4">
             <div class="form-group">
-                <label class="form-control">Firstname</label>
-                <input id="txtFirstname" type="text" value=@Model.Firstname>
+            <label class="form-label">Phone Number 1</label>
+            <input class="form-control" id="txtPhoneNumber01" type="text" value="@Model.PhoneNumber01" placeholder="">
             </div>
         </div>
-        <div class="col">
+        <div class="col-4">
             <div class="form-group">
-                <label class="form-control">Middlename</label>
-                <input id="txtMiddlename" type="text" value=@Model.Middlename>
+            <label class="form-label">Phone Number 2</label>
+            <input class="form-control" id="txtPhoneNumber02" type="text" value="@Model.PhoneNumber02" placeholder="">
             </div>
         </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-control" id="txtEmail" type="text" value="@Model.Email" placeholder="">
+            </div>
+        </div>
+        </div>
+        <br/>
+        <div class="row">
+        
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Hostel Address</label>
+            <input class="form-control" id="txtHostelAddress" type="text" value="@Model.HostelAddress" placeholder="">
+            </div>
+        </div>
+         <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Home Address</label>
+            <input class="form-control" id="txtHomeAddress" type="text" value="@Model.HomeAddress" placeholder="">
+            </div>
+        </div>
+               
+        <div/>
+        </div>
+        <br/>
+        <div class="row">
+         <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Course of Study</label>
+            <input class="form-control" id="txtCourseOfStudy" type="text" value="@Model.CourseOfStudy" placeholder="">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Unit</label>
+            <vc:unit></vc:unit>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Previous Unit</label>
+            <vc:unit></vc:unit>
+            </div>
+        </div>
+        <br/>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Position in Family</label>
+            <input class="form-control" id="txtPositionInFamily" type="text" value="@Model.PositionInFamily" placeholder="">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Social Media Address</label>
+            <input class="form-control" id="txtSocialMediaAddress" type="text" value="@Model.SocialMediaAddress" placeholder="">
+            </div>
+        </div>
+        <div class="col-lg-4">
+                            <div class="form-group mg-b-10-force">
+                                <label for="">Date Join ESM</label>
+                                <div class="date-input">
+                                    <div class="date-input">
+                                        <input type="date" class="date form-control" value="@Model.DateJoinESM" placeholder="" id="txtDateJoinESM">
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- col-4 -->
+        </div>
+        
+        <div class="text-center">
+            <br/>
+        <button class="btn btn-primary" type="submit" id="saveRecord">Save</button>
+        </div>
+        </form>
     </div>
-    <button class="btn" id="btnSaveRecord float-right">Save</button>
+    <button class="btn float-right" id="btnSaveRecord">Save</button>
 </div>
+
+
 @section scripts{
 <script>
     var saveUrl="@Url.Action("AddOrUpdatePrayerUnitData","PrayerUnit", new {area="Unit"})";
     
-    $("#btnSaveRecord").click(function(e){
-        e.preventDefault();
-    var body={
-            id:$("#rowId").val() == "" ? 0: $.trim($("#rowId").val()),
-            surname:$.trim($("#txtSurname").val()),
-            firstname:$.trim($("#txtFirstname").val()),
-            middlename:$.trim($("#txtMiddlename").val()),
-    }
-    var payload= SiteUtils.encrypt(JSON.stringify(body)).toStirng();
-    SiteUtils.post({payload:payload},saveUrl).then(function(response){
-        if(response.hasError==false)
-        {
-            alert("Success");
-        }
-        else
-        {
-            alert("Error")
-        }
-    })
+    $(document).ready(function(){
+    $("drpGender").val('@Model.Gender').trigger('change');
+    $("drpState").val('@Model.StateOfOrigin').trigger('change');
+    $("drpState").val('@Model.LGA').trigger('change');
+    $("drpUnit").val('@Model.Unit').trigger('change');
+    $("drpUnit").val('@Model.PreviousUnit').trigger('change');
     });
+    $("#btnSaveRecord").click(function(e)
+    {
+        e.preventDefault();
+        
+    var body={
+            Id:$("#rowId").val() == "" ? 0: $.trim($("#rowId").val()),
+            Surname:$.trim($("#txtSurname").val()),
+            Firstname:$.trim($("#txtFirstname").val()),
+            Middlename:$.trim($("#txtMiddlename").val()),
+            DateOfBirth:$.trim($("#txtDateofBirth").val()),
+            Gender:$.trim($("#drpGender").val()),
+            Email:$.trim($("#txtEmail").val()),
+            PhoneNumber01:$.trim($("#txtPhoneNumber01").val()),
+            PhoneNumber02:$.trim($("#txtPhoneNumber02").val()),
+            StateOfOrigin:$("#drpState").val(),
+            LGA:$("#drpState").val(),
+            Unit:$("#drpUnit").val(),
+            PreviousUnit:$("#drpUnit").val(),
+            PositionInFamily:$.trim($("#txtPositionInFamily").val()),
+            SocialMediaAddress:$.trim($("#txtSocialMediaAddress").val()),
+            HostelAddress:$.trim($("#txtHostelAddress").val()),
+            HomeAddress:$.trim($("#txtHomeAddress").val()),
+            DateJoinESM:$.trim($("#txtDateJoinESM").val()),
+            CourseOfStudy:$.trim($("#txtCourseOfStudy").val()),
+    }
+    //var payload=SiteUtils.encrypt(JSON.stringify(body)).toStirng();
+    //    SiteUtils.post({payload:payload}, saveUrl).then(function (response){
+    //    if(response.hasError==false)
+    //    {
+    //        alert("Success");
+    //    }
+    //    else
+    //    {
+    //        alert("Error");
+    //    }
+    //})
+    var payload=SiteUtils.encrypt(JSON.stringify(body)).toString();
+            SiteUtils.post({payload:payload}, saveUrl).then(function (response){
+            if(response.hasError==false)
+            {
+                alert("Success");
+            }
+            else{
+            alert("Error");
+            }
+            })
+
+    
+   
+    });
+
 </script>
 }

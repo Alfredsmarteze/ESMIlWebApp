@@ -2,8 +2,10 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container">
-    <div class="row mg-b-25 bg-white">
+<h4 class="text-muted">Prayer Unit</h4>
+<h5 class="text-muted">Capture new record</h5>
+<div class="container" style="background-color:lightblue">
+    <div class="row">
         <form >
         <div class="row">
         <div class="col-4">
@@ -12,6 +14,7 @@
             <input id="rowId" type="hidden">
             <input class="form-control" id="txtSurname" type="text" placeholder="">
             </div>
+           
         </div>
         <div class="col-4">
             <div class="form-group">
@@ -27,6 +30,7 @@
         </div>
         </div>
         <br/>
+        <div class="row">
         <div class="col-lg-4">
            <div class="form-group mg-b-10-force">
               <label class="form-control-label">Gender</label>
@@ -43,12 +47,29 @@
                                 </div>
                             </div>
                         </div><!-- col-4 -->
+        </div>
+        <br>
+        <div class="row">
+        <div class="col-lg-4">
+           <div class="form-group mg-b-10-force">
+              <label class="form-control-label">State of origin</label>
+          <vc:gender></vc:gender> 
+          </div>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-lg-4">
+           <div class="form-group mg-b-10-force">
+              <label class="form-control-label">LGA</label>
+          <vc:gender></vc:gender> 
+          </div>
+        </div>
+        </div>
         <br/>
         <div class="row">
          <div class="col-4">
             <div class="form-group">
             <label class="form-label">Phone Number 1</label>
-            <input id="rowId" type="hidden">
             <input class="form-control" id="txtPhoneNumber01" type="text" placeholder="">
             </div>
         </div>
@@ -65,6 +86,7 @@
             </div>
         </div>
         </div>
+        <br/>
         <div class="row">
         
         <div class="col-4">
@@ -81,23 +103,6 @@
         </div>
                
         <div/>
-       @* <div class="col-4">
-            <div class="form-group custom-file" id="imgPhot">
-            <label class="form-label custom-file-label">Choose File...</label>
-            <input  asclass="form-control custom-file-input input" id="imgPhoto" type="file" placeholder="">
-            </div>
-        </div>     *@
-        @* <div class="form-group custom-file">
-                <input asp-for="Photo" class="form-control custom-file-input input" type="file" />
-                <label asp-for="Photo" class="custom-file-label">Choose File...</label>
-                @*<span asp-validation-for="Photo" class="text-danger"></span>*
-            </div>*@
-        @*<div class="col-4">
-            <div class="form-group">
-        <div id="file">Choose file</div>
-        <input type="file" name="file" style="display:none;"/>
-        </div>
-        </div>*@
         </div>
         <br/>
         <div class="row">
@@ -116,9 +121,10 @@
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Previous Unit</label>
-            <vc:State></vc:State>
+            <vc:unit></vc:unit>
             </div>
         </div>
+        <br/>
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Position in Family</label>
@@ -131,6 +137,16 @@
             <input class="form-control" id="txtSocialMediaAddress" type="text" placeholder="">
             </div>
         </div>
+        <div class="col-lg-4">
+                            <div class="form-group mg-b-10-force">
+                                <label for="">Date Join ESM</label>
+                                <div class="date-input">
+                                    <div class="date-input">
+                                        <input type="date" class="date form-control" placeholder="" id="txtDateJoinESM">
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- col-4 -->
         </div>
         
         <div class="text-center">
@@ -145,7 +161,7 @@
    @* <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>*@
     @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
     <script>
-        
+  
         var saveUrl="@Url.Action("AddOrUpdatePrayerUnitData","PrayerUnit", new {area="Unit"})";
 
          //$(document).ready(function(){
@@ -177,17 +193,28 @@
             //    var geekss = e.target.files[0].name;
             //})
             var body={
-            id:$("#rowId").val() == "" ? 0: $.trim($("#rowId").val()),
-            surname:$.trim($("#txtSurname").val()),
-            firstname:$.trim($("#txtFirstname").val()),
-            middlename:$.trim($("#txtMiddlename").val()),
-            dateOfBirth:$.trim($("#txtEmployDate").val()),
-            courseOfStudy:$.trim($("#txtCourseOfStudy").val()),
-            photo:$.trim($("#imgPhoto").val())
-            
+            Id:$("#rowId").val() == "" ? 0: $.trim($("#rowId").val()),
+            Surname:$.trim($("#txtSurname").val()),
+            Firstname:$.trim($("#txtFirstname").val()),
+            Middlename:$.trim($("#txtMiddlename").val()),
+            DateOfBirth:$.trim($("#txtDateofBirth").val()),
+            Gender:$("#drpGender").val(),
+            Email:$.trim($("#txtEmail").val()),
+            PhoneNumber01:$.trim($("#txtPhoneNumber01").val()),
+            PhoneNumber02:$.trim($("#txtPhoneNumber02").val()),
+            StateOfOrigin:$("#drpGender").val(),
+            LGA:$("#drpGender").val(),
+            Unit:$("#drpUnit").val(),
+            PreviousUnit:$("#drpUnit").val(),
+            PositionInFamily:$.trim($("#txtPositionInFamily").val()),
+            SocialMediaAddress:$.trim($("#txtSocialMediaAddress").val()),
+            HostelAddress:$.trim($("#txtHostelAddress").val()),
+            HomeAddress:$.trim($("#txtHomeAddress").val()),
+            DateJoinESM:$.trim($("#txtDateJoinESM").val()),
+            CourseOfStudy:$.trim($("#txtCourseOfStudy").val()),
             }
-            console.log(body.photo);
-            var modelData=JSON.stringify(body);
+            //var modelData=JSON.stringify(body);
+            console.log(body);
             var payload=SiteUtils.encrypt(JSON.stringify(body)).toString();
             SiteUtils.post({payload:payload}, saveUrl).then(function (response){
             if(response.hasError==false)
@@ -201,7 +228,7 @@
             //$.ajax({
             //  type: "POST",
             //  url:saveUrl,
-            //  data:body,
+            //  data:JSON.stringify(body),
             //  dataType:'json',
             //  //contentType:'application/json; charset=utf-8',
             //  success: function(data)

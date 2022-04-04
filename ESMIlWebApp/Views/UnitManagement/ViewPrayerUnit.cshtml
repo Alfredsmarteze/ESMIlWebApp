@@ -1,5 +1,156 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model DataStructure.ViewModel.PrayerUnitDTO
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+
+<div class="container">
+    <div class="row">
+        <form >
+        <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Surname</label>
+            <input id="rowId" type="hidden">
+            <input class="form-control" id="txtSurname" type="text" value="@Model.Surname" readonly>
+            </div>
+           
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Firstname</label>
+            <input class="form-control" id="txtFirstname" type="text" value="@Model.Firstname" readonly>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Middlename</label>
+            <input class="form-control" id="txtMiddlename" type="text" value="@Model.Middlename" readonly>
+            </div>
+        </div>
+        </div>
+        <br/>
+        <div class="row">
+        <div class="col-lg-4">
+           <div class="form-group mg-b-10-force">
+              <label class="form-control-label">Gender</label>
+          <vc:gender></vc:gender> 
+          </div>
+        </div>
+        <div class="col-lg-4">
+                            <div class="form-group mg-b-10-force">
+                                <label for="">Date Of Birth</label>
+                                <div class="date-input">
+                                    <div class="date-input">
+                                        <input type="date" class="date form-control" readonly id="txtDateofBirth" value="@Model.DateOfBirth">
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- col-4 -->
+        </div>
+        <br>
+        <div class="row">
+        <div class="col-lg-4">
+           <div class="form-group mg-b-10-force">
+              <label class="form-control-label">State of origin</label>
+          <vc:gender></vc:gender> 
+          </div>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-lg-4">
+           <div class="form-group mg-b-10-force">
+              <label class="form-control-label">LGA</label>
+          <vc:gender></vc:gender> 
+          </div>
+        </div>
+        </div>
+        <br/>
+        <div class="row">
+         <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Phone Number 1</label>
+            <input class="form-control" id="txtPhoneNumber01" type="text" value="@Model.PhoneNumber01" readonly>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Phone Number 2</label>
+            <input class="form-control" id="txtPhoneNumber02" type="text" value="@Model.PhoneNumber02" readonly>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-control" id="txtEmail" type="text" value="@Model.Email" readonly>
+            </div>
+        </div>
+        </div>
+        <br/>
+        <div class="row">
+        
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Hostel Address</label>
+            <input class="form-control" id="txtHostelAddress" type="text" value="@Model.HostelAddress" readonly>
+            </div>
+        </div>
+         <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Home Address</label>
+            <input class="form-control" id="txtHomeAddress" type="text" value="@Model.HomeAddress" readonly>
+            </div>
+        </div>
+               
+        <div/>
+        </div>
+        <br/>
+        <div class="row">
+         <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Course of Study</label>
+            <input class="form-control" id="txtCourseOfStudy" type="text" value="@Model.CourseOfStudy"  readonly>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Unit</label>
+            <vc:unit></vc:unit>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Previous Unit</label>
+            <vc:unit></vc:unit>
+            </div>
+        </div>
+        <br/>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Position in Family</label>
+            <input class="form-control" id="txtPositionInFamily" type="text" value="@Model.PositionInFamily" readonly>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Social Media Address</label>
+            <input class="form-control" id="txtSocialMediaAddress" type="text" value="@Model.SocialMediaAddress" readonly>
+            </div>
+        </div>
+        <div class="col-lg-4">
+                            <div class="form-group mg-b-10-force">
+                                <label for="">Date Join ESM</label>
+                                <div class="date-input">
+                                    <div class="date-input">
+                                        <input type="date" class="date form-control" value="@Model.DateJoinESM" readonly id="txtDateJoinESM">
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- col-4 -->
+        </div>
+        
+       
+        </form>
+    </div>
+</div>

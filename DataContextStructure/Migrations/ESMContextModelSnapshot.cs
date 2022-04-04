@@ -45,10 +45,16 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("Firstname")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("HomeAddress")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HostelAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LGA")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Middlename")
@@ -70,6 +76,9 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SocialMediaAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StateOfOrigin")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")

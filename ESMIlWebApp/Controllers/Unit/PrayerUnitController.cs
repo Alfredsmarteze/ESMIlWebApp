@@ -138,21 +138,21 @@ namespace ESMIlWebApp.Controllers.Unit
 
                 var Model = JsonConvert.DeserializeObject<UserAction>(payload);
 
-                if (Model.actionType == null || Model.ids == null)
+                if (Model.ids == null)
                 {
                     return Json(new ResponseModel { message = "Bad request" });
                 }
-
+                
                 int[] ids = Array.ConvertAll(Model.ids.ToArray(), p => Convert.ToInt32(p));
-
-                switch (Model.actionType)
-                {
-                    case "btnDelete":
-                        _repository.DeletePrayerUnit(ids);
-                        break;
-                    default:
-                        break;
-                }
+                _repository.DeletePrayerUnit(ids);
+                //switch (Model.actionType)
+                //{
+                //    case "btnDelete":
+                //        _repository.DeletePrayerUnit(ids);
+                //        break;
+                //    default:
+                //        break;
+                //}
                 return Json(new ResponseModel { hasError = false, message = "Operation completed successfully", statusCode=(int)HttpStatusCode.OK });
             }
             catch (Exception ex)

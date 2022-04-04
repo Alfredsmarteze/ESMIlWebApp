@@ -21,19 +21,16 @@
 </style>
 
 <div class="controls-below-table">
-            @*<div class="table-records-info">
+     @*<input type="hidden" id="ActionType" class="ActionType" />
+    <a class="btn btn-primary ActionBtn" id="gAction" style="display:none">Action</a>
+            <div class="table-records-info">
                 <div class="col-auto">
                     <div class="input-group">
                         <button aria-expanded="false" aria-haspopup="true" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton1" type="button" style="min-width:100px;left: unset;top:auto !important;text-align: left">Action</button>
                         <div aria-labelledby="dropdownMenuButton1" class="dropdown-menu">
                             <a class="dropdown-item show_in_pending" href="javascript:;" title="delete record" onclick="Action_Click('btnDelete')"><span class="fa fa-trash-o"></span> Delete</a>
                         </div>
-                        <select aria-controls="bankTable" id="statusAction" class="form-control form-control-sm">
-                            <option value="P">Pending</option>
-                            <option value="T">Send For Approval</option>
-                            <option value="-1">All</option>
-                        </select>
-                        
+                                         
                     </div>
                     
                 </div>
@@ -55,7 +52,7 @@
 
 <div class="table-responsive">
     @*<div style="overflow-x:scroll">*@
-        <table id="prayerTable" width="100%" class="table-compact table-condensed table-striped">
+        <table id="prayerTable" width="100%" class="table-striped">
             <thead>
                 <tr>
                     <th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>
@@ -112,33 +109,19 @@
     <script>
         var arraysOfIds =[];
         
-        function Action_Click(option) {
-            $('.ActionType').val(option);
-            if (option == 'btnForVerification') {
-                if (arrayOfIds == undefined || arrayOfIds == null || arrayOfIds == "") {
-                    bootbox.alert({ message: "Please tag record(s) and send for verification" });
-                } else {
-                    $('.ActionBtn').click();
-                }
-            }
-            if (option == 'btnDelete') {
-                if (arrayOfIds == undefined || arrayOfIds == null || arrayOfIds == "") {
-                    bootbox.alert({ message: "Please tag record(s) and delete" });
-                } else {
-                    $('.ActionBtn').click();
-                }
-            }
-            if (option == 'btnRetrieve') {
-                if (arrayOfIds == undefined || arrayOfIds == null || arrayOfIds == "") {
-                    bootbox.alert({ message: "Please tag record(s)" });
-                } else {
-                    $('.ActionBtn').click();
-                }
-            }
+        //function Action_Click(option) {
+        //    $('.ActionType').val('btnDelete');
+            
+        //    if (option == 'btnDelete') {
+        //        if (arrayOfIds == undefined || arrayOfIds == null || arrayOfIds == "") {
+        //            bootbox.alert({ message: "Please tag record(s) and delete" });
+        //        } else {
+        //            $('.ActionBtn').click();
+        //        }
+        //    }
+        //}
 
-        }
-
-        var table=$("#prayerTable").DataTable({
+        var table =$("#prayerTable").DataTable({
         "lengthMenu":[[2,20,25,50, -1],[2,20,25,50,"All"]],
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
@@ -175,18 +158,39 @@
             "<a class='dropdown-item' href='#' id='deleteRecord' title='Delete Record'><i class='fa fa-trash-o'></i>&nbsp;Delete Record</a>" +
             "</div>"+
             '</div>'
+            
         },
-            {'data':"photo", 
-            'searchable':false,
-            'orderable':false,
-            'render':function(data, type, row, full, meta){
-        return '<img src="'+data.photo+'" alt="Passport" style="height:50px; width:50px;"/>';
-        }},
-        {'data':"id", "name":"Id", "autoWidth":false},
-        {'data':"surname", "name":"surname", "autoWidth":false},
-        {'data':"firstname", "name":"firstname", "autoWidth":false},
-        {'data':"middlename", "name":"middlename", "autoWidth":false},
-        {'data':"strDateOfBirth", "name":"dateofbirth", "autoWidth":false},
+        
+        //    {"data":"photo", 
+        //    'searchable':false,
+        //    'orderable':false,
+        //    'render':function(data, type, row, full, meta){
+        //return '<img src="'+data.photo+'" alt="Passport" style="height:50px; width:50px;"/>';
+        //}},
+        {"data":"id", "name":"id", "autoWidth":false},
+        {"data":"surname", "name":"surname", "autoWidth":false},
+        {"data":"firstname", "name":"firstname", "autoWidth":false},
+        {"data":"middlename", "name":"middlename", "autoWidth":false},
+        {"data":"strDateOfBirth", "name":"dateofbirth", "autoWidth":false},
+            //{
+            //        "sTitle": "Actions",
+
+            //        "render": function (data, type, row, meta)
+            //        {
+            //            if (row)
+            //            {
+            //                return `
+
+            //                    <button class=" btn btn-danger"
+            //                    data-id="${row.id}"
+                              
+            //                    onclick='DeleteStd(${row.id})'>Delete</button>`
+            //             }
+
+            //        return ''
+
+            //        }
+            //    },
         ],
 
        
@@ -228,24 +232,23 @@
             }
             getSelectedRowsId();
         })
-        $("#dropdownMenuDetail").on("click", function(){
-            alert("Hi");
-        });
+       
         function getSelectedRowsId()
         {
-         arraysOfIds=[];
-         table.$('inpu[type="checkbox"]').each(function(){
+        var arraysOfIds=[];
+         table.$('input[type="checkbox"]').each(function(){
             if(this.checked){
              arraysOfIds.push(this.value);
             }
          });
-        }
+        };
 
+   
 
          var operationProcessUrl = "@Url.Action("ActionButton", "PrayerUnit", new { area = "Unit" })";
-            $(".ActionBtn").click(function (e) {
+            $('#prayerTable tbody').on('click', '#deleteRecord',function (e) {
                 e.preventDefault();
-
+                
                 bootbox.confirm({
 
                     title: '<i class="fa fa-warning"></i> Warning',
@@ -260,13 +263,17 @@
                     },
                     callback: function (result) {
                         if (result) {
-
+                  var data1 = table.row($(this).parents('tr')).data();
+              // var data1 = table.row($(this).data());//parents('tr')).data();
+                console.log(data1);
+                 var arraydata=  arraysOfIds.push(data1.id);
+                 
                             var data = {
-                                actionType: $("#ActionType").val(),
-                                ids: arrayOfIds
+                                //actionType: $("#ActionType").val(),
+                                ids:arraysOfIds
                             }
 
-                            if (data.actionType == "" || data.ids == "") {
+                            if (data.ids == "") {
                                 SiteUtils.showMessage("Error", "red", "No row id selected");
                                 return
                             }
@@ -319,13 +326,13 @@
                 console.log(data.Id)
             });
 
-            $('#prayerTable tbody').on('click', '#deleteRecord', function (e) {
-                e.preventDefault();
-                arrayOfIds = [];
-                var data = table.row($(this).parents('tr')).data();
-                arrayOfIds.push(data.id);
-                Action_Click('btnDelete');
-            });
+            //$('#prayerTable tbody').on('click', '#deleteRecord', function (e) {
+            //    e.preventDefault();
+            //    arrayOfIds = [];
+            //    var data = table.row($(this).parents('tr')).data();
+            //    arrayOfIds.push(data.id);
+            //    //Action_Click('btnDelete');
+            //});
 
 
            

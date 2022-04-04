@@ -26,15 +26,15 @@ namespace ESMIlWebApp.Controllers.UnitManagement
         {
             var model = new PrayerUnitDTO();
             var rowId = Request.Form["updateRecordId"].FirstOrDefault();
-            if (rowId is not null)
+            if (rowId != null)
             {
                 var id = int.Parse(rowId);
                 model = _unitRepository.ListAllPrayerUnitData().Where(s => s.Id == id).FirstOrDefault();
             }
-            return View();
+            return View(model);
         }
 
-        public IActionResult ViewPrayerUni()
+        public IActionResult ViewPrayerUnit()
         {
             var model = new PrayerUnitDTO();
             var rowId = Request.Form["viewRecordId"].FirstOrDefault();
