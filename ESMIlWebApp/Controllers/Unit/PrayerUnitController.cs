@@ -57,7 +57,8 @@ namespace ESMIlWebApp.Controllers.Unit
                       || s.Email.ToLower().Contains(search)).ToList();
                 }
                 totalRecord = prayerRecord.Count();
-                prayerRecord=prayerRecord.OrderByDescending(s=>s.Id).ToList();
+                  prayerRecord=prayerRecord.OrderByDescending(s=>s.Id).ToList();
+                //prayerRecord = prayerRecord.OrderBy(s=>s.Id).ToList();
                 if (pageSize !=-1)
                 {
                     prayerRecord = prayerRecord.OrderByDescending(s => s.Id).Skip(skip).Take(pageSize).ToList();
@@ -86,9 +87,6 @@ namespace ESMIlWebApp.Controllers.Unit
                 
                 payload = EncryptionExtensions.DecryptStringAES(payload);
                 var newModel = JsonConvert.DeserializeObject<PrayerUnitDTOData>(payload);
-              //  string uniqueFileName = null;
-             //   uniqueFileName = ProcessImageUpload(newModel, uniqueFileName);
-             //   newModel.photo = uniqueFileName;
                 var savePrayerUnitData = await _repository.AddOrUpdatePrayerUnitAsync(newModel);
                 
                 if (savePrayerUnitData)
@@ -107,52 +105,21 @@ namespace ESMIlWebApp.Controllers.Unit
             }
             return Json(new ResponseModel { message = $"Error: {errorMessage}", statusCode = (int)HttpStatusCode.Conflict });
         }
-        //private string ProcessImageUpload(PrayerUnitDTOData unitDTOData, string uniqueFileName)
-        //{
-
-        //    if (unitDTOData.Image != null)
-        //    {
-        //        string upload = Path.Combine(_iWebHostEnvironment.WebRootPath, "images");
-        //        uniqueFileName = Guid.NewGuid().ToString() + "_" + unitDTOData.Image.FileName;
-        //        string filePath = Path.Combine(upload, uniqueFileName);
-        //        using (var fileStream = new FileStream(filePath, FileMode.Create))
-        //        {
-        //            unitDTOData.Image.CopyTo(fileStream);
-        //        }
-        //    }
-        //    return uniqueFileName;
-        //}
-        public ActionResult ActionButton(string payload)
+       
+        
+        public IActionResult ActionButton(int payload)
         {
             var exceptionMessage = string.Empty;
 
-            //UserAction para
             try
             {
-                if (string.IsNullOrWhiteSpace(payload))
-                {
-                    return Json(new ResponseModel { message = "Bad request"});
-                }
-
-                payload = EncryptionExtensions.DecryptStringAES(payload);
-
-                var Model = JsonConvert.DeserializeObject<UserAction>(payload);
-
-                if (Model.ids == null)
+               if (payload == null)
                 {
                     return Json(new ResponseModel { message = "Bad request" });
                 }
                 
-                int[] ids = Array.ConvertAll(Model.ids.ToArray(), p => Convert.ToInt32(p));
-                _repository.DeletePrayerUnit(ids);
-                //switch (Model.actionType)
-                //{
-                //    case "btnDelete":
-                //        _repository.DeletePrayerUnit(ids);
-                //        break;
-                //    default:
-                //        break;
-                //}
+                _repository.DeletePrayerUnit(payload);
+               
                 return Json(new ResponseModel { hasError = false, message = "Operation completed successfully", statusCode=(int)HttpStatusCode.OK });
             }
             catch (Exception ex)

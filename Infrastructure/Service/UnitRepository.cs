@@ -111,13 +111,28 @@ namespace Infrastructure.Service
             return uniqueFileName;
         }
 
-        public string DeletePrayerUnit(int[] ids)
+        public string DeletePrayerUnit(int ids)
         {
-            foreach (var id in ids)
-            {
-                var query = $"Delete from Prayerunit where Id={id}";
-                _context.Database.ExecuteSqlRaw(query);
-            }
+            var del = _context.prayerUnit.Where(s => s.Id == ids).FirstOrDefault();
+
+            _context.prayerUnit.Remove(del);
+            _context.SaveChanges();
+
+            //if (del != null)
+            //{
+            //    _context.prayerUnit.Remove(del);
+            //    _context.SaveChanges();
+            //}
+            //    var query = $"Delete from Prayerunit where Id={ids}";
+            //    _context.Database.ExecuteSqlRaw(query);
+            //}
+            //foreach (var id in del)
+           // {
+                //_context.prayerUnit.Remove(ids);
+                //_context.SaveChanges();
+               // var query = $"Delete from Prayerunit where Id={id}";
+                //_context.Database.ExecuteSqlRaw(query);
+            //}
             return "";
         }
 

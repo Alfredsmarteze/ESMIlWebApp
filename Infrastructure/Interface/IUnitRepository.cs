@@ -12,6 +12,6 @@ namespace Infrastructure.Interface
         IQueryable<StateDTO> ListState();
         Task<bool> AddOrUpdatePrayerUnitAsync(PrayerUnitDTOData prayerUnitDTO);
         IQueryable<PrayerUnitDTO> ListAllPrayerUnitData();
-        string DeletePrayerUnit(int [] ids);
+        string DeletePrayerUnit(int ids);
     }
 }

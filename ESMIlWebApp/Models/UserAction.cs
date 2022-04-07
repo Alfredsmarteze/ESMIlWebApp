@@ -4,6 +4,7 @@
     {
         public string actionType { get; set; }
         public List<int> ids { get; set; }
+        public int id { get; set; }
     }
     public class Processdata
     {

@@ -109,18 +109,7 @@
     <script>
         var arraysOfIds =[];
         
-        //function Action_Click(option) {
-        //    $('.ActionType').val('btnDelete');
-            
-        //    if (option == 'btnDelete') {
-        //        if (arrayOfIds == undefined || arrayOfIds == null || arrayOfIds == "") {
-        //            bootbox.alert({ message: "Please tag record(s) and delete" });
-        //        } else {
-        //            $('.ActionBtn').click();
-        //        }
-        //    }
-        //}
-
+    
         var table =$("#prayerTable").DataTable({
         "lengthMenu":[[2,20,25,50, -1],[2,20,25,50,"All"]],
         "processing": true, // for show progress bar
@@ -139,16 +128,27 @@
         "data":function(arg){}
         },
         "columns":[
+
             {
-                'data':"id",
-                'targets':0,
-                'searchable':false,
-                'orderable':false,
-                'classname':'dt-body-center',
-                'render':function(data,type,full,meta){
-                    return '<input type="checkbox" name="id[]" value="'+$('<div/>').text(data).html() + '">';
-                }
-            },
+                   "data":null,"sTitle": "Actions",
+
+                    "render": function (data, type, row, meta)
+                    {
+                        console.log(row.id)
+                        if (row)
+                        {
+                            return `<button class=" btn btn-danger"
+                                
+                                onclick='DeleteStd(${row.id})'>Delete</button>`
+                                
+                        }
+
+                    return ''
+
+                    }
+                    },
+
+           
             {
             "data": null, "name":"Action", "defaultContent":'<div class="btn-group mr-1 mb-1">'+
             "<button aria-expanded='false' aria-haspopup='true' class='btn btn-white dropdown-toggle' data-toggle='dropdown' id='dropdownMenuDetail' type='button'></button>"+
@@ -172,25 +172,25 @@
         {"data":"firstname", "name":"firstname", "autoWidth":false},
         {"data":"middlename", "name":"middlename", "autoWidth":false},
         {"data":"strDateOfBirth", "name":"dateofbirth", "autoWidth":false},
-            //{
-            //        "sTitle": "Actions",
+            {
+                    "data":null,"sTitle": "Actions",
 
-            //        "render": function (data, type, row, meta)
-            //        {
-            //            if (row)
-            //            {
-            //                return `
+                    "render": function (data, type, row, meta)
+                    {
+                        if (row)
+                        {
+                            return `
 
-            //                    <button class=" btn btn-danger"
-            //                    data-id="${row.id}"
+                                <button class=" btn btn-danger"
+                                data-id="${row.id}"
                               
-            //                    onclick='DeleteStd(${row.id})'>Delete</button>`
-            //             }
+                                onclick='DeleteStd(${row.id})'>Delete</button>`
+                         }
 
-            //        return ''
+                    return ''
 
-            //        }
-            //    },
+                    }
+                },
         ],
 
        
@@ -242,11 +242,47 @@
             }
          });
         };
+        function DeleteStd(id){
+            var postId={
+            "payload":id
+            }
+            if(confirm("Are You sure to delete this record..?"))
+        {
+           
 
-   
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("ActionButton", "PrayerUnit", new { area = "Unit" })",
+                    datatype: "JSON",
+                    data:postId,
+                    success: function (response) {
+                        if (response.success)
+                        {
+                            alert("Operation was successful");
+                            //$.notify(response.message, {
+                            //    globalPosition: "top centre",
+                            //    className: "sucess"
+                            //});
+                            
+                        }
+                        window.location.reload();
+                           // table.row().remove().draw();
+                         //   table.ajax.reload();
+
+                           // $("#myModal").modal('hide');
+
+                    },
+                });
+        }
+    }
+   //$('#prayerTable tbody').on('click','tr', function(){
+   //var data2=table.row( this ).data().id;
+   // alert("clicked row id" +" "+ data2);   
+   //})
+  
 
          var operationProcessUrl = "@Url.Action("ActionButton", "PrayerUnit", new { area = "Unit" })";
-            $('#prayerTable tbody').on('click', '#deleteRecord',function (e) {
+            $('#prayerTable tbody').on('click','#deleteRecord' ,function (e) {
                 e.preventDefault();
                 
                 bootbox.confirm({
@@ -263,26 +299,26 @@
                     },
                     callback: function (result) {
                         if (result) {
-                  var data1 = table.row($(this).parents('tr')).data();
-              // var data1 = table.row($(this).data());//parents('tr')).data();
-                console.log(data1);
-                 var arraydata=  arraysOfIds.push(data1.id);
+                  //var data1 = table.row($(this).parents('tr')).data();
+                    var data2=table.row($(this).parents('tr')).data();
+               //var data1 = table.row( this ).data().id;//parents('tr')).data();
+                console.log(data2);
+                // var arraydata=  arraysOfIds.push(data1.id);
+              
                  
                             var data = {
                                 //actionType: $("#ActionType").val(),
-                                ids:arraysOfIds
+                                id:data2.id,
                             }
 
-                            if (data.ids == "") {
-                                SiteUtils.showMessage("Error", "red", "No row id selected");
-                                return
-                            }
+                            //if (data.ids == "") {
+                            //    SiteUtils.showMessage("Error", "red", "No row id selected");
+                            //    return
+                            //}
 
                             var payload = SiteUtils.encrypt(JSON.stringify(data)).toString();
-                            SiteUtils.loading();
 
                             SiteUtils.post({ payload: payload }, operationProcessUrl).then(function (response) {
-                                SiteUtils.loadingOff();
                                 if (response.hasError == false) {
 
                                     table.draw();
