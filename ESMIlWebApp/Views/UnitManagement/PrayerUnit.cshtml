@@ -20,21 +20,8 @@
     }
 </style>
 
-<div class="controls-below-table">
-     @*<input type="hidden" id="ActionType" class="ActionType" />
-    <a class="btn btn-primary ActionBtn" id="gAction" style="display:none">Action</a>
-            <div class="table-records-info">
-                <div class="col-auto">
-                    <div class="input-group">
-                        <button aria-expanded="false" aria-haspopup="true" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton1" type="button" style="min-width:100px;left: unset;top:auto !important;text-align: left">Action</button>
-                        <div aria-labelledby="dropdownMenuButton1" class="dropdown-menu">
-                            <a class="dropdown-item show_in_pending" href="javascript:;" title="delete record" onclick="Action_Click('btnDelete')"><span class="fa fa-trash-o"></span> Delete</a>
-                        </div>
-                                         
-                    </div>
-                    
-                </div>
-            </div>*@
+@*<div class="controls-below-table">
+   
             <div class="table-records-pages">
                 <form class="row g-3">
                     
@@ -43,12 +30,12 @@
 
                         </div>
                     </div>
-                   @* <div class="col-auto" style="padding-right:20px !important">
+                    <div class="col-auto" style="padding-right:20px !important">
                         <a asp-action="CreatePrayerUnit" asp-controller="UnitManagement" asp-area="Unit" class="btn btn-primary float-right"><i class="fa fa-plus"></i> | &nbsp;<span> &nbsp;&nbsp;&nbsp; </span></a>
-                    </div>*@
+                    </div>
                 </form>
             </div>
-        </div>
+        </div>*@
 
 <div class="table-responsive">
     @*<div style="overflow-x:scroll">*@
@@ -107,9 +94,7 @@
 
 @section scripts{           
     <script>
-        var arraysOfIds =[];
-        
-    
+      
         var table =$("#prayerTable").DataTable({
         "lengthMenu":[[2,20,25,50, -1],[2,20,25,50,"All"]],
         "processing": true, // for show progress bar
@@ -134,12 +119,10 @@
 
                     "render": function (data, type, row, meta)
                     {
-                        console.log(row.id)
                         if (row)
                         {
-                            return `<button class=" btn btn-danger"
-                                
-                                onclick='DeleteStd(${row.id})'>Delete</button>`
+                            return `<button class=" btn btn-danger sureToDeleteThis"
+                                    onclick='DeleteStd(${row.id})'>Delete</button>`
                                 
                         }
 
@@ -181,9 +164,7 @@
                         {
                             return `
 
-                                <button class=" btn btn-danger"
-                                data-id="${row.id}"
-                              
+                                <button class=" btn btn-danger" 
                                 onclick='DeleteStd(${row.id})'>Delete</button>`
                          }
 
@@ -192,96 +173,54 @@
                     }
                 },
         ],
+      }); 
+   
 
-       
-       // initComplete: function (){ 
-       //             $('#prayerTable_length').appendTo($('#paginationLenght'))
-       //             $('#prayerTable_filter').appendTo($('#search'))
-       //             $('#prayerTable_paginate').appendTo($('#pagination'))
-       //             $('#prayerTable_info').appendTo($('#paginationInfo'))
-       //},
-         "footerCallback": function (row, data, start, end, display) {
-                    var api = this.api(), data;
-
-                    var json = api.ajax.json();
-
-                   
-          },
-          "order": [[2, 'desc']]
-        });
-        $('.search-input').on('keyup change', function(){
-        var index=$(this).attr('data-column'),
-        val=$(this).val();
-        table.columns(index).search(val.trim()).draw();
-        });
-
-        $('#example-select-all').on('click', function(){
-            var rows=table.rows({'search':'applied'}).nodes() //All rows with search applied
-            $('input[type="checkbox"]', rows).prop('checked', this.checked); //check and uncheck for all rows in the table
-            getSelectedRowsId();
-        });
-        // Handle click on checkbox to set state of "Select all" control
-        $("#prayerTable tbody").on('change','input[type="checkbox"]', function(){
-            if(!this.checked)// If checkbox is not checked
-            {
-                var el=$('#example-select-all').get(0);
-                if(el && el.checked &&('indeterminate' in el))// If "Select all" control is checked and has 'indeterminate' property
-                {
-                    el.indeterminate=true;
-                }
-            }
-            getSelectedRowsId();
-        })
-       
-        function getSelectedRowsId()
-        {
-        var arraysOfIds=[];
-         table.$('input[type="checkbox"]').each(function(){
-            if(this.checked){
-             arraysOfIds.push(this.value);
-            }
-         });
-        };
         function DeleteStd(id){
             var postId={
             "payload":id
             }
-            if(confirm("Are You sure to delete this record..?"))
-        {
-           
-
-                $.ajax({
+            bootbox.confirm({
+                 message:       "Are you sure you want to DELETE this record?",
+                 buttons: {
+                 cancel: {
+                 label: '<i class="fa fa-times"></i> Cancel'
+                },
+                confirm: {
+                label: '<i class="fa fa-check"></i> Confirm'
+                }
+    },
+    callback: function (result) {
+        if(result){
+            //var dialog = bootbox.dialog({
+            //title: 'A custom dialog with init',
+            //message: '<p><i class="fa fa-spin fa-spinner"></i> Loading...</p>'
+            //});
+            
+            //dialog.init(function(){
+            //setTimeout(function(){
+            //dialog.find('.bootbox-body').html('I was loaded after the dialog was shown!');
+            //}, 5000000);
+            //});
+         $.ajax({
                     type: "POST",
                     url: "@Url.Action("ActionButton", "PrayerUnit", new { area = "Unit" })",
                     datatype: "JSON",
                     data:postId,
-                    success: function (response) {
-                        if (response.success)
-                        {
-                            alert("Operation was successful");
-                            //$.notify(response.message, {
-                            //    globalPosition: "top centre",
-                            //    className: "sucess"
-                            //});
-                            
-                        }
-                        window.location.reload();
-                           // table.row().remove().draw();
-                         //   table.ajax.reload();
-
-                           // $("#myModal").modal('hide');
-
-                    },
+                    
                 });
-        }
+               bootbox.alert("You have successfully deleted the record.", function(){ 
+                window.location.reload(); 
+                });
+                }
+                else{
+                bootbox.alert("Record was not deleted.");
+                }
     }
-   //$('#prayerTable tbody').on('click','tr', function(){
-   //var data2=table.row( this ).data().id;
-   // alert("clicked row id" +" "+ data2);   
-   //})
-  
-
-         var operationProcessUrl = "@Url.Action("ActionButton", "PrayerUnit", new { area = "Unit" })";
+});
+         
+    }
+          var operationProcessUrl = "@Url.Action("ActionButton", "PrayerUnit", new { area = "Unit" })";
             $('#prayerTable tbody').on('click','#deleteRecord' ,function (e) {
                 e.preventDefault();
                 
