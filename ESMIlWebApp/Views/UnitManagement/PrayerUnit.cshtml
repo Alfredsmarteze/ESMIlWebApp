@@ -10,7 +10,13 @@
         margin-top: 0;
         padding-bottom: 0;
     }
-
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: none;
+    color: red!important;
+    border-radius: 0px;
+    border: 1px solid #828282;
+    border-color:gold;
+}
     div.dataTables_wrapper div.dataTables_length select {
         width: 170px;
     }
@@ -39,7 +45,7 @@
 
 <div class="table-responsive">
     @*<div style="overflow-x:scroll">*@
-        <table id="prayerTable" width="100%" class="table-striped">
+        <table id="prayerTable" width="100%" class="stripe hover">
             <thead>
                 <tr>
                     <th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>
