@@ -10,38 +10,28 @@
         margin-top: 0;
         padding-bottom: 0;
     }
+.dataTables_wrappr{
+
+    background:lightblue;
+}
     .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    background: none;
-    color: red!important;
+    background: gold;
     border-radius: 0px;
     border: 1px solid #828282;
     border-color:gold;
 }
+.dataTables_wrapper .dataTables_paginate .paginate_button:active {
+    background:green;
+}
     div.dataTables_wrapper div.dataTables_length select {
         width: 170px;
     }
-
-    .btnn{
-        margin-top:1.4rem;
+  
+   div .dataTables_wrapper{
+    background-color:aliceblue;
     }
 </style>
 
-@*<div class="controls-below-table">
-   
-            <div class="table-records-pages">
-                <form class="row g-3">
-                    
-                    <div class="col-auto">
-                        <div id="Search">
-
-                        </div>
-                    </div>
-                    <div class="col-auto" style="padding-right:20px !important">
-                        <a asp-action="CreatePrayerUnit" asp-controller="UnitManagement" asp-area="Unit" class="btn btn-primary float-right"><i class="fa fa-plus"></i> | &nbsp;<span> &nbsp;&nbsp;&nbsp; </span></a>
-                    </div>
-                </form>
-            </div>
-        </div>*@
 
 <div class="table-responsive">
     @*<div style="overflow-x:scroll">*@
@@ -73,19 +63,7 @@
         </table>
     @*</div>*@
     
-   @*<div class="invoice-footer">
-       <div class="invoice-logo">
-           <div class="row">
-               <div id="paginationLenght">
-                </div>
-                <div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                <div id="paginationInfo"></div>
-           </div>
-       </div>
-       <div class=invoice-info>
-           <div class="dataTables_paginate paging_simple_numbers" id="pagination"></div>
-       </div>
-   </div>*@
+
 </div>
 
 @using(Html.BeginForm("ViewPrayerUnit","UnitManagement",FormMethod.Post, new { id="viewPrayerForm", target="_blank"}))
@@ -102,7 +80,7 @@
     <script>
       
         var table =$("#prayerTable").DataTable({
-        "lengthMenu":[[2,20,25,50, -1],[2,20,25,50,"All"]],
+        "lengthMenu":[[7,20,25,50, -1],[7,20,25,50,"All"]],
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
         "filter": true, // this is for disable filter (search box)
@@ -181,6 +159,8 @@
         ],
       }); 
    
+      table.buttons().container()
+            .appendTo('#prayerTable_wrapper .col-md-6:eq(0)');
 
         function DeleteStd(id){
             var postId={
