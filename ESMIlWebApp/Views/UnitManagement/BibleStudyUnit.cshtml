@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Prayer unit";
+    ViewData["Title"] = "Bible study unit";
     Layout = "~/Views/Shared/_layout.cshtml";
 }
 
@@ -32,16 +32,16 @@
     }
 </style>
 
-<button class="btn btn-primary btn-rounded" id="newRecord">Capture New Record</button>
+    <button class="btn btn-primary btn-rounded" id="newRecord">Capture New Record</button>
 <br><br>
 <div class="table-responsive">
     @*<div style="overflow-x:scroll">*@
-        <table id="prayerTable" width="100%" class="stripe hover">
+        <table id="bibleStudyTable" width="100%" class="stripe hover">
             <thead>
                 <tr>
                 <th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>
                    <th>Action</th>
-                    <th>Photo Passport</th>
+                  @*  <th>Photo Passport</th>*@
                     <th>ID</th>
                     <th>Surname</th>
                     <th>Firstname</th>
@@ -67,11 +67,11 @@
 
 </div>
 
-@using(Html.BeginForm("ViewPrayerUnit","UnitManagement",FormMethod.Post, new { id="viewPrayerForm", target="_blank"}))
+@using(Html.BeginForm("ViewBibleStudyUnit","UnitManagement",FormMethod.Post, new { id="viewBibleStudyForm", target="_blank"}))
 {
     <input type="hidden" name="viewRecordId" id="viewRecordId">
 }
-@using(Html.BeginForm("UpdatePrayerUnit","UnitManagement",FormMethod.Post, new { id="updatePrayerForm", target="_blank"}))
+@using(Html.BeginForm("UpdateBibleStudyUnit","UnitManagement",FormMethod.Post, new { id="updateBibleStudyForm", target="_blank"}))
 {
     <input type="hidden" name="updateRecordId" id="updateRecordId">
 }
@@ -80,7 +80,7 @@
 @section scripts{           
     <script>
       
-        var table =$("#prayerTable").DataTable({
+        var table =$("#bibleStudyTable").DataTable({
         "lengthMenu":[[7,20,25,50, -1],[7,20,25,50,"All"]],
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
@@ -92,7 +92,7 @@
         //select: true,
         //dom: 'Bfrtip',
         "ajax":{
-        "url":"@Url.Action("GetAllPrayerUnit","PrayerUnit", new{area="Unit"})",
+        "url":"@Url.Action("GetAllBibleStudyUnit","BibleStudyUnit", new{area="Unit"})",
         "type":"POST",
         "datatype":"json",
         "data":function(arg){}
@@ -105,16 +105,12 @@
             "render": function (data, type, row, meta)
             {
             if (row)
-                    {
-                            return `<button class=" btn btn-danger sureToDeleteThis"
-                                    onclick='DeleteStd(${row.id})'>Delete</button>`
-                                
-                        }
-
-                    return ''
-
-                    }
-                    },
+            {
+              return `<button class=" btn btn-danger sureToDeleteThis" onclick='DeleteStd(${row.id})'>Delete</button>`
+            }
+            return ''
+            }
+            },
 
            
             {
@@ -128,39 +124,23 @@
             '</div>'
             
         },
-        
-        //    {"data":"photo", 
-        //    'searchable':false,
-        //    'orderable':false,
-        //    'render':function(data, type, row, full, meta){
-        //return '<img src="'+data.photo+'" alt="Passport" style="height:50px; width:50px;"/>';
-        //}},
         {"data":"id", "name":"id", "autoWidth":false},
         {"data":"surname", "name":"surname", "autoWidth":false},
         {"data":"firstname", "name":"firstname", "autoWidth":false},
         {"data":"middlename", "name":"middlename", "autoWidth":false},
-        {"data":"strDateOfBirth", "name":"dateofbirth", "autoWidth":false},
-            {
-                    "data":null,"sTitle": "Actions",
-
-                    "render": function (data, type, row, meta)
-                    {
-                        if (row)
-                        {
-                            return `
-
-                                <button class=" btn btn-danger" 
-                                onclick='DeleteStd(${row.id})'>Delete</button>`
-                         }
-
-                    return ''
-
-                    }
-                },
+       // {"data":"strDateOfBirth", "name":"dateofbirth", "autoWidth":false},
+        {"data":null,"sTitle": "Actions",
+         "render": function (data, type, row, meta)
+        {
+         if (row)
+         {
+         return `<button class=" btn btn-danger" onclick='DeleteStd(${row.id})'>Delete</button>`
+         }
+         return ''
+         }
+         },
         ],
       }); 
-   
-     
 
         function DeleteStd(id){
             var postId={
@@ -178,19 +158,10 @@
     },
     callback: function (result) {
         if(result){
-            //var dialog = bootbox.dialog({
-            //title: 'A custom dialog with init',
-            //message: '<p><i class="fa fa-spin fa-spinner"></i> Loading...</p>'
-            //});
-            
-            //dialog.init(function(){
-            //setTimeout(function(){
-            //dialog.find('.bootbox-body').html('I was loaded after the dialog was shown!');
-            //}, 5000000);
-            //});
+           
          $.ajax({
                     type: "POST",
-                    url: "@Url.Action("ActionButton", "PrayerUnit", new { area = "Unit" })",
+                    url: "@Url.Action("ActionButton", "BibleStudyUnit", new { area = "Unit" })",
                     datatype: "JSON",
                     data:postId,
                     
@@ -206,8 +177,8 @@
 });
          
     }
-          var operationProcessUrl = "@Url.Action("ActionButton", "PrayerUnit", new { area = "Unit" })";
-            $('#prayerTable tbody').on('click','#deleteRecord' ,function (e) {
+          var operationProcessUrl = "@Url.Action("ActionButton", "BibleStudyUnit", new { area = "Unit" })";
+            $('#bibleStudyTable tbody').on('click','#deleteRecord' ,function (e) {
                 e.preventDefault();
                 
                 bootbox.confirm({
@@ -270,37 +241,28 @@
             })
 
 
-         $('#prayerTable tbody').on('click', '#viewRecord', function (e) {
+         $('#bibleStudyTable tbody').on('click', '#viewRecord', function (e) {
                 e.preventDefault();
                 var data = table.row($(this).parents('tr')).data();
                 $("#viewRecordId").val(data.id);
-                $("#viewPrayerForm").submit();
+                $("#viewBibleStudyForm").submit();
 
             });
 
-            $('#prayerTable tbody').on('click', '#changeRecord', function (e) {
+            $('#bibleStudyTable tbody').on('click', '#changeRecord', function (e) {
                 e.preventDefault();
                 var data = table.row($(this).parents('tr')).data();
                 $("#updateRecordId").val(data.id);
-                $("#updatePrayerForm").submit();
+                $("#updateBibleStudyForm").submit();
 
+                console.log(data.Id)
             });
 
             $('#newRecord').on('click', function(e){
             e.preventDefault();
-            var returnUrl = '@Url.Action("CreateNewPrayer", "UnitManagement")';
+            var returnUrl = '@Url.Action("CreateNewBibleUnit", "UnitManagement")';
             window.location.href = returnUrl;
             })
-
-            //$('#prayerTable tbody').on('click', '#deleteRecord', function (e) {
-            //    e.preventDefault();
-            //    arrayOfIds = [];
-            //    var data = table.row($(this).parents('tr')).data();
-            //    arrayOfIds.push(data.id);
-            //    //Action_Click('btnDelete');
-            //});
-
-
            
     </script>
 }

@@ -1,4 +1,4 @@
-﻿@model DataStructure.ViewModel.PrayerUnitDTO
+﻿@model DataStructure.ViewModel.BibleStudyUnitDTO
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -13,20 +13,20 @@
             <div class="form-group">
             <label class="form-label">Surname</label>
             <input id="rowId" type="hidden">
-            <input class="form-control" id="txtSurname" type="text" value="@Model.Surname" placeholder="">
+            <input class="form-control" id="txtSurname" type="text" value="@Model.Surname" readonly>
             </div>
            
         </div>
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Firstname</label>
-            <input class="form-control" id="txtFirstname" type="text" value="@Model.Firstname" placeholder="">
+            <input class="form-control" id="txtFirstname" type="text" value="@Model.Firstname" readonly>
             </div>
         </div>
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Middlename</label>
-            <input class="form-control" id="txtMiddlename" type="text" value="@Model.Middlename" placeholder="">
+            <input class="form-control" id="txtMiddlename" type="text" value="@Model.Middlename" readonly>
             </div>
         </div>
         </div>
@@ -43,7 +43,7 @@
                                 <label for="">Date Of Birth</label>
                                 <div class="date-input">
                                     <div class="date-input">
-                                        <input type="date" class="date form-control" placeholder="" id="txtDateofBirth" value="@Model.DateOfBirth">
+                                        <input type="date" class="date form-control" readonly id="txtDateofBirth" value="@Model.DateOfBirth">
                                     </div>
                                 </div>
                             </div>
@@ -71,19 +71,19 @@
          <div class="col-4">
             <div class="form-group">
             <label class="form-label">Phone Number 1</label>
-            <input class="form-control" id="txtPhoneNumber01" type="text" value="@Model.PhoneNumber01" placeholder="">
+            <input class="form-control" id="txtPhoneNumber01" type="text" value="@Model.PhoneNumber01" readonly>
             </div>
         </div>
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Phone Number 2</label>
-            <input class="form-control" id="txtPhoneNumber02" type="text" value="@Model.PhoneNumber02" placeholder="">
+            <input class="form-control" id="txtPhoneNumber02" type="text" value="@Model.PhoneNumber02" readonly>
             </div>
         </div>
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Email</label>
-            <input class="form-control" id="txtEmail" type="text" value="@Model.Email" placeholder="">
+            <input class="form-control" id="txtEmail" type="text" value="@Model.Email" readonly>
             </div>
         </div>
         </div>
@@ -93,13 +93,13 @@
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Hostel Address</label>
-            <input class="form-control" id="txtHostelAddress" type="text" value="@Model.HostelAddress" placeholder="">
+            <input class="form-control" id="txtHostelAddress" type="text" value="@Model.HostelAddress" readonly>
             </div>
         </div>
          <div class="col-4">
             <div class="form-group">
             <label class="form-label">Home Address</label>
-            <input class="form-control" id="txtHomeAddress" type="text" value="@Model.HomeAddress" placeholder="">
+            <input class="form-control" id="txtHomeAddress" type="text" value="@Model.HomeAddress" readonly>
             </div>
         </div>
                
@@ -110,7 +110,7 @@
          <div class="col-4">
             <div class="form-group">
             <label class="form-label">Course of Study</label>
-            <input class="form-control" id="txtCourseOfStudy" type="text" value="@Model.CourseOfStudy" placeholder="">
+            <input class="form-control" id="txtCourseOfStudy" type="text" value="@Model.CourseOfStudy"  readonly>
             </div>
         </div>
         <div class="col-4">
@@ -129,13 +129,13 @@
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Position in Family</label>
-            <input class="form-control" id="txtPositionInFamily" type="text" value="@Model.PositionInFamily" placeholder="">
+            <input class="form-control" id="txtPositionInFamily" type="text" value="@Model.PositionInFamily" readonly>
             </div>
         </div>
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Social Media Address</label>
-            <input class="form-control" id="txtSocialMediaAddress" type="text" value="@Model.SocialMediaAddress" placeholder="">
+            <input class="form-control" id="txtSocialMediaAddress" type="text" value="@Model.SocialMediaAddress" readonly>
             </div>
         </div>
         <div class="col-lg-4">
@@ -143,84 +143,14 @@
                                 <label for="">Date Join ESM</label>
                                 <div class="date-input">
                                     <div class="date-input">
-                                        <input type="date" class="date form-control" value="@Model.DateJoinESM" placeholder="" id="txtDateJoinESM">
+                                        <input type="date" class="date form-control" value="@Model.DateJoinESM" readonly id="txtDateJoinESM">
                                     </div>
                                 </div>
                             </div>
                         </div><!-- col-4 -->
         </div>
         
-        <div class="text-center">
-            <br/>
-        <button class="btn btn-primary" type="submit" id="saveRecord">Save</button>
-        </div>
+       
         </form>
     </div>
-    <button class="btn float-right" id="btnSaveRecord">Save</button>
 </div>
-
-
-@section scripts{
-<script>
-    var saveUrl="@Url.Action("AddOrUpdatePrayerUnitData","PrayerUnit", new {area="Unit"})";
-    
-    $(document).ready(function(){
-    $("drpGender").val('@Model.Gender').trigger('change');
-    $("drpState").val('@Model.StateOfOrigin').trigger('change');
-    $("drpState").val('@Model.LGA').trigger('change');
-    $("drpUnit").val('@Model.Unit').trigger('change');
-    $("drpUnit").val('@Model.PreviousUnit').trigger('change');
-    });
-    $("#btnSaveRecord").click(function(e)
-    {
-        e.preventDefault();
-        
-        var body={
-            Id:$("#rowId").val() == "" ? 0: $.trim($("#rowId").val()),
-            Surname:$.trim($("#txtSurname").val()),
-            Firstname:$.trim($("#txtFirstname").val()),
-            Middlename:$.trim($("#txtMiddlename").val()),
-            DateOfBirth:$.trim($("#txtDateofBirth").val()),
-            Gender:$.trim($("#drpGender").val()),
-            Email:$.trim($("#txtEmail").val()),
-            PhoneNumber01:$.trim($("#txtPhoneNumber01").val()),
-            PhoneNumber02:$.trim($("#txtPhoneNumber02").val()),
-            StateOfOrigin:$("#drpState").val(),
-            LGA:$("#drpState").val(),
-            Unit:$("#drpUnit").val(),
-            PreviousUnit:$("#drpUnit").val(),
-            PositionInFamily:$.trim($("#txtPositionInFamily").val()),
-            SocialMediaAddress:$.trim($("#txtSocialMediaAddress").val()),
-            HostelAddress:$.trim($("#txtHostelAddress").val()),
-            HomeAddress:$.trim($("#txtHomeAddress").val()),
-            DateJoinESM:$.trim($("#txtDateJoinESM").val()),
-            CourseOfStudy:$.trim($("#txtCourseOfStudy").val()),
-        }
-    //var payload=SiteUtils.encrypt(JSON.stringify(body)).toStirng();
-    //    SiteUtils.post({payload:payload}, saveUrl).then(function (response){
-    //    if(response.hasError==false)
-    //    {
-    //        alert("Success");
-    //    }
-    //    else
-    //    {
-    //        alert("Error");
-    //    }
-    //})
-        var payload=SiteUtils.encrypt(JSON.stringify(body)).toString();
-            SiteUtils.post({payload:payload}, saveUrl).then(function (response){
-            if(response.hasError==false)
-            {
-                alert("Success");
-            }
-            else{
-            alert("Error");
-            }
-            })
-
-    
-   
-    });
-
-</script>
-}

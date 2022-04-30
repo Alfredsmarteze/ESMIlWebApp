@@ -15,7 +15,7 @@ namespace DataContextStructure
 
         }
 
-
+        public DbSet<BibleStudyUnit> bibleStudyUnit { get; set; }  
         public DbSet<PrayerUnit> prayerUnit { get; set; }
         public DbSet<State> state { get; set; }
 

@@ -23,6 +23,98 @@ namespace Infrastructure.Service
             _context = context;
             this._environment = environment;
         }
+        public async Task<bool> AddOrUpdateBibleStudyUnitAsync(BibleStudyUnitData model)
+        {
+            bool result;
+            if (model.Id < 1)
+            {
+
+                var Data = new BibleStudyUnit
+                {
+                    Surname = model.Surname,
+                    Firstname = model.Firstname,
+                    Middlename = model.Middlename,
+                    PhoneNumber01 = model.PhoneNumber01,
+                    PhoneNumber02 = model.PhoneNumber02,
+                    Email = model.Email,
+                    Gender = model.Gender,
+                    StateOfOrigin = model.StateOfOrigin,
+                    LGA = model.LGA,
+                    HomeAddress = model.HomeAddress,
+                    HostelAddress = model.HostelAddress,
+                    CourseOfStudy = model.CourseOfStudy,
+                    Unit = model.Unit,
+                    DateOfBirth = model.DateOfBirth,
+                    DateJoinESM = model.DateJoinESM,
+                    PreviousUnit = model.PreviousUnit,
+                    PositionInFamily = model.PositionInFamily,
+                    SocialMediaAddress = model.SocialMediaAddress,
+
+                };
+                _context.bibleStudyUnit.Add(Data);
+                result = await _context.SaveChangesAsync() > 0;
+            }
+            else
+            {
+                var bibleStudyData = _context.bibleStudyUnit.Find(model.Id);
+
+                if (bibleStudyData is null)
+                {
+                    throw new("Not found");
+                }
+                bibleStudyData.Surname = model.Surname;
+                bibleStudyData.Firstname = model.Firstname;
+                bibleStudyData.Middlename = model.Middlename;
+                bibleStudyData.PhoneNumber01 = model.PhoneNumber01;
+                bibleStudyData.PhoneNumber02 = model.PhoneNumber02;
+                bibleStudyData.Email = model.Email;
+                bibleStudyData.HomeAddress = model.HomeAddress;
+                bibleStudyData.HostelAddress = model.HostelAddress;
+                bibleStudyData.CourseOfStudy = model.CourseOfStudy;
+                bibleStudyData.Unit = model.Unit;
+                bibleStudyData.StateOfOrigin = model.StateOfOrigin;
+                bibleStudyData.LGA = model.LGA;
+                bibleStudyData.PreviousUnit = model.PreviousUnit;
+                bibleStudyData.DateOfBirth = model.DateOfBirth;
+                bibleStudyData.DateJoinESM = model.DateJoinESM;
+                bibleStudyData.Gender = model.Gender;
+                bibleStudyData.PositionInFamily = model.PositionInFamily;
+                bibleStudyData.SocialMediaAddress = model.SocialMediaAddress;
+                result = await _context.SaveChangesAsync() > 0;
+            }
+            return result;
+        }
+        public string DeleteBibleStudyUnit(int id)
+        { 
+            var del= _context.bibleStudyUnit.Where(u => u.Id == id).FirstOrDefault();
+            if (del != null)
+                _context.bibleStudyUnit.Remove(del);
+            _context.SaveChanges();
+            return "";
+        }
+        public IQueryable<BibleStudyUnitDTO> GetAllBibleStudyUnitsAsync()
+        {
+            return (from s in _context.bibleStudyUnit
+                    select new BibleStudyUnitDTO
+                    {
+                        Id = s.Id,
+                        Surname = s.Surname == null ? "" : s.Surname,
+                        Firstname = s.Firstname == null ? "" : s.Firstname,
+                        Middlename = s.Middlename == null ? "" : s.Middlename,
+                        Unit = s.Unit == null ? "" : s.Unit,
+                        CourseOfStudy = s.CourseOfStudy == null ? "" : s.CourseOfStudy,
+                        Email = s.Email == null ? "" : s.Email,
+                        PhoneNumber01 = s.PhoneNumber01 == null ? "" : s.PhoneNumber01,
+                        PhoneNumber02 = s.PhoneNumber02 == null ? "" : s.PhoneNumber02,
+                        HomeAddress = s.HomeAddress == null ? "" : s.HomeAddress,
+                        HostelAddress = s.HostelAddress == null ? "" : s.HostelAddress,
+                        PreviousUnit = s.PreviousUnit == null ? "" : s.PreviousUnit,
+                        DateOfBirth = s.DateOfBirth == null ? null : s.DateOfBirth,
+                        PositionInFamily = s.PositionInFamily == null ? "" : s.PositionInFamily,
+                        SocialMediaAddress = s.SocialMediaAddress == null ? "" : s.SocialMediaAddress,
+                        Photo = s.Photo == null ? "" : s.Photo,
+                    });
+        }
         public IQueryable<StateDTO> ListState()
         {
             return _context.state.AsNoTracking().Select(s => new StateDTO
@@ -111,9 +203,9 @@ namespace Infrastructure.Service
             return uniqueFileName;
         }
 
-        public string DeletePrayerUnit(int ids)
+        public string DeletePrayerUnit(int id)
         {
-            var del = _context.prayerUnit.Where(s => s.Id == ids).FirstOrDefault();
+            var del = _context.prayerUnit.Where(s => s.Id == id).FirstOrDefault();
 
             _context.prayerUnit.Remove(del);
             _context.SaveChanges();
