@@ -18,7 +18,7 @@ namespace ESMIlWebApp.Controllers.UnitManagement
         }
 
         [HttpGet]
-        //[Route("BibleStudyUnit/Members")]
+        [Route("BibleStudyUnit/Members")]
         public IActionResult BibleStudyUnit() => View();
         
         [HttpGet]
@@ -52,6 +52,7 @@ namespace ESMIlWebApp.Controllers.UnitManagement
         }
 
         [HttpGet]
+        [Route("PrayerUnit/Members")]
         public IActionResult PrayerUnit()=>View();
 
         [HttpGet]

@@ -7,15 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\images\**" />
     <Compile Remove="wwwroot\lib\tooltip.js\**" />
     <Compile Remove="wwwroot\scss\**" />
     <Compile Remove="wwwroot\slib\**" />
+    <Content Remove="wwwroot\images\**" />
     <Content Remove="wwwroot\lib\tooltip.js\**" />
     <Content Remove="wwwroot\scss\**" />
     <Content Remove="wwwroot\slib\**" />
+    <EmbeddedResource Remove="wwwroot\images\**" />
     <EmbeddedResource Remove="wwwroot\lib\tooltip.js\**" />
     <EmbeddedResource Remove="wwwroot\scss\**" />
     <EmbeddedResource Remove="wwwroot\slib\**" />
+    <None Remove="wwwroot\images\**" />
     <None Remove="wwwroot\lib\tooltip.js\**" />
     <None Remove="wwwroot\scss\**" />
     <None Remove="wwwroot\slib\**" />
@@ -54,10 +58,6 @@
   <ItemGroup>
     <ProjectReference Include="..\DataContextStructure\DataContextStructure.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace ESMIlWebApp.Controllers.Unit
 {
- [Area("Unit")]   
+ //[Area("Unit")]   
     public class PrayerUnitController : Controller
     {
         private readonly IUnitRepository _repository;
