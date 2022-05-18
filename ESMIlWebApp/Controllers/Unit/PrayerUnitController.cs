@@ -54,6 +54,19 @@ namespace ESMIlWebApp.Controllers.Unit
                       || s.Middlename.ToLower().Contains(search)
                       || s.PhoneNumber01.ToLower().Contains(search)
                       || s.PhoneNumber02.ToLower().Contains(search)
+                      || s.CourseOfStudy.ToLower().Contains(search)
+                      || s.HostelAddress.ToLower().Contains(search)
+                      || s.PreviousUnit.ToLower().Contains(search)
+                      || s.strDateJoinESM.ToLower().Contains(search)
+                      || s.strDateOfBirth.ToLower().Contains(search)
+                      || s.Email.ToLower().Contains(search)
+                      || s.Ambition.ToLower().Contains(search)
+                      || s.Gender.ToLower().Contains(search)
+                      || s.HomeAddress.ToLower().Contains(search)
+                      || s.LGA.ToLower().Contains(search)
+                      || s.PositionInFamily.ToLower().Contains(search)
+                      || s.SocialMediaAddress.ToLower().Contains(search)
+                      || s.StateOfOrigin.ToLower().Contains(search)
                       || s.Email.ToLower().Contains(search)).ToList();
                 }
                 totalRecord = prayerRecord.Count();

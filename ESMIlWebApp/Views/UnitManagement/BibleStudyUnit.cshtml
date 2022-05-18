@@ -41,7 +41,7 @@
                 <tr>
                 <th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>
                    <th>Action</th>
-                  @*  <th>Photo Passport</th>*@
+                  @*<th>Photo Passport</th>*@
                     <th>ID</th>
                     <th>Surname</th>
                     <th>Firstname</th>
@@ -99,20 +99,18 @@
         },
         "columns":[
 
-            {
-            "data":null,"sTitle": "Actions",
+            //{
+            //"data":null,"sTitle": "Actions",
 
-            "render": function (data, type, row, meta)
-            {
-            if (row)
-            {
-              return `<button class=" btn btn-danger sureToDeleteThis" onclick='DeleteStd(${row.id})'>Delete</button>`
-            }
-            return ''
-            }
-            },
-
-           
+            //"render": function (data, type, row, meta)
+            //{
+            //if (row)
+            //{
+            //  return `<button class=" btn btn-danger sureToDeleteThis" onclick='DeleteStd(${row.id})'>Delete</button>`
+            //}
+            //return ''
+            //}
+            //},
             {
             "data": null, "name":"Action", "defaultContent":'<div class="btn-group mr-1 mb-1">'+
             "<button aria-expanded='false' aria-haspopup='true' class='btn btn-white dropdown-toggle' data-toggle='dropdown' id='dropdownMenuDetail' type='button'></button>"+
@@ -122,13 +120,12 @@
             "<a class='dropdown-item' href='#' id='deleteRecord' title='Delete Record'><i class='fa fa-trash-o'></i>&nbsp;Delete Record</a>" +
             "</div>"+
             '</div>'
-            
-        },
+            },
         {"data":"id", "name":"id", "autoWidth":false},
         {"data":"surname", "name":"surname", "autoWidth":false},
         {"data":"firstname", "name":"firstname", "autoWidth":false},
         {"data":"middlename", "name":"middlename", "autoWidth":false},
-       // {"data":"strDateOfBirth", "name":"dateofbirth", "autoWidth":false},
+       //{"data":"strDateOfBirth", "name":"dateofbirth", "autoWidth":false},
         {"data":null,"sTitle": "Actions",
          "render": function (data, type, row, meta)
         {

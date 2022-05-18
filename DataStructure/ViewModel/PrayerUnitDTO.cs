@@ -29,7 +29,8 @@ namespace DataStructure.ViewModel
         public string PositionInFamily { get; set; }
         public string SocialMediaAddress { get; set; }
         public string Photo { get; set; }
-         
+        public string? Ambition { get; set; }
+
         public string strDateOfBirth { get { if (DateOfBirth.HasValue) { return DateOfBirth.Value.ToString("dd/MM/yyyy"); } else { return string.Empty; } } }
         public string strDateJoinESM { get { if (DateJoinESM.HasValue) { return DateJoinESM.Value.ToString("dd/MM/yyyy"); } else { return string.Empty; } } }
     }
@@ -41,6 +42,7 @@ namespace DataStructure.ViewModel
         public string Firstname { get; set; }
         public string Middlename { get; set; }
         public string Gender { get; set; }
+        public string Ambition { get; set; }
         public string PhoneNumber01 { get; set; }
         public string PhoneNumber02 { get; set; }
         public string? Email { get; set; }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -237,18 +237,23 @@ namespace Infrastructure.Service
                         Surname = s.Surname==null ? "": s.Surname,
                         Firstname= s.Firstname == null ? "" : s.Firstname,
                         Middlename= s.Middlename == null ? "" : s.Middlename,
-                        Unit= s.Unit == null ? "" : s.Unit,
-                        CourseOfStudy= s.CourseOfStudy == null ? "" : s.CourseOfStudy,
-                        Email= s.Email == null ? "" : s.Email,
-                        PhoneNumber01= s.PhoneNumber01 == null ? "" : s.PhoneNumber01,
-                        PhoneNumber02= s.PhoneNumber02 == null ? "" : s.PhoneNumber02,
-                        HomeAddress= s.HomeAddress == null ? "" : s.HomeAddress,
-                        HostelAddress= s.HostelAddress == null ? "" : s.HostelAddress,
-                        PreviousUnit =s.PreviousUnit == null ? "" : s.PreviousUnit,
-                        DateOfBirth=s.DateOfBirth == null ? null : s.DateOfBirth,
-                        PositionInFamily=s.PositionInFamily == null ? "" : s.PositionInFamily,
-                        SocialMediaAddress=s.SocialMediaAddress == null ? "" : s.SocialMediaAddress,
-                        Photo= s.Photo == null ? "":s.Photo,
+                        Unit = s.Unit == null ? "" : s.Unit,
+                        Gender = s.Gender == null ? "" : s.Gender,
+                        LGA = s.LGA == null ? "" : s.LGA,
+                        StateOfOrigin = s.StateOfOrigin == null ? "" : s.StateOfOrigin,
+                        DateJoinESM = s.DateJoinESM == null ? null : s.DateJoinESM,
+                        Ambition = s.Ambition == null ? "" : s.Ambition,
+                        CourseOfStudy = s.CourseOfStudy == null ? "" : s.CourseOfStudy,
+                        Email = s.Email == null ? "" : s.Email,
+                        PhoneNumber01 = s.PhoneNumber01 == null ? "" : s.PhoneNumber01,
+                        PhoneNumber02 = s.PhoneNumber02 == null ? "" : s.PhoneNumber02,
+                        HomeAddress = s.HomeAddress == null ? "" : s.HomeAddress,
+                        HostelAddress = s.HostelAddress == null ? "" : s.HostelAddress,
+                        PreviousUnit = s.PreviousUnit == null ? "" : s.PreviousUnit,
+                        DateOfBirth = s.DateOfBirth == null ? null : s.DateOfBirth,
+                        PositionInFamily = s.PositionInFamily == null ? "" : s.PositionInFamily,
+                        SocialMediaAddress = s.SocialMediaAddress == null ? "" : s.SocialMediaAddress,
+                        Photo = s.Photo == null ? "" : s.Photo,
                     });
         }
 

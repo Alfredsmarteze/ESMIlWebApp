@@ -40,13 +40,29 @@
             <thead>
                 <tr>
                 <th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>
-                   <th>Action</th>
-                    <th>Photo Passport</th>
+                   @*<th>Photo Passport</th>*@
+                    <th>Actions</th>
                     <th>ID</th>
                     <th>Surname</th>
                     <th>Firstname</th>
                     <th>Middlename</th>
+                    <th>Gender</th>
                     <th>Date Of Birth</th>
+                    <th>State Of Origin</th>
+                    <th>LGA</th>
+                    <th>Phone Number 01</th>
+                    <th>Phone Number 02</th>
+                    <th>Email</th>
+                    <th>Hostel Address</th>
+                    <th>Home Address</th>
+                    <th>Course Of Study</th>
+                    <th>Unit</th>
+                    <th>Previous Unit</th>
+                    <th>Position In Family</th>
+                    <th>Social Media Address</th>
+                    <th>Ambition</th>
+                    <th>Date Join ESM</th>
+                    @*<th>What Else Here</th>*@
                 </tr>
             </thead>
             @*<thead>
@@ -63,9 +79,9 @@
             </tbody>
         </table>
     @*</div>*@
+    </div>
     
-
-</div>
+  
 
 @using(Html.BeginForm("ViewPrayerUnit","UnitManagement",FormMethod.Post, new { id="viewPrayerForm", target="_blank"}))
 {
@@ -87,6 +103,7 @@
         "filter": true, // this is for disable filter (search box)
         "orderMulti": false, // for disable multiple column at once
         "paginate":true,
+        "scrollX": true,
        // colReorder: false,
       //  rowReorder:false,
         //select: true,
@@ -98,26 +115,7 @@
         "data":function(arg){}
         },
         "columns":[
-
-            {
-            "data":null,"sTitle": "Actions",
-
-            "render": function (data, type, row, meta)
-            {
-            if (row)
-                    {
-                            return `<button class=" btn btn-danger sureToDeleteThis"
-                                    onclick='DeleteStd(${row.id})'>Delete</button>`
-                                
-                        }
-
-                    return ''
-
-                    }
-                    },
-
-           
-            {
+           {
             "data": null, "name":"Action", "defaultContent":'<div class="btn-group mr-1 mb-1">'+
             "<button aria-expanded='false' aria-haspopup='true' class='btn btn-white dropdown-toggle' data-toggle='dropdown' id='dropdownMenuDetail' type='button'></button>"+
             "<div aria-labelledby='dropdownMenuButton6' class='dropdown-menu'>"+
@@ -139,24 +137,32 @@
         {"data":"surname", "name":"surname", "autoWidth":false},
         {"data":"firstname", "name":"firstname", "autoWidth":false},
         {"data":"middlename", "name":"middlename", "autoWidth":false},
+        {"data":"gender", "name":"gender", "autoWidth":false},
         {"data":"strDateOfBirth", "name":"dateofbirth", "autoWidth":false},
-            {
-                    "data":null,"sTitle": "Actions",
-
-                    "render": function (data, type, row, meta)
-                    {
-                        if (row)
-                        {
-                            return `
-
-                                <button class=" btn btn-danger" 
-                                onclick='DeleteStd(${row.id})'>Delete</button>`
-                         }
-
-                    return ''
-
-                    }
-                },
+        {"data":"stateOfOrigin", "name":"stateOfOrigin", "autoWidth":false},
+        {"data":"lga", "name":"lga", "autoWidth":false},
+        {"data":"phoneNumber01", "name":"phoneNumber01", "autoWidth":false},
+        {"data":"phoneNumber02", "name":"phoneNumber02", "autoWidth":false},
+        {"data":"email", "name":"email", "autoWidth":false},
+        {"data":"hostelAddress", "name":"hostelAddress", "autoWidth":false},
+        {"data":"homeAddress", "name":"homeAddress", "autoWidth":false},
+        {"data":"courseOfStudy", "name":"courseOfStudy", "autoWidth":false},
+        {"data":"unit", "name":"unit", "autoWidth":false},
+        {"data":"previousUnit", "name":"previousUnit", "autoWidth":false},
+        {"data":"positionInFamily", "name":"positionInFamily", "autoWidth":false},
+        {"data":"socialMediaAddress", "name":"socialMediaAddress", "autoWidth":false},
+        {"data":"ambition", "name":"ambition", "autoWidth":false},
+        {"data":"strDateJoinESM", "name":"strDateJOinESM", "autoWidth":false},
+        {"data":null,"sTitle": "Action",
+        "render": function (data, type, row, meta)
+         {
+           if (row)
+           {
+            return`<button class=" btn btn-danger" onclick='DeleteStd(${row.id})'>Delete</button>`
+           }
+           return ''
+         }
+         },
         ],
       }); 
    
