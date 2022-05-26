@@ -4,49 +4,39 @@
 }
 
 <style>
-    .dataTables_wrapper .row:first-child {
-        border-bottom: 0;
-        margin-bottom: 0;
-        margin-top: 0;
-        padding-bottom: 0;
-    }
-.dataTables_wrappr{
-
-    background:lightblue;
-}
-    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    background: gold;
-    border-radius: 0px;
-    border: 1px solid #828282;
-    border-color:gold;
-}
-.dataTables_wrapper .dataTables_paginate .paginate_button:active {
-    background:green;
-}
-    div.dataTables_wrapper div.dataTables_length select {
-        width: 170px;
-    }
-  
-   div .dataTables_wrapper{
-    background-color:aliceblue;
-    }
+   
 </style>
 
-    <button class="btn btn-primary btn-rounded" id="newRecord">Capture New Record</button>
+<button class="btn btn-primary btn-rounded" id="newRecord">Capture New Record</button>
 <br><br>
 <div class="table-responsive">
     @*<div style="overflow-x:scroll">*@
-        <table id="bibleStudyTable" width="100%" class="stripe hover">
+        <table id="bibleTable" width="100%" class="stripe hover">
             <thead>
                 <tr>
-                <th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>
-                   <th>Action</th>
-                  @*<th>Photo Passport</th>*@
+               @* <th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>*@
+                    <th>Actions</th>
                     <th>ID</th>
                     <th>Surname</th>
                     <th>Firstname</th>
                     <th>Middlename</th>
+                    <th>Gender</th>
                     <th>Date Of Birth</th>
+                    <th>State Of Origin</th>
+                    <th>LGA</th>
+                    <th>Phone Number 01</th>
+                    <th>Phone Number 02</th>
+                    <th>Email</th>
+                    <th>Hostel Address</th>
+                    <th>Home Address</th>
+                    <th>Course Of Study</th>
+                    <th>Unit</th>
+                    <th>Previous Unit</th>
+                    <th>Position In Family</th>
+                    <th>Social Media Address</th>
+                    <th>Ambition</th>
+                    <th>Date Join ESM</th>
+                    <th></th>
                 </tr>
             </thead>
             @*<thead>
@@ -63,15 +53,15 @@
             </tbody>
         </table>
     @*</div>*@
+    </div>
     
+  
 
-</div>
-
-@using(Html.BeginForm("ViewBibleStudyUnit","UnitManagement",FormMethod.Post, new { id="viewBibleStudyForm", target="_blank"}))
+@using(Html.BeginForm("ViewBibleStudyUnit","UnitManagement",FormMethod.Post, new { id="viewBibleForm", target="_blank"}))
 {
     <input type="hidden" name="viewRecordId" id="viewRecordId">
 }
-@using(Html.BeginForm("UpdateBibleStudyUnit","UnitManagement",FormMethod.Post, new { id="updateBibleStudyForm", target="_blank"}))
+@using(Html.BeginForm("UpdateBibleStudyUnit","UnitManagement",FormMethod.Post, new { id="updateBibleForm", target="_blank"}))
 {
     <input type="hidden" name="updateRecordId" id="updateRecordId">
 }
@@ -80,17 +70,18 @@
 @section scripts{           
     <script>
       
-        var table =$("#bibleStudyTable").DataTable({
+        var table =$("#bibleTable").DataTable({
         "lengthMenu":[[7,20,25,50, -1],[7,20,25,50,"All"]],
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
         "filter": true, // this is for disable filter (search box)
         "orderMulti": false, // for disable multiple column at once
         "paginate":true,
+        "scrollX": true,
        // colReorder: false,
       //  rowReorder:false,
         //select: true,
-        //dom: 'Bfrtip',  , new {area="Unit"}
+        //dom: 'Bfrtip', , new{area="Unit"}
         "ajax":{
         "url":"@Url.Action("GetAllBibleStudyUnit","BibleStudyUnit")",
         "type":"POST",
@@ -98,20 +89,7 @@
         "data":function(arg){}
         },
         "columns":[
-
-            //{
-            //"data":null,"sTitle": "Actions",
-
-            //"render": function (data, type, row, meta)
-            //{
-            //if (row)
-            //{
-            //  return `<button class=" btn btn-danger sureToDeleteThis" onclick='DeleteStd(${row.id})'>Delete</button>`
-            //}
-            //return ''
-            //}
-            //},
-            {
+           {
             "data": null, "name":"Action", "defaultContent":'<div class="btn-group mr-1 mb-1">'+
             "<button aria-expanded='false' aria-haspopup='true' class='btn btn-white dropdown-toggle' data-toggle='dropdown' id='dropdownMenuDetail' type='button'></button>"+
             "<div aria-labelledby='dropdownMenuButton6' class='dropdown-menu'>"+
@@ -120,26 +98,49 @@
             "<a class='dropdown-item' href='#' id='deleteRecord' title='Delete Record'><i class='fa fa-trash-o'></i>&nbsp;Delete Record</a>" +
             "</div>"+
             '</div>'
-            },
+            
+        },
+        
+        //    {"data":"photo", 
+        //    'searchable':false,
+        //    'orderable':false,
+        //    'render':function(data, type, row, full, meta){
+        //return '<img src="'+data.photo+'" alt="Passport" style="height:50px; width:50px;"/>';
+        //}},
         {"data":"id", "name":"id", "autoWidth":false},
         {"data":"surname", "name":"surname", "autoWidth":false},
         {"data":"firstname", "name":"firstname", "autoWidth":false},
         {"data":"middlename", "name":"middlename", "autoWidth":false},
-       //{"data":"strDateOfBirth", "name":"dateofbirth", "autoWidth":false},
-        {"data":null,"sTitle": "Actions",
-         "render": function (data, type, row, meta)
-        {
-         if (row)
+        {"data":"gender", "name":"gender", "autoWidth":false},
+        {"data":"strDateOfBirth", "name":"dateofbirth", "autoWidth":false},
+        {"data":"stateOfOrigin", "name":"stateOfOrigin", "autoWidth":false},
+        {"data":"lga", "name":"lga", "autoWidth":false},
+        {"data":"phoneNumber01", "name":"phoneNumber01", "autoWidth":false},
+        {"data":"phoneNumber02", "name":"phoneNumber02", "autoWidth":false},
+        {"data":"email", "name":"email", "autoWidth":false},
+        {"data":"hostelAddress", "name":"hostelAddress", "autoWidth":false},
+        {"data":"homeAddress", "name":"homeAddress", "autoWidth":false},
+        {"data":"courseOfStudy", "name":"courseOfStudy", "autoWidth":false},
+        {"data":"unit", "name":"unit", "autoWidth":false},
+        {"data":"previousUnit", "name":"previousUnit", "autoWidth":false},
+        {"data":"positionInFamily", "name":"positionInFamily", "autoWidth":false},
+        {"data":"socialMediaAddress", "name":"socialMediaAddress", "autoWidth":false},
+        {"data":"ambition", "name":"ambition", "autoWidth":false},
+        {"data":"strDateJoinESM", "name":"strDateJOinESM", "autoWidth":false},
+        {"data":null,"sTitle": "Action",
+        "render": function (data, type, row, meta)
          {
-         return `<button class=" btn btn-danger" onclick='DeleteStd(${row.id})'>Delete</button>`
-         }
-         return ''
+           if (row)
+           {
+            return`<button class=" btn btn-danger" onclick='DeleteStd(${row.id})'>Delete</button>`
+           }
+           return ''
          }
          },
         ],
       }); 
-
-        function DeleteStd(id){
+   
+         function DeleteStd(id){
             var postId={
             "payload":id
             }
@@ -155,8 +156,7 @@
     },
     callback: function (result) {
         if(result){
-           
-         $.ajax({
+           $.ajax({
                     type: "POST",
                     url: "@Url.Action("ActionButton", "BibleStudyUnit", new { area = "Unit" })",
                     datatype: "JSON",
@@ -168,91 +168,29 @@
                 });
                 }
                 else{
-                bootbox.alert("Record was not deleted.");
+                bootbox.alert("Record not deleted.");
                 }
     }
 });
          
     }
-          var operationProcessUrl = "@Url.Action("ActionButton", "BibleStudyUnit", new { area = "Unit" })";
-            $('#bibleStudyTable tbody').on('click','#deleteRecord' ,function (e) {
-                e.preventDefault();
-                
-                bootbox.confirm({
-
-                    title: '<i class="fa fa-warning"></i> Warning',
-                    message: "Do you still want to continue with this operation?",
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-remove"></i> No'
-                        },
-                        confirm: {
-                            label: '<i class="fa fa-check"></i> Yes'
-                        }
-                    },
-                    callback: function (result) {
-                        if (result) {
-                  //var data1 = table.row($(this).parents('tr')).data();
-                    var data2=table.row($(this).parents('tr')).data();
-               //var data1 = table.row( this ).data().id;//parents('tr')).data();
-                console.log(data2);
-                // var arraydata=  arraysOfIds.push(data1.id);
-              
-                 
-                            var data = {
-                                //actionType: $("#ActionType").val(),
-                                id:data2.id,
-                            }
-
-                            //if (data.ids == "") {
-                            //    SiteUtils.showMessage("Error", "red", "No row id selected");
-                            //    return
-                            //}
-
-                            var payload = SiteUtils.encrypt(JSON.stringify(data)).toString();
-
-                            SiteUtils.post({ payload: payload }, operationProcessUrl).then(function (response) {
-                                if (response.hasError == false) {
-
-                                    table.draw();
+        
 
 
-                                    SiteUtils.showMessage("Success", "green", response.message);
-
-                                } else {
-
-                                    SiteUtils.showMessage("Error", "red", response.message);
-
-                                }
-
-
-                            }).catch(function (err) {
-                                SiteUtils.loadingOff();
-                                SiteUtils.showMessage("Error", "red", err.statusText);
-                            })
-
-
-                        }
-                    }
-                });
-            })
-
-
-         $('#bibleStudyTable tbody').on('click', '#viewRecord', function (e) {
+         $('#bibleTable tbody').on('click', '#viewRecord', function (e) {
                 e.preventDefault();
                 var data = table.row($(this).parents('tr')).data();
                 $("#viewRecordId").val(data.id);
-                $("#viewBibleStudyForm").submit();
+                $("#viewBibleForm").submit();
 
             });
 
-            $('#bibleStudyTable tbody').on('click', '#changeRecord', function (e) {
+            $('#bibleTable tbody').on('click', '#changeRecord', function (e) {
                 e.preventDefault();
                 var data = table.row($(this).parents('tr')).data();
                 $("#updateRecordId").val(data.id);
-                $("#updateBibleStudyForm").submit();
+                $("#updateBibleForm").submit();
 
-                console.log(data.Id)
             });
 
             $('#newRecord').on('click', function(e){

@@ -1,5 +1,4 @@
-﻿@*@model DataStructure.Entites.PrayerUnit;*@
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h4 class="text-muted">Bible Study Unit</h4>
@@ -40,9 +39,9 @@
         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label for="">Date Of Birth</label>
-                                <div class="date-input">
-                                    <div class="date-input">
-                                        <input type="date" class="date form-control" placeholder="" id="txtDateofBirth">
+                                <div class="ate-input">
+                                    <div class="ate-input">
+                                        <input type="text" class="date form-control" placeholder="" id="txtDateofBirth">
                                     </div>
                                 </div>
                             </div>
@@ -140,9 +139,9 @@
         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label for="">Date Join ESM</label>
-                                <div class="date-input">
-                                    <div class="date-input">
-                                        <input type="date" class="date form-control" placeholder="" id="txtDateJoinESM">
+                                <div class="ate-input">
+                                    <div class="ate-input">
+                                        <input type="text" class="date form-control" placeholder="" id="txtDateJoinESM">
                                     </div>
                                 </div>
                             </div>
@@ -160,36 +159,12 @@
 @section scripts{
      <script>
   
-        var saveUrl="@Url.Action("AddOrUpdatePrayerUnitData","PrayerUnit", new {area="Unit"})";
-
-         //$(document).ready(function(){
-         
-               //// $("h4").text(geekss + ' is the selected file.');
-        // });
-
-               // var wrapper = $('<div/>').css({height:0,width:0,'overflow':'hidden'});
-               // var fileInput = $(':file').wrap(wrapper);
-               // var text;
-
-               // fileInput.change(function(){
-               // $this = $(this);
-               // $('#file').html($this.val());
-               // text = $('#file').html();
-               // text = text.substring(text.lastIndexOf("\\") + 1, text.length);
-               // $('#file').html(text);
-               // });
-
-               //$('#file').click(function(){
-               //fileInput.click();
-               //}).show();
+        var saveUrl="@Url.Action("AddOrUpdateBibleStudyUnitData","BibleStudyUnit", new {area="Unit"})";
 
         $("#saveRecord").click(function(e)
         {
             e.preventDefault();
 
-            //$('input[type="file"]').change(function(e) {
-            //    var geekss = e.target.files[0].name;
-            //})
             var body={
             Id:$("#rowId").val() == "" ? 0: $.trim($("#rowId").val()),
             Surname:$.trim($("#txtSurname").val()),
@@ -217,33 +192,21 @@
             SiteUtils.post({payload:payload}, saveUrl).then(function (response){
             if(response.hasError==false)
             {
-                alert("Success");
+                alert(response.message);
             }
             else{
-            alert("Error");
+            alert(response.message);
             }
             })
-            //$.ajax({
-            //  type: "POST",
-            //  url:saveUrl,
-            //  data:JSON.stringify(body),
-            //  dataType:'json',
-            //  //contentType:'application/json; charset=utf-8',
-            //  success: function(data)
-            //  {
-            //  alert(data.message)
-            //  },
-            //  error:function()
-            //  {
-            //  alert("An error occured")
-            //  }
-            //});
+
         });
-           
-        //  jQuery(".date").datetimepicker({
-        //    timepicker: false,
-        //    format: 'd/m/Y'
-        //});
+          //$(function (){
+          // $('.date').datepicker();
+          //})  
+        jQuery('.date').datepicker({
+        timepicker:false,
+        format:'m/d/Y'
+        })
 
     </script>
 }

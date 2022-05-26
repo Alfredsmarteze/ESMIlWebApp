@@ -14,6 +14,7 @@ namespace DataStructure.Entites
         public string? Middlename { get; set; }
         public string? PhoneNumber01 { get; set; }
         public string? PhoneNumber02  { get; set; }
+        public string? Ambition { get; set; }
          public string? Gender { get; set; } 
          public string? StateOfOrigin { get; set; } 
          public string? LGA { get; set; }

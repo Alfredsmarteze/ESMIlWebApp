@@ -42,7 +42,7 @@
                                 <label for="">Date Of Birth</label>
                                 <div class="date-input">
                                     <div class="date-input">
-                                        <input type="date" class="date form-control" placeholder="" id="txtDateofBirth">
+                                        <input type="text" class="date form-control" placeholder="" id="txtDateofBirth">
                                     </div>
                                 </div>
                             </div>
@@ -114,6 +114,12 @@
         </div>
         <div class="col-4">
             <div class="form-group">
+            <label class="form-label">Ambition</label>
+            <input class="form-control" id="txtAmbition" type="text" placeholder="">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
             <label class="form-label">Unit</label>
             <vc:unit></vc:unit>
             </div>
@@ -142,7 +148,7 @@
                                 <label for="">Date Join ESM</label>
                                 <div class="date-input">
                                     <div class="date-input">
-                                        <input type="date" class="date form-control" placeholder="" id="txtDateJoinESM">
+                                        <input type="text" class="date form-control" placeholder="" id="txtDateJoinESM">
                                     </div>
                                 </div>
                             </div>
@@ -203,6 +209,7 @@
             PhoneNumber01:$.trim($("#txtPhoneNumber01").val()),
             PhoneNumber02:$.trim($("#txtPhoneNumber02").val()),
             StateOfOrigin:$("#drpGender").val(),
+            Ambition:$("#txtAmbition").val(),
             LGA:$("#drpGender").val(),
             Unit:$("#drpUnit").val(),
             PreviousUnit:$("#drpUnit").val(),
@@ -219,10 +226,10 @@
             SiteUtils.post({payload:payload}, saveUrl).then(function (response){
             if(response.hasError==false)
             {
-                alert("Success");
+                alert(response.message);
             }
             else{
-            alert("Error");
+            alert(response.message);
             }
             })
             //$.ajax({
@@ -241,11 +248,17 @@
             //  }
             //});
         });
-           
-        //  jQuery(".date").datetimepicker({
-        //    timepicker: false,
-        //    format: 'd/m/Y'
-        //});
-
+           jQuery('.date').datepicker({
+        timepicker:false,
+        format:'m/d/Y'
+        })
+        //jQuery('.date').datepicker({
+        //timepicker:true,
+        //datepicker:true,
+        //formatDate:'d/m/Y'
+       //})
+    //$(function (){
+    //       $('.date').datepicker();
+    //      })
     </script>
 }

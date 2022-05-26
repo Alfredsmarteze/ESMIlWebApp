@@ -65,6 +65,14 @@
     {
       "library": "Buttons@2.0.0",
       "destination": "wwwroot/Buttons/"
+    },
+    {
+      "library": "jquery-datetimepicker@2.5.20",
+      "destination": "wwwroot/jquery-datetimepicker/"
+    },
+    {
+      "library": "jqueryui@1.12.1",
+      "destination": "wwwroot/jqueryui/"
     }
   ]
 }

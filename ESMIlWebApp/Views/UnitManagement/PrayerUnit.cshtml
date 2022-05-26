@@ -4,32 +4,7 @@
 }
 
 <style>
-    .dataTables_wrapper .row:first-child {
-        border-bottom: 0;
-        margin-bottom: 0;
-        margin-top: 0;
-        padding-bottom: 0;
-    }
-.dataTables_wrappr{
-
-    background:lightblue;
-}
-    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    background: gold;
-    border-radius: 0px;
-    border: 1px solid #828282;
-    border-color:gold;
-}
-.dataTables_wrapper .dataTables_paginate .paginate_button:active {
-    background:green;
-}
-    div.dataTables_wrapper div.dataTables_length select {
-        width: 170px;
-    }
-  
-   div .dataTables_wrapper{
-    background-color:aliceblue;
-    }
+   
 </style>
 
 <button class="btn btn-primary btn-rounded" id="newRecord">Capture New Record</button>
@@ -39,8 +14,7 @@
         <table id="prayerTable" width="100%" class="stripe hover">
             <thead>
                 <tr>
-                <th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>
-                   @*<th>Photo Passport</th>*@
+               @* <th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>*@
                     <th>Actions</th>
                     <th>ID</th>
                     <th>Surname</th>
@@ -62,7 +36,7 @@
                     <th>Social Media Address</th>
                     <th>Ambition</th>
                     <th>Date Join ESM</th>
-                    @*<th>What Else Here</th>*@
+                    <th></th>
                 </tr>
             </thead>
             @*<thead>
@@ -206,7 +180,7 @@
                 });
                 }
                 else{
-                bootbox.alert("Record was not deleted.");
+                bootbox.alert("Record not deleted.");
                 }
     }
 });

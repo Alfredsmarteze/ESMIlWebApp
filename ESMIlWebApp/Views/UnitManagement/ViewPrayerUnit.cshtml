@@ -4,8 +4,9 @@
 }
 
 
-
-<div class="container">
+<h4 class="text-muted">Prayer Unit</h4>
+<h5 class="text-muted">View record</h5>
+<div class="container" style="background-color:lightblue">
     <div class="row">
         <form >
         <div class="row">
@@ -43,7 +44,7 @@
                                 <label for="">Date Of Birth</label>
                                 <div class="date-input">
                                     <div class="date-input">
-                                        <input type="date" class="date form-control" readonly id="txtDateofBirth" value="@Model.DateOfBirth">
+                                        <input type="text" class="date form-control" readonly id="txtDateofBirth" value="@Model.strDateOfBirth">
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +55,7 @@
         <div class="col-lg-4">
            <div class="form-group mg-b-10-force">
               <label class="form-control-label">State of origin</label>
-          <vc:gender></vc:gender> 
+          <vc:state></vc:state> 
           </div>
         </div>
         </div>
@@ -62,7 +63,7 @@
         <div class="col-lg-4">
            <div class="form-group mg-b-10-force">
               <label class="form-control-label">LGA</label>
-          <vc:gender></vc:gender> 
+          <vc:state></vc:state> 
           </div>
         </div>
         </div>
@@ -115,14 +116,22 @@
         </div>
         <div class="col-4">
             <div class="form-group">
+            <label class="form-label">Ambition</label>
+            <input class="form-control" id="txtAmbition" type="text" value="@Model.Ambition"  readonly>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group">
             <label class="form-label">Unit</label>
-            <vc:unit></vc:unit>
+            <input class="form-control" id="txtPositionInFamily" type="text" value="@Model.Unit" readonly>
+            @*<vc:unit></vc:unit>*@
             </div>
         </div>
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Previous Unit</label>
-            <vc:unit></vc:unit>
+            <input class="form-control" id="txtPositionInFamily" type="text" value="@Model.PreviousUnit" readonly>
             </div>
         </div>
         <br/>
@@ -141,9 +150,9 @@
         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label for="">Date Join ESM</label>
-                                <div class="date-input">
-                                    <div class="date-input">
-                                        <input type="date" class="date form-control" value="@Model.DateJoinESM" readonly id="txtDateJoinESM">
+                                <div class="ate-input">
+                                    <div class="ate-input">
+                                        <input type="text" class="ate form-control" value="@Model.strDateJoinESM" readonly id="txtDateJoinESM">
                                     </div>
                                 </div>
                             </div>

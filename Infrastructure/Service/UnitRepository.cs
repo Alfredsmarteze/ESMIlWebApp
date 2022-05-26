@@ -26,6 +26,19 @@ namespace Infrastructure.Service
         public async Task<bool> AddOrUpdateBibleStudyUnitAsync(BibleStudyUnitData model)
         {
             bool result;
+            var bdate = new DateTime();
+            if (!string.IsNullOrEmpty(model.DateOfBirth))
+            {
+                var splitDateOfBirth = model.DateOfBirth.Split('/');
+                bdate = new DateTime(int.Parse(splitDateOfBirth[2]), int.Parse(splitDateOfBirth[1]), int.Parse(splitDateOfBirth[0]));
+            }
+
+            var dateJoin = new DateTime();
+            if (!string.IsNullOrEmpty(model.DateJoinESM))
+            {
+                var splitDateJoin = model.DateJoinESM.Split('/');
+                dateJoin = new DateTime(int.Parse(splitDateJoin[2]), int.Parse(splitDateJoin[1]), int.Parse(splitDateJoin[0]));
+            }
             if (model.Id < 1)
             {
 
@@ -40,12 +53,13 @@ namespace Infrastructure.Service
                     Gender = model.Gender,
                     StateOfOrigin = model.StateOfOrigin,
                     LGA = model.LGA,
+                    Ambition = model.Ambition,
                     HomeAddress = model.HomeAddress,
                     HostelAddress = model.HostelAddress,
                     CourseOfStudy = model.CourseOfStudy,
                     Unit = model.Unit,
-                    DateOfBirth = model.DateOfBirth,
-                    DateJoinESM = model.DateJoinESM,
+                    DateOfBirth =bdate,
+                    DateJoinESM =dateJoin,
                     PreviousUnit = model.PreviousUnit,
                     PositionInFamily = model.PositionInFamily,
                     SocialMediaAddress = model.SocialMediaAddress,
@@ -72,11 +86,12 @@ namespace Infrastructure.Service
                 bibleStudyData.HostelAddress = model.HostelAddress;
                 bibleStudyData.CourseOfStudy = model.CourseOfStudy;
                 bibleStudyData.Unit = model.Unit;
+                bibleStudyData.Ambition = model.Ambition;
                 bibleStudyData.StateOfOrigin = model.StateOfOrigin;
                 bibleStudyData.LGA = model.LGA;
                 bibleStudyData.PreviousUnit = model.PreviousUnit;
-                bibleStudyData.DateOfBirth = model.DateOfBirth;
-                bibleStudyData.DateJoinESM = model.DateJoinESM;
+                bibleStudyData.DateOfBirth = bdate;
+                bibleStudyData.DateJoinESM = dateJoin;
                 bibleStudyData.Gender = model.Gender;
                 bibleStudyData.PositionInFamily = model.PositionInFamily;
                 bibleStudyData.SocialMediaAddress = model.SocialMediaAddress;
@@ -102,6 +117,11 @@ namespace Infrastructure.Service
                         Firstname = s.Firstname == null ? "" : s.Firstname,
                         Middlename = s.Middlename == null ? "" : s.Middlename,
                         Unit = s.Unit == null ? "" : s.Unit,
+                        Gender = s.Gender == null ? "" : s.Gender,
+                        LGA = s.LGA == null ? "" : s.LGA,
+                        StateOfOrigin = s.StateOfOrigin == null ? "" : s.StateOfOrigin,
+                        DateJoinESM = s.DateJoinESM == null ? null : s.DateJoinESM,
+                        Ambition = s.Ambition == null ? "" : s.Ambition,
                         CourseOfStudy = s.CourseOfStudy == null ? "" : s.CourseOfStudy,
                         Email = s.Email == null ? "" : s.Email,
                         PhoneNumber01 = s.PhoneNumber01 == null ? "" : s.PhoneNumber01,
@@ -127,6 +147,22 @@ namespace Infrastructure.Service
         {
             
             bool result;
+            DateTime? bdate = null;
+            //var bdate = new DateTime();
+            if (!string.IsNullOrEmpty(model.DateOfBirth))
+            {
+                var splitDateOfBirth = model.DateOfBirth.Split('/');
+                bdate = new DateTime(int.Parse(splitDateOfBirth[2]), int.Parse(splitDateOfBirth[1]), int.Parse(splitDateOfBirth[0]));
+            }
+
+            DateTime? dateJoin = null;
+            //var dateJoin = new DateTime();
+            if (!string.IsNullOrEmpty(model.DateJoinESM))
+            {
+                var splitDateJoin = model.DateJoinESM.Split('/');
+                dateJoin = new DateTime(int.Parse(splitDateJoin[2]), int.Parse(splitDateJoin[1]), int.Parse(splitDateJoin[0]));
+            }
+
             if (model.Id <1)
             {
                 
@@ -141,16 +177,16 @@ namespace Infrastructure.Service
                     Gender = model.Gender,
                     StateOfOrigin = model.StateOfOrigin,
                     LGA = model.LGA,
+                    Ambition=model.Ambition,
                     HomeAddress = model.HomeAddress,
                     HostelAddress = model.HostelAddress,
                     CourseOfStudy = model.CourseOfStudy,
                     Unit = model.Unit,
-                    DateOfBirth = model.DateOfBirth,
-                    DateJoinESM = model.DateJoinESM,
+                    DateOfBirth =bdate,
+                    DateJoinESM = dateJoin,
                     PreviousUnit = model.PreviousUnit,
                     PositionInFamily = model.PositionInFamily,
                     SocialMediaAddress = model.SocialMediaAddress,
-                    
                 };
                 _context.prayerUnit.Add(pData);
                 result = await _context.SaveChangesAsync() > 0;
@@ -173,11 +209,12 @@ namespace Infrastructure.Service
                     prayerData.HostelAddress = model.HostelAddress;
                     prayerData.CourseOfStudy = model.CourseOfStudy;
                     prayerData.Unit = model.Unit;
+                    prayerData.Ambition = model.Ambition;
                     prayerData.StateOfOrigin=model.StateOfOrigin;
                     prayerData.LGA=model.LGA;
                     prayerData.PreviousUnit=model.PreviousUnit;
-                    prayerData.DateOfBirth = model.DateOfBirth;
-                    prayerData.DateJoinESM =model.DateJoinESM;
+                    prayerData.DateOfBirth = bdate;//model.DateOfBirth;
+                    prayerData.DateJoinESM = dateJoin;// model.DateJoinESM;
                     prayerData.Gender= model.Gender;
                     prayerData.PositionInFamily = model.PositionInFamily;
                     prayerData.SocialMediaAddress = model.SocialMediaAddress;
