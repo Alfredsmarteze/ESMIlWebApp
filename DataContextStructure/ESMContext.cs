@@ -14,7 +14,12 @@ namespace DataContextStructure
             // using var context = new ESMContext(contextOptions);
 
         }
-
+        public DbSet<ChoralUnit> choralUnit { get; set; }
+        public DbSet<DmeUnit> dmeUnit { get; set; }
+        public DbSet<PublicityAndEditorialUnit> publicityAndEditorialUnit { get; set; }
+        public DbSet<TechnicalUnit> technicalUnit { get; set; }
+        public DbSet<UsheringUnit> usheringUnit { get; set; }
+        public DbSet<WelfareUnit> welfareUnit { get; set; }
         public DbSet<BibleStudyUnit> bibleStudyUnit { get; set; }  
         public DbSet<PrayerUnit> prayerUnit { get; set; }
         public DbSet<State> state { get; set; }

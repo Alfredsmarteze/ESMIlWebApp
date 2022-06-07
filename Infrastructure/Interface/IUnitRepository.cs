@@ -9,12 +9,24 @@ namespace Infrastructure.Interface
 {
     public interface IUnitRepository
     {
+        Task<bool> AddOrUpdatePublicityUnit(PublicityUnitData publicityUnitData);
+        Task<bool> AddOrUpdateDMEUnitAsync(DMEUnitData dMEUnitData);
         Task<bool> AddOrUpdateBibleStudyUnitAsync(BibleStudyUnitData bibleStudyUnitData);
-        IQueryable<BibleStudyUnitDTO> GetAllBibleStudyUnitsAsync();
-        string DeleteBibleStudyUnit(int id);
-        IQueryable<StateDTO> ListState();
         Task<bool> AddOrUpdatePrayerUnitAsync(PrayerUnitDTOData prayerUnitDTO);
+        Task<bool> AddOrUpdateChoralUnitAsync(ChoralUnitData choralUnitData);
+        IQueryable<PublicityAndEditorialUnitDTO> ListAllPublicityUnitAsync();
+        IQueryable<DmeUnitDTO> ListAllDmeUnitData();
+        IQueryable<BibleStudyUnitDTO> GetAllBibleStudyUnitsAsync();
+        IQueryable<ChoralUnitDTO> GetAllChoralUnitsAsync();
         IQueryable<PrayerUnitDTO> ListAllPrayerUnitData();
+        string DeletePublicityUnit(int id);
+        string DeleteDmeUnit(int id);
+        string DeleteBibleStudyUnit(int id);
+        string DeleteChoralUnit(int id);
         string DeletePrayerUnit(int ids);
+        IQueryable<StateDTO> ListState();
+        
+        
+        
     }
 }

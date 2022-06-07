@@ -9,15 +9,15 @@ using Newtonsoft.Json;
 
 namespace ESMIlWebApp.Controllers.Unit
 {
-   // [Area("Unit")]
-    public class BibleStudyUnitController : Controller
+    // [Area("Unit")]
+    public class DMEUnitController : Controller
     {
         private readonly IUnitRepository _repository;
-        private readonly ILogger<BibleStudyUnitController> _logger;
+        private readonly ILogger<DMEUnitController> _logger;
         private readonly IWebHostEnvironment _iWebHostEnvironment;
         private string errorMessage = string.Empty;
 
-        public BibleStudyUnitController(IUnitRepository repository, ILogger<BibleStudyUnitController> logger, IWebHostEnvironment webHostEnvironment)
+        public DMEUnitController(IUnitRepository repository, ILogger<DMEUnitController> logger, IWebHostEnvironment webHostEnvironment)
         {
             _repository = repository;
             _logger = logger;
@@ -28,28 +28,25 @@ namespace ESMIlWebApp.Controllers.Unit
             return View();
         }
 
-        public IActionResult GetAllBibleStudyUnit()
+        public IActionResult GetAllDMEUnit()
         {
             try
             {
-                //var length = Request.Form["length"].FirstOrDefault();
-                //var draw= Request.Form["draw"].FirstOrDefault();
-                //var start=Request.Form["start"].FirstOrDefault();
+                var length = Request.Form["length"].FirstOrDefault();
                 var draw = Request.Form["draw"].FirstOrDefault();
                 var start = Request.Form["start"].FirstOrDefault();
-                var length = Request.Form["length"].FirstOrDefault();
-
+               
                 var search = Request.Form["search[value]"].FirstOrDefault();
 
                 int pageSize = length != null ? Convert.ToInt32(length) : 0;
                 int skip = start != null ? Convert.ToInt32(start) : 0;
                 int totalRecord = 0;
 
-                var bibleStudyUnitRecord = _repository.GetAllBibleStudyUnitsAsync().ToList();
+                var dmeUnitRecord = _repository.ListAllDmeUnitData().ToList();
 
                 if (!string.IsNullOrWhiteSpace(search.ToString()))
                 {
-                    bibleStudyUnitRecord = bibleStudyUnitRecord.Where(s => s.Surname.ToLower().Contains(search)
+                    dmeUnitRecord = dmeUnitRecord.Where(s => s.Surname.ToLower().Contains(search)
                       || s.Firstname.ToLower().Contains(search)
                       || s.Middlename.ToLower().Contains(search)
                       || s.PhoneNumber01.ToLower().Contains(search)
@@ -69,19 +66,19 @@ namespace ESMIlWebApp.Controllers.Unit
                       || s.HomeAddress.ToLower().Contains(search)
                       || s.Email.ToLower().Contains(search)).ToList();
                 }
-                totalRecord = bibleStudyUnitRecord.Count();
-                bibleStudyUnitRecord = bibleStudyUnitRecord.OrderByDescending(s => s.Id).ToList();
+                totalRecord = dmeUnitRecord.Count();
+                dmeUnitRecord = dmeUnitRecord.OrderByDescending(s => s.Id).ToList();
                 //prayerRecord = prayerRecord.OrderBy(s=>s.Id).ToList();
                 if (pageSize != -1)
                 {
-                    bibleStudyUnitRecord = bibleStudyUnitRecord.OrderByDescending(s => s.Id).Skip(skip).Take(pageSize).ToList();
+                    dmeUnitRecord = dmeUnitRecord.OrderByDescending(s => s.Id).Skip(skip).Take(pageSize).ToList();
                 }
                 return Json(new
                 {
                     draw = draw,
                     recordsFiltered = totalRecord,
                     recordsTotal = totalRecord,
-                    data = bibleStudyUnitRecord
+                    data = dmeUnitRecord
                 });
 
             }
@@ -92,17 +89,17 @@ namespace ESMIlWebApp.Controllers.Unit
             }
             return Json(new ResponseModel { message = $" Error:\a {errorMessage}" });
         }
-        public async Task<IActionResult> AddOrUpdateBibleStudyUnitData(string payload)
+        public async Task<IActionResult> AddOrUpdateDmeUnitData(string payload)
         {
             try
             {
-                var model = new PrayerUnitDTOData();
+                var model = new DMEUnitData();
 
                 payload = EncryptionExtensions.DecryptStringAES(payload);
-                var newModel = JsonConvert.DeserializeObject<BibleStudyUnitData>(payload);
-                var saveBibleStudyUnitData = await _repository.AddOrUpdateBibleStudyUnitAsync(newModel);
+                var newModel = JsonConvert.DeserializeObject<DMEUnitData>(payload);
+                var saveDmeUnitData = await _repository.AddOrUpdateDMEUnitAsync(newModel);
 
-                if (saveBibleStudyUnitData)
+                if (saveDmeUnitData)
                 {
                     return Json(new ResponseModel { hasError = false, message = "Operation successful", statusCode = (int)HttpStatusCode.OK });
                 }
@@ -131,7 +128,7 @@ namespace ESMIlWebApp.Controllers.Unit
                     return Json(new ResponseModel { message = "Bad request" });
                 }
 
-                _repository.DeleteBibleStudyUnit(payload);
+                _repository.DeleteDmeUnit(payload);
 
                 return Json(new ResponseModel { hasError = false, message = "Operation completed successfully", statusCode = (int)HttpStatusCode.OK });
             }

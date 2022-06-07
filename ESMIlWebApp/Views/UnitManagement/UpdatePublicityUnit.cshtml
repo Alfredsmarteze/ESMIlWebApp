@@ -1,11 +1,11 @@
-﻿@model DataStructure.ViewModel.PrayerUnitDTO
+﻿@model DataStructure.ViewModel.PublicityAndEditorialUnitDTO
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-<h4 class="text-muted">Prayer Unit</h4>
-<h5 class="text-muted">Update record</h5>
+<h4 class="text-muted">Publicity Unit</h4>
+<h5 class="text-muted">Update <span class="text-bright"> @Model.Surname</span> record</h5>
 <div class="container" style="background-color:lightblue">
     <div class="row">
         <form >
@@ -42,7 +42,7 @@
         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label for="">Date Of Birth</label>
-                                <div class="ate-input">
+                                <div class="date-input">
                                     <div class="ate-input">
                                         <input type="text" class="date form-control" placeholder="" id="txtDateofBirth" value="@Model.strDateOfBirth">
                                     </div>
@@ -149,7 +149,7 @@
         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label for="">Date Join ESM</label>
-                                <div class="ate-input">
+                                <div class="date-input">
                                     <div class="ate-input">
                                         <input type="text" class="date form-control" value="@Model.strDateJoinESM" placeholder="" id="txtDateJoinESM">
                                     </div>
@@ -167,7 +167,7 @@
 
 @section scripts{
 <script>
-    var saveUrl="@Url.Action("AddOrUpdatePrayerUnitData","PrayerUnit", new {area="Unit"})";
+    var saveUrl="@Url.Action("AddOrUpdatePublicityUnitData","PublicityUnit", new {area="Unit"})";
     
     $(document).ready(function(){
     $("drpGender").val('@Model.Gender').trigger('change');
@@ -201,26 +201,13 @@
             DateJoinESM:$.trim($("#txtDateJoinESM").val()),
             CourseOfStudy:$.trim($("#txtCourseOfStudy").val()),
         }
-    //var payload=SiteUtils.encrypt(JSON.stringify(body)).toStirng();
-    //    SiteUtils.post({payload:payload}, saveUrl).then(function (response){
-    //    if(response.hasError==false)
-    //    {
-    //        alert("Success");
-    //    }
-    //    else
-    //    {
-    //        alert("Error");
-    //    }
-    //})
-
-   
-
+    
         var payload=SiteUtils.encrypt(JSON.stringify(body)).toString();
             SiteUtils.post({payload:payload}, saveUrl).then(function (response){
             if(response.hasError==false)
             {
                 alert(response.message, "Ok");
-                var returnUrl = '@Url.Action("PrayerUnit", "UnitManagement")';
+                var returnUrl = '@Url.Action("PublicityUnit", "UnitManagement")';
                             window.location.href = returnUrl;
             }
             else{
@@ -231,15 +218,11 @@
     
    
     });
-
-
-     jQuery('.date').datepicker({
-        timepicker:false,
-        format:'d/m/Y'
-        })
-          //$(function (){
-          // $('.date').datepicker();
-          //})
+    
+    //Date time picker
+    $(function (){
+      $('.date').datepicker();
+    })
 
 </script>
 }

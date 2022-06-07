@@ -1,33 +1,30 @@
-﻿@model DataStructure.ViewModel.PrayerUnitDTO
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
-<h4 class="text-muted">Prayer Unit</h4>
-<h5 class="text-muted">Update record</h5>
+<h4 class="text-muted">Choral Unit</h4>
+<h5 class="text-muted">Capture new record</h5>
 <div class="container" style="background-color:lightblue">
-    <div class="row">
-        <form >
+    <div class="row" id="fadeout">
+        <form>
         <div class="row">
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Surname</label>
-            <input id="rowId" type="hidden" value="@Model.Id">
-            <input class="form-control" id="txtSurname" type="text" value="@Model.Surname" placeholder="">
+            <input id="rowId" type="hidden">
+            <input class="form-control" id="txtSurname" type="text" placeholder="">
             </div>
            
         </div>
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Firstname</label>
-            <input class="form-control" id="txtFirstname" type="text" value="@Model.Firstname" placeholder="">
+            <input class="form-control" id="txtFirstname" type="text" placeholder="">
             </div>
         </div>
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Middlename</label>
-            <input class="form-control" id="txtMiddlename" type="text" value="@Model.Middlename" placeholder="">
+            <input class="form-control" id="txtMiddlename" type="text" placeholder="">
             </div>
         </div>
         </div>
@@ -44,7 +41,7 @@
                                 <label for="">Date Of Birth</label>
                                 <div class="ate-input">
                                     <div class="ate-input">
-                                        <input type="text" class="date form-control" placeholder="" id="txtDateofBirth" value="@Model.strDateOfBirth">
+                                        <input type="text" class="date form-control" placeholder="" id="txtDateofBirth">
                                     </div>
                                 </div>
                             </div>
@@ -72,19 +69,19 @@
          <div class="col-4">
             <div class="form-group">
             <label class="form-label">Phone Number 1</label>
-            <input class="form-control" id="txtPhoneNumber01" type="text" value="@Model.PhoneNumber01" placeholder="">
+            <input class="form-control" id="txtPhoneNumber01" type="text" placeholder="">
             </div>
         </div>
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Phone Number 2</label>
-            <input class="form-control" id="txtPhoneNumber02" type="text" value="@Model.PhoneNumber02" placeholder="">
+            <input class="form-control" id="txtPhoneNumber02" type="text" placeholder="">
             </div>
         </div>
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Email</label>
-            <input class="form-control" id="txtEmail" type="text" value="@Model.Email" placeholder="">
+            <input class="form-control" id="txtEmail" type="text" placeholder="">
             </div>
         </div>
         </div>
@@ -94,13 +91,13 @@
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Hostel Address</label>
-            <input class="form-control" id="txtHostelAddress" type="text" value="@Model.HostelAddress" placeholder="">
+            <input class="form-control" id="txtHostelAddress" type="text" placeholder="">
             </div>
         </div>
          <div class="col-4">
             <div class="form-group">
             <label class="form-label">Home Address</label>
-            <input class="form-control" id="txtHomeAddress" type="text" value="@Model.HomeAddress" placeholder="">
+            <input class="form-control" id="txtHomeAddress" type="text" placeholder="">
             </div>
         </div>
                
@@ -111,14 +108,7 @@
          <div class="col-4">
             <div class="form-group">
             <label class="form-label">Course of Study</label>
-            <input class="form-control" id="txtCourseOfStudy" type="text" value="@Model.CourseOfStudy" placeholder="">
-            </div>
-        </div>
-         <div class="row">
-         <div class="col-4">
-            <div class="form-group">
-            <label class="form-label">Ambition</label>
-            <input class="form-control" id="txtAmbition" type="text" value="@Model.Ambition" >
+            <input class="form-control" id="txtCourseOfStudy" type="text" placeholder="">
             </div>
         </div>
         <div class="col-4">
@@ -137,13 +127,13 @@
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Position in Family</label>
-            <input class="form-control" id="txtPositionInFamily" type="text" value="@Model.PositionInFamily" placeholder="">
+            <input class="form-control" id="txtPositionInFamily" type="text" placeholder="">
             </div>
         </div>
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Social Media Address</label>
-            <input class="form-control" id="txtSocialMediaAddress" type="text" value="@Model.SocialMediaAddress" placeholder="">
+            <input class="form-control" id="txtSocialMediaAddress" type="text" placeholder="">
             </div>
         </div>
         <div class="col-lg-4">
@@ -151,47 +141,42 @@
                                 <label for="">Date Join ESM</label>
                                 <div class="ate-input">
                                     <div class="ate-input">
-                                        <input type="text" class="date form-control" value="@Model.strDateJoinESM" placeholder="" id="txtDateJoinESM">
+                                        <input type="text" class="date form-control" placeholder="" id="txtDateJoinESM">
                                     </div>
                                 </div>
                             </div>
                         </div><!-- col-4 -->
         </div>
-            
+        
+        <div class="text-center">
+            <br/>
+        <button class="btn btn-primary" type="submit" id="saveRecord">Save</button>
         </div>
         </form>
     </div>
-    <button class="btn float-right" id="btnSaveRecord">Save</button>
 </div>
 
-
 @section scripts{
-<script>
-    var saveUrl="@Url.Action("AddOrUpdatePrayerUnitData","PrayerUnit", new {area="Unit"})";
-    
-    $(document).ready(function(){
-    $("drpGender").val('@Model.Gender').trigger('change');
-    $("drpState").val('@Model.StateOfOrigin').trigger('change');
-    $("drpState").val('@Model.LGA').trigger('change');
-    $("drpUnit").val('@Model.Unit').trigger('change');
-    $("drpUnit").val('@Model.PreviousUnit').trigger('change');
-    });
-    $("#btnSaveRecord").click(function(e)
-    {
-        e.preventDefault();
-        var body={
+     <script>
+  
+        var saveUrl="@Url.Action("AddOrUpdateChoralUnitData","Choral", new {area="Unit"})";
+
+        $("#saveRecord").click(function(e)
+        {
+            e.preventDefault();
+
+            var body={
             Id:$("#rowId").val() == "" ? 0: $.trim($("#rowId").val()),
             Surname:$.trim($("#txtSurname").val()),
             Firstname:$.trim($("#txtFirstname").val()),
             Middlename:$.trim($("#txtMiddlename").val()),
             DateOfBirth:$.trim($("#txtDateofBirth").val()),
-            Gender:$.trim($("#drpGender").val()),
+            Gender:$("#drpGender").val(),
             Email:$.trim($("#txtEmail").val()),
             PhoneNumber01:$.trim($("#txtPhoneNumber01").val()),
             PhoneNumber02:$.trim($("#txtPhoneNumber02").val()),
-            StateOfOrigin:$("#drpState").val(),
-            Ambition:$("#txtAmbition").val(),
-            LGA:$("#drpState").val(),
+            StateOfOrigin:$("#drpGender").val(),
+            LGA:$("#drpGender").val(),
             Unit:$("#drpUnit").val(),
             PreviousUnit:$("#drpUnit").val(),
             PositionInFamily:$.trim($("#txtPositionInFamily").val()),
@@ -200,46 +185,27 @@
             HomeAddress:$.trim($("#txtHomeAddress").val()),
             DateJoinESM:$.trim($("#txtDateJoinESM").val()),
             CourseOfStudy:$.trim($("#txtCourseOfStudy").val()),
-        }
-    //var payload=SiteUtils.encrypt(JSON.stringify(body)).toStirng();
-    //    SiteUtils.post({payload:payload}, saveUrl).then(function (response){
-    //    if(response.hasError==false)
-    //    {
-    //        alert("Success");
-    //    }
-    //    else
-    //    {
-    //        alert("Error");
-    //    }
-    //})
-
-   
-
-        var payload=SiteUtils.encrypt(JSON.stringify(body)).toString();
+            }
+            //var modelData=JSON.stringify(body);
+            console.log(body);
+            var payload=SiteUtils.encrypt(JSON.stringify(body)).toString();
             SiteUtils.post({payload:payload}, saveUrl).then(function (response){
             if(response.hasError==false)
             {
-                alert(response.message, "Ok");
-                var returnUrl = '@Url.Action("PrayerUnit", "UnitManagement")';
+               alert(response.message);
+
+               var returnUrl = '@Url.Action("ChoralUnit", "UnitManagement")';
                             window.location.href = returnUrl;
             }
-            else{
-            alert(response.message);
-            }
             })
-
-    
-   
-    });
-
-
-     jQuery('.date').datepicker({
-        timepicker:false,
-        format:'d/m/Y'
-        })
+        });
           //$(function (){
           // $('.date').datepicker();
-          //})
+          //})  
+        jQuery('.date').datepicker({
+        timepicker:false,
+        format:'Y/m/d'
+        })
 
-</script>
+    </script>
 }

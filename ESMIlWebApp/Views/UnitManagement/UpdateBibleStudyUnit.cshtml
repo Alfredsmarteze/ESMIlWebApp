@@ -206,10 +206,12 @@
             SiteUtils.post({payload:payload}, saveUrl).then(function (response){
             if(response.hasError==false)
             {
-                alert(response.message, "Ok");
+               alert(response.message, "Ok");
+                var returnUrl = '@Url.Action("BibleStudyUnit", "UnitManagement")';
+                            window.location.href = returnUrl;
             }
             else{
-            alert("Error");
+            alert(response.message);
             }
             })
 

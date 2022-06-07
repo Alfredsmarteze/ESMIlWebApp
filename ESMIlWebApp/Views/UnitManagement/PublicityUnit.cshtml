@@ -1,0 +1,203 @@
+﻿@{
+    ViewData["Title"] = "Publicity unit";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<style>
+   
+</style>
+
+<button class="btn btn-primary btn-rounded" id="newRecord">Capture New Record</button>
+<br><br>
+<div class="table-responsive">
+    @*<div style="overflow-x:scroll">*@
+        <table id="publicityTable" width="100%" class="stripe hover">
+            <thead>
+                <tr>
+               @* <th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>*@
+                    <th>Actions</th>
+                    <th>ID</th>
+                    <th>Surname</th>
+                    <th>Firstname</th>
+                    <th>Middlename</th>
+                    <th>Gender</th>
+                    <th>Date Of Birth</th>
+                    <th>State Of Origin</th>
+                    <th>LGA</th>
+                    <th>Phone Number 01</th>
+                    <th>Phone Number 02</th>
+                    <th>Email</th>
+                    <th>Hostel Address</th>
+                    <th>Home Address</th>
+                    <th>Course Of Study</th>
+                    <th>Unit</th>
+                    <th>Previous Unit</th>
+                    <th>Position In Family</th>
+                    <th>Social Media Address</th>
+                    <th>Ambition</th>
+                    <th>Date Join ESM</th>
+                    <th></th>
+                </tr>
+            </thead>
+            @*<thead>
+                <tr>
+                    @*<th></th>
+                    <th></th>
+                    <th></th>
+                    <th><input class="form-control search-input" data-column="" type="text"></th>
+                    <th><input class="form-control search-input" data-column="" type="text"></th>
+                    <th><input class="form-control search-input" data-column="" type="text"></th>
+                </tr>
+            </thead>*@
+            <tbody>
+            </tbody>
+        </table>
+    @*</div>*@
+    </div>
+    
+  
+
+@using(Html.BeginForm("ViewPublicityUnit","UnitManagement",FormMethod.Post, new { id="viewPublicityForm", target="_blank"}))
+{
+    <input type="hidden" name="viewRecordId" id="viewRecordId">
+}
+@using(Html.BeginForm("UpdatePublicityUnit","UnitManagement",FormMethod.Post, new { id="updatePublicityForm", target="_blank"}))
+{
+    <input type="hidden" name="updateRecordId" id="updateRecordId">
+}
+
+
+@section scripts{           
+    <script>
+      
+        var table =$("#publicityTable").DataTable({
+        "lengthMenu":[[7,20,25,50, -1],[7,20,25,50,"All"]],
+        "processing": true, // for show progress bar
+        "serverSide": true, // for process server side
+        "filter": true, // this is for disable filter (search box)
+        "orderMulti": false, // for disable multiple column at once
+        "paginate":true,
+        "scrollX": true,
+       // colReorder: false,
+      //  rowReorder:false,
+        //select: true,
+        //dom: 'Bfrtip', , new{area="Unit"}
+        "ajax":{
+        "url":"@Url.Action("GetAllPublicityUnit","PublicityUnit")",
+        "type":"POST",
+        "datatype":"json",
+        "data":function(arg){}
+        },
+        "columns":[
+           {
+            "data": null, "name":"Action", "defaultContent":'<div class="btn-group mr-1 mb-1">'+
+            "<button aria-expanded='false' aria-haspopup='true' class='btn btn-white dropdown-toggle' data-toggle='dropdown' id='dropdownMenuDetail' type='button'></button>"+
+            "<div aria-labelledby='dropdownMenuButton6' class='dropdown-menu'>"+
+            "<a class='dropdown-item' href='#' id='changeRecord' title='Update record'><i class='fa fa-edit'></i>&nbsp; Update record</a>"+
+            "<a class='dropdown-item' href='#' id='viewRecord' title='View record'><i class='fa fa-info-circle'></i>&nbsp; View record</a>"+
+            "<a class='dropdown-item' href='#' id='deleteRecord' title='Delete Record'><i class='fa fa-trash-o'></i>&nbsp;Delete Record</a>" +
+            "</div>"+
+            '</div>'
+            
+        },
+        
+        //    {"data":"photo", 
+        //    'searchable':false,
+        //    'orderable':false,
+        //    'render':function(data, type, row, full, meta){
+        //return '<img src="'+data.photo+'" alt="Passport" style="height:50px; width:50px;"/>';
+        //}},
+        {"data":"id", "name":"id", "autoWidth":false},
+        {"data":"surname", "name":"surname", "autoWidth":false},
+        {"data":"firstname", "name":"firstname", "autoWidth":false},
+        {"data":"middlename", "name":"middlename", "autoWidth":false},
+        {"data":"gender", "name":"gender", "autoWidth":false},
+        {"data":"strDateOfBirth", "name":"dateofbirth", "autoWidth":false},
+        {"data":"stateOfOrigin", "name":"stateOfOrigin", "autoWidth":false},
+        {"data":"lga", "name":"lga", "autoWidth":false},
+        {"data":"phoneNumber01", "name":"phoneNumber01", "autoWidth":false},
+        {"data":"phoneNumber02", "name":"phoneNumber02", "autoWidth":false},
+        {"data":"email", "name":"email", "autoWidth":false},
+        {"data":"hostelAddress", "name":"hostelAddress", "autoWidth":false},
+        {"data":"homeAddress", "name":"homeAddress", "autoWidth":false},
+        {"data":"courseOfStudy", "name":"courseOfStudy", "autoWidth":false},
+        {"data":"unit", "name":"unit", "autoWidth":false},
+        {"data":"previousUnit", "name":"previousUnit", "autoWidth":false},
+        {"data":"positionInFamily", "name":"positionInFamily", "autoWidth":false},
+        {"data":"socialMediaAddress", "name":"socialMediaAddress", "autoWidth":false},
+        {"data":"ambition", "name":"ambition", "autoWidth":false},
+        {"data":"strDateJoinESM", "name":"strDateJOinESM", "autoWidth":false},
+        {"data":null,"sTitle": "Action",
+        "render": function (data, type, row, meta)
+         {
+           if (row)
+           {
+            return`<button class=" btn btn-danger" onclick='DeleteStd(${row.id})'>Delete</button>`
+           }
+           return ''
+         }
+         },
+        ],
+      }); 
+   
+         function DeleteStd(id){
+            var postId={
+            "payload":id
+            }
+            bootbox.confirm({
+                 message:       "Are you sure you want to DELETE this record?",
+                 buttons: {
+                 cancel: {
+                 label: '<i class="fa fa-times"></i> Cancel'
+                },
+                confirm: {
+                label: '<i class="fa fa-check"></i> Confirm'
+                }
+    },
+    callback: function (result) {
+        if(result){
+           $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("ActionButton", "PublicityUnit", new { area = "Unit" })",
+                    datatype: "JSON",
+                    data:postId,
+                    
+                });
+               bootbox.alert("You have successfully deleted the record.", function(){ 
+                window.location.reload(); 
+                });
+                }
+                else{
+                bootbox.alert("Record not deleted.");
+                }
+    }
+});
+         
+    }
+        
+
+
+         $('#publicityTable tbody').on('click', '#viewRecord', function (e) {
+                e.preventDefault();
+                var data = table.row($(this).parents('tr')).data();
+                $("#viewRecordId").val(data.id);
+                $("#viewPublicityForm").submit();
+
+            });
+
+            $('#publicityTable tbody').on('click', '#changeRecord', function (e) {
+                e.preventDefault();
+                var data = table.row($(this).parents('tr')).data();
+                $("#updateRecordId").val(data.id);
+                $("#updatePublicityForm").submit();
+
+            });
+
+            $('#newRecord').on('click', function(e){
+            e.preventDefault();
+            var returnUrl = '@Url.Action("CreateNewPublicityUnit", "UnitManagement")';
+            window.location.href = returnUrl;
+            })
+           
+    </script>
+}
