@@ -9,8 +9,8 @@ namespace ESMIlWebApp.Controllers.UnitManagement
     {
         private IUnitRepository _unitRepository;
         public UnitManagementController(IUnitRepository unitRepository)
-        { 
-            _unitRepository=unitRepository;
+        {
+            _unitRepository = unitRepository;
         }
         public IActionResult Index()
         {
@@ -20,24 +20,24 @@ namespace ESMIlWebApp.Controllers.UnitManagement
         [HttpGet]
         [Route("BibleStudyUnit/Members")]
         public IActionResult BibleStudyUnit() => View();
-        
+
         [HttpGet]
         [Route("New/BibleStudyUnit/Data")]
-        public IActionResult CreateNewBibleUnit()=>View();
-      
+        public IActionResult CreateNewBibleUnit() => View();
+
         [Route("Update/BibleStudyUnit/Data")]
         public IActionResult UpdateBibleStudyUnit()
-        { 
-            var model=new BibleStudyUnitDTO();
-            var rowId=Request.Form["updateRecordId"].FirstOrDefault();
-            if (rowId !=null)
+        {
+            var model = new BibleStudyUnitDTO();
+            var rowId = Request.Form["updateRecordId"].FirstOrDefault();
+            if (rowId != null)
             {
                 var id = int.Parse(rowId);
                 model = _unitRepository.GetAllBibleStudyUnitsAsync().Where(s => s.Id == id).FirstOrDefault();
             }
             return View(model);
         }
-        
+
         [Route("View/BibleStudyUnit/Data")]
         public IActionResult ViewBibleStudyUnit()
         {
@@ -53,7 +53,7 @@ namespace ESMIlWebApp.Controllers.UnitManagement
 
         [HttpGet]
         [Route("PrayerUnit/Members")]
-        public IActionResult PrayerUnit()=>View();
+        public IActionResult PrayerUnit() => View();
 
         [HttpGet]
         [Route("New/PrayerUnit/Data")]
@@ -80,7 +80,7 @@ namespace ESMIlWebApp.Controllers.UnitManagement
             if (rowId is not null)
             {
                 var id = int.Parse(rowId);
-                model=_unitRepository.ListAllPrayerUnitData().Where(s=>s.Id==id).FirstOrDefault();
+                model = _unitRepository.ListAllPrayerUnitData().Where(s => s.Id == id).FirstOrDefault();
             }
             return View(model);
         }
@@ -118,7 +118,7 @@ namespace ESMIlWebApp.Controllers.UnitManagement
             }
             return View(model);
         }
-        
+
         [HttpGet]
         [Route("DMEUnit/Members")]
         public IActionResult DmeUnit() => View();
@@ -129,34 +129,36 @@ namespace ESMIlWebApp.Controllers.UnitManagement
 
         [Route("Update/DMEUnit/Data")]
         public IActionResult UpdateDmeUnit()
-        { 
-         var model= new DmeUnitDTO();
+        {
+            var model = new DmeUnitDTO();
             var rowId = Request.Form["updateRecordId"].FirstOrDefault();
-            if (rowId !=null)
+            if (rowId != null)
             {
                 var id = int.Parse(rowId);
                 model = _unitRepository.ListAllDmeUnitData().Where(s => s.Id == id).FirstOrDefault();
             }
             return View(model);
         }
-                       
+
         [HttpGet]
         [Route("View/DMEUnit/Data")]
         public IActionResult ViewDmeUnit()
         {
             var model = new DmeUnitDTO();
             var rowId = Request.Form["viewRecordId"].FirstOrDefault();
-            if (rowId !=null)
+            if (rowId != null)
             {
                 var id = int.Parse(rowId);
                 model = _unitRepository.ListAllDmeUnitData().Where(s => s.Id == id).FirstOrDefault();
             }
             return View(model);
         }
-        
+
         [HttpGet]
         [Route("New/PublicityUnit/Data")]
-        public IActionResult CreateNewPublicityUnit()=> View();
+        public IActionResult CreateNewPublicityUnit() => View();
+        
+        [Route("Update/PublicityUnit/Data")]
         public IActionResult UpdatePublicityUnit()
         {
             var model = new PublicityAndEditorialUnitDTO();
@@ -185,5 +187,104 @@ namespace ESMIlWebApp.Controllers.UnitManagement
         [HttpGet]
         [Route("Publicity/Members")]
         public IActionResult PublicityUnit()=>View();
+
+        [HttpGet, Route("New/TechnicalUnit/Data")]
+        public IActionResult CreateNewTechnicalUnit() => View();
+        
+        [Route("Update/TechnicalUnit/Data")]
+        public IActionResult UpdateTechnicalUnit()
+        {
+            var model = new TechnicalUnitDTO();
+            var rowId = Request.Form["updateRecordId"].FirstOrDefault();
+            if (rowId is not null)
+            {
+                var id = int.Parse(rowId);
+                model = _unitRepository.ListAllTechnicalUnitAsync().Where(s => s.Id == id).FirstOrDefault();
+            }
+            return View(model);
+        }
+
+        [Route("View/TechnicalUnit/Data")]
+        public IActionResult ViewTechnicalUnit()
+        {
+            var model = new TechnicalUnitDTO();
+            var rowId = Request.Form["viewRecordId"].FirstOrDefault();
+            if (rowId is not null)
+            {
+                var id = int.Parse(rowId);
+                model = _unitRepository.ListAllTechnicalUnitAsync().Where(s => s.Id == id).FirstOrDefault();
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        [Route("Technical/Members")]
+        public IActionResult TechnicalUnit() => View();
+
+        [HttpGet, Route("New/welfareUnit/Data")]
+        public IActionResult CreateNewWelfareUnit() => View();
+
+        [Route("Update/WelfareUnit/Data")]
+        public IActionResult UpdateWelfareUnit()
+        {
+            var model = new WelfareUnitDTO();
+            var rowId = Request.Form["updateRecordId"].FirstOrDefault();
+            if (rowId is not null)
+            {
+                var id = int.Parse(rowId);
+                model = _unitRepository.ListAllWelfareUnitAsync().Where(s => s.Id == id).FirstOrDefault();
+            }
+            return View(model);
+        }
+
+        [Route("View/WelfareUnit/Data")]
+        public IActionResult ViewWelfareUnit()
+        {
+            var model = new WelfareUnitDTO();
+            var rowId = Request.Form["viewRecordId"].FirstOrDefault();
+            if (rowId is not null)
+            {
+                var id = int.Parse(rowId);
+                model = _unitRepository.ListAllWelfareUnitAsync().Where(s => s.Id == id).FirstOrDefault();
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        [Route("Welfare/Members")]
+        public IActionResult WelfareUnit() => View();
+
+        [HttpGet, Route("New/UsheringUnit/Data")]
+        public IActionResult CreateNewUsheringUnit() => View();
+
+        [Route("Update/UsheringUnit/Data")]
+        public IActionResult UpdateUsheringUnit()
+        {
+            var model = new UsheringUnitDTO();
+            var rowId = Request.Form["updateRecordId"].FirstOrDefault();
+            if (rowId is not null)
+            {
+                var id = int.Parse(rowId);
+                model = _unitRepository.ListAllUsheringUnitAsync().Where(s => s.Id == id).FirstOrDefault();
+            }
+            return View(model);
+        }
+
+        [Route("View/UsheringUnit/Data")]
+        public IActionResult ViewUsheringUnit()
+        {
+            var model = new UsheringUnitDTO();
+            var rowId = Request.Form["viewRecordId"].FirstOrDefault();
+            if (rowId is not null)
+            {
+                var id = int.Parse(rowId);
+                model = _unitRepository.ListAllUsheringUnitAsync().Where(s => s.Id == id).FirstOrDefault();
+            }
+            return View(model);
+        }
+
+        [HttpGet, Route("Ushering/Members")]
+        public IActionResult UsheringUnit() => View();
+
     }
 }

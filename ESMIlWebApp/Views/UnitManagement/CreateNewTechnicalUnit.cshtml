@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h4 class="text-muted">DME Unit</h4>
+<h4 class="text-muted">Technical Unit</h4>
 <h5 class="text-muted">Capture new record</h5>
 <div class="container" style="background-color:lightblue">
     <div class="row" id="fadeout">
@@ -45,7 +45,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div><!-- col-4 -->
+        </div><!-- col-4 -->
         </div>
         <br>
         <div class="row">
@@ -165,7 +165,7 @@
 @section scripts{
      <script>
   
-        var saveUrl="@Url.Action("AddOrUpdateDmeUnitData","DMEUnit", new {area="Unit"})";
+        var saveUrl="@Url.Action("AddOrUpdateTechnicalUnitData","TechnicalUnit", new {area="Unit"})";
 
         $("#saveRecord").click(function(e)
         {
@@ -200,7 +200,7 @@
             if(response.hasError==false)
             {
                 alert(response.message);
-                var returnUrl = '@Url.Action("DmeUnit", "UnitManagement")';
+                var returnUrl = '@Url.Action("TechnicalUnit", "UnitManagement")';
                     window.location.href = returnUrl;
             }
             });

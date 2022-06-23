@@ -5,19 +5,19 @@ using ESMIlWebApp.Models;
 using DataStructure.ViewModel;
 using System.Net;
 using Newtonsoft.Json;
-//using System.Web.Mvc;
+
 
 namespace ESMIlWebApp.Controllers.Unit
 {
     // [Area("Unit")]
-    public class ChoralController : Controller
+    public class WelfareUnitController : Controller
     {
         private readonly IUnitRepository _repository;
-        private readonly ILogger<ChoralController> _logger;
+        private readonly ILogger<WelfareUnitController> _logger;
         private readonly IWebHostEnvironment _iWebHostEnvironment;
         private string errorMessage = string.Empty;
 
-        public ChoralController(IUnitRepository repository, ILogger<ChoralController> logger, IWebHostEnvironment webHostEnvironment)
+        public WelfareUnitController(IUnitRepository repository, ILogger<WelfareUnitController> logger, IWebHostEnvironment webHostEnvironment)
         {
             _repository = repository;
             _logger = logger;
@@ -28,13 +28,10 @@ namespace ESMIlWebApp.Controllers.Unit
             return View();
         }
 
-        public IActionResult GetAllChoralUnit()
+        public IActionResult GetAllWelfareUnit()
         {
             try
             {
-                //var length = Request.Form["length"].FirstOrDefault();
-                //var draw= Request.Form["draw"].FirstOrDefault();
-                //var start=Request.Form["start"].FirstOrDefault();
                 var draw = Request.Form["draw"].FirstOrDefault();
                 var start = Request.Form["start"].FirstOrDefault();
                 var length = Request.Form["length"].FirstOrDefault();
@@ -45,11 +42,11 @@ namespace ESMIlWebApp.Controllers.Unit
                 int skip = start != null ? Convert.ToInt32(start) : 0;
                 int totalRecord = 0;
 
-                var choralUnitRecord = _repository.GetAllChoralUnitsAsync().ToList();
+                var welfareUnitRecord = _repository.ListAllWelfareUnitAsync().ToList();
 
                 if (!string.IsNullOrWhiteSpace(search.ToString()))
                 {
-                    choralUnitRecord = choralUnitRecord.Where(s => s.Surname.ToLower().Contains(search)
+                    welfareUnitRecord = welfareUnitRecord.Where(s => s.Surname.ToLower().Contains(search)
                       || s.Firstname.ToLower().Contains(search)
                       || s.Middlename.ToLower().Contains(search)
                       || s.PhoneNumber01.ToLower().Contains(search)
@@ -69,19 +66,19 @@ namespace ESMIlWebApp.Controllers.Unit
                       || s.HomeAddress.ToLower().Contains(search)
                       || s.Email.ToLower().Contains(search)).ToList();
                 }
-                totalRecord = choralUnitRecord.Count();
-                choralUnitRecord = choralUnitRecord.OrderByDescending(s => s.Id).ToList();
+                totalRecord = welfareUnitRecord.Count();
+                welfareUnitRecord = welfareUnitRecord.OrderByDescending(s => s.Id).ToList();
                 //prayerRecord = prayerRecord.OrderBy(s=>s.Id).ToList();
                 if (pageSize != -1)
                 {
-                    choralUnitRecord = choralUnitRecord.OrderByDescending(s => s.Id).Skip(skip).Take(pageSize).ToList();
+                    welfareUnitRecord = welfareUnitRecord.OrderByDescending(s => s.Id).Skip(skip).Take(pageSize).ToList();
                 }
                 return Json(new
                 {
                     draw = draw,
                     recordsFiltered = totalRecord,
                     recordsTotal = totalRecord,
-                    data = choralUnitRecord
+                    data = welfareUnitRecord
                 });
 
             }
@@ -92,17 +89,17 @@ namespace ESMIlWebApp.Controllers.Unit
             }
             return Json(new ResponseModel { message = $" Error:\a {errorMessage}" });
         }
-        public async Task<IActionResult> AddOrUpdateChoralUnitData(string payload)
+        public async Task<IActionResult> AddOrUpdatewelfareUnitData(string payload)
         {
             try
             {
-                var model = new ChoralUnitData();
+                var model = new WelfareUnitData();
 
                 payload = EncryptionExtensions.DecryptStringAES(payload);
-                var newModel = JsonConvert.DeserializeObject<ChoralUnitData>(payload);
-                var saveChoralUnitData = await _repository.AddOrUpdateChoralUnitAsync(newModel);
+                var newModel = JsonConvert.DeserializeObject<WelfareUnitData>(payload);
+                var saveWelfareUnitData = await _repository.AddOrUpdateWelfareUnitAsync(newModel);
 
-                if (saveChoralUnitData)
+                if (saveWelfareUnitData)
                 {
                     return Json(new ResponseModel { hasError = false, message = "Operation successful", statusCode = (int)HttpStatusCode.OK });
                 }
@@ -116,7 +113,7 @@ namespace ESMIlWebApp.Controllers.Unit
                 _logger.LogError("Error", ex.Message);
                 errorMessage = ex.Message;
             }
-            return Json(new ResponseModel { message = $"Error: {errorMessage}", statusCode = (int)HttpStatusCode.Conflict });
+            return Json(new ResponseModel { message = $"Error Message: {errorMessage}", statusCode = (int)HttpStatusCode.Conflict });
         }
 
 
@@ -131,7 +128,7 @@ namespace ESMIlWebApp.Controllers.Unit
                     return Json(new ResponseModel { message = "Bad request" });
                 }
 
-                _repository.DeleteChoralUnitById(payload);
+                _repository.DeleteWelfareUnitById(payload);
 
                 return Json(new ResponseModel { hasError = false, message = "Operation completed successfully", statusCode = (int)HttpStatusCode.OK });
             }
@@ -140,7 +137,7 @@ namespace ESMIlWebApp.Controllers.Unit
                 _logger.LogError("Error", ex);
                 errorMessage = ex.Message;
             }
-            return Json(new ResponseModel { message = $" Errror: {errorMessage}", statusCode = (int)HttpStatusCode.NotImplemented });
+            return Json(new ResponseModel { message = $" Errror Message: {errorMessage}", statusCode = (int)HttpStatusCode.NotImplemented });
         }
     }
 }

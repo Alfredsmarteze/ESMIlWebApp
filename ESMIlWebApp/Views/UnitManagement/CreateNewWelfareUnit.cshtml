@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h4 class="text-muted">DME Unit</h4>
+<h4 class="text-muted">Welfare Unit</h4>
 <h5 class="text-muted">Capture new record</h5>
 <div class="container" style="background-color:lightblue">
     <div class="row" id="fadeout">
@@ -165,7 +165,7 @@
 @section scripts{
      <script>
   
-        var saveUrl="@Url.Action("AddOrUpdateDmeUnitData","DMEUnit", new {area="Unit"})";
+        var saveUrl="@Url.Action("AddOrUpdateWelfareUnitData","WelfareUnit", new {area="Unit"})";
 
         $("#saveRecord").click(function(e)
         {
@@ -182,8 +182,8 @@
             PhoneNumber01:$.trim($("#txtPhoneNumber01").val()),
             PhoneNumber02:$.trim($("#txtPhoneNumber02").val()),
             StateOfOrigin:$("#drpGender").val(),
-            Ambition:$.trim($("#txtAmbition").val()),
             LGA:$("#drpGender").val(),
+            Ambition:$("#txtAmbition").val(),
             Unit:$("#drpUnit").val(),
             PreviousUnit:$("#drpUnit").val(),
             PositionInFamily:$.trim($("#txtPositionInFamily").val()),
@@ -199,12 +199,13 @@
             SiteUtils.post({payload:payload}, saveUrl).then(function (response){
             if(response.hasError==false)
             {
-                alert(response.message);
-                var returnUrl = '@Url.Action("DmeUnit", "UnitManagement")';
-                    window.location.href = returnUrl;
+               alert(response.message);
+
+               var returnUrl = '@Url.Action("WelfareUnit", "UnitManagement")';
+                            window.location.href = returnUrl;
             }
-            });
-           });
+            })
+        });
           //$(function (){
           // $('.date').datepicker();
           //})  

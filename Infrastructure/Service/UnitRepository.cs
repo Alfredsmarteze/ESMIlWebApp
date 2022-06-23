@@ -99,7 +99,7 @@ namespace Infrastructure.Service
             }
             return result;
         }
-        public string DeleteBibleStudyUnit(int id)
+        public string DeleteBibleStudyUnitById(int id)
         { 
             var del= _context.bibleStudyUnit.Where(u => u.Id == id).FirstOrDefault();
             if (del != null)
@@ -230,7 +230,7 @@ namespace Infrastructure.Service
             }
             return uniqueFileName;
         }
-        public string DeletePrayerUnit(int id)
+        public string DeletePrayerUnitById(int id)
         {
             var del = _context.prayerUnit.Where(s => s.Id == id).FirstOrDefault();
             if (del==null)
@@ -391,7 +391,7 @@ namespace Infrastructure.Service
                         Photo = s.Photo == null ? "" : s.Photo,
                     });
         }
-        public string DeleteChoralUnit(int id)
+        public string DeleteChoralUnitById(int id)
         {
            var del= _context.choralUnit.FirstOrDefault(c => c.Id == id);
             if (del == null)
@@ -516,7 +516,7 @@ namespace Infrastructure.Service
                         Photo = s.Photo == null ? "" : s.Photo,
                     });
         }
-        public string DeleteDmeUnit(int id)
+        public string DeleteDmeUnitById(int id)
         {
             var del = _context.dmeUnit.FirstOrDefault(s => s.Id == id);
             if (del != null)
@@ -636,7 +636,7 @@ namespace Infrastructure.Service
                         Photo = s.Photo == null ? "" : s.Photo,
                     });
         }
-        public string DeletePublicityUnit(int id)
+        public string DeletePublicityUnitById(int id)
         {
            var del=_context.publicityAndEditorialUnit.FirstOrDefault(x => x.Id == id);
             if (del != null)
@@ -648,6 +648,359 @@ namespace Infrastructure.Service
             {
               throw new("Not found");
             }
+            return "";
+        }
+
+        public async Task<bool> AddOrUpdateTechnicalUnitAsync(TechnicalUnitData model)
+        {
+            bool result;
+            //DateTime? bdate = null;
+            var bdate = new DateTime();
+            if (!string.IsNullOrEmpty(model.DateOfBirth))
+            {
+                var splitDateOfBirth = model.DateOfBirth.Split('/');
+                bdate = new DateTime(int.Parse(splitDateOfBirth[2]), int.Parse(splitDateOfBirth[0]), int.Parse(splitDateOfBirth[1]));
+            }
+
+            //DateTime? dateJoin = null;
+            var dateJoin = new DateTime();
+            if (!string.IsNullOrEmpty(model.DateJoinESM))
+            {
+                var splitDateJoin = model.DateJoinESM.Split('/');
+                dateJoin = new DateTime(int.Parse(splitDateJoin[2]), int.Parse(splitDateJoin[0]), int.Parse(splitDateJoin[1]));
+            }
+
+            if (model.Id < 1)
+            {
+
+                var technicalData = new TechnicalUnit
+                {
+                    Surname = model.Surname,
+                    Firstname = model.Firstname,
+                    Middlename = model.Middlename,
+                    PhoneNumber01 = model.PhoneNumber01,
+                    PhoneNumber02 = model.PhoneNumber02,
+                    Email = model.Email,
+                    Gender = model.Gender,
+                    StateOfOrigin = model.StateOfOrigin,
+                    LGA = model.LGA,
+                    Ambition = model.Ambition,
+                    HomeAddress = model.HomeAddress,
+                    HostelAddress = model.HostelAddress,
+                    CourseOfStudy = model.CourseOfStudy,
+                    Unit = model.Unit,
+                    DateOfBirth = bdate,
+                    DateJoinESM = dateJoin,
+                    PreviousUnit = model.PreviousUnit,
+                    PositionInFamily = model.PositionInFamily,
+                    SocialMediaAddress = model.SocialMediaAddress,
+                };
+                _context.technicalUnit.Add(technicalData);
+                result = await _context.SaveChangesAsync() > 0;
+            }
+            else
+            {
+                var technicalData = _context.technicalUnit.Find(model.Id);
+
+                if (technicalData is null)
+                {
+                    throw new("Not found");
+                }
+                technicalData.Surname = model.Surname;
+                technicalData.Firstname = model.Firstname;
+                technicalData.Middlename = model.Middlename;
+                technicalData.PhoneNumber01 = model.PhoneNumber01;
+                technicalData.PhoneNumber02 = model.PhoneNumber02;
+                technicalData.Email = model.Email;
+                technicalData.HomeAddress = model.HomeAddress;
+                technicalData.HostelAddress = model.HostelAddress;
+                technicalData.CourseOfStudy = model.CourseOfStudy;
+                technicalData.Unit = model.Unit;
+                technicalData.Ambition = model.Ambition;
+                technicalData.StateOfOrigin = model.StateOfOrigin;
+                technicalData.LGA = model.LGA;
+                technicalData.PreviousUnit = model.PreviousUnit;
+                technicalData.DateOfBirth = bdate;//model.DateOfBirth;
+                technicalData.DateJoinESM = dateJoin;// model.DateJoinESM;
+                technicalData.Gender = model.Gender;
+                technicalData.PositionInFamily = model.PositionInFamily;
+                technicalData.SocialMediaAddress = model.SocialMediaAddress;
+                result = await _context.SaveChangesAsync() > 0;
+            }
+            return result;
+        }
+
+        public async Task<bool> AddOrUpdateWelfareUnitAsync(WelfareUnitData model)
+        {
+            bool result;
+            //DateTime? bdate = null;
+            var bdate = new DateTime();
+            if (!string.IsNullOrEmpty(model.DateOfBirth))
+            {
+                var splitDateOfBirth = model.DateOfBirth.Split('/');
+                bdate = new DateTime(int.Parse(splitDateOfBirth[2]), int.Parse(splitDateOfBirth[0]), int.Parse(splitDateOfBirth[1]));
+            }
+
+            //DateTime? dateJoin = null;
+            var dateJoin = new DateTime();
+            if (!string.IsNullOrEmpty(model.DateJoinESM))
+            {
+                var splitDateJoin = model.DateJoinESM.Split('/');
+                dateJoin = new DateTime(int.Parse(splitDateJoin[2]), int.Parse(splitDateJoin[0]), int.Parse(splitDateJoin[1]));
+            }
+
+            if (model.Id < 1)
+            {
+
+                var pData = new WelfareUnit
+                {
+                    Surname = model.Surname,
+                    Firstname = model.Firstname,
+                    Middlename = model.Middlename,
+                    PhoneNumber01 = model.PhoneNumber01,
+                    PhoneNumber02 = model.PhoneNumber02,
+                    Email = model.Email,
+                    Gender = model.Gender,
+                    StateOfOrigin = model.StateOfOrigin,
+                    LGA = model.LGA,
+                    Ambition = model.Ambition,
+                    HomeAddress = model.HomeAddress,
+                    HostelAddress = model.HostelAddress,
+                    CourseOfStudy = model.CourseOfStudy,
+                    Unit = model.Unit,
+                    DateOfBirth = bdate,
+                    DateJoinESM = dateJoin,
+                    PreviousUnit = model.PreviousUnit,
+                    PositionInFamily = model.PositionInFamily,
+                    SocialMediaAddress = model.SocialMediaAddress,
+                };
+                _context.welfareUnit.Add(pData);
+                result = await _context.SaveChangesAsync() > 0;
+            }
+            else
+            {
+                var welfareData = _context.welfareUnit.Find(model.Id);
+
+                if (welfareData is null)
+                {
+                    throw new("Not found");
+                }
+                welfareData.Surname = model.Surname;
+                welfareData.Firstname = model.Firstname;
+                welfareData.Middlename = model.Middlename;
+                welfareData.PhoneNumber01 = model.PhoneNumber01;
+                welfareData.PhoneNumber02 = model.PhoneNumber02;
+                welfareData.Email = model.Email;
+                welfareData.HomeAddress = model.HomeAddress;
+                welfareData.HostelAddress = model.HostelAddress;
+                welfareData.CourseOfStudy = model.CourseOfStudy;
+                welfareData.Unit = model.Unit;
+                welfareData.Ambition = model.Ambition;
+                welfareData.StateOfOrigin = model.StateOfOrigin;
+                welfareData.LGA = model.LGA;
+                welfareData.PreviousUnit = model.PreviousUnit;
+                welfareData.DateOfBirth = bdate;//model.DateOfBirth;
+                welfareData.DateJoinESM = dateJoin;// model.DateJoinESM;
+                welfareData.Gender = model.Gender;
+                welfareData.PositionInFamily = model.PositionInFamily;
+                welfareData.SocialMediaAddress = model.SocialMediaAddress;
+                result = await _context.SaveChangesAsync() > 0;
+            }
+            return result;
+        }
+
+        public IQueryable<TechnicalUnitDTO> ListAllTechnicalUnitAsync()
+        {
+            return (from s in _context.technicalUnit
+                    select new TechnicalUnitDTO
+                    {
+
+                        Id = s.Id,
+                        Surname = s.Surname == null ? "" : s.Surname,
+                        Firstname = s.Firstname == null ? "" : s.Firstname,
+                        Middlename = s.Middlename == null ? "" : s.Middlename,
+                        Unit = s.Unit == null ? "" : s.Unit,
+                        Gender = s.Gender == null ? "" : s.Gender,
+                        LGA = s.LGA == null ? "" : s.LGA,
+                        StateOfOrigin = s.StateOfOrigin == null ? "" : s.StateOfOrigin,
+                        DateJoinESM = s.DateJoinESM == null ? null : s.DateJoinESM,
+                        Ambition = s.Ambition == null ? "" : s.Ambition,
+                        CourseOfStudy = s.CourseOfStudy == null ? "" : s.CourseOfStudy,
+                        Email = s.Email == null ? "" : s.Email,
+                        PhoneNumber01 = s.PhoneNumber01 == null ? "" : s.PhoneNumber01,
+                        PhoneNumber02 = s.PhoneNumber02 == null ? "" : s.PhoneNumber02,
+                        HomeAddress = s.HomeAddress == null ? "" : s.HomeAddress,
+                        HostelAddress = s.HostelAddress == null ? "" : s.HostelAddress,
+                        PreviousUnit = s.PreviousUnit == null ? "" : s.PreviousUnit,
+                        DateOfBirth = s.DateOfBirth == null ? null : s.DateOfBirth,
+                        PositionInFamily = s.PositionInFamily == null ? "" : s.PositionInFamily,
+                        SocialMediaAddress = s.SocialMediaAddress == null ? "" : s.SocialMediaAddress,
+                        Photo = s.Photo == null ? "" : s.Photo,
+
+                    });
+        }
+
+        public IQueryable<WelfareUnitDTO> ListAllWelfareUnitAsync()
+        {
+            return (from s in _context.welfareUnit
+                    select new WelfareUnitDTO
+                    {
+                        Id = s.Id,
+                        Surname = s.Surname == null ? "" : s.Surname,
+                        Firstname = s.Firstname == null ? "" : s.Firstname,
+                        Middlename = s.Middlename == null ? "" : s.Middlename,
+                        Unit = s.Unit == null ? "" : s.Unit,
+                        Gender = s.Gender == null ? "" : s.Gender,
+                        LGA = s.LGA == null ? "" : s.LGA,
+                        StateOfOrigin = s.StateOfOrigin == null ? "" : s.StateOfOrigin,
+                        DateJoinESM = s.DateJoinESM == null ? null : s.DateJoinESM,
+                        Ambition = s.Ambition == null ? "" : s.Ambition,
+                        CourseOfStudy = s.CourseOfStudy == null ? "" : s.CourseOfStudy,
+                        Email = s.Email == null ? "" : s.Email,
+                        PhoneNumber01 = s.PhoneNumber01 == null ? "" : s.PhoneNumber01,
+                        PhoneNumber02 = s.PhoneNumber02 == null ? "" : s.PhoneNumber02,
+                        HomeAddress = s.HomeAddress == null ? "" : s.HomeAddress,
+                        HostelAddress = s.HostelAddress == null ? "" : s.HostelAddress,
+                        PreviousUnit = s.PreviousUnit == null ? "" : s.PreviousUnit,
+                        DateOfBirth = s.DateOfBirth == null ? null : s.DateOfBirth,
+                        PositionInFamily = s.PositionInFamily == null ? "" : s.PositionInFamily,
+                        SocialMediaAddress = s.SocialMediaAddress == null ? "" : s.SocialMediaAddress,
+                        Photo = s.Photo == null ? "" : s.Photo,
+                    });
+        }
+
+        public string DeleteTechnicalUnitById(int id)
+        {
+            var deleteTechUnit = _context.technicalUnit.Find(id);
+            if (deleteTechUnit != null)
+            _context.Remove(deleteTechUnit);
+            _context.SaveChangesAsync();
+            return "";
+        }
+
+        public string DeleteWelfareUnitById(int id)
+        {
+            var deleteWelfare=_context.welfareUnit.Find(id);
+            if (deleteWelfare != null) 
+            _context.Remove(deleteWelfare);
+            _context.SaveChangesAsync();
+            return "";
+        }
+
+        public async Task<bool> AddOrUpdateUsheringUnitAsync(UsheringUnitData model)
+        {
+            bool result;
+            //DateTime? bdate = null;
+            var bdate = new DateTime();
+            if (!string.IsNullOrEmpty(model.DateOfBirth))
+            {
+                var splitDateOfBirth = model.DateOfBirth.Split('/');
+                bdate = new DateTime(int.Parse(splitDateOfBirth[2]), int.Parse(splitDateOfBirth[0]), int.Parse(splitDateOfBirth[1]));
+            }
+
+            //DateTime? dateJoin = null;
+            var dateJoin = new DateTime();
+            if (!string.IsNullOrEmpty(model.DateJoinESM))
+            {
+                var splitDateJoin = model.DateJoinESM.Split('/');
+                dateJoin = new DateTime(int.Parse(splitDateJoin[2]), int.Parse(splitDateJoin[0]), int.Parse(splitDateJoin[1]));
+            }
+
+            if (model.Id < 1)
+            {
+
+                var usheringData = new UsheringUnit
+                {
+                    Surname = model.Surname,
+                    Firstname = model.Firstname,
+                    Middlename = model.Middlename,
+                    PhoneNumber01 = model.PhoneNumber01,
+                    PhoneNumber02 = model.PhoneNumber02,
+                    Email = model.Email,
+                    Gender = model.Gender,
+                    StateOfOrigin = model.StateOfOrigin,
+                    LGA = model.LGA,
+                    Ambition = model.Ambition,
+                    HomeAddress = model.HomeAddress,
+                    HostelAddress = model.HostelAddress,
+                    CourseOfStudy = model.CourseOfStudy,
+                    Unit = model.Unit,
+                    DateOfBirth = bdate,
+                    DateJoinESM = dateJoin,
+                    PreviousUnit = model.PreviousUnit,
+                    PositionInFamily = model.PositionInFamily,
+                    SocialMediaAddress = model.SocialMediaAddress,
+                };
+                _context.usheringUnit.Add(usheringData);
+                result = await _context.SaveChangesAsync() > 0;
+            }
+            else
+            {
+                var usheringData = _context.usheringUnit.Find(model.Id);
+
+                if (usheringData is null)
+                {
+                    throw new("Not found");
+                }
+                usheringData.Surname = model.Surname;
+                usheringData.Firstname = model.Firstname;
+                usheringData.Middlename = model.Middlename;
+                usheringData.PhoneNumber01 = model.PhoneNumber01;
+                usheringData.PhoneNumber02 = model.PhoneNumber02;
+                usheringData.Email = model.Email;
+                usheringData.HomeAddress = model.HomeAddress;
+                usheringData.HostelAddress = model.HostelAddress;
+                usheringData.CourseOfStudy = model.CourseOfStudy;
+                usheringData.Unit = model.Unit;
+                usheringData.Ambition = model.Ambition;
+                usheringData.StateOfOrigin = model.StateOfOrigin;
+                usheringData.LGA = model.LGA;
+                usheringData.PreviousUnit = model.PreviousUnit;
+                usheringData.DateOfBirth = bdate;//model.DateOfBirth;
+                usheringData.DateJoinESM = dateJoin;// model.DateJoinESM;
+                usheringData.Gender = model.Gender;
+                usheringData.PositionInFamily = model.PositionInFamily;
+                usheringData.SocialMediaAddress = model.SocialMediaAddress;
+                result = await _context.SaveChangesAsync() > 0;
+            }
+            return result;
+        }
+
+        public IQueryable<UsheringUnitDTO> ListAllUsheringUnitAsync()
+        {
+            return(from s in _context.usheringUnit select new UsheringUnitDTO {
+
+                Id = s.Id,
+                Surname = s.Surname == null ? "" : s.Surname,
+                Firstname = s.Firstname == null ? "" : s.Firstname,
+                Middlename = s.Middlename == null ? "" : s.Middlename,
+                Unit = s.Unit == null ? "" : s.Unit,
+                Gender = s.Gender == null ? "" : s.Gender,
+                LGA = s.LGA == null ? "" : s.LGA,
+                StateOfOrigin = s.StateOfOrigin == null ? "" : s.StateOfOrigin,
+                DateJoinESM = s.DateJoinESM == null ? null : s.DateJoinESM,
+                Ambition = s.Ambition == null ? "" : s.Ambition,
+                CourseOfStudy = s.CourseOfStudy == null ? "" : s.CourseOfStudy,
+                Email = s.Email == null ? "" : s.Email,
+                PhoneNumber01 = s.PhoneNumber01 == null ? "" : s.PhoneNumber01,
+                PhoneNumber02 = s.PhoneNumber02 == null ? "" : s.PhoneNumber02,
+                HomeAddress = s.HomeAddress == null ? "" : s.HomeAddress,
+                HostelAddress = s.HostelAddress == null ? "" : s.HostelAddress,
+                PreviousUnit = s.PreviousUnit == null ? "" : s.PreviousUnit,
+                DateOfBirth = s.DateOfBirth == null ? null : s.DateOfBirth,
+                PositionInFamily = s.PositionInFamily == null ? "" : s.PositionInFamily,
+                SocialMediaAddress = s.SocialMediaAddress == null ? "" : s.SocialMediaAddress,
+                Photo = s.Photo == null ? "" : s.Photo,
+
+            });
+        }
+
+        public string deleteUsheringUnitById(int id)
+        {
+           var deleteUsheringById=_context.usheringUnit.Find(id);
+            if (deleteUsheringById != null)
+                _context.Remove(deleteUsheringById);
+            _context.SaveChangesAsync();
             return "";
         }
     }

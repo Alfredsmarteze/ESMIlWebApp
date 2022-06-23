@@ -30,8 +30,8 @@ namespace DataStructure.ViewModel
         public string SocialMediaAddress { get; set; }
         public string Photo { get; set; }
 
-        public string strDateOfBirth { get { if (DateOfBirth.HasValue) { return DateOfBirth.Value.ToString("dd/MM/yyyy"); } else { return string.Empty; } } }
-        public string strDateJoinESM { get { if (DateJoinESM.HasValue) { return DateJoinESM.Value.ToString("dd/MM/yyyy"); } else { return string.Empty; } } }
+        public string strDateOfBirth { get { if (DateOfBirth.HasValue) { return DateOfBirth.Value.ToString("MM/dd/yyyy"); } else { return string.Empty; } } }
+        public string strDateJoinESM { get { if (DateJoinESM.HasValue) { return DateJoinESM.Value.ToString("MM/dd/yyyy"); } else { return string.Empty; } } }
 
     }
 

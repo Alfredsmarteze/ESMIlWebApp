@@ -116,7 +116,7 @@ namespace ESMIlWebApp.Controllers.Unit
                 _logger.LogError("Error", ex.Message);
                 errorMessage = ex.Message;
             }
-            return Json(new ResponseModel { message = $"Error: {errorMessage}", statusCode = (int)HttpStatusCode.Conflict });
+            return Json(new ResponseModel { message = $"Error Message: {errorMessage}", statusCode = (int)HttpStatusCode.Conflict });
         }
 
 
@@ -131,7 +131,7 @@ namespace ESMIlWebApp.Controllers.Unit
                     return Json(new ResponseModel { message = "Bad request" });
                 }
 
-                _repository.DeleteBibleStudyUnit(payload);
+                _repository.DeleteBibleStudyUnitById(payload);
 
                 return Json(new ResponseModel { hasError = false, message = "Operation completed successfully", statusCode = (int)HttpStatusCode.OK });
             }
@@ -140,7 +140,7 @@ namespace ESMIlWebApp.Controllers.Unit
                 _logger.LogError("Error", ex);
                 errorMessage = ex.Message;
             }
-            return Json(new ResponseModel { message = $" Errror: {errorMessage}", statusCode = (int)HttpStatusCode.NotImplemented });
+            return Json(new ResponseModel { message = $" Errror Message: {errorMessage}", statusCode = (int)HttpStatusCode.NotImplemented });
         }
     }
 }

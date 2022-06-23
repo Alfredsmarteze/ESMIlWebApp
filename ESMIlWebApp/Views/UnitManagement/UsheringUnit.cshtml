@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Prayer unit";
+    ViewData["Title"] = "Ushering unit";
     Layout = "~/Views/Shared/_layout.cshtml";
 }
 
@@ -11,7 +11,7 @@
 <br><br>
 <div class="table-responsive">
     @*<div style="overflow-x:scroll">*@
-        <table id="prayerTable" width="100%" class="stripe hover">
+        <table id="usheringTable" width="100%" class="stripe hover">
             <thead>
                 <tr>
                @* <th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>*@
@@ -57,11 +57,11 @@
     
   
 
-@using(Html.BeginForm("ViewPrayerUnit","UnitManagement",FormMethod.Post, new { id="viewPrayerForm", target="_blank"}))
+@using(Html.BeginForm("ViewUsheringUnit","UnitManagement",FormMethod.Post, new { id="viewUsheringForm", target="_blank"}))
 {
     <input type="hidden" name="viewRecordId" id="viewRecordId">
 }
-@using(Html.BeginForm("UpdatePrayerUnit","UnitManagement",FormMethod.Post, new { id="updatePrayerForm", target="_blank"}))
+@using(Html.BeginForm("UpdateUsheringUnit","UnitManagement",FormMethod.Post, new { id="updateUsheringForm", target="_blank"}))
 {
     <input type="hidden" name="updateRecordId" id="updateRecordId">
 }
@@ -70,7 +70,7 @@
 @section scripts{           
     <script>
       
-        var table =$("#prayerTable").DataTable({
+        var table =$("#usheringTable").DataTable({
         "lengthMenu":[[7,20,25,50, -1],[7,20,25,50,"All"]],
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
@@ -78,13 +78,12 @@
         "orderMulti": false, // for disable multiple column at once
         "paginate":true,
         "scrollX": true,
-        "scrollY": true,
        // colReorder: false,
       //  rowReorder:false,
         //select: true,
         //dom: 'Bfrtip', , new{area="Unit"}
         "ajax":{
-        "url":"@Url.Action("GetAllPrayerUnit","PrayerUnit")",
+        "url":"@Url.Action("GetAllUsheringUnit","UsheringUnit")",
         "type":"POST",
         "datatype":"json",
         "data":function(arg){}
@@ -141,13 +140,11 @@
         ],
       }); 
    
-     
-
-        function DeleteStd(id){
+         function DeleteStd(id){
             var postId={
             "payload":id
             }
-           bootbox.confirm({
+            bootbox.confirm({
                  message:       "Are you sure you want to DELETE this record?",
                  buttons: {
                  cancel: {
@@ -159,19 +156,9 @@
     },
     callback: function (result) {
         if(result){
-            //var dialog = bootbox.dialog({
-            //title: 'A custom dialog with init',
-            //message: '<p><i class="fa fa-spin fa-spinner"></i> Loading...</p>'
-            //});
-            
-            //dialog.init(function(){
-            //setTimeout(function(){
-            //dialog.find('.bootbox-body').html('I was loaded after the dialog was shown!');
-            //}, 5000000);
-            //});
-         $.ajax({
+           $.ajax({
                     type: "POST",
-                    url: "@Url.Action("ActionButton", "PrayerUnit", new { area = "Unit" })",
+                    url: "@Url.Action("ActionButton", "UsheringUnit", new { area = "Unit" })",
                     datatype: "JSON",
                     data:postId,
                     
@@ -187,101 +174,30 @@
 });
          
     }
-          var operationProcessUrl = "@Url.Action("ActionButton", "PrayerUnit", new { area = "Unit" })";
-            $('#prayerTable tbody').on('click','#deleteRecord' ,function (e) {
-                e.preventDefault();
-                
-                bootbox.confirm({
-
-                    title: '<i class="fa fa-warning"></i> Warning',
-                    message: "Do you still want to continue with this operation?",
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-remove"></i> No'
-                        },
-                        confirm: {
-                            label: '<i class="fa fa-check"></i> Yes'
-                        }
-                    },
-                    callback: function (result) {
-                        if (result) {
-                  //var data1 = table.row($(this).parents('tr')).data();
-                    var data2=table.row($(this).parents('tr')).data();
-               //var data1 = table.row( this ).data().id;//parents('tr')).data();
-                console.log(data2);
-                // var arraydata=  arraysOfIds.push(data1.id);
-              
-                 
-                            var data = {
-                                //actionType: $("#ActionType").val(),
-                                id:data2.id,
-                            }
-
-                            //if (data.ids == "") {
-                            //    SiteUtils.showMessage("Error", "red", "No row id selected");
-                            //    return
-                            //}
-
-                            var payload = SiteUtils.encrypt(JSON.stringify(data)).toString();
-
-                            SiteUtils.post({ payload: payload }, operationProcessUrl).then(function (response) {
-                                if (response.hasError == false) {
-
-                                    table.draw();
+        
 
 
-                                    SiteUtils.showMessage("Success", "green", response.message);
-
-                                } else {
-
-                                    SiteUtils.showMessage("Error", "red", response.message);
-
-                                }
-
-
-                            }).catch(function (err) {
-                                SiteUtils.loadingOff();
-                                SiteUtils.showMessage("Error", "red", err.statusText);
-                            })
-
-
-                        }
-                    }
-                });
-            })
-
-
-         $('#prayerTable tbody').on('click', '#viewRecord', function (e) {
+         $('#usheringTable tbody').on('click', '#viewRecord', function (e) {
                 e.preventDefault();
                 var data = table.row($(this).parents('tr')).data();
                 $("#viewRecordId").val(data.id);
-                $("#viewPrayerForm").submit();
+                $("#viewUsheringForm").submit();
 
             });
 
-            $('#prayerTable tbody').on('click', '#changeRecord', function (e) {
+            $('#usheringTable tbody').on('click', '#changeRecord', function (e) {
                 e.preventDefault();
                 var data = table.row($(this).parents('tr')).data();
                 $("#updateRecordId").val(data.id);
-                $("#updatePrayerForm").submit();
+                $("#updateUsheringForm").submit();
 
             });
 
             $('#newRecord').on('click', function(e){
             e.preventDefault();
-            var returnUrl = '@Url.Action("CreateNewPrayer", "UnitManagement")';
+            var returnUrl = '@Url.Action("CreateNewUsheringUnit", "UnitManagement")';
             window.location.href = returnUrl;
             })
-
-            //$('#prayerTable tbody').on('click', '#deleteRecord', function (e) {
-            //    e.preventDefault();
-            //    arrayOfIds = [];
-            //    var data = table.row($(this).parents('tr')).data();
-            //    arrayOfIds.push(data.id);
-            //    //Action_Click('btnDelete');
-            //});
-
-
            
     </script>
 }
