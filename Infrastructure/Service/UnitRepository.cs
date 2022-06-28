@@ -650,7 +650,6 @@ namespace Infrastructure.Service
             }
             return "";
         }
-
         public async Task<bool> AddOrUpdateTechnicalUnitAsync(TechnicalUnitData model)
         {
             bool result;
@@ -729,7 +728,6 @@ namespace Infrastructure.Service
             }
             return result;
         }
-
         public async Task<bool> AddOrUpdateWelfareUnitAsync(WelfareUnitData model)
         {
             bool result;
@@ -808,7 +806,6 @@ namespace Infrastructure.Service
             }
             return result;
         }
-
         public IQueryable<TechnicalUnitDTO> ListAllTechnicalUnitAsync()
         {
             return (from s in _context.technicalUnit
@@ -839,7 +836,6 @@ namespace Infrastructure.Service
 
                     });
         }
-
         public IQueryable<WelfareUnitDTO> ListAllWelfareUnitAsync()
         {
             return (from s in _context.welfareUnit
@@ -868,7 +864,6 @@ namespace Infrastructure.Service
                         Photo = s.Photo == null ? "" : s.Photo,
                     });
         }
-
         public string DeleteTechnicalUnitById(int id)
         {
             var deleteTechUnit = _context.technicalUnit.Find(id);
@@ -877,7 +872,6 @@ namespace Infrastructure.Service
             _context.SaveChangesAsync();
             return "";
         }
-
         public string DeleteWelfareUnitById(int id)
         {
             var deleteWelfare=_context.welfareUnit.Find(id);
@@ -886,7 +880,6 @@ namespace Infrastructure.Service
             _context.SaveChangesAsync();
             return "";
         }
-
         public async Task<bool> AddOrUpdateUsheringUnitAsync(UsheringUnitData model)
         {
             bool result;
@@ -965,7 +958,6 @@ namespace Infrastructure.Service
             }
             return result;
         }
-
         public IQueryable<UsheringUnitDTO> ListAllUsheringUnitAsync()
         {
             return(from s in _context.usheringUnit select new UsheringUnitDTO {
@@ -994,13 +986,124 @@ namespace Infrastructure.Service
 
             });
         }
-
-        public string deleteUsheringUnitById(int id)
+        public string DeleteUsheringUnitById(int id)
         {
            var deleteUsheringById=_context.usheringUnit.Find(id);
             if (deleteUsheringById != null)
                 _context.Remove(deleteUsheringById);
             _context.SaveChangesAsync();
+            return "";
+        }
+        public async Task<bool> AddOrUpdateTransportUnitAsync(TransportUnitData model)
+        {
+            bool result;
+            var bdate = new DateTime();
+            if (!string.IsNullOrEmpty(model.DateOfBirth))
+            {
+                var splitDateOfBirth = model.DateOfBirth.Split('/');
+                bdate = new DateTime(int.Parse(splitDateOfBirth[2]), int.Parse(splitDateOfBirth[0]), int.Parse(splitDateOfBirth[1]));
+            }
+
+            var dateJoin = new DateTime();
+            if (!string.IsNullOrEmpty(model.DateJoinESM))
+            {
+                var splitDateJoin = model.DateJoinESM.Split('/');
+                dateJoin = new DateTime(int.Parse(splitDateJoin[2]), int.Parse(splitDateJoin[0]), int.Parse(splitDateJoin[1]));
+            }
+
+            if (model.Id < 1)
+            {
+
+                var transportUnitData = new TransportUnit
+                {
+                    Surname = model.Surname,
+                    Firstname = model.Firstname,
+                    Middlename = model.Middlename,
+                    PhoneNumber01 = model.PhoneNumber01,
+                    PhoneNumber02 = model.PhoneNumber02,
+                    Email = model.Email,
+                    Gender = model.Gender,
+                    StateOfOrigin = model.StateOfOrigin,
+                    LGA = model.LGA,
+                    Ambition = model.Ambition,
+                    HomeAddress = model.HomeAddress,
+                    HostelAddress = model.HostelAddress,
+                    CourseOfStudy = model.CourseOfStudy,
+                    Unit = model.Unit,
+                    DateOfBirth = bdate,
+                    DateJoinESM = dateJoin,
+                    PreviousUnit = model.PreviousUnit,
+                    PositionInFamily = model.PositionInFamily,
+                    SocialMediaAddress = model.SocialMediaAddress,
+                };
+                _context.transportUnit.Add(transportUnitData);
+                result = await _context.SaveChangesAsync() > 0;
+            }
+            else
+            {
+                var transportUnitData = _context.transportUnit.Find(model.Id);
+
+                if (transportUnitData is null)
+                {
+                    throw new("Not found");
+                }
+                transportUnitData.Surname = model.Surname;
+                transportUnitData.Firstname = model.Firstname;
+                transportUnitData.Middlename = model.Middlename;
+                transportUnitData.PhoneNumber01 = model.PhoneNumber01;
+                transportUnitData.PhoneNumber02 = model.PhoneNumber02;
+                transportUnitData.Email = model.Email;
+                transportUnitData.HomeAddress = model.HomeAddress;
+                transportUnitData.HostelAddress = model.HostelAddress;
+                transportUnitData.CourseOfStudy = model.CourseOfStudy;
+                transportUnitData.Unit = model.Unit;
+                transportUnitData.Ambition = model.Ambition;
+                transportUnitData.StateOfOrigin = model.StateOfOrigin;
+                transportUnitData.LGA = model.LGA;
+                transportUnitData.PreviousUnit = model.PreviousUnit;
+                transportUnitData.DateOfBirth = bdate;//model.DateOfBirth;
+                transportUnitData.DateJoinESM = dateJoin;// model.DateJoinESM;
+                transportUnitData.Gender = model.Gender;
+                transportUnitData.PositionInFamily = model.PositionInFamily;
+                transportUnitData.SocialMediaAddress = model.SocialMediaAddress;
+                result = await _context.SaveChangesAsync() > 0;
+            }
+            return result;
+        }
+        public IQueryable<TransportUnitDTO> ListAllTransportUnitAsync()
+        {
+            return(from s in _context.transportUnit select new TransportUnitDTO {
+                Id = s.Id,
+                Surname = s.Surname == null ? "" : s.Surname,
+                Firstname = s.Firstname == null ? "" : s.Firstname,
+                Middlename = s.Middlename == null ? "" : s.Middlename,
+                Unit = s.Unit == null ? "" : s.Unit,
+                Gender = s.Gender == null ? "" : s.Gender,
+                LGA = s.LGA == null ? "" : s.LGA,
+                StateOfOrigin = s.StateOfOrigin == null ? "" : s.StateOfOrigin,
+                DateJoinESM = s.DateJoinESM == null ? null : s.DateJoinESM,
+                Ambition = s.Ambition == null ? "" : s.Ambition,
+                CourseOfStudy = s.CourseOfStudy == null ? "" : s.CourseOfStudy,
+                Email = s.Email == null ? "" : s.Email,
+                PhoneNumber01 = s.PhoneNumber01 == null ? "" : s.PhoneNumber01,
+                PhoneNumber02 = s.PhoneNumber02 == null ? "" : s.PhoneNumber02,
+                HomeAddress = s.HomeAddress == null ? "" : s.HomeAddress,
+                HostelAddress = s.HostelAddress == null ? "" : s.HostelAddress,
+                PreviousUnit = s.PreviousUnit == null ? "" : s.PreviousUnit,
+                DateOfBirth = s.DateOfBirth == null ? null : s.DateOfBirth,
+                PositionInFamily = s.PositionInFamily == null ? "" : s.PositionInFamily,
+                SocialMediaAddress = s.SocialMediaAddress == null ? "" : s.SocialMediaAddress,
+                Photo = s.Photo == null ? "" : s.Photo,
+            });
+        }
+        public string DeleteTransportUnitById(int id)
+        {
+            var deleteTransportById =_context.transportUnit.Find(id);
+            if (deleteTransportById !=null)
+            {
+                _context.transportUnit.Remove(deleteTransportById);
+                _context.SaveChangesAsync();
+            }
             return "";
         }
     }

@@ -286,5 +286,38 @@ namespace ESMIlWebApp.Controllers.UnitManagement
         [HttpGet, Route("Ushering/Members")]
         public IActionResult UsheringUnit() => View();
 
+
+        [HttpGet, Route("New/TransportUnit/Data")]
+        public IActionResult CreateNewTransportUnit() => View();
+
+        [Route("Update/TransportUnit/Data")]
+        public IActionResult UpdateTransportUnit()
+        {
+            var model = new TransportUnitDTO();
+            var rowId = Request.Form["updateRecordId"].FirstOrDefault();
+            if (rowId is not null)
+            {
+                var id = int.Parse(rowId);
+                model = _unitRepository.ListAllTransportUnitAsync().Where(s => s.Id == id).FirstOrDefault();
+            }
+            return View(model);
+        }
+
+        [Route("View/TransportUnit/Data")]
+        public IActionResult ViewTransportUnit()
+        {
+            var model = new TransportUnitDTO();
+            var rowId = Request.Form["viewRecordId"].FirstOrDefault();
+            if (rowId is not null)
+            {
+                var id = int.Parse(rowId);
+                model = _unitRepository.ListAllTransportUnitAsync().Where(s => s.Id == id).FirstOrDefault();
+            }
+            return View(model);
+        }
+
+        [HttpGet, Route("Transport/Members")]
+        public IActionResult TransportUnit() => View();
+
     }
 }

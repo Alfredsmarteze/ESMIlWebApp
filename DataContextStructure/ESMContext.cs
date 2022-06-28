@@ -14,6 +14,7 @@ namespace DataContextStructure
             // using var context = new ESMContext(contextOptions);
 
         }
+        public DbSet<TransportUnit> transportUnit { get; set; }
         public DbSet<ChoralUnit> choralUnit { get; set; }
         public DbSet<DmeUnit> dmeUnit { get; set; }
         public DbSet<PublicityAndEditorialUnit> publicityAndEditorialUnit { get; set; }

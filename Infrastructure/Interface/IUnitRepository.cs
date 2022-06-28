@@ -9,6 +9,7 @@ namespace Infrastructure.Interface
 {
     public interface IUnitRepository
     {
+        Task<bool> AddOrUpdateTransportUnitAsync(TransportUnitData transportUnitData);
         Task<bool> AddOrUpdateUsheringUnitAsync(UsheringUnitData usheringUnitData);
         Task<bool> AddOrUpdateTechnicalUnitAsync(TechnicalUnitData technicalUnitData);
         Task<bool> AddOrUpdateWelfareUnitAsync(WelfareUnitData welfareUnitDTO);
@@ -17,6 +18,7 @@ namespace Infrastructure.Interface
         Task<bool> AddOrUpdateBibleStudyUnitAsync(BibleStudyUnitData bibleStudyUnitData);
         Task<bool> AddOrUpdatePrayerUnitAsync(PrayerUnitDTOData prayerUnitDTO);
         Task<bool> AddOrUpdateChoralUnitAsync(ChoralUnitData choralUnitData);
+        IQueryable<TransportUnitDTO> ListAllTransportUnitAsync();
         IQueryable<UsheringUnitDTO> ListAllUsheringUnitAsync();
         IQueryable<TechnicalUnitDTO> ListAllTechnicalUnitAsync();
         IQueryable<WelfareUnitDTO> ListAllWelfareUnitAsync();
@@ -25,7 +27,8 @@ namespace Infrastructure.Interface
         IQueryable<BibleStudyUnitDTO> GetAllBibleStudyUnitsAsync();
         IQueryable<ChoralUnitDTO> GetAllChoralUnitsAsync();
         IQueryable<PrayerUnitDTO> ListAllPrayerUnitData();
-        string deleteUsheringUnitById(int id); 
+        string DeleteTransportUnitById(int id);
+        string DeleteUsheringUnitById(int id); 
         string DeleteTechnicalUnitById(int id);
         string DeleteWelfareUnitById(int id);
         string DeletePublicityUnitById(int id);
