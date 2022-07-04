@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataContextStructure.Migrations
 {
     [DbContext(typeof(ESMContext))]
-    [Migration("20220604221031_addedotherunit")]
-    partial class addedotherunit
+    [Migration("20220704121805_init1")]
+    partial class init1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -477,6 +477,79 @@ namespace DataContextStructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("technicalUnit");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.TransportUnit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Ambition")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CourseOfStudy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DateJoinESM")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Firstname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HomeAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HostelAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LGA")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Middlename")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber01")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber02")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PositionInFamily")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreviousUnit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SocialMediaAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StateOfOrigin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Unit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("transportUnit");
                 });
 
             modelBuilder.Entity("DataStructure.Entites.UsheringUnit", b =>

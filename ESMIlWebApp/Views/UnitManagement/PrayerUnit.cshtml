@@ -69,8 +69,12 @@
 
 @section scripts{           
     <script>
-      
+
         var table =$("#prayerTable").DataTable({
+        columnDefs: [ {
+        targets: [12,13],
+        render: $.fn.dataTable.render.ellipsis(10)
+        } ],
         "lengthMenu":[[7,20,25,50, -1],[7,20,25,50,"All"]],
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
@@ -78,7 +82,7 @@
         "orderMulti": false, // for disable multiple column at once
         "paginate":true,
         "scrollX": true,
-        "scrollY": true,
+        "scrollY": '350px',
         //"responsive": true,
        // colReorder: false,
       //  rowReorder:false,
@@ -90,11 +94,6 @@
         "datatype":"json",
         "data":function(arg){}
         },
-        "columnDefs":[{targets:13,className:"truncate"}],
-            "createdRow": function(row) {
-                var td = $(row).find(".truncate");
-                td.attr("title", td.html());
-            },
         "columns":[
            {
             "data": null, "name":"Action", "defaultContent":'<div class="btn-group mr-1 mb-1">'+
@@ -145,7 +144,9 @@
          }
          },
         ],
-        
+        "initComplete": function(settings, json) {
+        $('body').find('.dataTables_scrollBody').addClass("scrollbar");
+        },
       }); 
    
      

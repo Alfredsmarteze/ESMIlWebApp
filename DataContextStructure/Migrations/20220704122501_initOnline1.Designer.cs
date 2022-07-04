@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataContextStructure.Migrations
 {
     [DbContext(typeof(ESMContext))]
-    [Migration("20220623220130_addedTransportUnitTbl")]
-    partial class addedTransportUnitTbl
+    [Migration("20220704122501_initOnline1")]
+    partial class initOnline1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

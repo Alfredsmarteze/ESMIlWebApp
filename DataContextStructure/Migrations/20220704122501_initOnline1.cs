@@ -4,7 +4,7 @@
 
 namespace DataContextStructure.Migrations
 {
-    public partial class addedStateTbl : Migration
+    public partial class initOnline1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

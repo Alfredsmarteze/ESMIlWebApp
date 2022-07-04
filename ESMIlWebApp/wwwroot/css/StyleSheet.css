@@ -62,6 +62,14 @@
         padding: 12px; /* Add some padding */
     }
 
-        .statictisModal ul li .badge {
+ .statictisModal ul li .badge {
             color: #fff !important;
-        }
+ }
+
+
+/*.truncate {
+    max-width: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}*/

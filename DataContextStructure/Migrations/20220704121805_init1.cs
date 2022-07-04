@@ -5,22 +5,41 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataContextStructure.Migrations
 {
-    public partial class addedotherunit : Migration
+    public partial class init1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_BibleStudyUnit",
-                table: "BibleStudyUnit");
-
-            migrationBuilder.RenameTable(
-                name: "BibleStudyUnit",
-                newName: "bibleStudyUnit");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_bibleStudyUnit",
-                table: "bibleStudyUnit",
-                column: "Id");
+            migrationBuilder.CreateTable(
+                name: "bibleStudyUnit",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Firstname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Middlename = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber01 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber02 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Ambition = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateOfOrigin = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LGA = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DateJoinESM = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    HostelAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HomeAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CourseOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PreviousUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PositionInFamily = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SocialMediaAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_bibleStudyUnit", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "choralUnit",
@@ -87,6 +106,38 @@ namespace DataContextStructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "prayerUnit",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Firstname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Middlename = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber01 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber02 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Ambition = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DateJoinESM = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    HostelAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HomeAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CourseOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PreviousUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PositionInFamily = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateOfOrigin = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LGA = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SocialMediaAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_prayerUnit", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "publicityAndEditorialUnit",
                 columns: table => new
                 {
@@ -119,6 +170,19 @@ namespace DataContextStructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "state",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StateName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_state", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "technicalUnit",
                 columns: table => new
                 {
@@ -148,6 +212,38 @@ namespace DataContextStructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_technicalUnit", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "transportUnit",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Firstname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Middlename = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber01 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber02 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Ambition = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateOfOrigin = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LGA = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DateJoinESM = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    HostelAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HomeAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CourseOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PreviousUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PositionInFamily = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SocialMediaAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_transportUnit", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -218,35 +314,34 @@ namespace DataContextStructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "bibleStudyUnit");
+
+            migrationBuilder.DropTable(
                 name: "choralUnit");
 
             migrationBuilder.DropTable(
                 name: "dmeUnit");
 
             migrationBuilder.DropTable(
+                name: "prayerUnit");
+
+            migrationBuilder.DropTable(
                 name: "publicityAndEditorialUnit");
 
             migrationBuilder.DropTable(
+                name: "state");
+
+            migrationBuilder.DropTable(
                 name: "technicalUnit");
+
+            migrationBuilder.DropTable(
+                name: "transportUnit");
 
             migrationBuilder.DropTable(
                 name: "usheringUnit");
 
             migrationBuilder.DropTable(
                 name: "welfareUnit");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_bibleStudyUnit",
-                table: "bibleStudyUnit");
-
-            migrationBuilder.RenameTable(
-                name: "bibleStudyUnit",
-                newName: "BibleStudyUnit");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_BibleStudyUnit",
-                table: "BibleStudyUnit",
-                column: "Id");
         }
     }
 }
