@@ -29,6 +29,14 @@
     <Content Remove="wwwroot\lib\bootstrap\dist\js\bootstrap-confirmation.js" />
     <Content Remove="wwwroot\lib\bootstrap\dist\js\bootstrap-confirmation.min.js" />
     <Content Remove="wwwroot\lib\bootstrap\dist\js\bootstrap-confirmation.min.js.map" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\js\popper-utils.js" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\js\popper-utils.js.map" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\js\popper-utils.min.js" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\js\popper-utils.min.js.map" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\js\popper.js" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\js\popper.js.map" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\js\popper.min.js" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\js\popper.min.js.map" />
     <Content Remove="wwwroot\lib\popper.js\dist\umd\popper-utils.js" />
     <Content Remove="wwwroot\lib\popper.js\dist\umd\popper-utils.js.map" />
     <Content Remove="wwwroot\lib\popper.js\dist\umd\popper-utils.min.js" />
@@ -109,6 +117,10 @@
     <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js.map" />
     <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
     <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\popper.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\popper.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\popper.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\popper.min.js.map" />
     <None Include="wwwroot\lib\bootstrap\LICENSE" />
     <None Include="wwwroot\lib\datatables-responsive\dataTables.responsive.js" />
     <None Include="wwwroot\lib\datatables-responsive\dataTables.responsive.min.js" />
