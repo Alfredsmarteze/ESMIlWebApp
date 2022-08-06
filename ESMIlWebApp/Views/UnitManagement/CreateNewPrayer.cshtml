@@ -3,8 +3,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h4 class="text-muted">Prayer Unit</h4>
-<h5 class="text-muted">Capture new record</h5>
-<div class="container" style="background-color:lightblue">
+<div class="bg-primary">
+    <h2>
+        <img src="~/image/web-site-under-construction.jpg" class="container-fluid" alt="Under Contruction" height=150 width=300 img/>
+    </h2>
+</div>
+<div class="container">
+    <h2 class="text-mute">Meeting Hour</h2>
+    <ul>
+    <li class="text-info">What time do you meet?</li>
+    </ul>
+    </div>
+<button class="btn btn-primary btn-rounded showForm">Be part of us</button><br/>
+<div class="container hideForm" style="background-color:lightblue">
+    <h5 class="text-primary">Capture new record</h5>
     <div class="row">
         <form >
         <div class="row">
@@ -169,27 +181,12 @@
     <script>
   
         var saveUrl="@Url.Action("AddOrUpdatePrayerUnitData","PrayerUnit", new {area="Unit"})";
-
-         //$(document).ready(function(){
-         
-               //// $("h4").text(geekss + ' is the selected file.');
-        // });
-
-               // var wrapper = $('<div/>').css({height:0,width:0,'overflow':'hidden'});
-               // var fileInput = $(':file').wrap(wrapper);
-               // var text;
-
-               // fileInput.change(function(){
-               // $this = $(this);
-               // $('#file').html($this.val());
-               // text = $('#file').html();
-               // text = text.substring(text.lastIndexOf("\\") + 1, text.length);
-               // $('#file').html(text);
-               // });
-
-               //$('#file').click(function(){
-               //fileInput.click();
-               //}).show();
+         $(document).ready(function() {
+         $(".hideForm").hide();
+         $(".showForm").on('click', function() { 
+              $('.hideForm').toggle();
+         })
+    });
 
         $("#saveRecord").click(function(e)
         {

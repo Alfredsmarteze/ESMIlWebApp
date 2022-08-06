@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using DataStructure.Entites;
 using Microsoft.Extensions.Configuration;
+using DataStructure;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DataContextStructure
 {
-    public class ESMContext : DbContext
+    public class ESMContext :IdentityDbContext<ApplicationUser>
     {
         public ESMContext(DbContextOptions<ESMContext> options) : base(options)
         {
@@ -14,6 +16,8 @@ namespace DataContextStructure
             // using var context = new ESMContext(contextOptions);
 
         }
+        public DbSet<LoginInfo> loginInfo { get; set; }
+        public DbSet<Register> register { get; set; }
         public DbSet<TransportUnit> transportUnit { get; set; }
         public DbSet<ChoralUnit> choralUnit { get; set; }
         public DbSet<DmeUnit> dmeUnit { get; set; }

@@ -1,0 +1,51 @@
+﻿@model DataStructure.LoginInfo
+@*@section NoIndexing
+{
+    <meta name="robots" content="noindex, nofollow">
+}
+@section description{
+
+}
+@{
+    ViewData["Title"] = "Index";
+}*@
+
+
+@*<h4>LoginInfo</h4>*@
+<br>
+<br>
+<br>
+<br>
+
+<div>
+    <div class="row justify-content-center g-success">
+        <div class="col-md-4">
+            <form asp-action="Login" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Username" class="control-label font-weight-bolder"></label>
+                    <input asp-for="Username" class="form-control bg-success" style="color:white" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label font-weight-bolder"></label>
+                    <input asp-for="Password" class="form-control bg-success" style="color:white" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label font-weight-bolder">
+                        <input class="form-check-input bg-success" asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Login" class="btn bg-success justify-content-center"
+                           style="color:white" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@*<div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@
+

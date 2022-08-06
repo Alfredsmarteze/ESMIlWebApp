@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<ApplicationUser> signInManager;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -32,9 +33,41 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1 justify-content-end">
-
-                        <li class="dropdown crea " style="margin-left:15px; margin-top:7px">
+                         <li class="dropdown crea " style="margin-left:15px; margin-top:7px">
                             <a href="#" class="dropdown-toggle text-white" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Units</a>
+                            <ul class="dropdown-menu flex-grow-1" role="menu">
+                                 
+                                <li class="nav-item shadow-lg">
+                                    <a class="nav-link text-primary" asp-area="" asp-controller="UnitManagement" asp-action="CreateNewPrayer">Prayer Unit</a>
+                                </li>
+                                <li class="nav-item shadow-lg">
+                                    <a class="nav-link text-primary" asp-area="" asp-controller="UnitManagement" asp-action="CreateNewBible">Bible Study Unit</a>
+                                </li>
+                                <li class="nav-item shadow-lg">
+                                    <a class="nav-link text-primary" asp-area="" asp-controller="UnitManagement" asp-action="CreateNewChoral">Choral Unit</a>
+                                </li>
+                                <li class="nav-item shadow-lg">
+                                    <a class="nav-link text-primary" asp-area="" asp-controller="UnitManagement" asp-action="CreateNewDme">DME Unit</a>
+                                </li>
+                                <li class="nav-item shadow-lg">
+                                    <a class="nav-link text-primary" asp-area="" asp-controller="UnitManagement" asp-action="CreateNewPublicityUnit">Publicity Unit</a>
+                                </li>
+                                <li class="nav-item shadow-lg">
+                                    <a class="nav-link text-primary" asp-area="" asp-controller="UnitManagement" asp-action="CreateNewUsheringUnit">Ushering Unit</a>
+                                </li>
+                                <li class="nav-item shadow-lg">
+                                    <a class="nav-link text-primary" asp-area="" asp-controller="UnitManagement" asp-action="CreateNewWelfareUnit">Welfare Unit</a>
+                                </li>
+                                <li class="nav-item shadow-lg">
+                                    <a class="nav-link text-primary" asp-area="" asp-controller="UnitManagement" asp-action="CreateNewTechnicalUnit">Technical Unit</a>
+                                </li>
+                                <li class="nav-item shadow-lg">
+                                    <a class="nav-link text-primary" asp-area="" asp-controller="UnitManagement" asp-action="CreateNewTransportUnit">Transport Unit</a>
+                                </li>
+                               </ul>
+                        </li>
+                        <li class="dropdown crea " style="margin-left:15px; margin-top:7px">
+                            <a href="#" class="dropdown-toggle text-white" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Units Records</a>
 
                             <ul class="dropdown-menu flex-grow-1" role="menu">
                                 <li class="nav-item shadow-lg">
@@ -67,18 +100,40 @@
                              </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="#" asp-action="#">Our ESMAF Data</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="#" asp-action="#">Set-Up</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Our ESMAF Data</a>
                         </li>
+                       
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="#" asp-action="#">Login</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Set-Up</a>
                         </li>
-                        
+                        @*<li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="#" asp-action="#">Login</a>
+                        </li>*@
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Register">SignUp</a>
+                        </li>
+
+                        @if(signInManager.IsSignedIn(User))
+                         {
+                        <li class="nav-item text-white"> @*style="color:white; margin-left:15px; margin-top:7px">*@
+                            <form method="post" asp-action="Logout" asp-controller="Home">
+                                <button type="submit" class="nav-link btn btn-link py-0" style="width:auto">
+                                    <span style="color:white"> Logout @User.Identity.Name</span>
+                                </button>
+                            </form>
+                        </li>
+                         }
+                         else
+                         {
+
+                        <li class="nav-item list-unstyled float-right">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                        </li>
+                         }
+
 
                     </ul>
                 </div>
@@ -93,30 +148,28 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; @DateTime.Now.Year- ESMIlWebApp</a>
+            &copy; @DateTime.Now.Year- ESMIlWebApp
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.js"></script>
     @*<script src="~/slib/popper.js/dist/umd/popper.min.js"></script>*@
 
     @*<script src="~/popper.js/dist/umd/popper.min.js"></script>*@
-    @*<script src="~/lib/popper.js/dist/umd/popper.min.js"></script>*@
+    <script src="~/lib/popper.js/dist/umd/popper.min.js"></script>
     
     <script src="~/jqueryui/jquery-ui.min.js" ></script>
     @*<script src="~/lib/datatables.net/jquery.dataTables.js" ></script>*@
     <script src="~/lib/datatables/js/jquery.dataTables.min.js" ></script>
 
 
-    @*<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>*@
 
-@*<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>*@
     
 @*<script src=~/lib/bootstrap/dist/js/bootstrap.js/bootstrap.bundle.js></script>*@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>   
        
 
     @*<script src="~/lib/datatables/js/dataTables.dataTables.min.js" ></script>*@
- @*<script src="~/lib/datatables/js/datatables.bootstrap4.min.js" ></script>*@
+    <script src="~/lib/datatables/js/datatables.bootstrap4.min.js" ></script>
     <script src=~/lib/bootstrap/dist/js/bootstrap.min.js></script>
     <script src="~/jquery-datetimepicker/jquery.datetimepicker.js"></script>
     <script src="https://cdn.datatables.net/plug-ins/1.12.1/dataRender/ellipsis.js"></script>

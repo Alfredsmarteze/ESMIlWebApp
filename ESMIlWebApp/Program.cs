@@ -1,7 +1,10 @@
 using DataContextStructure;
+using DataStructure;
 using Infrastructure.Interface;
 using Infrastructure.Service;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +15,21 @@ builder.Services.AddDbContext<ESMContext>(x => x.UseSqlServer(connectionString))
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IUnitRepository, UnitRepository>();
+builder.Services.AddTransient<IAccountRepository, AccountRepository>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(opt =>
+{
+    opt.Password.RequireDigit = true;
+    opt.Password.RequiredUniqueChars = 0;
+    opt.Password.RequiredLength = 8;
+    opt.Password.RequireLowercase = true;
+    opt.Password.RequireUppercase = true;
+    opt.Password.RequireNonAlphanumeric = false;
+})
+    .AddEntityFrameworkStores<ESMContext>();
 
+builder.Services.Configure<IdentityOptions>(opts => {
+
+});
 
 var app = builder.Build();
 

@@ -220,8 +220,6 @@
             if(response.hasError==false)
             {
                 alert(response.message, "Ok");
-                var returnUrl = '@Url.Action("PrayerUnit", "UnitManagement")';
-                            window.location.href = returnUrl;
             }
             else{
             alert(response.message);
