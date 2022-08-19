@@ -9,17 +9,17 @@ using System.Diagnostics;
 
 namespace ESMIlWebApp.Controllers
 {
-    public class HomeController : Controller
+    public class AccountController : Controller
     {
         private readonly IAccountRepository _accountRepository;
-        private readonly ILogger<HomeController> _logger;
+        //private readonly ILogger<AccountController> _logger;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IAccountRepository accountRepository)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IAccountRepository accountRepository)
         {
             this._accountRepository = accountRepository;
-            _logger = logger;
+          //  _logger = logger;
             this._userManager = userManager;
             this._signInManager = signInManager;
         }
@@ -50,7 +50,7 @@ namespace ESMIlWebApp.Controllers
             var userdata = await _userManager.CreateAsync(user, register.Password);
 
             if (userdata.Succeeded)
-            {
+            {    
                 await _signInManager.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("Login", "Home");
             }
@@ -62,7 +62,7 @@ namespace ESMIlWebApp.Controllers
 
             return View("Index");
         }
-        
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -74,58 +74,51 @@ namespace ESMIlWebApp.Controllers
         {
             try
             {
-                //if (ModelState.IsValid)
-                //{
-                    var signMeIn = await _signInManager.PasswordSignInAsync(loginInfo.Username, loginInfo.Password,
-                        loginInfo.RememberMe, false);
 
-                    if (signMeIn.Succeeded)
+
+                //if (ModelState.IsValid)
+                //  {
+                 var signMeIn = await _signInManager.PasswordSignInAsync(loginInfo.Username, loginInfo.Password,
+                  loginInfo.RememberMe, false);
+                //var signMeIn=    _accountRepository.Login(loginInfo, returnUrl);
+
+                if (signMeIn.Succeeded)
+                {
+                    if (!string.IsNullOrEmpty(returnUrl))
                     {
-                    if (Url.IsLocalUrl(returnUrl))
-                    {
-                        if (!string.IsNullOrEmpty(returnUrl)) 
-                        { 
-                        return Redirect(returnUrl);
-                        }
-                     }
-                     else
-                     {
-                            return RedirectToAction("Index", "Home");
-                     }
+                        return LocalRedirect(returnUrl);
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Invalid login details");
+                    return RedirectToAction("Index", "Home");
                     }
-               // }
-                return View("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login details");
+                }
+                // }
+                 return View(loginInfo);
             }
-            catch (Exception e) 
+            catch(Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
-
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            //await _signInManager.SignOutAsync();
+           // return RedirectToAction("Index", "Home");
 
-           // await  _accountRepository.Logout();
-          //  return RedirectToAction("Index", "Home");
+             await  _accountRepository.Logout();
+              return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Privacy()
         {
             return View();
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
+                
     }
 }

@@ -30,9 +30,14 @@ namespace Infrastructure.Service
 
              
         }
-        public async Task Login(LoginInfo loginIfo)
+        public async Task<SignInResult> Login(LoginInfo loginIfo, string returnUrl)
         {
-            await signInManager.PasswordSignInAsync(loginIfo.Password, loginIfo.Username, loginIfo.RememberMe, false);
+            var re=  await signInManager.PasswordSignInAsync(loginIfo.Password, loginIfo.Username, loginIfo.RememberMe, false);
+          //  if (re.Succeeded)
+          //  {
+          //      return re;
+          //  }
+            return re; ;    
         }
 
         public async Task Logout()

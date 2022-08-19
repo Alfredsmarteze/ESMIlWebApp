@@ -1,4 +1,5 @@
 ﻿using DataStructure;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Infrastructure.Interface
     {
         void Register(Register register);
         Task Logout();
-        Task Login(LoginInfo loginIfo);
+        Task<SignInResult> Login(LoginInfo loginIfo, string retunUrl);
 
     }
 }

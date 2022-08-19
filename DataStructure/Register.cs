@@ -12,15 +12,15 @@ namespace DataStructure
         public int Id { get; set; }
 
         [Required, MaxLength(10)]
-        public string? UserName { get; set; }
+        public string UserName { get; set; }
 
         [Required, DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required, DataType(DataType.Password)]
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         [Required, Display(Name = "Confirm Password"), Compare("Password", ErrorMessage = "Password did not match.")]
-        public string Confirmpassword { get; set; }
+        public string? Confirmpassword { get; set; }
     }
 }

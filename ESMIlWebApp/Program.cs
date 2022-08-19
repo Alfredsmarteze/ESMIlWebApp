@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("Connection");
 builder.Services.AddDbContext<ESMContext>(x => x.UseSqlServer(connectionString));
 
+builder.Services.AddRazorPages();   
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IUnitRepository, UnitRepository>();
 builder.Services.AddTransient<IAccountRepository, AccountRepository>();
@@ -24,12 +25,14 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(opt =>
     opt.Password.RequireLowercase = true;
     opt.Password.RequireUppercase = true;
     opt.Password.RequireNonAlphanumeric = false;
+
+    opt.SignIn.RequireConfirmedAccount = false;
 })
     .AddEntityFrameworkStores<ESMContext>();
 
-builder.Services.Configure<IdentityOptions>(opts => {
-
-});
+//builder.Services.Configure<IdentityOptions>(opts => {
+//    opts.SignIn.RequireConfirmedAccount = false;
+//});
 
 var app = builder.Build();
 
@@ -46,6 +49,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 //app.MapControllerRoute(
