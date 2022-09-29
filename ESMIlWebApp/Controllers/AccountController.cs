@@ -15,6 +15,7 @@ namespace ESMIlWebApp.Controllers
         //private readonly ILogger<AccountController> _logger;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ILogger<AccountController> _logger; 
 
         public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IAccountRepository accountRepository)
         {
