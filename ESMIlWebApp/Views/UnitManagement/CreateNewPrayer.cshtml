@@ -192,9 +192,6 @@
         {
             e.preventDefault();
 
-            //$('input[type="file"]').change(function(e) {
-            //    var geekss = e.target.files[0].name;
-            //})
             var body={
             Id:$("#rowId").val() == "" ? 0: $.trim($("#rowId").val()),
             Surname:$.trim($("#txtSurname").val()),
@@ -247,7 +244,10 @@
         });
          jQuery('.date').datepicker({
         timepicker:false,
-        format:'Y/m/d'
+        format:'Y/m/d',
+        changeYear: true,
+        changeMonth:true,
+        yearRange: "1900:1999"
         })
         //jQuery('.date').datepicker({
         //timepicker:true,

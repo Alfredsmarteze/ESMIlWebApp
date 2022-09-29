@@ -1,4 +1,5 @@
 ﻿using DataStructure;
+using DataStructure.ViewModelAccount;
 using ESMIlWebApp.Models;
 using ESMIlWebApp.Ultilities;
 using Infrastructure.Interface;
@@ -12,15 +13,17 @@ namespace ESMIlWebApp.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountRepository _accountRepository;
-        //private readonly ILogger<AccountController> _logger;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ILogger<AccountController> _logger; 
+        private readonly ILogger<AccountController> _logger;
+        private readonly IEmailRepository _emailRepository;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IAccountRepository accountRepository)
+        public AccountController(ILogger<AccountController> logger, UserManager<ApplicationUser> userManager, 
+            SignInManager<ApplicationUser> signInManager, IAccountRepository accountRepository, IEmailRepository emailRepository)
         {
+            this._emailRepository=emailRepository;
             this._accountRepository = accountRepository;
-          //  _logger = logger;
+            _logger = logger;
             this._userManager = userManager;
             this._signInManager = signInManager;
         }
@@ -29,19 +32,77 @@ namespace ESMIlWebApp.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(ForgotPassword forgotPassword)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(forgotPassword.Email);
+                if (user !=null && await _userManager.IsEmailConfirmedAsync(user))
+                {
+                    var token=await _userManager.GeneratePasswordResetTokenAsync(user);
+                    var passwordResetLink = Url.Action("ResetPassword", "Account", new { email = forgotPassword.Email, token = token }, Request.Scheme);
+                    if (passwordResetLink !=null)
+                    {
+                        _emailRepository.SendEmail(forgotPassword.Email, passwordResetLink);
+                        return View("ForgotPasswordConfirmation");
+                    }
+                }
+                return View("ForgotPasswordConfirmation");
+            }
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel reset)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(reset.Email);
+                if (user !=null)
+                {
+                    var result = await _userManager.ResetPasswordAsync(user, reset.Token, reset.Password);
+                    if (result.Succeeded)
+                    {
+                        return View("ResetPasswordConfirmation");
+                    }
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return View(reset);
+                }
+                return View("ResetPasswordConfirmation");   
+            }
+            return View(reset);
+        }
+        
+        [HttpGet]
+        public  async Task<IActionResult> ResetPassword(string token, string email)
+        {
+           if (token==null || email==null)
+            {
+                ModelState.AddModelError("", "Invalid password reset token");
+            }
+            
+            var user = email;
+            var usern=await _userManager.FindByEmailAsync(user);
+            var tokenn = await _userManager.GeneratePasswordResetTokenAsync(usern);
+            return View();
+        }
 
+        public IActionResult ResetPasswordConfirmation()
+        {
+            return View();
+        }
         [HttpGet]
         public IActionResult Register()
         {
-            //if (!string.IsNullOrEmpty(returnUrl))
-            //{
-            //    return LocalRedirect(returnUrl);
-            //}
-            //else
-            //{
-            //    return View();
-            //}
-            return View();
+           return View();
         }
 
         [HttpPost]
@@ -51,17 +112,45 @@ namespace ESMIlWebApp.Controllers
             var userdata = await _userManager.CreateAsync(user, register.Password);
 
             if (userdata.Succeeded)
-            {    
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Login", "Home");
+            {
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var confirmationLink = Url.Action("ConfirmEmail", "Account", new
+                {
+                    Id = user.Id,
+                    token = token
+                }, Request.Scheme);
+                if (confirmationLink != null)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    _emailRepository.SendEmail(user.Email, confirmationLink);
+                    return RedirectToAction("MailSent", "Account");
+                }
             }
 
             foreach (var err in userdata.Errors)
             {
                 ModelState.AddModelError("", err.Description);
             }
+            return View();
+        }
 
-            return View("Index");
+        public IActionResult MailSent()
+        {
+            ViewBag.mailSent="Mail has been sent to the email address you provided. Check the mail to confirm the email address.";
+            return View();        
+        }
+        public async Task<IActionResult> ConfirmEmail(string id, string token)
+        {
+            if (id !=null & token!=null)
+            {
+              var userId=  await _userManager.FindByIdAsync(id);
+              var result=  await _userManager.ConfirmEmailAsync(userId, token);
+                if (result.Succeeded)
+                {
+                    return View();
+                }
+            }
+            return View();
         }
 
         [HttpGet]
@@ -75,14 +164,10 @@ namespace ESMIlWebApp.Controllers
         {
             try
             {
-
-
                 //if (ModelState.IsValid)
                 //  {
                  var signMeIn = await _signInManager.PasswordSignInAsync(loginInfo.Username, loginInfo.Password,
                   loginInfo.RememberMe, false);
-                //var signMeIn=    _accountRepository.Login(loginInfo, returnUrl);
-
                 if (signMeIn.Succeeded)
                 {
                     if (!string.IsNullOrEmpty(returnUrl))
@@ -109,11 +194,8 @@ namespace ESMIlWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            //await _signInManager.SignOutAsync();
-           // return RedirectToAction("Index", "Home");
-
              await  _accountRepository.Logout();
-              return RedirectToAction("Index", "Home");
+             return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Privacy()

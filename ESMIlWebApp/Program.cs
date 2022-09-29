@@ -5,6 +5,7 @@ using Infrastructure.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using NLog.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IUnitRepository, UnitRepository>();
 builder.Services.AddTransient<IAccountRepository, AccountRepository>();
+builder.Services.AddTransient<IEmailRepository, EmailRepository>();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(opt =>
 {
     opt.Password.RequireDigit = true;
@@ -28,7 +30,12 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(opt =>
 
     opt.SignIn.RequireConfirmedAccount = false;
 })
-    .AddEntityFrameworkStores<ESMContext>();
+    .AddEntityFrameworkStores<ESMContext>()
+    .AddDefaultTokenProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+builder.Logging.AddEventSourceLogger();
+builder.Logging.AddNLog();
 
 //builder.Services.Configure<IdentityOptions>(opts => {
 //    opts.SignIn.RequireConfirmedAccount = false;
