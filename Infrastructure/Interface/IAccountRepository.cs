@@ -10,6 +10,7 @@ namespace Infrastructure.Interface
 {
     public interface IAccountRepository
     {
+        IQueryable EmailExist(Register register);
         void Register(Register register);
         Task Logout();
         Task<SignInResult> Login(LoginInfo loginIfo, string retunUrl);

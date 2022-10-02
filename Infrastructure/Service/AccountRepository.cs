@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using DataContextStructure;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Infrastructure.Service
 {
@@ -44,5 +45,16 @@ namespace Infrastructure.Service
         {
             await signInManager.SignOutAsync();
         }
+
+        public IQueryable EmailExist(Register register)
+        {
+            var emailExist=   esmContext.Users.Where(s => s.Email == register.Email);
+            if (emailExist.Any())
+            {
+                return emailExist;
+            }
+            return null ;
+        }
+
     }
 }

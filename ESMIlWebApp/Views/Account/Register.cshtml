@@ -18,6 +18,7 @@
     <div class="col-md-4 ">
         <form asp-action="Register">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <h6 class=" text-danger">@ViewBag.MailExist</h6>
             <div class="form-group">
                 <label asp-for="UserName" class="control-label font-weight-bolder"></label>
                 <input asp-for="UserName" class="form-control" />

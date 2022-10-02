@@ -1,10 +1,12 @@
-﻿using DataStructure;
+﻿using DataContextStructure;
+using DataStructure;
 using DataStructure.ViewModelAccount;
 using ESMIlWebApp.Models;
 using ESMIlWebApp.Ultilities;
 using Infrastructure.Interface;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 using System.Diagnostics;
 
@@ -17,15 +19,18 @@ namespace ESMIlWebApp.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<AccountController> _logger;
         private readonly IEmailRepository _emailRepository;
+        private readonly ESMContext _eSMContext;
 
         public AccountController(ILogger<AccountController> logger, UserManager<ApplicationUser> userManager, 
-            SignInManager<ApplicationUser> signInManager, IAccountRepository accountRepository, IEmailRepository emailRepository)
+            SignInManager<ApplicationUser> signInManager, IAccountRepository accountRepository, IEmailRepository emailRepository,
+            ESMContext eSMContext)
         {
             this._emailRepository=emailRepository;
             this._accountRepository = accountRepository;
-            _logger = logger;
+           this._logger = logger;
             this._userManager = userManager;
             this._signInManager = signInManager;
+            this._eSMContext = eSMContext;
         }
 
         public IActionResult Index()
@@ -109,7 +114,14 @@ namespace ESMIlWebApp.Controllers
         public async Task<IActionResult> Register(Register register)
         {
             var user = new ApplicationUser { UserName = register.UserName, Email = register.Email };
-            var userdata = await _userManager.CreateAsync(user, register.Password);
+            var userEmaill=  _accountRepository.EmailExist(register);
+            if (userEmaill !=null)
+            {
+                ViewBag.MailExist = $"This Email {register.Email} cannot be used becuase it exist already";
+                return View();
+            }
+            
+            var userdata = await _userManager.CreateAsync(user, register.Password );
 
             if (userdata.Succeeded)
             {
@@ -136,7 +148,7 @@ namespace ESMIlWebApp.Controllers
 
         public IActionResult MailSent()
         {
-            ViewBag.mailSent="Mail has been sent to the email address you provided. Check the mail to confirm the email address.";
+            ViewBag.mailSent=$"Mail has been sent to the email address you provided. Check the mail to confirm the email address.";
             return View();        
         }
         public async Task<IActionResult> ConfirmEmail(string id, string token)
@@ -191,7 +203,7 @@ namespace ESMIlWebApp.Controllers
                 throw new Exception(e.Message);
             }
         }
-        [HttpPost]
+         [HttpPost]
         public async Task<IActionResult> Logout()
         {
              await  _accountRepository.Logout();
