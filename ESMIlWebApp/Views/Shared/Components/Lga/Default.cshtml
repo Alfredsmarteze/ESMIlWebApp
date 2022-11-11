@@ -1,0 +1,13 @@
+﻿@model List<DataStructure.ViewModel.LgaDTO>
+
+<select class="form-control select2" placeholder="LGA" id="drpLga">
+
+    @foreach (var item in Model)
+    {
+
+        <option value="@item.LgaName">
+            @item.LgaName
+        </option>
+    }
+
+</select>

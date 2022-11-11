@@ -54,7 +54,8 @@ namespace ESMIlWebApp.Controllers
                     var passwordResetLink = Url.Action("ResetPassword", "Account", new { email = forgotPassword.Email, token = token }, Request.Scheme);
                     if (passwordResetLink !=null)
                     {
-                        _emailRepository.SendEmail(forgotPassword.Email, passwordResetLink);
+                        var mailLink = string.Format($"<h2><span style='color:blue'>Kindly click on the below link to reset your password</span></h2> \n  <span style='border-color:green'><button style='border-style:groove,background-color:white'>{passwordResetLink}</button></span>");
+                        _emailRepository.SendEmail(forgotPassword.Email, mailLink);
                         return View("ForgotPasswordConfirmation");
                     }
                 }
@@ -86,7 +87,7 @@ namespace ESMIlWebApp.Controllers
             return View(reset);
         }
         
-        [HttpGet]
+        [HttpGet]   
         public  async Task<IActionResult> ResetPassword(string token, string email)
         {
            if (token==null || email==null)
@@ -131,10 +132,11 @@ namespace ESMIlWebApp.Controllers
                     Id = user.Id,
                     token = token
                 }, Request.Scheme);
+                var mailLink = string.Format($"<h2><span style='color:blue'>Kindly click on the below link to verify your email</span></h2> \n <span style='border-color:green'><button style='border-style:groove,background-color:white'>{confirmationLink}</button></span>");
                 if (confirmationLink != null)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    _emailRepository.SendEmail(user.Email, confirmationLink);
+                    _emailRepository.SendEmail(user.Email, mailLink);
                     return RedirectToAction("MailSent", "Account");
                 }
             }

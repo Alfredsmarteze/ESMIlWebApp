@@ -16,6 +16,42 @@ namespace ESMIlWebApp.Controllers.UnitManagement
         {
             return View();
         }
+        
+        [HttpGet]
+        [Route("New/FirstTimer")]
+        public IActionResult CreateFirstTimer()=>View();
+
+        [HttpGet]
+        [Route("AllFirstTimer")]
+        public IActionResult FirstTimer()=>View();
+
+        [Route("Update/FirstTimer/Data")]
+        public IActionResult UpdateFirstTimer()
+        { 
+            var model= new FirstTimerDTO();
+            var rowId = Request.Form["updateRecordId"].FirstOrDefault();
+            if (rowId == null)
+            {
+                ViewBag.NoRecordFound = "No Record Found.";
+                return View();
+            }
+            var id = int.Parse(rowId);
+            model = _unitRepository.ListAllFirstTimerAsync().Where(s => s.Id == id).FirstOrDefault();
+            return View(model);
+        }
+
+        [Route("View/FirstTimer/Data")]
+        public IActionResult ViewFirstTimer()
+        {
+            var model = new FirstTimerDTO();
+            var rowId = Request.Form["viewRecordId"].FirstOrDefault();
+            if (rowId != null)
+            {
+                var id = int.Parse(rowId);
+                model = _unitRepository.ListAllFirstTimerAsync().Where(s => s.Id == id).FirstOrDefault();
+            }
+            return View(model);
+        }
 
         [HttpGet]
         [Route("BibleStudyUnit/Members")]

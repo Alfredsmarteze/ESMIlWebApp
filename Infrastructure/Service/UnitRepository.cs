@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Infrastructure.Service
 {
-    public class UnitRepository:IUnitRepository
+    public class UnitRepository : IUnitRepository
     {
         private readonly ESMContext _context;
         private readonly IHostingEnvironment _environment;
@@ -22,6 +22,71 @@ namespace Infrastructure.Service
         {
             _context = context;
             this._environment = environment;
+        }
+        public async Task<bool> AddOrUpdateFirstTimerAsync(FirstTimerData model) 
+        {
+            bool result;
+            var jDate = new DateTime();
+            if (!string.IsNullOrEmpty(model.JoiningVisitingDate))
+            {
+                var splitDateJoinOrVisit= model.JoiningVisitingDate.Split('/');
+                jDate = new DateTime(int.Parse(splitDateJoinOrVisit[2]), int.Parse(splitDateJoinOrVisit[0]), int.Parse(splitDateJoinOrVisit[1]));
+            }
+            if (model.PhoneNumber !=null)
+            {
+              //  int x= Int32.Parse(model.PhoneNumber)
+            }
+            if (model.Id<1)
+            {
+                var data = new FirstTimer
+                {
+                    Surname = model.Surname,
+                    Othernames = model.Othernames,
+                    JoiningVisitingDate = jDate,
+                    FacultyName = model.FacultyName,
+                    DepartmentName = model.DepartmentName,
+                    Gender = model.Gender,  
+                    PhoneNumber =model.PhoneNumber,
+                    ReasonOfComing=model.ReasonOfComing,
+                };
+                _context.firstTimer.Add(data);
+                result = await _context.SaveChangesAsync() > 0;
+            }
+            else
+            {
+                var firstTimer = _context.firstTimer.Find(model.Id);
+                if (firstTimer == null)
+                {
+                    throw new("Not found");
+                }
+                firstTimer.Surname = model.Surname;
+                firstTimer.Othernames = model.Othernames;
+                firstTimer.JoiningVisitingDate= jDate;
+                firstTimer.FacultyName = model.FacultyName;
+                firstTimer.DepartmentName=model.DepartmentName;
+                firstTimer.Gender = model.Gender;
+                firstTimer.ReasonOfComing = model.ReasonOfComing;
+                firstTimer.PhoneNumber =model.PhoneNumber;
+                result = await _context.SaveChangesAsync() > 0;
+            }
+            return result;
+        }
+        public IQueryable<FirstTimerDTO> ListAllFirstTimerAsync()
+        {
+            return (from s in _context.firstTimer
+                    select new FirstTimerDTO
+                    {
+                        Id = s.Id,
+                        Surname=s.Surname ==null ? "" :s.Surname,  
+                        Othernames=s.Othernames ==null ? "" : s.Othernames,    
+                        FacultyName=s.FacultyName==null ? "" : s.FacultyName,
+                        DepartmentName=s.DepartmentName == null ? "" : s.DepartmentName, 
+                        ReasonOfComing=s.ReasonOfComing == null ? "" : s.ReasonOfComing,
+                        JoiningVisitingDate=s.JoiningVisitingDate==null ? null:s.JoiningVisitingDate,
+                        PhoneNumber=s.PhoneNumber,
+                        Gender=s.Gender == null ? "" :s.Gender
+
+                    });
         }
         public async Task<bool> AddOrUpdateBibleStudyUnitAsync(BibleStudyUnitData model)
         {
@@ -58,8 +123,8 @@ namespace Infrastructure.Service
                     HostelAddress = model.HostelAddress,
                     CourseOfStudy = model.CourseOfStudy,
                     Unit = model.Unit,
-                    DateOfBirth =bdate,
-                    DateJoinESM =dateJoin,
+                    DateOfBirth = bdate,
+                    DateJoinESM = dateJoin,
                     PreviousUnit = model.PreviousUnit,
                     PositionInFamily = model.PositionInFamily,
                     SocialMediaAddress = model.SocialMediaAddress,
@@ -100,8 +165,8 @@ namespace Infrastructure.Service
             return result;
         }
         public string DeleteBibleStudyUnitById(int id)
-        { 
-            var del= _context.bibleStudyUnit.Where(u => u.Id == id).FirstOrDefault();
+        {
+            var del = _context.bibleStudyUnit.Where(u => u.Id == id).FirstOrDefault();
             if (del != null)
                 _context.bibleStudyUnit.Remove(del);
             _context.SaveChanges();
@@ -137,7 +202,7 @@ namespace Infrastructure.Service
         }
         public async Task<bool> AddOrUpdatePrayerUnitAsync(PrayerUnitDTOData model)
         {
-            
+
             bool result;
             //DateTime? bdate = null;
             var bdate = new DateTime();
@@ -155,9 +220,9 @@ namespace Infrastructure.Service
                 dateJoin = new DateTime(int.Parse(splitDateJoin[2]), int.Parse(splitDateJoin[0]), int.Parse(splitDateJoin[1]));
             }
 
-            if (model.Id <1)
+            if (model.Id < 1)
             {
-                
+
                 var pData = new PrayerUnit
                 {
                     Surname = model.Surname,
@@ -169,12 +234,12 @@ namespace Infrastructure.Service
                     Gender = model.Gender,
                     StateOfOrigin = model.StateOfOrigin,
                     LGA = model.LGA,
-                    Ambition=model.Ambition,
+                    Ambition = model.Ambition,
                     HomeAddress = model.HomeAddress,
                     HostelAddress = model.HostelAddress,
                     CourseOfStudy = model.CourseOfStudy,
                     Unit = model.Unit,
-                    DateOfBirth =bdate,
+                    DateOfBirth = bdate,
                     DateJoinESM = dateJoin,
                     PreviousUnit = model.PreviousUnit,
                     PositionInFamily = model.PositionInFamily,
@@ -186,31 +251,31 @@ namespace Infrastructure.Service
             else
             {
                 var prayerData = _context.prayerUnit.Find(model.Id);
-               
+
                 if (prayerData is null)
                 {
                     throw new("Not found");
                 }
-                    prayerData.Surname = model.Surname;
-                    prayerData.Firstname = model.Firstname;
-                    prayerData.Middlename = model.Middlename;
-                    prayerData.PhoneNumber01 = model.PhoneNumber01;
-                    prayerData.PhoneNumber02 = model.PhoneNumber02;
-                    prayerData.Email = model.Email;
-                    prayerData.HomeAddress = model.HomeAddress;
-                    prayerData.HostelAddress = model.HostelAddress;
-                    prayerData.CourseOfStudy = model.CourseOfStudy;
-                    prayerData.Unit = model.Unit;
-                    prayerData.Ambition = model.Ambition;
-                    prayerData.StateOfOrigin=model.StateOfOrigin;
-                    prayerData.LGA=model.LGA;
-                    prayerData.PreviousUnit=model.PreviousUnit;
-                    prayerData.DateOfBirth = bdate;//model.DateOfBirth;
-                    prayerData.DateJoinESM = dateJoin;// model.DateJoinESM;
-                    prayerData.Gender= model.Gender;
-                    prayerData.PositionInFamily = model.PositionInFamily;
-                    prayerData.SocialMediaAddress = model.SocialMediaAddress;
-                    result = await _context.SaveChangesAsync() > 0;
+                prayerData.Surname = model.Surname;
+                prayerData.Firstname = model.Firstname;
+                prayerData.Middlename = model.Middlename;
+                prayerData.PhoneNumber01 = model.PhoneNumber01;
+                prayerData.PhoneNumber02 = model.PhoneNumber02;
+                prayerData.Email = model.Email;
+                prayerData.HomeAddress = model.HomeAddress;
+                prayerData.HostelAddress = model.HostelAddress;
+                prayerData.CourseOfStudy = model.CourseOfStudy;
+                prayerData.Unit = model.Unit;
+                prayerData.Ambition = model.Ambition;
+                prayerData.StateOfOrigin = model.StateOfOrigin;
+                prayerData.LGA = model.LGA;
+                prayerData.PreviousUnit = model.PreviousUnit;
+                prayerData.DateOfBirth = bdate;//model.DateOfBirth;
+                prayerData.DateJoinESM = dateJoin;// model.DateJoinESM;
+                prayerData.Gender = model.Gender;
+                prayerData.PositionInFamily = model.PositionInFamily;
+                prayerData.SocialMediaAddress = model.SocialMediaAddress;
+                result = await _context.SaveChangesAsync() > 0;
             }
             return result;
         }
@@ -233,7 +298,7 @@ namespace Infrastructure.Service
         public string DeletePrayerUnitById(int id)
         {
             var del = _context.prayerUnit.Where(s => s.Id == id).FirstOrDefault();
-            if (del==null)
+            if (del == null)
             {
                 throw new("Not found");
             }
@@ -249,11 +314,11 @@ namespace Infrastructure.Service
             //    _context.Database.ExecuteSqlRaw(query);
             //}
             //foreach (var id in del)
-           // {
-                //_context.prayerUnit.Remove(ids);
-                //_context.SaveChanges();
-               // var query = $"Delete from Prayerunit where Id={id}";
-                //_context.Database.ExecuteSqlRaw(query);
+            // {
+            //_context.prayerUnit.Remove(ids);
+            //_context.SaveChanges();
+            // var query = $"Delete from Prayerunit where Id={id}";
+            //_context.Database.ExecuteSqlRaw(query);
             //}
             return "";
         }
@@ -263,9 +328,9 @@ namespace Infrastructure.Service
                     select new PrayerUnitDTO
                     {
                         Id = s.Id,
-                        Surname = s.Surname==null ? "": s.Surname,
-                        Firstname= s.Firstname == null ? "" : s.Firstname,
-                        Middlename= s.Middlename == null ? "" : s.Middlename,
+                        Surname = s.Surname == null ? "" : s.Surname,
+                        Firstname = s.Firstname == null ? "" : s.Firstname,
+                        Middlename = s.Middlename == null ? "" : s.Middlename,
                         Unit = s.Unit == null ? "" : s.Unit,
                         Gender = s.Gender == null ? "" : s.Gender,
                         LGA = s.LGA == null ? "" : s.LGA,
@@ -285,7 +350,7 @@ namespace Infrastructure.Service
                         Photo = s.Photo == null ? "" : s.Photo,
                     });
         }
-        public async Task<bool>AddOrUpdateChoralUnitAsync(ChoralUnitData model)
+        public async Task<bool> AddOrUpdateChoralUnitAsync(ChoralUnitData model)
         {
             bool result;
             //DateTime? bdate = null;
@@ -363,7 +428,7 @@ namespace Infrastructure.Service
             }
             return result;
         }
-        public IQueryable<ChoralUnitDTO>GetAllChoralUnitsAsync()
+        public IQueryable<ChoralUnitDTO> GetAllChoralUnitsAsync()
         {
             return (from s in _context.choralUnit
                     select new ChoralUnitDTO
@@ -393,7 +458,7 @@ namespace Infrastructure.Service
         }
         public string DeleteChoralUnitById(int id)
         {
-           var del= _context.choralUnit.FirstOrDefault(c => c.Id == id);
+            var del = _context.choralUnit.FirstOrDefault(c => c.Id == id);
             if (del == null)
             {
                 throw new("Not found");
@@ -409,6 +474,13 @@ namespace Infrastructure.Service
                 StateName = s.StateName
             });
 
+        }
+        public IQueryable<LgaDTO> ListLga() 
+        {
+            return _context.lga.AsNoTracking().Select(s => new LgaDTO
+            {
+                LgaName = s.LgaName
+            });
         }
         public async Task<bool> AddOrUpdateDMEUnitAsync(DMEUnitData model)
         {
@@ -1106,5 +1178,7 @@ namespace Infrastructure.Service
             }
             return "";
         }
+
+        
     }
 }

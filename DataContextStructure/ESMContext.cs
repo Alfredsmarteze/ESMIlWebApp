@@ -16,6 +16,7 @@ namespace DataContextStructure
             // using var context = new ESMContext(contextOptions);
 
         }
+        public DbSet<FirstTimer> firstTimer { get; set; }
         public DbSet<LoginInfo> loginInfo { get; set; }
         public DbSet<Register> register { get; set; }
         public DbSet<TransportUnit> transportUnit { get; set; }
@@ -28,6 +29,7 @@ namespace DataContextStructure
         public DbSet<BibleStudyUnit> bibleStudyUnit { get; set; }  
         public DbSet<PrayerUnit> prayerUnit { get; set; }
         public DbSet<State> state { get; set; }
+        public DbSet<Lga> lga { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

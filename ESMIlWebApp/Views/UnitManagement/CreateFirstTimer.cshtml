@@ -1,0 +1,132 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4 class="text-muted">First Timer</h4>
+<h5 class="text-muted">Capture new record</h5>
+<div class="container" style="background-color:lightblue">
+        <form>
+        <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Surname</label>
+            <input id="rowId" type="hidden">
+            <input class="form-control" id="txtSurname" type="text" placeholder="">
+            </div>
+           
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Othernames</label>
+            <input class="form-control" id="txtOthernames" type="text" placeholder="">
+            </div>
+        </div>
+       
+        </div>
+        <br/>
+        <div class="row">
+        <div class="col-lg-4">
+           <div class="form-group mg-b-10-force">
+              <label class="form-control-label">Gender</label>
+          <vc:gender></vc:gender> 
+          </div>
+        </div>
+        
+        </div>
+        <br>
+        
+        <div class="row">
+         <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Phone Number 1</label>
+            <input class="form-control" id="txtPhoneNumber" type="text" placeholder="">
+            </div>
+        </div>
+        </div>
+        <br/>
+        
+        <div class="row">
+         <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Department</label>
+            <input class="form-control" id="txtDepartmentName" type="text" placeholder="">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Faculty</label>
+                    <input class="form-control" id="txtFacultyName" type="text" placeholder="">
+            </div>
+        </div>
+        
+        <br/>
+        
+        <div class="col-lg-4">
+                              <div class="form-group mg-b-10-force">
+                                <label for="">Date </label>
+                                <div class="ate-input">
+                                    <div class="ate-input">
+                                        <input type="text" class="date form-control" placeholder="Date" id="txtDateJoinVisiting">
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- col-4 -->
+        </div>
+        <br/>
+        <div class="col-lg-4">
+            <div class="form-group mg-b-10-force">
+                <label class="form-control-label">Joining/Visiting</label>
+                <vc:Visiting-Joining></vc:Visiting-Joining>
+            </div>
+        </div>
+        <br/>
+        <div class="text-center">
+            <br/>
+        <button class="btn btn-primary" type="submit" id="saveRecord">Save</button>
+        </div>
+        </form>
+</div>
+
+@section scripts{
+       
+     <script>
+  
+        var saveUrl="@Url.Action("AddUpdateFirstTimer","FirstTimer")";
+
+        $("#saveRecord").click(function(e)
+        {
+            e.preventDefault();
+
+            var body={
+            Id:$("#rowId").val() == "" ? 0: $.trim($("#rowId").val()),
+            Surname:$.trim($("#txtSurname").val()),
+            Othernames: $.trim($("#txtOthernames").val()),
+            Gender:$("#drpGender").val(),
+            PhoneNumber:$.trim($("#txtPhoneNumber").val()),
+            ReasonOfComing: $("#drpReasonOfComing").val(),
+            JoiningVisitingDate:$.trim($("#txtDateJoinVisiting").val()),
+            FacultyName:$.trim($("#txtFacultyName").val()),
+            DepartmentName: $.trim($("#txtDepartmentName").val())
+            }
+            
+            $.ajax({
+               type: "POST",
+               url:"@Url.Action("AddUpdateFirstTimer","FirstTimer")",
+               dataType: "Json",
+               data:{payload:JSON.stringify(body)},
+               success: function (result) {
+                    if(result.hasError==false)
+                    {
+                        alert(result.message);
+                    }
+                
+               },
+               
+            });
+        });
+            jQuery('.date').datepicker({
+            timepicker: false,
+            format: 'Y/d/m',
+        });
+
+    </script>
+}
