@@ -1,0 +1,97 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h5 class="text-muted">Add Programme</h5>
+<div class="container" style="background-color:lightblue">
+    <form>
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group">
+                    <label class="form-label">Speaker</label>
+                    <input id="rowId" type="hidden">
+                    <input class="form-control" id="txtSpeaker" type="text" placeholder="">
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label class="form-label">Cordinator</label>
+                    <input class="form-control" id="txtCordinator" type="text" placeholder="">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label class="form-label">Programme</label>
+                    <input class="form-control" id="txtProgramme" type="text" placeholder="">
+                </div>
+            </div>
+        </div>
+        <br />
+        <br>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group mg-b-10-force">
+                    <label for="">Programme Date </label>
+                    <div class="ate-input">
+                        <div class="ate-input">
+                            <input type="text" class="date form-control" placeholder="Date" id="txtProgrammeDate">
+                        </div>
+                    </div>
+                </div>
+            </div><!-- col-4 -->
+            <div class="col-4">
+                <div class="form-group">
+                    <label class="form-label">Note</label>
+                    <input class="form-control" id="txtNote" type="text" placeholder="">
+                </div>
+            </div>
+            <br />
+        </div>
+        
+        <div class="text-center">
+            <br />
+            <button class="btn btn-primary" type="submit" id="saveRecord">Save</button>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+
+    <script>
+
+        var saveUrl = "@Url.Action("AddOrUpdateProgrammeData","ProgrammeTableData")";
+
+        $("#saveRecord").click(function (e) {
+            e.preventDefault();
+
+            var body = {
+                Id: $("#rowId").val() == "" ? 0 : $.trim($("#rowId").val()),
+                Speaker: $.trim($("#txtSpeaker").val()),
+                Cordinator: $.trim($("#txtCordinator").val()),
+                Programme: $.trim($("#txtProgramme").val()),
+                Note: $.trim($("#txtNote").val()),
+                ProgrammeDate: $.trim($("#txtProgrammeDate").val()),
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("AddOrUpdateProgrammeData","ProgrammeTableData")",
+                dataType: "Json",
+                data: { payload: JSON.stringify(body) },
+                success: function (result) {
+                    if (result.hasError == false) {
+                        alert(result.message);
+                    }
+
+                },
+
+            });
+        });
+        jQuery('.date').datepicker({
+            timepicker: false,
+            format: 'Y/d/m',
+        });
+
+    </script>
+}

@@ -4,7 +4,7 @@
 <h4 class="text-muted">First Timer</h4>
 <h5 class="text-muted">Capture new record</h5>
 <div class="container" style="background-color:lightblue">
-        <form>
+        <form id="clearFrm">
         <div class="row">
         <div class="col-4">
             <div class="form-group">
@@ -91,7 +91,9 @@
      <script>
   
         var saveUrl="@Url.Action("AddUpdateFirstTimer","FirstTimer")";
-
+        $.fn.clearForm=function(){
+        this.each(function(){this.reset();})
+        }
         $("#saveRecord").click(function(e)
         {
             e.preventDefault();
@@ -113,10 +115,18 @@
                url:"@Url.Action("AddUpdateFirstTimer","FirstTimer")",
                dataType: "Json",
                data:{payload:JSON.stringify(body)},
-               success: function (result) {
-                    if(result.hasError==false)
+               success: function (result) 
+               {
+                    if (result.hasError == false) 
                     {
-                        alert(result.message);
+                        Swal.fire(result.message, '', 'success');
+                        $("#clearFrm").each(function () {
+                            this.reset();
+                        })
+                    }
+                    else if (result.hasError == true) 
+                    {
+                        Swal.fire(result.message, '', 'error');
                     }
                 
                },

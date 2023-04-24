@@ -73,3 +73,47 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }*/
+
+
+/*Key Frame Animation*/
+@keyframes ballmove {
+
+    0% {
+        left: 0px;
+        top: 0px;
+        color: red;
+        background-color: greenyellow;
+    }
+
+    33% {
+        left: 20px;
+        top: 100px;
+        background-color: blue;
+        color: white;
+        transform: scaleY(1.5);
+    }
+
+    66% {
+        left: 40px;
+        top: 120px;
+        background-color: salmon;
+        transform: rotate3d(1,0,0,60deg)
+    }
+
+    100% {
+        left: 70px;
+        top: 130px;
+        background-color: firebrick;
+        color: white;
+        /*transform: skewY(60deg);*/
+    }
+}
+
+div #ball.animate {
+    animation-name: ballmove;
+    animation-duration: 20s;
+    animation-delay: 1s;
+    animation-timing-function: ease-in ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}

@@ -82,13 +82,16 @@ namespace ESMIlWebApp.Controllers.Unit
             {
                if (payload != null)
                  payload = EncryptionExtensions.EncryptStringAES(payload);
-              var  payloadd = EncryptionExtensions.DecryptStringAES(payload);
+                var  payloadd = EncryptionExtensions.DecryptStringAES(payload);
                 var newModel = JsonConvert.DeserializeObject<FirstTimerData>(payloadd);
-                
                 var saveFirstTimer = await _repository.AddOrUpdateFirstTimerAsync(newModel);
                 if (saveFirstTimer)
                 {
-                    return Json(new ResponseModel { message = "Successful", hasError = false, statusCode = (int)HttpStatusCode.OK });
+                    if (newModel.Id>0)
+                    {
+                        return Json(new ResponseModel { message = $"Successfully Updated {newModel.Surname}'s Record", hasError = false, statusCode = (int)HttpStatusCode.OK });
+                    }
+                    return Json(new ResponseModel { message = $"{newModel.Surname} Has Been Added Successfully", hasError = false, statusCode = (int)HttpStatusCode.OK });
                 }
                 else
                 {

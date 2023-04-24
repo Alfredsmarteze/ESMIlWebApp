@@ -1,0 +1,12 @@
+﻿@model List<ESMIlWebApp.Models.PastUnitCordinatorModel>
+
+<select class="form-control select2" placeholder="" id="drpPastUnitCordinator">
+
+    @foreach (var item in Model)
+    {
+        <option value="@item.Value">
+            @item.Value
+        </option>
+    }
+
+</select>

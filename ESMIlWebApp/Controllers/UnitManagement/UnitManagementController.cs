@@ -18,6 +18,10 @@ namespace ESMIlWebApp.Controllers.UnitManagement
         }
         
         [HttpGet]
+        [Route("New/ESMAF")]
+        public IActionResult CreateNewEsmaf() => View();
+
+        [HttpGet]
         [Route("New/FirstTimer")]
         public IActionResult CreateFirstTimer()=>View();
 

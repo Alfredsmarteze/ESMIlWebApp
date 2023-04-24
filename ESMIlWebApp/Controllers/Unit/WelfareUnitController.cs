@@ -101,7 +101,9 @@ namespace ESMIlWebApp.Controllers.Unit
 
                 if (saveWelfareUnitData)
                 {
-                    return Json(new ResponseModel { hasError = false, message = "Operation successful", statusCode = (int)HttpStatusCode.OK });
+                    if (newModel.Id>0)
+                    return Json(new ResponseModel { hasError = false, message = $"Successfully updated {newModel.Firstname} record", statusCode = (int)HttpStatusCode.OK });
+                    return Json(new ResponseModel { hasError = false, message = $"Successfully added {newModel.Firstname} to welfare unit", statusCode = (int)HttpStatusCode.OK });
                 }
                 else
                 {

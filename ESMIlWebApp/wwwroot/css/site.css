@@ -1,5 +1,27 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Gaegu:wght@300&family=Libre+Baskerville:ital@0;1&family=Sedgwick+Ave+Display&family=Sigmar&display=swap');
+
+.fonts, .contact {
+    /*font-family: 'Sigmar', cursive;*/
+    font-family: 'Bungee Shade', cursive;
+    font-size:28px;
+}
+.welcome {
+    font-family: 'Sedgwick Ave Display', cursive;
+    padding:3rem;
+}
+.img{
+
+    padding-top:1rem
+}
+.address{
+    
+    font-family: 'Gaegu', cursive;
+    font-size:25px;
+}
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
@@ -17,7 +39,9 @@ body {
   margin-bottom: 60px;
 }
 
-
+.bg{
+    background-color:goldenrod;
+}
 
 .btn-group,
 .btn-group-vertical {

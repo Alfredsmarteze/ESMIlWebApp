@@ -3,6 +3,10 @@
 
 // Write your JavaScript code.
 
+//Animate on scroll
+AOS.init();
+AOS.refresh();
+
 //var saveUrl = "@Url.Action("AddOrUpdatePrayerUnitData","PrayerUnit", new{area = "Unit"})";
 
 //$("#saveRecord").click(function (e) {

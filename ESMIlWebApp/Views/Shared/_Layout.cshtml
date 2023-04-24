@@ -17,6 +17,7 @@
     <link rel="stylesheet" href=~/css/dataTableSheet.css/>
     @*<link rel="stylesheet" href=~/css/main.css>*@
     <link rel="stylesheet" href=~/css/StyleSheet.css/>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     @*<link rel="stylesheet" href="~/lib/datatables.net-bs5/dataTables.bootstrap5.css.min.css" />*@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ESMIlWebApp.styles.css" asp-append-version="true" />
@@ -41,7 +42,7 @@
                                     <a class="nav-link text-primary" asp-area="" asp-controller="UnitManagement" asp-action="CreateNewPrayer">Prayer Unit</a>
                                 </li>
                                 <li class="nav-item shadow-lg">
-                                    <a class="nav-link text-primary" asp-area="" asp-controller="UnitManagement" asp-action="CreateNewBible">Bible Study Unit</a>
+                                    <a class="nav-link text-primary" asp-area="" asp-controller="UnitManagement" asp-action="CreateNewBibleUnit">Bible Study Unit</a>
                                 </li>
                                 <li class="nav-item shadow-lg">
                                     <a class="nav-link text-primary" asp-area="" asp-controller="UnitManagement" asp-action="CreateNewChoral">Choral Unit</a>
@@ -75,13 +76,10 @@
                         </li>
                        
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Set-Up</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="About">About</a>
                         </li>
-                        @*<li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="#" asp-action="#">Login</a>
-                        </li>*@
                         
-
+                        
                         @if(signInManager.IsSignedIn(User))
                          {
                         <li class="nav-item text-white" style="margin-top:7px">@*margin-left:15px;*@
@@ -91,6 +89,9 @@
                                 </button>
                             </form>
                         </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="UnitManagement" asp-action="FirstTimer">First Timer</a>
+                            </li>
                             <li class="dropdown crea " style="margin-left:15px; margin-top:7px">
                                 <a href="#" class="dropdown-toggle text-white" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Units Records</a>
 
@@ -142,15 +143,24 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="container-fluid">
+        <main role="main" class="">
             @RenderBody()
         </main>
+        @* Free Style Animation *@
+        <br />
+        <br />
+        
+        <div id="ball" class="animate rounded-circle text-succes h3 text-center">
+            <p>  “Equipping the Saint for service” Ephesians 4:12</p>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; @DateTime.Now.Year- ESMIlWebApp
+   
+
+    <footer class=" footer text-muted">
+        <div class="container text-muted text-center">
+              &copy; @DateTime.Now.Year- ESM Unilorin PS
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -190,14 +200,12 @@
     @*<script src="~/lib/dropdown.js/jquery.dropdown.js"></script>*@
     <script src="~/js/dependencies.min.js"></script>
     <script src="~/js/JavaScriptUtils.js"></script>
-    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    
-    
-    
     <script src="~/lib/bootbox.js/bootbox.min.js"></script>
     <script src="~/bootbox/bootbox.locales.min.js"></script>
     <script src="~/lib/font-awesome/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   @*  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

@@ -5,7 +5,7 @@
 <h5 class="text-muted">Capture new record</h5>
 <div class="container" style="background-color:lightblue">
     <div class="row" id="fadeout">
-        <form>
+        <form id="clearFrm">
         <div class="row">
         <div class="col-4">
             <div class="form-group">
@@ -166,7 +166,9 @@
      <script>
   
         var saveUrl="@Url.Action("AddOrUpdateTechnicalUnitData","TechnicalUnit", new {area="Unit"})";
-
+        $.fn.clearForm=function(){this.each(function(){
+            this.reset();        
+        })}
         $("#saveRecord").click(function(e)
         {
             e.preventDefault();
@@ -197,11 +199,15 @@
             console.log(body);
             var payload=SiteUtils.encrypt(JSON.stringify(body)).toString();
             SiteUtils.post({payload:payload}, saveUrl).then(function (response){
-            if(response.hasError==false)
-            {
-                alert(response.message);
-                
-            }
+                if (response.hasError == false) 
+                {
+                    Swal.fire(response.message, '', 'success');
+                    $("#clearFrm").clearForm();
+                }
+                else if (response.hasError == true) 
+                {
+                    Swal.fire(response.message, '', 'error');
+                }
             });
            });
           //$(function (){

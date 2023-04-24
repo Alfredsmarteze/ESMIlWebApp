@@ -11,6 +11,8 @@ using Infrastructure.Interface;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
+using DataStructure;
+using static DataStructure.ViewModel.EsmafData;
 
 namespace Infrastructure.Service
 {
@@ -23,6 +25,263 @@ namespace Infrastructure.Service
             _context = context;
             this._environment = environment;
         }
+        
+        public async Task<bool> AddOrUpdateESMAfAsync(EsmafData model)
+        {
+            
+            int academicSession = int.Parse(model.AcademicSessionDate);
+            int academicSession2 = int.Parse(model.AcademicSessionDate2);
+            int yearOfEntry = int.Parse(model.YearOfEntry);
+            int yearOfGraduation = int.Parse(model.YearOfGraduation);
+            using (var saveData= _context)
+            {
+                bool result;
+                if (model.Id < 1)
+                {
+
+                    var data = new ESMAF
+                    {
+                        Surname = model.Surname,
+                        Othernames = model.Othernames,
+                        Gender = model.Gender,
+                        PhoneNumber = model.PhoneNumber,
+                        Email = model.Email,
+                        Faculty = model.Faculty,
+                        CourseOfStudy = model.CourseOfStudy,
+                        UnitServed = model.UnitServed,
+                        HouseAddress = model.HouseAddress,
+                        YearOfEntry = yearOfEntry,
+                        YearOfGraduation = yearOfGraduation,
+                    };
+                    saveData.eSMAF.Add(data);
+                    result = await saveData.SaveChangesAsync() > 0;
+
+                    var data2 = new PastExecutive
+                    {
+                        SurnameExcos = model.Surname,
+                        OthernameExcos = model.Othernames,
+                        Gender = model.Gender,
+                        Phone=model.PhoneNumber,
+                        Email = model.Email,
+                        Office = model.Office,
+                        AcademicSectionDate = $"{academicSession}/{academicSession2}"
+                    };
+                    saveData.pastExecutive.Add(data2);
+                    _ = await saveData.SaveChangesAsync() > 0;
+
+                    if (model.Office == GetPastExecutive.BibleStudyCordinator.ToString())
+                    {
+                        var data3 = new PastBibleStudyCordinator
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}",
+                        };
+                        saveData.pastBibleStudyCordinators.Add(data3);
+                        _ = await saveData.SaveChangesAsync() > 0;
+                    }
+                    else if (model.Office == GetPastExecutive.PrayerUnitCordinator.ToString())
+                    {
+                        var data4 = new PastPrayerUnitCordinator
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}",
+                        };
+                        saveData.pastPrayerUnitCordinator.Add(data4);
+                        _ = await saveData.SaveChangesAsync() > 0;
+                    }
+                    else if (model.Office == GetPastExecutive.ChoralUnitCordinator.ToString())
+                    {
+                        var data5 = new PastChoralUnitCordinator
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}",
+                        };
+                        saveData.pastChoralUnitCordinator.Add(data5);
+                        _ = await saveData.SaveChangesAsync() > 0;
+                    }
+                    else if (model.Office == GetPastExecutive.WelfareUnitCordinator.ToString())
+                    {
+                        var data6 = new PastWelfareUnitCordinator
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}",
+                        };
+                        saveData.pastWelfareUnitCordinator.Add(data6);
+                        _ = await saveData.SaveChangesAsync() > 0;
+                    }
+                    else if (model.Office == GetPastExecutive.DramaUnitCordinator.ToString())
+                    {
+                        var data7 = new PastDMECordinator
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}",
+                        };
+                        saveData.pastDMECordinator.Add(data7);
+                        _ = await saveData.SaveChangesAsync() > 0;
+                    }
+                    else if (model.Office == GetPastExecutive.TechnicalUnitCordinator.ToString())
+                    {
+                        var data8 = new PastTechnicalUnitCordinator
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}",
+                        };
+                        saveData.pastTechnicalUnitCordinator.Add(data8);
+                        _ = await saveData.SaveChangesAsync() > 0;
+                    }
+                    else if (model.Office == GetPastExecutive.UsheringUnitCordinator.ToString())
+                    {
+                        var data8 = new PastUsheringUnitCordinator
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}",
+                        };
+                        saveData.pastUsheringUnitCordinator.Add(data8);
+                        _ = await saveData.SaveChangesAsync() > 0;
+                    }
+                    else if (model.Office == GetPastExecutive.PublicityUnitCordinator.ToString())
+                    {
+                        var data9 = new PastPublicityUnitCordinator
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}",
+                        };
+                        saveData.pastPublicityUnitCordinator.Add(data9);
+                        _ = await saveData.SaveChangesAsync() > 0;
+                    }
+                    else if (model.Office == GetPastExecutive.TransportUnitCordinator.ToString())
+                    {
+                        var data10 = new PastTransportUnitCordinator
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}",
+                        };
+                        saveData.pastTransportUnitCordinator.Add(data10);
+                        _ = await saveData.SaveChangesAsync() > 0;
+                    }
+                    else if (model.Office == GetPastExecutive.DramaUnitCordinator.ToString())
+                    {
+                        var data11 = new PastDramaUnitCordinator
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}",
+                        };
+                        saveData.pastDramaUnitCordinator.Add(data11);
+                        _ = await saveData.SaveChangesAsync() > 0;
+                    }
+                    else if (model.Office == GetPastExecutive.Treasurer.ToString())
+                    {
+                        var data12 = new PastTreasurer
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}",
+                        };
+                        saveData.pastTreasurer.Add(data12);
+                        _ = await saveData.SaveChangesAsync() > 0;
+                    }
+                    
+                    else if (model.Office == GetPastExecutive.Secretary.ToString())
+                    {
+                        var data13 = new PastSecretary
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}",
+                        };
+                        saveData.pastSecretary.Add(data13);
+                        _ = await saveData.SaveChangesAsync() > 0;
+                    }
+                    else if (model.Office == GetPastExecutive.President.ToString())
+                    {
+
+                        var data14 = new PastPresident
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}",
+                        };
+                        saveData.pastPresident.Add(data14);
+                        _ = await saveData.SaveChangesAsync() > 0;
+                    }
+                }
+                else
+                {
+                    var esmaf = _context.eSMAF.Find(model.Id);
+                    if (esmaf == null)
+                    {
+                        throw new("Not Found");
+                    }
+                    esmaf.Gender = model.Gender;
+                    esmaf.Othernames = model.Othernames;
+                    esmaf.Surname = model.Surname;
+                    esmaf.PhoneNumber = model.PhoneNumber;
+                    esmaf.CourseOfStudy = model.CourseOfStudy;
+                    esmaf.Email = model.Email;
+                    esmaf.Faculty = model.Faculty;
+                    esmaf.CourseOfStudy = model.CourseOfStudy;
+                    esmaf.HouseAddress = model.HouseAddress;
+                    esmaf.YearOfEntry = 0;
+                    esmaf.YearOfGraduation = 0;
+                    esmaf.UnitServed = model.UnitServed;
+
+                    result = await saveData.SaveChangesAsync()>0 ;
+
+                }
+                
+                return result;
+             }
+             
+        }
         public async Task<bool> AddOrUpdateFirstTimerAsync(FirstTimerData model) 
         {
             bool result;
@@ -32,10 +291,7 @@ namespace Infrastructure.Service
                 var splitDateJoinOrVisit= model.JoiningVisitingDate.Split('/');
                 jDate = new DateTime(int.Parse(splitDateJoinOrVisit[2]), int.Parse(splitDateJoinOrVisit[0]), int.Parse(splitDateJoinOrVisit[1]));
             }
-            if (model.PhoneNumber !=null)
-            {
-              //  int x= Int32.Parse(model.PhoneNumber)
-            }
+            
             if (model.Id<1)
             {
                 var data = new FirstTimer
@@ -1179,6 +1435,10 @@ namespace Infrastructure.Service
             return "";
         }
 
-        
+        public Task AddUpdateESMAfAsync<T>(T pastExecutiveData)
+        {
+            throw new NotImplementedException();
+        }
+             
     }
 }

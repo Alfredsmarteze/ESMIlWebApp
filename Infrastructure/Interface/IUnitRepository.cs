@@ -9,6 +9,8 @@ namespace Infrastructure.Interface
 {
     public interface IUnitRepository
     {
+        Task AddUpdateESMAfAsync<T>(T pastExecutiveData);
+        Task<bool> AddOrUpdateESMAfAsync(EsmafData pastExecutiveData);
         Task<bool> AddOrUpdateFirstTimerAsync(FirstTimerData firstTimerData);
         Task<bool> AddOrUpdateTransportUnitAsync(TransportUnitData transportUnitData);
         Task<bool> AddOrUpdateUsheringUnitAsync(UsheringUnitData usheringUnitData);

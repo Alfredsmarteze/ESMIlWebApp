@@ -26,6 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Shared\Components\_ViewImports.cshtml" />
+    <Content Remove="Views\Shared\_ViewImports.cshtml" />
+    <Content Remove="Views\Shared\_ViewStart.cshtml" />
     <Content Remove="wwwroot\css\custom.css" />
     <Content Remove="wwwroot\lib\bootstrap\dist\js\bootstrap-confirmation.js" />
     <Content Remove="wwwroot\lib\bootstrap\dist\js\bootstrap-confirmation.min.js" />
@@ -466,6 +469,57 @@
     <None Include="wwwroot\popper.js\dist\umd\popper.js.map" />
     <None Include="wwwroot\popper.js\dist\umd\popper.min.js" />
     <None Include="wwwroot\popper.js\dist\umd\popper.min.js.map" />
+    <None Include="wwwroot\templ2\images\icons\icon-arrow-left.svg" />
+    <None Include="wwwroot\templ2\images\icons\icon-arrow-right.svg" />
+    <None Include="wwwroot\templ2\images\icons\icon-calendar.svg" />
+    <None Include="wwwroot\templ2\images\icons\icon-location.svg" />
+    <None Include="wwwroot\templ2\images\icons\icon-quote.svg" />
+    <None Include="wwwroot\templ2\images\icons\icon-time.svg" />
+    <None Include="wwwroot\templ2\images\icons\podcast\icon-apple.svg" />
+    <None Include="wwwroot\templ2\images\icons\podcast\icon-podcast.svg" />
+    <None Include="wwwroot\templ2\images\icons\podcast\icon-soundcloud.svg" />
+    <None Include="wwwroot\templ2\images\icons\podcast\icon-spotify.svg" />
+    <None Include="wwwroot\templ2\images\icons\podcast\icon-youtube.svg" />
+    <None Include="wwwroot\templ2\images\icons\social\icon-email.svg" />
+    <None Include="wwwroot\templ2\images\icons\social\icon-facebook.svg" />
+    <None Include="wwwroot\templ2\images\icons\social\icon-instagram.svg" />
+    <None Include="wwwroot\templ2\images\icons\social\icon-twitter.svg" />
+    <None Include="wwwroot\templ2\images\logo.svg" />
+    <None Include="wwwroot\templ2\js\jquery-3.2.1.min.js" />
+    <None Include="wwwroot\templ2\js\main.js" />
+    <None Include="wwwroot\templ2\js\modernizr.js" />
+    <None Include="wwwroot\templ2\js\plugins.js" />
+    <None Include="wwwroot\templ\bat\libmail.php" />
+    <None Include="wwwroot\templ\bat\MailHandler.php" />
+    <None Include="wwwroot\templ\bat\recaptchalib.php" />
+    <None Include="wwwroot\templ\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\templ\js\camera.js" />
+    <None Include="wwwroot\templ\js\device.js" />
+    <None Include="wwwroot\templ\js\html5shiv.js" />
+    <None Include="wwwroot\templ\js\jquery-migrate-1.1.1.js" />
+    <None Include="wwwroot\templ\js\jquery.easing.1.3.js" />
+    <None Include="wwwroot\templ\js\jquery.equalheights.js" />
+    <None Include="wwwroot\templ\js\jquery.js" />
+    <None Include="wwwroot\templ\js\jquery.mobile.customized.min.js" />
+    <None Include="wwwroot\templ\js\jquery.mobilemenu.js" />
+    <None Include="wwwroot\templ\js\jquery.mousewheel.js" />
+    <None Include="wwwroot\templ\js\jquery.simplr.smoothscroll.js" />
+    <None Include="wwwroot\templ\js\jquery.ui.totop.js" />
+    <None Include="wwwroot\templ\js\modal.js" />
+    <None Include="wwwroot\templ\js\owl.carousel.js" />
+    <None Include="wwwroot\templ\js\PIE.htc" />
+    <None Include="wwwroot\templ\js\PIE.php" />
+    <None Include="wwwroot\templ\js\script.js" />
+    <None Include="wwwroot\templ\js\superfish.js" />
+    <None Include="wwwroot\templ\js\TMForm.js" />
+    <None Include="wwwroot\templ\js\tmStickUp.js" />
+    <None Include="wwwroot\templ\less\contact-form.less" />
+    <None Include="wwwroot\templ\less\countdown.less" />
+    <None Include="wwwroot\templ\less\mixins.less" />
+    <None Include="wwwroot\templ\less\stuck.less" />
+    <None Include="wwwroot\templ\less\style.less" />
+    <None Include="wwwroot\templ\less\superfish.less" />
+    <None Include="wwwroot\templ\less\variables.less" />
   </ItemGroup>
 
   <ItemGroup>

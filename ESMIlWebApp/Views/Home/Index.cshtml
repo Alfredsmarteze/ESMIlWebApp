@@ -3,18 +3,117 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <img src="~/image/web-site-under-construction.jpg" alt="Under Contruction" height=290 width=300 img/>
+<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+            <img src="~/image/web-site-under-construction.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+            <img src="~/image/web-site-under-construction.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="~/image/web-site-under-construction.jpg" class="d-block w-100" alt="...">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
 </div>
+<br />
+<br />
+<br />
+<br />
 
+<div class="container bg">
+ <div class="row justify-content-start">
+    <div class="col-sm img"> <img src="~/image/web-site-under-construction.jpg" alt="Speaker"
+                 height="150" width="150" class="float-md-left rounded-circle shadow-lg" />
+   </div>
+        <div class="col-sm-10">
+            <h2 class="text-center text-black-50 card-header welcome" data-aos="slide-right" data-aos-delay="1000" data-aos-duration="100">Welcome To ESM Unilorin PS Chapter</h2>
+        </div>
+ </div>
+     
+    <p class="lead address" style="padding:0.8rem">
+        ECWA Student Ministry (ESM) Unilorin Permanent Site (PS) is a gathering of sons and daughters of Most High God under the ministry of Evangelical Church Winning All (ECWA)... The life style of Jesus you are to live happily in your daily activities.
+        There are some resources here that have been written specially for you, to help you
+        understand christianity, and to live the life of our Lord Jesus Christ.
+        I am telling you that it is possible for you to live the life Jesus Christ lived in this earth.
+    </p>
+</div>
+<br />
+<br />
+<br />
+<br />
+ <div class="container">
+     <h5 class="card-header text-center">Testimonies</h5>
+     <div class="row card-group">
+         <div class="col card text-center">
+             <p class="card-body">God did a very wonderful thinngs in my life, I trusted God for break-through in my family and God did it
+                 miraculously, the break-through was financial break-through. Not just that alone my GP has been awesome, 
+                 when I calculated it I was like oh my God, this is your hands in my academics. What a miracle working God.
+                 Truely scripture is true- "Those that put their trust in God, their face will never be put to shame."
+             </p>
+             <footer class="card-footer"> Sis Chiyere</footer>
+         </div>
+        <div class="col card text-center">
+            <p class="card-body">
+                God did a very wonderful thinngs in my life, I trusted God for break-through in my family and God did it
+                miraculously, the break-through was financial break-through. Not just that alone my GP has been awesome,
+                when I calculated it I was like oh my God, this is your hands in my academics. What a miracle working God.
+                Truely scripture is true- "Those that put their trust in God, their face will never be put to shame."
+            </p>
+            <footer class="card-footer"> Sis Chiyere</footer>
+        </div>
+        <div class="col card text-center">
+            <p class="card-body">
+                God did a very wonderful thinngs in my life, I trusted God for break-through in my family and God did it
+                miraculously, the break-through was financial break-through. Not just that alone my GP has been awesome,
+                when I calculated it I was like oh my God, this is your hands in my academics. What a miracle working God.
+                Truely scripture is true- "Those that put their trust in God, their face will never be put to shame."
+            </p>
+            <footer class="card-footer"> Sis Chiyere</footer>
+        </div>
+     </div>
+ </div>
+
+<br />
+<br />
+<br />
+<br />
+<div class="row">
+    <div class="col card bg-dark text-white">
+        <div class="text-center">
+            <h5 class="fonts card-header">Main Meeting Days</h5>
+            <div class="card-body">
+                <p>Monday <span class="text-black"></span><img src="~/image/download530pmIcon (2).jpeg" height="50" width="50"/> 5:30PM - 7:30PM</p><br/>
+                <p>Wenesday <span class="text-black"></span><img src="~/image/download530pmIcon (2).jpeg" height="50" width="50" /> 5:30PM - 7:30PM</p>
+            </div>
+        </div>
+    </div>
+    <div class="col card bg-dark text-white">
+        <div class="card-header text-center">
+            <h5 class="contact card-header"> Contact </h5>
+            <div class="card-body">
+                <img src="~/image/MapPin.png" height="50" width="50"><p class="card-text w-100">Tanke Ilorin</p>
+            </div>
+        </div>
+    </div>
+    
+
+    @* Free Style Animation *@
+    @*<div id="ball" class="animate rounded-circle text-succes h3 text-center">
+        <p>  “Equipping the Saint for service” Ephesians 4:12</p>
+    </div>*@
+
+</div>
 @section scripts{
 <script>
 
-     var dt= new Date();
-          var eq=  dt.getDay()
-          if(eq==25){
-          Console.log(eq);
-          }
 </script>
 }

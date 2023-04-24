@@ -102,9 +102,11 @@ namespace ESMIlWebApp.Controllers.Unit
                 var savePrayerUnitData = await _repository.AddOrUpdatePrayerUnitAsync(newModel);
                 
                 if (savePrayerUnitData)
-             {
-                    return Json(new ResponseModel { hasError = false, message = "Operation successful", statusCode = (int)HttpStatusCode.OK });
-             }
+                {
+                    if (newModel.Id>0)
+                        return Json(new ResponseModel { hasError = false, message = $"Successfully updated {newModel.Firstname} record", statusCode = (int)HttpStatusCode.OK });
+                    return Json(new ResponseModel { hasError = false, message = $"Successfully added {newModel.Firstname} to prayer unit", statusCode = (int)HttpStatusCode.OK });
+                }
                 else
                 {
                     return Json(new ResponseModel { hasError = true, message = "Operation not successful", statusCode = (int)HttpStatusCode.InternalServerError });

@@ -5,7 +5,7 @@
 <h5 class="text-muted">Capture new record</h5>
 <div class="container" style="background-color:lightblue">
     <div class="row" id="fadeout">
-        <form>
+        <form id="clearFrm">
         <div class="row">
         <div class="col-4">
             <div class="form-group">
@@ -55,8 +55,8 @@
           <vc:state></vc:state> 
           </div>
         </div>
-        </div>
-        <div class="row">
+        @*</div>
+        <div class="row">*@
         <div class="col-lg-4">
            <div class="form-group mg-b-10-force">
               <label class="form-control-label">LGA</label>
@@ -166,7 +166,11 @@
      <script>
   
         var saveUrl="@Url.Action("AddOrUpdateBibleStudyUnitData","BibleStudyUnit", new {area="Unit"})";
-
+        $.fn.clearForm=function(){
+            this.each(function(){
+            this.reset();
+            })
+        }
         $("#saveRecord").click(function(e)
         {
             e.preventDefault();
@@ -193,16 +197,18 @@
             DateJoinESM:$.trim($("#txtDateJoinESM").val()),
             CourseOfStudy:$.trim($("#txtCourseOfStudy").val()),
             }
-            //var modelData=JSON.stringify(body);
+
             console.log(body);
             var payload=SiteUtils.encrypt(JSON.stringify(body)).toString();
             SiteUtils.post({payload:payload}, saveUrl).then(function (response){
             if(response.hasError==false)
             {
-                alert(response.message);
-
-                //var returnUrl = '@Url.Action("BibleStudyUnit", "UnitManagement")';
-                //            window.location.href = returnUrl;
+               Swal.fire(response.message,'','success');
+                    $("#clearFrm").clearForm();
+            }
+            else if(response.hasError==true)
+            {
+               Swal.fire(response.message, '', 'error');
             }
             });
         });

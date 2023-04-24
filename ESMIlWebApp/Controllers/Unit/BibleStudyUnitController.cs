@@ -102,9 +102,16 @@ namespace ESMIlWebApp.Controllers.Unit
                 var newModel = JsonConvert.DeserializeObject<BibleStudyUnitData>(payload);
                 var saveBibleStudyUnitData = await _repository.AddOrUpdateBibleStudyUnitAsync(newModel);
 
+                if (string.IsNullOrEmpty(newModel.CourseOfStudy))
+                    throw new Exception("Course of study cannot be empty");
+                if (string.IsNullOrEmpty(newModel.DateJoinESM))
+                    throw new Exception("Date joined ESM cannot be empty");
+
                 if (saveBibleStudyUnitData)
                 {
-                    return Json(new ResponseModel { hasError = false, message = "Operation successful", statusCode = (int)HttpStatusCode.OK });
+                    if(newModel.Id>0)
+                    return Json(new ResponseModel { hasError = false, message = $"Successfully updated {newModel.Firstname} record", statusCode = (int)HttpStatusCode.OK });
+                    return Json(new ResponseModel { hasError = false, message = $"Successfully added {newModel.Firstname} to bible study unit!", statusCode = (int)HttpStatusCode.OK });
                 }
                 else
                 {
@@ -116,7 +123,7 @@ namespace ESMIlWebApp.Controllers.Unit
                 _logger.LogError("Error", ex.Message);
                 errorMessage = ex.Message;
             }
-            return Json(new ResponseModel { message = $"Error Message: {errorMessage}", statusCode = (int)HttpStatusCode.Conflict });
+            return Json(new ResponseModel { message = $"Error Message: {errorMessage}", hasError=true, statusCode = (int)HttpStatusCode.Conflict });
         }
 
 

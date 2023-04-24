@@ -217,13 +217,14 @@
 
         var payload=SiteUtils.encrypt(JSON.stringify(body)).toString();
             SiteUtils.post({payload:payload}, saveUrl).then(function (response){
-            if(response.hasError==false)
-            {
-                alert(response.message, "Ok");
-            }
-            else{
-            alert(response.message);
-            }
+                if (response.hasError == false) 
+                {
+                    Swal.fire(response.message, '', 'success');
+                }
+                else if (response.hasError == true) 
+                {
+                    Swal.fire(response.message, '', 'error');
+                }
             })
 
     

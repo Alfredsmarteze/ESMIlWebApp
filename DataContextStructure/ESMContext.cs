@@ -3,6 +3,9 @@ using DataStructure.Entites;
 using Microsoft.Extensions.Configuration;
 using DataStructure;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Reflection.Emit;
+using System.Reflection.Metadata;
+//using System.Data.Entity;
 
 namespace DataContextStructure
 {
@@ -16,6 +19,22 @@ namespace DataContextStructure
             // using var context = new ESMContext(contextOptions);
 
         }
+        public DbSet<ProgramTable> programTable { get; set; }
+        public DbSet<PastDramaUnitCordinator> pastDramaUnitCordinator { get; set; }
+        public DbSet<PastTreasurer> pastTreasurer { get; set; }
+        public DbSet<PastSecretary> pastSecretary { get; set; }
+        public DbSet<PastPresident> pastPresident { get; set; }
+        public DbSet<PastPublicityUnitCordinator> pastPublicityUnitCordinator     { get; set; }
+        public DbSet<PastPrayerUnitCordinator>  pastPrayerUnitCordinator   { get; set; }
+        public DbSet<PastWelfareUnitCordinator>  pastWelfareUnitCordinator   { get; set; }
+        public DbSet<PastTransportUnitCordinator>  pastTransportUnitCordinator  { get; set; }
+        public DbSet<PastUsheringUnitCordinator> pastUsheringUnitCordinator   { get; set; }
+        public DbSet<PastTechnicalUnitCordinator> pastTechnicalUnitCordinator  { get; set; }
+        public DbSet<PastChoralUnitCordinator>  pastChoralUnitCordinator { get; set; }
+        public DbSet<PastDMECordinator> pastDMECordinator { get; set; }
+        public DbSet<PastBibleStudyCordinator> pastBibleStudyCordinators { get; set; }
+        public DbSet<ESMAF> eSMAF { get; set; }
+        public DbSet<PastExecutive> pastExecutive { get; set; }
         public DbSet<FirstTimer> firstTimer { get; set; }
         public DbSet<LoginInfo> loginInfo { get; set; }
         public DbSet<Register> register { get; set; }
@@ -30,6 +49,26 @@ namespace DataContextStructure
         public DbSet<PrayerUnit> prayerUnit { get; set; }
         public DbSet<State> state { get; set; }
         public DbSet<Lga> lga { get; set; }
+
+
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder
+            .Entity<ESMAF>()
+            .HasOne(e => e.PastExcos)
+            .WithOne(e => e.ESMAF).IsRequired()
+            .HasForeignKey<PastExecutive>(s => s.EsmafId).IsRequired();//.OnDelete(DeleteBehavior.NoAction);
+
+            builder
+            .Entity<PastExecutive>()
+            .HasOne(e => e.ESMAF)
+            .WithOne(e => e.PastExcos)
+            .HasForeignKey<ESMAF>(s => s.PastId);
+        }
+
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

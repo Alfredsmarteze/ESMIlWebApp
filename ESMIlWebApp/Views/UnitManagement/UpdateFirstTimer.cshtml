@@ -13,14 +13,14 @@
                 <div class="form-group">
                     <label class="form-label">Surname</label>
                     <input id="rowId" type="hidden" value="@Model.Id">
-                    <input class="form-control" id="txtSurname" type="text" placeholder="">
+                    <input class="form-control" id="txtSurname" value="@Model.Surname" type="text" placeholder="">
                 </div>
 
             </div>
             <div class="col-4">
                 <div class="form-group">
                     <label class="form-label">Othernames</label>
-                    <input class="form-control" id="txtOthernames" type="text" placeholder="">
+                    <input class="form-control" id="txtOthernames" value="@Model.Othernames" type="text" placeholder="">
                 </div>
             </div>
 
@@ -41,7 +41,7 @@
             <div class="col-4">
                 <div class="form-group">
                     <label class="form-label">Phone Number 1</label>
-                    <input class="form-control" id="txtPhoneNumber" type="text" placeholder="">
+                    <input class="form-control" id="txtPhoneNumber" value="@Model.PhoneNumber" type="text" placeholder="">
                 </div>
             </div>
         </div>
@@ -51,13 +51,13 @@
             <div class="col-4">
                 <div class="form-group">
                     <label class="form-label">Department</label>
-                    <input class="form-control" id="txtDepartmentName" type="text" placeholder="">
+                    <input class="form-control" id="txtDepartmentName" value="@Model.DepartmentName" type="text" placeholder="">
                 </div>
             </div>
             <div class="col-4">
                 <div class="form-group">
                     <label class="form-label">Faculty</label>
-                    <input class="form-control" id="txtFacultyName" type="text" placeholder="">
+                    <input class="form-control" id="txtFacultyName" value="@Model.FacultyName" type="text" placeholder="">
                 </div>
             </div>
 
@@ -68,7 +68,7 @@
                     <label for="">Date </label>
                     <div class="ate-input">
                         <div class="ate-input">
-                            <input type="text" class="date form-control" placeholder="" id="txtDateJoinVisiting">
+                            <input type="text" class="date form-control" value="@Model.strDate" placeholder="" id="txtDateJoinVisiting">
                         </div>
                     </div>
                 </div>
@@ -98,6 +98,12 @@
             $("drpReasonOfComing").val('@Model.JoiningVisitingDate').trigger('change');
         });
 
+        var i, yr, now = new Date();
+        for (i = 0; i < 10; i++) {
+            yr = now.getFullYear() + i; // or whatever
+            $('#selectyear').append($('<option/>').val(yr).text(yr));
+        };
+
         $("#saveRecord").click(function (e) {
             e.preventDefault();
 
@@ -112,8 +118,6 @@
                 FacultyName: $.trim($("#txtFacultyName").val()),
                 DepartmentName: $.trim($("#txtDepartmentName").val())
             }
-            //var modelData=JSON.stringify(body);
-            console.log(body);
             $.ajax({
                 type: "POST",
                 url: "@Url.Action("AddUpdateFirstTimer","FirstTimer")",
@@ -121,7 +125,10 @@
                 data: { payload: JSON.stringify(body) },
                 success: function (result) {
                     if (result.hasError == false) {
-                        alert(result.message);
+                        Swal.fire(result.message, '', 'success');
+                    }
+                    else if (result.hasError == true) {
+                        Swal.fire(result.message, '', 'error');
                     }
                 },
 
@@ -130,7 +137,8 @@
         jQuery('.date').datepicker({
             timepicker: false,
             format: 'Y/m/d',
+            //dateFormat: 'yy',
+           //changeYear:true
         })
-
     </script>
 }
