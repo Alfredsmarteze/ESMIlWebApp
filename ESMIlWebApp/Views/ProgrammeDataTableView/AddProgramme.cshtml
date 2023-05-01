@@ -3,7 +3,7 @@
 }
 <h5 class="text-muted">Add Programme</h5>
 <div class="container" style="background-color:lightblue">
-    <form>
+    <form id="clearFrm">
         <div class="row">
             <div class="col-4">
                 <div class="form-group">
@@ -61,7 +61,9 @@
     <script>
 
         var saveUrl = "@Url.Action("AddOrUpdateProgrammeData","ProgrammeTableData")";
-
+        $.fn.clearForm = function () {
+            this.each(function () { this.reset(); })
+        }
         $("#saveRecord").click(function (e) {
             e.preventDefault();
 
@@ -79,9 +81,13 @@
                 url: "@Url.Action("AddOrUpdateProgrammeData","ProgrammeTableData")",
                 dataType: "Json",
                 data: { payload: JSON.stringify(body) },
-                success: function (result) {
-                    if (result.hasError == false) {
-                        alert(result.message);
+                success: function (response) {
+                    if (response.hasError == false) {
+                        Swal.fire(response.message, '', 'success');
+                        $("#clearFrm").clearForm();
+                    }
+                    else if (response.hasError == true) {
+                        Swal.fire(response.message, '', 'error');
                     }
 
                 },

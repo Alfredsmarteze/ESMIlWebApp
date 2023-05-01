@@ -20,11 +20,11 @@ namespace Infrastructure.Service
         }
         public async Task<bool> AddOrUpdateProgrammeTableAsync(ProgrammeTableData programmeTableData)
         {
-            bool result=true;
+            bool result;
 
           var splitProgrammeDate = programmeTableData.ProgrammeDate.Split('/');
           var  splitDate = new DateTime(int.Parse(splitProgrammeDate[2]), int.Parse(splitProgrammeDate[0]), int.Parse(splitProgrammeDate[1]));
-            if (programmeTableData.Id < 0)
+            if (programmeTableData.Id<1)
             {
                 var addData = new ProgramTable
                 {
@@ -34,7 +34,7 @@ namespace Infrastructure.Service
                     Programme=programmeTableData.Programme,
                     Note = programmeTableData.Note,
                 };
-                _context.Add(addData);
+                _context.programTable.Add(addData);
                 result = await _context.SaveChangesAsync() > 0;
             }
             else {
@@ -58,11 +58,12 @@ namespace Infrastructure.Service
             return (from s in _context.programTable
                     select new ProgrammeTableDTO
                     {
-                        Speaker=s.Speaker==null ? "" : s.Speaker,
-                        Cordinator=s.Cordinator==null ? "" :s.Cordinator,
-                        Programme=s.Programme==null ? "" : s.Programme,
-                        Note=s.Note==null ? "": s.Note,
-                        ProgrammeDate=s.ProgramDate==null ? null:s.ProgramDate,
+                        Id = s.Id,//==null ? 0 :s.Id,
+                        Speaker=s.Speaker,//==null ? "" : s.Speaker,
+                        Cordinator=s.Cordinator,//==null ? "" :s.Cordinator,
+                        Programme=s.Programme,//==null ? "" : s.Programme,
+                        Note=s.Note,//==null ? "": s.Note,
+                        ProgrammeDate=s.ProgramDate,//==null ? null:s.ProgramDate,
                     }); 
         }
     }

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "First Timer";
+    ViewData["Title"] = "Our Programme";
     Layout = "~/Views/Shared/_layout.cshtml";
 }
 
@@ -63,7 +63,7 @@
             //select: true,
             //dom: 'Bfrtip', , new{area="Unit"}
             "ajax": {
-                "url": "@Url.Action("GetAllFirstTimer","FirstTimer")",
+                "url": "@Url.Action("GetAllProgrammeData","ProgrammeTableData")",
                 "type": "POST",
                 "datatype": "json",
                 "data": function (arg) { }
@@ -84,9 +84,8 @@
                 { "data": "speaker", "name": "speaker", "autoWidth": false },
                 { "data": "cordinator", "name": "cordinator", "autoWidth": false },
                 { "data": "programme", "name": "programme", "autoWidth": false },
+                { "data": "strDate", "name": "programmeDate", "autoWidth": false },
                 { "data": "note", "name": "note", "autoWidth": false },
-                { "data": "programmeDate", "name": "programmeDate", "autoWidth": false },
-
             ],
 
         });

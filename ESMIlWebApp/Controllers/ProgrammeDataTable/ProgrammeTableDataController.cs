@@ -75,19 +75,19 @@ namespace ESMIlWebApp.Controllers.ProgrammeDataTable
             {
                 //  byte[] con = Convert.FromBase64String(payload);
                 // var coon = con.ToString();
-                var payloadd = EncryptionExtensions.EncryptStringAES(payload);
-                payload = EncryptionExtensions.DecryptStringAES(payload);
-                var newModel = JsonConvert.DeserializeObject<ProgrammeTableData>(payload);
+                 payload = EncryptionExtensions.EncryptStringAES(payload);
+             var payloadd = EncryptionExtensions.DecryptStringAES(payload);
+                var newModel = JsonConvert.DeserializeObject<ProgrammeTableData>(payloadd);
                 var saveProgrammeData = await _programmeTableRepository.AddOrUpdateProgrammeTableAsync(newModel);
 
                 if (saveProgrammeData)
-                {
+               // {
                     return Json(new ResponseModel { hasError = false, message = "Operation successful", statusCode = (int)HttpStatusCode.OK });
-                }
-                else
-                {
+               // }
+               // else
+              // {
                     return Json(new ResponseModel { hasError = true, message = "Operation not successful", statusCode = (int)HttpStatusCode.InternalServerError });
-                }
+               //}
             }
             catch (Exception ex)
             {
