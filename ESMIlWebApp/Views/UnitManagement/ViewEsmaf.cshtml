@@ -1,72 +1,74 @@
-﻿@{
+﻿@model DataStructure.ViewModel.ESMAFDTO;
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h4 class="text-muted">ESMAF</h4>
-<h5 class="text-muted">Capture new record</h5>
+<h5 class="text-muted">Update Record</h5>
+<p class="text-danger">@ViewBag.NoRecordFound</p>
 <div class="container" style="background-color:lightblue">
     <form id="clearFrm">
         <div class="row">
             <div class="col-4">
                 <div class="form-group">
                     <label class="form-label">Surname</label>
-                    <input id="rowId" type="hidden">
-                    <input class="form-control" id="txtSurname" type="text" placeholder="">
+                    <input id="rowId" type="hidden" value="@Model.Id">
+                    <input class="form-control" id="txtSurname" value="@Model.Surname" readonly type="text" placeholder="">
                 </div>
 
             </div>
             <div class="col-4">
                 <div class="form-group">
                     <label class="form-label">Othernames</label>
-                    <input class="form-control" id="txtOthernames" type="text" placeholder="">
+                    <input class="form-control" id="txtOthernames" value="@Model.Othernames" readonly type="text" placeholder="">
                 </div>
             </div>
-                            
+
             <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
                     <label class="form-control-label">Gender</label>
                     <vc:gender></vc:gender>
                 </div>
             </div>
-                    
+
         </div>
-        
+
         <br>
 
         <div class="row">
             <div class="col-4">
                 <div class="form-group">
                     <label class="form-label">Phone Number 1</label>
-                    <input class="form-control" id="txtPhoneNumber" type="text" placeholder="">
+                    <input class="form-control" id="txtPhoneNumber" readonly value="@Model.PhoneNumber" type="text" placeholder="">
                 </div>
             </div>
 
             <div class="col-4">
                 <div class="form-group">
                     <label class="form-label">Email</label>
-                    <input class="form-control" id="txtEmail" type="text" placeholder="">
+                    <input class="form-control" id="txtEmail" value="@Model.Email" readonly type="text" placeholder="">
                 </div>
             </div>
             <div class="col-4">
                 <div class="form-group">
                     <label class="form-label">House Address</label>
-                    <input class="form-control" id="txtHouseAddress" type="text" placeholder="">
+                    <input class="form-control" id="txtHouseAddress" value="@Model.HouseAddress" readonly type="text" placeholder="">
                 </div>
             </div>
-         </div>
+        </div>
 
-         <br/>
-         
-         <div class="row">
+        <br />
+
+        <div class="row">
             <div class="col-4">
                 <div class="form-group">
                     <label class="form-label">Course Of Study</label>
-                    <input class="form-control" id="txtCourseOfStudy" type="text" placeholder="">
+                    <input class="form-control" id="txtCourseOfStudy" value="@Model.CourseOfStudy" readonly type="text" placeholder="">
                 </div>
             </div>
             <div class="col-4">
                 <div class="form-group">
                     <label class="form-label">Faculty</label>
-                    <input class="form-control" id="txtFacultyName" type="text" placeholder="">
+                    <input class="form-control" id="txtFacultyName" value="@Model.Faculty" type="text" readonly placeholder="">
                 </div>
             </div>
 
@@ -75,7 +77,7 @@
                     <label for="">Year Of Entry </label>
                     <div class="ate-input">
                         <div class="ate-input">
-                            <input type="text" class="dateYear form-control" placeholder="Date" id="txtYearOfEntry">
+                            <input type="text" class="dateYear form-control" value="@Model.YearOfEntry" readonly placeholder="Date" id="txtYearOfEntry">
                         </div>
                     </div>
                 </div>
@@ -85,7 +87,7 @@
                     <label for="">Year Of Graduation </label>
                     <div class="ate-input">
                         <div class="ate-input">
-                            <input type="text" class="dateYear form-control" placeholder="Date" id="txtYearOfGraduation">
+                            <input type="text" class="dateYear form-control" value="@Model.YearOfGraduation" readonly placeholder="Date" id="txtYearOfGraduation">
                         </div>
                     </div>
                 </div>
@@ -96,55 +98,40 @@
                     <vc:unit></vc:unit>
                 </div>
             </div>
-          </div>
+        </div>
         <br />
 
         <p>Kindly Fill Below form if you have served as an executive</p>
-        
+
         <div class="row">
-        <div class="col-4">
-            <div class="form-group">
-                <label class="form-label">Office</label>
-                <vc:pastunitcordinator></vc:pastunitcordinator>
-                @*<input class="form-control" id="txtOffice" type="text" placeholder="">*@
+            <div class="col-4">
+                <div class="form-group">
+                    <label class="form-label">Office</label>
+                    <vc:pastunitcordinator></vc:pastunitcordinator>
+                </div>
             </div>
-        </div>
             <br /><br />
             <div class="row">
                 <div class="form-group mg-b-10-force">
-                    
+
                     <label for="">Academic Session</label>
-                    
+
                     <div class="row">
-                    <div class="col-sm-3">
-                        <div class="">
-                            <input type="text" class="dateYear form-control" placeholder="Year" id="txtAcademicSessionYear">
+                        <div class="col-sm-3">
+                            <div class="">
+                                <input type="text" class="dateYear form-control" value="@Model.FullAcademicSession" placeholder="Year" readonly id="txtAcademicSessionYear">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="ate-input">
-                            <input type="text" class="dateYear form-control" placeholder="Year" id="txtAcademicSessionYear2">
-                        </div>
-                    </div>
+                        
                     </div>
                 </div>
             </div>
-            @*</div>*@
-            @*<div class="col-lg-4">
-                <div class="form-group mg-b-10-force">
-                    <label for="">Academic Session2</label>
-                    <div class="ate-input">
-                        <div class="ate-input">
-                            <input type="text" class="dateYear form-control" placeholder="Date" id="txtAcademicSessionYear2">
-                        </div>
-                    </div>
-                </div>
-            </div>*@
+
         </div>
-        
+
         <br />
-        
-        <div class="text-center">
+
+        <div class="text-center" hidden>
             <br />
             <button class="btn btn-primary" type="submit" id="saveRecord">Save</button>
         </div>
@@ -155,9 +142,16 @@
 
     <script>
 
-        var saveUrl ="@Url.Action("AddOrUpdateEsmaf","Esmaf")";
-        $.fn.clearForm=function(){
-            this.each(function(){this.reset();})
+        var saveUrl = "@Url.Action("AddOrUpdateEsmaf","ESMAF")";
+
+        $(document).ready(function () {
+            $("#drpGender").val('@Model.Gender').trigger('change');
+            $("#drpPastUnitCordinator").val('@Model.Office').trigger('change');
+            $("#drpUnit").val('@Model.UnitServed').trigger('change');
+        })
+
+        $.fn.clearForm = function () {
+            this.each(function () { this.reset(); })
         }
         $("#saveRecord").click(function (e) {
             e.preventDefault();
@@ -168,15 +162,15 @@
                 Othernames: $.trim($("#txtOthernames").val()),
                 Gender: $("#drpGender").val(),
                 PhoneNumber: $.trim($("#txtPhoneNumber").val()),
-                Email:$.trim($("#txtEmail").val()),
-                HouseAddress:$.trim($("#txtHouseAddress").val()),
-                CourseOfStudy:$.trim($("#txtCourseOfStudy").val()),
+                Email: $.trim($("#txtEmail").val()),
+                HouseAddress: $.trim($("#txtHouseAddress").val()),
+                CourseOfStudy: $.trim($("#txtCourseOfStudy").val()),
                 Faculty: $.trim($("#txtFacultyName").val()),
                 YearOfEntry: $.trim($("#txtYearOfEntry").val()),
-                YearOfGraduation:$.trim($("#txtYearOfGraduation").val()),
-                AcademicSessionDate:$.trim($("#txtAcademicSessionYear").val()),
+                YearOfGraduation: $.trim($("#txtYearOfGraduation").val()),
+                AcademicSessionDate: $.trim($("#txtAcademicSessionYear").val()),
                 AcademicSessionDate2: $.trim($("#txtAcademicSessionYear2").val()),
-                UnitServed:$("#drpUnit").val(),
+                UnitServed: $.trim($("#drpUnit").val()),
                 Office: $("#drpPastUnitCordinator").val()
             }
             $.ajax({
@@ -199,11 +193,11 @@
         });
         jQuery('.dateYear').datepicker({
             timepicker: false,
-           // format: 'Y/d/m',
+            // format: 'Y/d/m',
             dateFormat: 'yy',
-            changeYear:true,
+            changeYear: true,
             //changeMonth: true,
-           yearRange: "1999:2022"
+            yearRange: "1999:2022"
         });
 
     </script>

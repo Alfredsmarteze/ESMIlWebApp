@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "First Timer";
+    ViewData["Title"] = "ESMAF";
     Layout = "~/Views/Shared/_layout.cshtml";
 }
 
@@ -12,7 +12,7 @@
 <br>
 <div class="table-responsive">
     @*<div style="overflow-x:scroll">*@
-    <table id="firstTimerTable" width="100%" class="stripe hover">
+    <table id="esmafTable" width="100%" class="stripe hover">
         <thead>
             <tr>
                 @* <th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>*@
@@ -22,10 +22,13 @@
                 <th>Othernames</th>
                 <th>Gender</th>
                 <th>Phone Number </th>
-                <th>Department</th>
+                <th>Email</th>
+                <th>House Address</th>
+                <th>Course Of Study</th>
                 <th>Faculty</th>
-                <th>Reason Of Coming</th>
-                <th>Date Join/Visit</th>
+                <th>Year Of Entry</th>
+                <th>Year Of Graduation</th>
+                <th>Unit Served</th>
             </tr>
         </thead>
         @*<thead>
@@ -46,11 +49,11 @@
 
 
 
-@using (Html.BeginForm("ViewFirstTimer", "UnitManagement", FormMethod.Post, new { id = "viewFirstTimerForm", target = "_blank" }))
+@using (Html.BeginForm("ViewEsmaf", "UnitManagement", FormMethod.Post, new { id = "viewEsmafForm", target = "_blank" }))
 {
     <input type="hidden" name="viewRecordId" id="viewRecordId">
 }
-@using (Html.BeginForm("UpdateFirstTimer", "UnitManagement", FormMethod.Post, new { id = "updateFirstTimerForm", target = "_blank" }))
+@using (Html.BeginForm("UpdateEsmaf", "UnitManagement", FormMethod.Post, new { id = "updateEsmafForm", target = "_blank" }))
 {
     <input type="hidden" name="updateRecordId" id="updateRecordId">
 }
@@ -59,11 +62,11 @@
 @section scripts{
     <script>
 
-        var table = $("#firstTimerTable").DataTable({
-            //columnDefs: [{
-            //    targets: [12, 13],
-            //    render: $.fn.dataTable.render.ellipsis(10)
-            //}],
+        var table = $("#esmafTable").DataTable({
+            columnDefs: [{
+                targets: [7],
+                render: $.fn.dataTable.render.ellipsis(10)
+            }],
             "lengthMenu": [[7, 20, 25, 50, -1], [7, 20, 25, 50, "All"]],
             "processing": true, // for show progress bar
             "serverSide": true, // for process server side
@@ -76,14 +79,14 @@
             //select: true,
             //dom: 'Bfrtip', , new{area="Unit"}
             "ajax": {
-                "url": "@Url.Action("GetAllFirstTimer","FirstTimer")",
+                "url": "@Url.Action("GetAllEsmaf","ESMAF")",
                 "type": "POST",
                 "datatype": "json",
                 "data": function (arg) { }
             },
             "columns": [
                 {
-                    "data": null, "name": "Action", "defaultContent": '<div class="btn-group mr-1 mb-1">' +
+                 "data": null, "name": "Action", "defaultContent": '<div class="btn-group mr-1 mb-1">' +
                         "<button aria-expanded='false' aria-haspopup='true' class='btn btn-white dropdown-toggle' data-toggle='dropdown' id='dropdownMenuDetail' type='button'></button>" +
                         "<div aria-labelledby='dropdownMenuButton6' class='dropdown-menu'>" +
                         "<a class='dropdown-item' href='#' id='changeRecord' title='Update record'><i class='fa fa-edit'></i>&nbsp; Update record</a>" +
@@ -98,39 +101,40 @@
                 { "data": "othernames", "name": "othernames", "autoWidth": false },
                 { "data": "gender", "name": "gender", "autoWidth": false },
                 { "data": "phoneNumber", "name": "phoneNumber", "autoWidth": false },
-                { "data": "departmentName", "name": "departmentName", "autoWidth": false },
-                { "data": "facultyName", "name": "facultyName", "autoWidth": false },
-                { "data": "reasonOfComing", "name": "reasonOfComing", "autoWidth": false },
-                { "data": "strDate", "name": "strDate", "autoWidth": false }
-                
+                { "data": "email", "name": "email", "autoWidth": false },
+                { "data": "houseAddress", "name": "houseAddress", "autoWidth": false },
+                { "data": "courseOfStudy", "name": "courseOfStudy", "autoWidth": false },
+                { "data": "faculty", "name": "faculty", "autoWidth": false },
+                { "data": "yearOfEntry", "name": "yearOfEntry", "autoWidth": false },
+                { "data": "yearOfGraduation", "name": "yearOfGraduation", "autoWidth": false },
+                { "data": "unitServed", "name": "unitServed", "autoWidth": false }
+
             ],
-            
+
         });
 
 
-
-
-        $('#firstTimerTable tbody').on('click', '#viewRecord', function (e) {
+        $('#esmafTable tbody').on('click', '#viewRecord', function (e) {
             e.preventDefault();
             var data = table.row($(this).parents('tr')).data();
             $("#viewRecordId").val(data.id);
-            $("#viewFirstTimerForm").submit();
+            $("#viewEsmafForm").submit();
 
         });
 
-        $('#firstTimerTable tbody').on('click', '#changeRecord', function (e) {
+        $('#esmafTable tbody').on('click', '#changeRecord', function (e) {
             e.preventDefault();
             var data = table.row($(this).parents('tr')).data();
             $("#updateRecordId").val(data.id);
-            $("#updateFirstTimerForm").submit();
+            $("#updateEsmafForm").submit();
 
         });
 
         $('#newRecord').on('click', function (e) {
             e.preventDefault();
-            var returnUrl = '@Url.Action("CreateFirstTimer", "UnitManagement")';
+            var returnUrl = '@Url.Action("CreateNewEsmaf", "UnitManagement")';
             window.location.href = returnUrl;
-        });
+        })
 
     </script>
-   }
+}

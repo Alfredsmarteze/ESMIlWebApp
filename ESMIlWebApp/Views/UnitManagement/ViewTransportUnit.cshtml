@@ -63,7 +63,7 @@
         <div class="col-lg-4">
            <div class="form-group mg-b-10-force">
               <label class="form-control-label">LGA</label>
-          <vc:state></vc:state> 
+          <vc:lga></vc:lga> 
           </div>
         </div>
         </div>
@@ -123,15 +123,8 @@
 
         <div class="col-4">
             <div class="form-group">
-            <label class="form-label">Unit</label>
-            <input class="form-control" id="txtPositionInFamily" type="text" value="@Model.Unit" readonly>
-            @*<vc:unit></vc:unit>*@
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="form-group">
             <label class="form-label">Previous Unit</label>
-            <input class="form-control" id="txtPositionInFamily" type="text" value="@Model.PreviousUnit" readonly>
+            <vc:unit></vc:unit>
             </div>
         </div>
         <br/>
@@ -163,3 +156,15 @@
         </form>
     </div>
 </div>
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+            $("#drpGender").val('@Model.Gender').trigger('change');
+            $("#drpState").val('@Model.StateOfOrigin').trigger('change');
+            $("#drpLga").val('@Model.LGA').trigger('change');
+            $("#drpUnit").val('@Model.PreviousUnit').trigger('change');
+        });
+
+    </script>
+}

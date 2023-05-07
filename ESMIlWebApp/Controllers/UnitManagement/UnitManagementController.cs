@@ -20,7 +20,38 @@ namespace ESMIlWebApp.Controllers.UnitManagement
         [HttpGet]
         [Route("New/ESMAF")]
         public IActionResult CreateNewEsmaf() => View();
-
+        [HttpGet]
+        [Route("AllEsmaf")]
+        public IActionResult Esmaf() => View();
+        
+        [Route("Update/ESMAF/Data")]
+        public IActionResult UpdateEsmaf() 
+        {
+            var model = new ESMAFDTO();
+            var rowId = Request.Form["updateRecordId"].FirstOrDefault();
+            if (rowId == null) 
+            {
+                ViewBag.NoRecordFound = "No Record Found.";
+                return View();
+            }
+            var id = int.Parse(rowId);
+            model=_unitRepository.ListAllEsmafAsync().Where(s=>s.Id==id).FirstOrDefault();
+            return View(model);
+        }
+        [Route("View/ESMAF/Data")]
+        public IActionResult ViewEsmaf()
+        {
+            var model = new ESMAFDTO();
+            var rowId = Request.Form["viewRecordId"].FirstOrDefault();
+            if (rowId == null)
+            {
+                ViewBag.NoRecordFound = "No Record Found.";
+                return View();
+            }
+            var id = int.Parse(rowId);
+            model=_unitRepository.ListAllEsmafAsync().Where(s=>s.Id==id).FirstOrDefault();
+            return View(model);
+        }
         [HttpGet]
         [Route("New/FirstTimer")]
         public IActionResult CreateFirstTimer()=>View();
@@ -28,10 +59,11 @@ namespace ESMIlWebApp.Controllers.UnitManagement
         [HttpGet]
         [Route("AllFirstTimer")]
         public IActionResult FirstTimer()=>View();
-
+        
+        
         [Route("Update/FirstTimer/Data")]
         public IActionResult UpdateFirstTimer()
-        { 
+        {   
             var model= new FirstTimerDTO();
             var rowId = Request.Form["updateRecordId"].FirstOrDefault();
             if (rowId == null)
@@ -53,8 +85,12 @@ namespace ESMIlWebApp.Controllers.UnitManagement
             {
                 var id = int.Parse(rowId);
                 model = _unitRepository.ListAllFirstTimerAsync().Where(s => s.Id == id).FirstOrDefault();
+                return View(model);
+            }else
+            {
+                ViewBag.NoRecordFound = "No Record Found.";
             }
-            return View(model);
+            return View();
         }
 
         [HttpGet]

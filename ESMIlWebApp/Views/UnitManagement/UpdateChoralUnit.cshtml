@@ -63,7 +63,7 @@
         <div class="col-lg-4">
            <div class="form-group mg-b-10-force">
               <label class="form-control-label">LGA</label>
-          <vc:state></vc:state> 
+          <vc:lga></vc:lga> 
           </div>
         </div>
         </div>
@@ -121,12 +121,7 @@
             <input class="form-control" id="txtAmbition" type="text" value="@Model.Ambition" >
             </div>
         </div>
-        <div class="col-4">
-            <div class="form-group">
-            <label class="form-label">Unit</label>
-            <vc:unit></vc:unit>
-            </div>
-        </div>
+        
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Previous Unit</label>
@@ -170,11 +165,10 @@
     var saveUrl="@Url.Action("AddOrUpdateChoralUnitData","Choral", new {area="Unit"})";
     
     $(document).ready(function(){
-    $("drpGender").val('@Model.Gender').trigger('change');
-    $("drpState").val('@Model.StateOfOrigin').trigger('change');
-    $("drpState").val('@Model.LGA').trigger('change');
-    $("drpUnit").val('@Model.Unit').trigger('change');
-    $("drpUnit").val('@Model.PreviousUnit').trigger('change');
+    $("#drpGender").val('@Model.Gender').trigger('change');
+    $("#drpState").val('@Model.StateOfOrigin').trigger('change');
+    $("#drpLga").val('@Model.LGA').trigger('change');
+    $("#drpUnit").val('@Model.PreviousUnit').trigger('change');
     });
     $("#btnSaveRecord").click(function(e)
     {
@@ -192,7 +186,6 @@
             StateOfOrigin:$("#drpState").val(),
             Ambition:$("#txtAmbition").val(),
             LGA:$("#drpState").val(),
-            Unit:$("#drpUnit").val(),
             PreviousUnit:$("#drpUnit").val(),
             PositionInFamily:$.trim($("#txtPositionInFamily").val()),
             SocialMediaAddress:$.trim($("#txtSocialMediaAddress").val()),

@@ -19,7 +19,9 @@ namespace DataStructure.Entites
         public string? Faculty { get; set; }
         public int  YearOfEntry { get; set; }
         public int YearOfGraduation { get; set; }
-        public string UnitServed { get; set; }
+        public string? UnitServed { get; set; }
+        public int AcademicSessionDate { get; set; }
+        public int AcademicSessionDate2 { get; set; }
         public PastExecutive PastExcos { get; set; }
         public int?  PastId { get; set; }
     }

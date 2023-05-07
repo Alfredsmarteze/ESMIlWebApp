@@ -117,12 +117,7 @@
             <input class="form-control" id="txtAmbition" type="text" placeholder="">
             </div>
         </div>
-        <div class="col-4">
-            <div class="form-group">
-            <label class="form-label">Unit</label>
-            <vc:unit></vc:unit>
-            </div>
-        </div>
+        
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Previous Unit</label>
@@ -188,10 +183,9 @@
             Email:$.trim($("#txtEmail").val()),
             PhoneNumber01:$.trim($("#txtPhoneNumber01").val()),
             PhoneNumber02:$.trim($("#txtPhoneNumber02").val()),
-            StateOfOrigin:$("#drpGender").val(),
-            LGA:$("#drpGender").val(),
+            StateOfOrigin:$("#drpState").val(),
+            LGA:$("#drpLga").val(),
             Ambition:$("#txtAmbition").val(),
-            Unit:$("#drpUnit").val(),
             PreviousUnit:$("#drpUnit").val(),
             PositionInFamily:$.trim($("#txtPositionInFamily").val()),
             SocialMediaAddress:$.trim($("#txtSocialMediaAddress").val()),

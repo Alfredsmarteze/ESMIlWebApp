@@ -22,6 +22,7 @@ namespace Infrastructure.Interface
         Task<bool> AddOrUpdatePrayerUnitAsync(PrayerUnitDTOData prayerUnitDTO);
         Task<bool> AddOrUpdateChoralUnitAsync(ChoralUnitData choralUnitData);
         IQueryable<FirstTimerDTO> ListAllFirstTimerAsync();
+        IQueryable<ESMAFDTO>ListAllEsmafAsync();
         IQueryable<TransportUnitDTO> ListAllTransportUnitAsync();
         IQueryable<UsheringUnitDTO> ListAllUsheringUnitAsync();
         IQueryable<TechnicalUnitDTO> ListAllTechnicalUnitAsync();

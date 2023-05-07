@@ -25,10 +25,32 @@ namespace Infrastructure.Service
             _context = context;
             this._environment = environment;
         }
-        
+        public IQueryable<ESMAFDTO> ListAllEsmafAsync()
+        {
+            return (from d in _context.eSMAF
+                    from c in _context.pastExecutive.Where(x=>d.Surname==x.SurnameExcos && x.OthernameExcos==d.Othernames && x.Gender==d.Gender)
+                   // join c in _context.pastExecutive on  d.Surname equals c.SurnameExcos && d.S
+                    select new ESMAFDTO
+                    {
+                        Id=d.Id,
+                        Surname = d.Surname ==null ? "" :d.Surname,
+                        Othernames=d.Othernames== null ? "" : d.Othernames,
+                        Gender=d.Gender== null ? "" : d.Gender,
+                        UnitServed=d.UnitServed ==null ? "" :d.UnitServed,
+                        Office=c.Office==null ? "" :c.Office,
+                        Email=d.Email == null ? "" : d.Email,
+                        HouseAddress=d.HouseAddress == null ? "" : d.HouseAddress,
+                        PhoneNumber=d.PhoneNumber== null ? "" : d.PhoneNumber,
+                        CourseOfStudy=d.CourseOfStudy== null ? "" :d.CourseOfStudy,
+                        YearOfEntry=d.YearOfEntry== null ? null : d.YearOfEntry,
+                        YearOfGraduation=d.YearOfGraduation==null ? null: d.YearOfGraduation,
+                        AcademicSessionDate=d.AcademicSessionDate, 
+                        AcademicSessionDate2=d.AcademicSessionDate2,
+                        FullAcademicSession=c.AcademicSectionDate == null ? "" : c.AcademicSectionDate
+                    });
+        }
         public async Task<bool> AddOrUpdateESMAfAsync(EsmafData model)
         {
-            
             int academicSession = int.Parse(model.AcademicSessionDate);
             int academicSession2 = int.Parse(model.AcademicSessionDate2);
             int yearOfEntry = int.Parse(model.YearOfEntry);
@@ -52,11 +74,14 @@ namespace Infrastructure.Service
                         HouseAddress = model.HouseAddress,
                         YearOfEntry = yearOfEntry,
                         YearOfGraduation = yearOfGraduation,
+                        AcademicSessionDate=academicSession,
+                        AcademicSessionDate2=academicSession2
+                        
                     };
                     saveData.eSMAF.Add(data);
                     result = await saveData.SaveChangesAsync() > 0;
 
-                    var data2 = new PastExecutive
+                    var data2 = new PastExecutive // The of this capture is to gather all executive in one table.
                     {
                         SurnameExcos = model.Surname,
                         OthernameExcos = model.Othernames,
@@ -270,8 +295,8 @@ namespace Infrastructure.Service
                     esmaf.Faculty = model.Faculty;
                     esmaf.CourseOfStudy = model.CourseOfStudy;
                     esmaf.HouseAddress = model.HouseAddress;
-                    esmaf.YearOfEntry = 0;
-                    esmaf.YearOfGraduation = 0;
+                    esmaf.YearOfEntry = yearOfEntry;
+                    esmaf.YearOfGraduation = yearOfGraduation;
                     esmaf.UnitServed = model.UnitServed;
 
                     result = await saveData.SaveChangesAsync()>0 ;

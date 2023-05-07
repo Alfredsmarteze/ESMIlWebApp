@@ -9,18 +9,22 @@ namespace DataStructure.ViewModel
 {
     public class ESMAFDTO
     {
-        public int Id { get; set; }
-        public string? Surname { get; set; }
-        public string? Othernames { get; set; }
-        public string? Gender { get; set; }
-        public string? PhoneNumber { get; set; }
-        public string? Email { get; set; }
-        public string? HouseAddress { get; set; }
-        public string? CourseOfStudy { get; set; }
-        public string? Faculty { get; set; }
-        public DateTime? YearOfEntry { get; set; }
-        public DateTime? YearOfGraduation { get; set; }
+        public int? Id { get; set; }
+        public string Surname { get; set; }
+        public string Othernames { get; set; }
+        public string Gender { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public string HouseAddress { get; set; }
+        public string CourseOfStudy { get; set; }
+        public string Faculty { get; set; }
+        public int? YearOfEntry { get; set; }
+        public int? YearOfGraduation { get; set; }
         public string UnitServed { get; set; }
+        public string Office { get; set; }
+        public string FullAcademicSession { get; set; }
+        public int? AcademicSessionDate { get; set; }
+        public int? AcademicSessionDate2 { get; set; }
         public PastExecutive PastExcos { get; set; }
         public string strngYearOfEntry { get { if (YearOfEntry.HasValue) { return YearOfEntry.Value.ToString("MM/dd/yyyy"); } else return string.Empty; } }
         public string strngYearOfGraduation {get{ if (YearOfGraduation.HasValue) { return YearOfGraduation.Value.ToString("MM/dd/yyyy"); } else return string.Empty; } }
