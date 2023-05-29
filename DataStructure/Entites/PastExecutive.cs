@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace DataStructure.Entites
 {
     public class PastExecutive
     {
-        
+        [Key]
         public int Id { get; set; }
         public string? SurnameExcos { get; set; }
         public string? OthernameExcos { get; set; }
@@ -20,8 +21,8 @@ namespace DataStructure.Entites
         public string? AcademicSectionDate { get; set; }
         //public DateTime? AcademicSectionDate2 { get; set; }
         //public DateTime? FullAcademicSectionDate { get; set; }
+        [ForeignKey("EsmafId")]
         public ESMAF ESMAF { get; set; }
-        [Key]
         public int EsmafId { get; set; }
     }
 }

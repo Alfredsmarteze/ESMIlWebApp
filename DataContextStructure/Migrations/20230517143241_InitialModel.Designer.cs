@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataContextStructure.Migrations
 {
     [DbContext(typeof(ESMContext))]
-    [Migration("20221216072027_init4")]
-    partial class init4
+    [Migration("20230517143241_InitialModel")]
+    partial class InitialModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -316,6 +316,12 @@ namespace DataContextStructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
+                    b.Property<int>("AcademicSessionDate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AcademicSessionDate2")
+                        .HasColumnType("int");
+
                     b.Property<string>("CourseOfStudy")
                         .HasColumnType("nvarchar(max)");
 
@@ -344,7 +350,6 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UnitServed")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("YearOfEntry")
@@ -354,10 +359,6 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PastId")
-                        .IsUnique()
-                        .HasFilter("[PastId] IS NOT NULL");
 
                     b.ToTable("eSMAF");
                 });
@@ -515,11 +516,11 @@ namespace DataContextStructure.Migrations
 
             modelBuilder.Entity("DataStructure.Entites.PastExecutive", b =>
                 {
-                    b.Property<int>("EsmafId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EsmafId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("AcademicSectionDate")
                         .HasColumnType("nvarchar(max)");
@@ -527,11 +528,11 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
 
                     b.Property<string>("Office")
                         .HasColumnType("nvarchar(max)");
@@ -545,7 +546,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("SurnameExcos")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("EsmafId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
 
                     b.ToTable("pastExecutive");
                 });
@@ -900,6 +903,38 @@ namespace DataContextStructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("prayerUnit");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.ProgramTable", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Cordinator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ProgramDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Programme")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Speaker")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("programTable");
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PublicityAndEditorialUnit", b =>
@@ -1502,15 +1537,15 @@ namespace DataContextStructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("DataStructure.Entites.ESMAF", b =>
+            modelBuilder.Entity("DataStructure.Entites.PastExecutive", b =>
                 {
-                    b.HasOne("DataStructure.Entites.PastExecutive", "PastExcos")
-                        .WithOne("ESMAF")
-                        .HasForeignKey("DataStructure.Entites.ESMAF", "PastId")
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PastExcos");
+                    b.Navigation("ESMAF");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1561,12 +1596,6 @@ namespace DataContextStructure.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DataStructure.Entites.PastExecutive", b =>
-                {
-                    b.Navigation("ESMAF")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

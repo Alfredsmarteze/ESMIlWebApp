@@ -358,10 +358,6 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PastId")
-                        .IsUnique()
-                        .HasFilter("[PastId] IS NOT NULL");
-
                     b.ToTable("eSMAF");
                 });
 
@@ -518,11 +514,11 @@ namespace DataContextStructure.Migrations
 
             modelBuilder.Entity("DataStructure.Entites.PastExecutive", b =>
                 {
-                    b.Property<int>("EsmafId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EsmafId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("AcademicSectionDate")
                         .HasColumnType("nvarchar(max)");
@@ -530,11 +526,11 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
 
                     b.Property<string>("Office")
                         .HasColumnType("nvarchar(max)");
@@ -548,7 +544,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("SurnameExcos")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("EsmafId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
 
                     b.ToTable("pastExecutive");
                 });
@@ -1537,15 +1535,15 @@ namespace DataContextStructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("DataStructure.Entites.ESMAF", b =>
+            modelBuilder.Entity("DataStructure.Entites.PastExecutive", b =>
                 {
-                    b.HasOne("DataStructure.Entites.PastExecutive", "PastExcos")
-                        .WithOne("ESMAF")
-                        .HasForeignKey("DataStructure.Entites.ESMAF", "PastId")
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PastExcos");
+                    b.Navigation("ESMAF");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1596,12 +1594,6 @@ namespace DataContextStructure.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DataStructure.Entites.PastExecutive", b =>
-                {
-                    b.Navigation("ESMAF")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
