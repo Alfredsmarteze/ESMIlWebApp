@@ -81,6 +81,7 @@ namespace Infrastructure.Service
                     saveData.eSMAF.Add(data);
                     result = await saveData.SaveChangesAsync() > 0;
 
+                    
                     var data2 = new PastExecutive // The of this capture is to gather all executive in one table.
                     {
                         SurnameExcos = model.Surname,
@@ -89,6 +90,7 @@ namespace Infrastructure.Service
                         Phone=model.PhoneNumber,
                         Email = model.Email,
                         Office = model.Office,
+                        EsmafId = data.Id.Value,
                         AcademicSectionDate = $"{academicSession}/{academicSession2}"
                     };
                     saveData.pastExecutive.Add(data2);

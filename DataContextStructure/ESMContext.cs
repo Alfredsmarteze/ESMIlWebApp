@@ -55,17 +55,17 @@ namespace DataContextStructure
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder
-            .Entity<ESMAF>()
-            .HasOne(e => e.PastExcos)
-            .WithOne(e => e.ESMAF).IsRequired()
-            .HasForeignKey<PastExecutive>(s => s.EsmafId).IsRequired();//.OnDelete(DeleteBehavior.NoAction);
+            //builder
+            //.Entity<ESMAF>()
+            //.HasOne(e => e.PastExcos)
+            //.WithOne(e => e.ESMAF).IsRequired()
+            //.HasForeignKey<PastExecutive>(s => s.EsmafId).IsRequired();//.OnDelete(DeleteBehavior.NoAction);
 
-            builder
-            .Entity<PastExecutive>()
-            .HasOne(e => e.ESMAF)
-            .WithOne(e => e.PastExcos)
-            .HasForeignKey<ESMAF>(s => s.PastId);
+            //builder
+            //.Entity<PastExecutive>()
+            //.HasOne(e => e.ESMAF)
+            //.WithOne(e => e.PastExcos)
+            //.HasForeignKey<ESMAF>(s => s.PastId);
         }
 
 
