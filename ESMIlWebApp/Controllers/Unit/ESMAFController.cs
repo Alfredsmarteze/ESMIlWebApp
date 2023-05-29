@@ -99,7 +99,7 @@ namespace ESMIlWebApp.Controllers.Unit
                 catch (Exception e)
                 {
                     _logger.LogError("Error", e.Message);
-                    errorMessage = e.Message;
+                    errorMessage = e.InnerException.Message;
                 }
                 return Json(new ResponseModel { message = $" Error:\a {errorMessage}" });
             

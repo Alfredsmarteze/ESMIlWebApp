@@ -1,0 +1,62 @@
+﻿@model DataStructure.ViewModel.ProgrammeTableDTO;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h5 class="text-muted">Add Programme</h5>
+<div class="container" style="background-color:lightblue">
+    <form id="clearFrm">
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group">
+                    <label class="form-label">Speaker</label>
+                    <input id="rowId" type="hidden">
+                    <input class="form-control" id="txtSpeaker" value="@Model.Speaker" type="text" readonly placeholder="">
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label class="form-label">Cordinator</label>
+                    <input class="form-control" id="txtCordinator" value="@Model.Cordinator" readonly type="text" placeholder="">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label class="form-label">Programme</label>
+                    <input class="form-control" id="txtProgramme" value="@Model.Programme" readonly type="text" placeholder="">
+                </div>
+            </div>
+        </div>
+        <br />
+        <br>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group mg-b-10-force">
+                    <label for="">Programme Date </label>
+                    <div class="ate-input">
+                        <div class="ate-input">
+                            <input type="text" class="date form-control" value="@Model.strDate" readonly placeholder="Date" id="txtProgrammeDate">
+                        </div>
+                    </div>
+                </div>
+            </div><!-- col-4 -->
+            <div class="col-4">
+                <div class="form-group mg-b-10-force">
+                    <label class="form-label">Note</label>
+                    <input class="form-control" id="txtNote" value="@Model.Note" readonly type="text" placeholder="">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group mg-b-10-force">
+                    <label class="form-label">Programme Status</label>
+                    <input class="form-control" id="txtNote" value="@Model.ProgrammeStatus" readonly type="text" placeholder="">
+                </div>
+            </div>
+            <br /><br />
+        </div>
+
+        
+    </form>
+</div>
+

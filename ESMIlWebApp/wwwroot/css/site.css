@@ -2,6 +2,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Gaegu:wght@300&family=Libre+Baskerville:ital@0;1&family=Sedgwick+Ave+Display&family=Sigmar&display=swap');
 
+.btnsave{
+    padding:1.0rem;
+}
+.datediv{
+    padding:0.5rem;
+}
 .fonts, .contact {
     /*font-family: 'Sigmar', cursive;*/
     font-family: 'Bungee Shade', cursive;

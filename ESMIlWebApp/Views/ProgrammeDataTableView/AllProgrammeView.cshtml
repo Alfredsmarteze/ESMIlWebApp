@@ -16,32 +16,19 @@
         <thead>
             <tr>
                 @* <th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>*@
-                <th>Actions</th>
-                <th>ID</th>
                 <th>Speaker</th>
                 <th>Cordinator</th>
                 <th>Programme</th>
                 <th>Programme Date </th>
                 <th>Note</th>
                 <th>Status</th>
-             </tr>
+            </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
     @*</div>*@
 </div>
-
-
-
-@using (Html.BeginForm("ViewProgramme", "ProgrammeDataTableView", FormMethod.Post, new { id = "viewProgrammeDataForm", target = "_blank" }))
-{
-    <input type="hidden" name="viewRecordId" id="viewRecordId">
-}
-@using (Html.BeginForm("UpdateProgramme", "ProgrammeDataTableView", FormMethod.Post, new { id = "updateProgrammeDataForm", target = "_blank" }))
-{
-    <input type="hidden" name="updateRecordId" id="updateRecordId">
-}
 
 
 @section scripts{
@@ -70,18 +57,7 @@
                 "data": function (arg) { }
             },
             "columns": [
-                {
-                    "data": null, "name": "Action", "defaultContent": '<div class="btn-group mr-1 mb-1">' +
-                        "<button aria-expanded='false' aria-haspopup='true' class='btn btn-white dropdown-toggle' data-toggle='dropdown' id='dropdownMenuDetail' type='button'></button>" +
-                        "<div aria-labelledby='dropdownMenuButton6' class='dropdown-menu'>" +
-                        "<a class='dropdown-item' href='#' id='changeRecord' title='Update record'><i class='fa fa-edit'></i>&nbsp; Update record</a>" +
-                        "<a class='dropdown-item' href='#' id='viewRecord' title='View record'><i class='fa fa-info-circle'></i>&nbsp; View record</a>" +
-                        "</div>" +
-                        '</div>'
-
-                },
-
-                { "data": "id", "name": "id", "autoWidth": false },
+                
                 { "data": "speaker", "name": "speaker", "autoWidth": false },
                 { "data": "cordinator", "name": "cordinator", "autoWidth": false },
                 { "data": "programme", "name": "programme", "autoWidth": false },
@@ -91,31 +67,7 @@
             ],
 
         });
-
-
-
-
-        $('#programmeDataTable tbody').on('click', '#viewRecord', function (e) {
-            e.preventDefault();
-            var data = table.row($(this).parents('tr')).data();
-            $("#viewRecordId").val(data.id);
-            $("#viewProgrammeDataForm").submit();
-
-        });
-
-        $('#programmeDataTable tbody').on('click', '#changeRecord', function (e) {
-            e.preventDefault();
-            var data = table.row($(this).parents('tr')).data();
-            $("#updateRecordId").val(data.id);
-            $("#updateProgrammeDataForm").submit();
-
-        });
-
-        $('#newRecord').on('click', function (e) {
-            e.preventDefault();
-            var returnUrl = '@Url.Action("AddProgramme", "ProgrammeDataTableView")';
-            window.location.href = returnUrl;
-        })
+        
 
     </script>
 }

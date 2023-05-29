@@ -23,7 +23,11 @@ namespace ESMIlWebApp.Controllers.ProgrammeDataTableView
         [HttpGet]
         [Route("AllProgramme")]
         public IActionResult AllProgramme()=>View();
-        
+
+        [HttpGet]
+        [Route("OurProgramme")]
+        public IActionResult AllProgrammeView() => View();
+
         [Route("Update/Programme")]
         public IActionResult UpdateProgramme() 
         {
@@ -39,7 +43,7 @@ namespace ESMIlWebApp.Controllers.ProgrammeDataTableView
 
             return View(model);
         }
-
+        [Route("View/Programme")]
         public IActionResult ViewProgramme() 
         {
             var model= new ProgrammeTableDTO();

@@ -14,6 +14,7 @@ namespace DataStructure.Entites
         public string Cordinator { get; set; }
         public string Note { get; set; }
         public DateTime ProgramDate { get; set; }
+        public string ProgrammeStatus { get; set; }
         
     }
 }

@@ -42,6 +42,7 @@ namespace ESMIlWebApp.Controllers.ProgrammeDataTable
                       || s.Cordinator.ToLower().Contains(search)
                       || s.Programme.ToLower().Contains(search)
                       || s.Note.ToLower().Contains(search)
+                      || s.ProgrammeStatus.ToLower().Contains(search)
                       || s.strDate.ToLower().Contains(search)).ToList();
 
                 }

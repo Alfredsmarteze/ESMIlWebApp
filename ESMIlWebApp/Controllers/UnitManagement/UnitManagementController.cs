@@ -216,7 +216,7 @@ namespace ESMIlWebApp.Controllers.UnitManagement
             return View(model);
         }
 
-        [HttpGet]
+        
         [Route("View/DMEUnit/Data")]
         public IActionResult ViewDmeUnit()
         {
