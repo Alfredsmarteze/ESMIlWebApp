@@ -8,38 +8,38 @@
 <h5 class="text-muted">You are viewing <span class="text-bright">@Model.Surname's</span> record</h5>
 <div class="container" style="background-color:lightblue">
     <div class="row">
-      <form >
+        <form >
         <div class="row">
-          <div class="col-4">
+        <div class="col-4">
             <div class="form-group">
             <label class="form-label">Surname</label>
-            <input id="rowId" type="hidden" value="@Model.Id">
+            <input id="rowId" type="hidden">
             <input class="form-control" id="txtSurname" type="text" value="@Model.Surname" readonly>
             </div>
            
-          </div>
-          <div class="col-4">
+        </div>
+        <div class="col-4">
             <div class="form-group">
             <label class="form-label">Firstname</label>
             <input class="form-control" id="txtFirstname" type="text" value="@Model.Firstname" readonly>
             </div>
-          </div>
-          <div class="col-4">
+        </div>
+        <div class="col-4">
             <div class="form-group">
             <label class="form-label">Middlename</label>
             <input class="form-control" id="txtMiddlename" type="text" value="@Model.Middlename" readonly>
             </div>
-          </div>
+        </div>
         </div>
         <br/>
         <div class="row">
-          <div class="col-lg-4">
+        <div class="col-lg-4">
            <div class="form-group mg-b-10-force">
               <label class="form-control-label">Gender</label>
-           <vc:gender></vc:gender> 
+          <vc:gender></vc:gender> 
           </div>
-         </div>
-          <div class="col-lg-4">
+        </div>
+        <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label for="">Date Of Birth</label>
                                 <div class="date-input">
@@ -48,16 +48,16 @@
                                     </div>
                                 </div>
                             </div>
-          </div><!-- col-4 -->
+                        </div><!-- col-4 -->
         </div>
         <br>
         <div class="row">
-          <div class="col-lg-4">
-            <div class="form-group mg-b-10-force">
+        <div class="col-lg-4">
+           <div class="form-group mg-b-10-force">
               <label class="form-control-label">State of origin</label>
-              <vc:state></vc:state> 
-            </div>
+          <vc:state></vc:state> 
           </div>
+        </div>
         </div>
         <div class="row">
         <div class="col-lg-4">
@@ -65,7 +65,7 @@
               <label class="form-control-label">LGA</label>
           <vc:lga></vc:lga> 
           </div>
-         </div>
+        </div>
         </div>
         <br/>
         <div class="row">
@@ -91,59 +91,57 @@
         <br/>
         <div class="row">
         
-          <div class="col-4">
+        <div class="col-4">
             <div class="form-group">
             <label class="form-label">Hostel Address</label>
             <input class="form-control" id="txtHostelAddress" type="text" value="@Model.HostelAddress" readonly>
             </div>
-          </div>
-          <div class="col-4">
+        </div>
+         <div class="col-4">
             <div class="form-group">
-              <label class="form-label">Home Address</label>
-              <input class="form-control" id="txtHomeAddress" type="text" value="@Model.HomeAddress" readonly>
+            <label class="form-label">Home Address</label>
+            <input class="form-control" id="txtHomeAddress" type="text" value="@Model.HomeAddress" readonly>
             </div>
-         </div>
+        </div>
                
         <div/>
         </div>
         <br/>
         <div class="row">
-           <div class="col-4">
-              <div class="form-group">
-                 <label class="form-label">Course of Study</label>
-                 <input class="form-control" id="txtCourseOfStudy" type="text" value="@Model.CourseOfStudy"  readonly>
-              </div>
-            </div>
-           <div class="col-4">
+         <div class="col-4">
             <div class="form-group">
-                <label class="form-label">Ambition</label>
-                <input class="form-control" id="txtAmbition" type="text" value="@Model.Ambition"  readonly>
+            <label class="form-label">Course of Study</label>
+            <input class="form-control" id="txtCourseOfStudy" type="text" value="@Model.CourseOfStudy"  readonly>
             </div>
-          </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Ambition</label>
+            <input class="form-control" id="txtAmbition" type="text" value="@Model.Ambition"  readonly>
+            </div>
+        </div>
 
         
         <div class="col-4">
             <div class="form-group">
-               <label class="form-label">Previous Unit</label>
-               <vc:unit></vc:unit>
+            <label class="form-label">Previous Unit</label>
+            <vc:unit></vc:unit>
             </div>
-        </div>
         </div>
         <br/>
-       <div class="row">
-            <div class="col-4">
-                <div class="form-group">
-                    <label class="form-label">Position in Family</label>
-                    <input class="form-control" id="txtPositionInFamily" type="text" value="@Model.PositionInFamily" readonly>
-                </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Position in Family</label>
+            <input class="form-control" id="txtPositionInFamily" type="text" value="@Model.PositionInFamily" readonly>
             </div>
-            <div class="col-4">
-                <div class="form-group">
-                    <label class="form-label">Social Media Address</label>
-                    <input class="form-control" id="txtSocialMediaAddress" type="text" value="@Model.SocialMediaAddress" readonly>
-                </div>
-           </div>
-              <div class="col-lg-4">
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+            <label class="form-label">Social Media Address</label>
+            <input class="form-control" id="txtSocialMediaAddress" type="text" value="@Model.SocialMediaAddress" readonly>
+            </div>
+        </div>
+        <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label for="">Date Join ESM</label>
                                 <div class="ate-input">
@@ -152,12 +150,11 @@
                                     </div>
                                 </div>
                             </div>
-              </div><!-- col-4 -->
-       </div>
-        
+                        </div><!-- col-4 -->
+        </div>
         
        
-      </form>
+        </form>
     </div>
 </div>
 @section scripts{

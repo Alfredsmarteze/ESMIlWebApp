@@ -33,7 +33,6 @@ namespace Infrastructure.Service
                     ProgramDate = splitDate,
                     Programme=programmeTableData.Programme,
                     Note = programmeTableData.Note,
-                    ProgrammeStatus = programmeTableData.ProgrammeStatus,
                 };
                 _context.programTable.Add(addData);
                 result = await _context.SaveChangesAsync() > 0;
@@ -47,7 +46,6 @@ namespace Infrastructure.Service
                     getId.Cordinator=programmeTableData.Cordinator;
                     getId.Programme = programmeTableData.Programme;
                     getId.ProgramDate = splitDate;
-                    getId.ProgrammeStatus = programmeTableData.ProgrammeStatus;
                     result = await _context.SaveChangesAsync() > 0;    
                 }
                     
@@ -60,13 +58,12 @@ namespace Infrastructure.Service
             return (from s in _context.programTable
                     select new ProgrammeTableDTO
                     {
-                        Id = s.Id==null ? 0 :s.Id,
-                        Speaker=s.Speaker==null ? "" : s.Speaker,
-                        Cordinator=s.Cordinator==null ? "" :s.Cordinator,
-                        Programme=s.Programme==null ? "" : s.Programme,
-                        Note=s.Note==null ? "": s.Note,
-                        ProgrammeDate=s.ProgramDate==null ? null:s.ProgramDate,
-                        ProgrammeStatus=s.ProgrammeStatus == null ? "" : s.ProgrammeStatus,
+                        Id = s.Id,//==null ? 0 :s.Id,
+                        Speaker=s.Speaker,//==null ? "" : s.Speaker,
+                        Cordinator=s.Cordinator,//==null ? "" :s.Cordinator,
+                        Programme=s.Programme,//==null ? "" : s.Programme,
+                        Note=s.Note,//==null ? "": s.Note,
+                        ProgrammeDate=s.ProgramDate,//==null ? null:s.ProgramDate,
                     }); 
         }
     }

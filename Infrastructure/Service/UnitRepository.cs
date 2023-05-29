@@ -13,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using DataStructure;
 using static DataStructure.ViewModel.EsmafData;
-using System.ComponentModel.Design;
 
 namespace Infrastructure.Service
 {
@@ -59,7 +58,7 @@ namespace Infrastructure.Service
             using (var saveData= _context)
             {
                 bool result;
-                if (model.Id<1)
+                if (model.Id < 1)
                 {
 
                     var data = new ESMAF
@@ -76,11 +75,11 @@ namespace Infrastructure.Service
                         YearOfEntry = yearOfEntry,
                         YearOfGraduation = yearOfGraduation,
                         AcademicSessionDate=academicSession,
-                        AcademicSessionDate2=academicSession2,
+                        AcademicSessionDate2=academicSession2
                         
                     };
                     saveData.eSMAF.Add(data);
-                    //result = await saveData.SaveChangesAsync() > 0;
+                    result = await saveData.SaveChangesAsync() > 0;
 
                     var data2 = new PastExecutive // The of this capture is to gather all executive in one table.
                     {
@@ -90,12 +89,10 @@ namespace Infrastructure.Service
                         Phone=model.PhoneNumber,
                         Email = model.Email,
                         Office = model.Office,
-                        AcademicSectionDate = $"{academicSession}/{academicSession2}",
-                        //EsmafId=model.Id
-                        
+                        AcademicSectionDate = $"{academicSession}/{academicSession2}"
                     };
                     saveData.pastExecutive.Add(data2);
-               //     _ = await saveData.SaveChangesAsync() > 0;
+                    _ = await saveData.SaveChangesAsync() > 0;
 
                     if (model.Office == GetPastExecutive.BibleStudyCordinator.ToString())
                     {
@@ -109,7 +106,7 @@ namespace Infrastructure.Service
                             AcademicSectionDate = $"{academicSession}/{academicSession2}",
                         };
                         saveData.pastBibleStudyCordinators.Add(data3);
-                      //  _ = await saveData.SaveChangesAsync() > 0;
+                        _ = await saveData.SaveChangesAsync() > 0;
                     }
                     else if (model.Office == GetPastExecutive.PrayerUnitCordinator.ToString())
                     {
@@ -123,7 +120,7 @@ namespace Infrastructure.Service
                             AcademicSectionDate = $"{academicSession}/{academicSession2}",
                         };
                         saveData.pastPrayerUnitCordinator.Add(data4);
-                       // _ = await saveData.SaveChangesAsync() > 0;
+                        _ = await saveData.SaveChangesAsync() > 0;
                     }
                     else if (model.Office == GetPastExecutive.ChoralUnitCordinator.ToString())
                     {
@@ -137,7 +134,7 @@ namespace Infrastructure.Service
                             AcademicSectionDate = $"{academicSession}/{academicSession2}",
                         };
                         saveData.pastChoralUnitCordinator.Add(data5);
-                       // _ = await saveData.SaveChangesAsync() > 0;
+                        _ = await saveData.SaveChangesAsync() > 0;
                     }
                     else if (model.Office == GetPastExecutive.WelfareUnitCordinator.ToString())
                     {
@@ -151,7 +148,7 @@ namespace Infrastructure.Service
                             AcademicSectionDate = $"{academicSession}/{academicSession2}",
                         };
                         saveData.pastWelfareUnitCordinator.Add(data6);
-                       // _ = await saveData.SaveChangesAsync() > 0;
+                        _ = await saveData.SaveChangesAsync() > 0;
                     }
                     else if (model.Office == GetPastExecutive.DramaUnitCordinator.ToString())
                     {
@@ -165,7 +162,7 @@ namespace Infrastructure.Service
                             AcademicSectionDate = $"{academicSession}/{academicSession2}",
                         };
                         saveData.pastDMECordinator.Add(data7);
-                       // _ = await saveData.SaveChangesAsync() > 0;
+                        _ = await saveData.SaveChangesAsync() > 0;
                     }
                     else if (model.Office == GetPastExecutive.TechnicalUnitCordinator.ToString())
                     {
@@ -179,7 +176,7 @@ namespace Infrastructure.Service
                             AcademicSectionDate = $"{academicSession}/{academicSession2}",
                         };
                         saveData.pastTechnicalUnitCordinator.Add(data8);
-                       // _ = await saveData.SaveChangesAsync() > 0;
+                        _ = await saveData.SaveChangesAsync() > 0;
                     }
                     else if (model.Office == GetPastExecutive.UsheringUnitCordinator.ToString())
                     {
@@ -193,7 +190,7 @@ namespace Infrastructure.Service
                             AcademicSectionDate = $"{academicSession}/{academicSession2}",
                         };
                         saveData.pastUsheringUnitCordinator.Add(data8);
-                       // _ = await saveData.SaveChangesAsync() > 0;
+                        _ = await saveData.SaveChangesAsync() > 0;
                     }
                     else if (model.Office == GetPastExecutive.PublicityUnitCordinator.ToString())
                     {
@@ -207,7 +204,7 @@ namespace Infrastructure.Service
                             AcademicSectionDate = $"{academicSession}/{academicSession2}",
                         };
                         saveData.pastPublicityUnitCordinator.Add(data9);
-                        //_ = await saveData.SaveChangesAsync() > 0;
+                        _ = await saveData.SaveChangesAsync() > 0;
                     }
                     else if (model.Office == GetPastExecutive.TransportUnitCordinator.ToString())
                     {
@@ -221,7 +218,7 @@ namespace Infrastructure.Service
                             AcademicSectionDate = $"{academicSession}/{academicSession2}",
                         };
                         saveData.pastTransportUnitCordinator.Add(data10);
-                        //_ = await saveData.SaveChangesAsync() > 0;
+                        _ = await saveData.SaveChangesAsync() > 0;
                     }
                     else if (model.Office == GetPastExecutive.DramaUnitCordinator.ToString())
                     {
@@ -235,7 +232,7 @@ namespace Infrastructure.Service
                             AcademicSectionDate = $"{academicSession}/{academicSession2}",
                         };
                         saveData.pastDramaUnitCordinator.Add(data11);
-                        //_ = await saveData.SaveChangesAsync() > 0;
+                        _ = await saveData.SaveChangesAsync() > 0;
                     }
                     else if (model.Office == GetPastExecutive.Treasurer.ToString())
                     {
@@ -249,7 +246,7 @@ namespace Infrastructure.Service
                             AcademicSectionDate = $"{academicSession}/{academicSession2}",
                         };
                         saveData.pastTreasurer.Add(data12);
-                       // _ = await saveData.SaveChangesAsync() > 0;
+                        _ = await saveData.SaveChangesAsync() > 0;
                     }
                     
                     else if (model.Office == GetPastExecutive.Secretary.ToString())
@@ -264,7 +261,7 @@ namespace Infrastructure.Service
                             AcademicSectionDate = $"{academicSession}/{academicSession2}",
                         };
                         saveData.pastSecretary.Add(data13);
-                       // _ = await saveData.SaveChangesAsync() > 0;
+                        _ = await saveData.SaveChangesAsync() > 0;
                     }
                     else if (model.Office == GetPastExecutive.President.ToString())
                     {
@@ -279,27 +276,13 @@ namespace Infrastructure.Service
                             AcademicSectionDate = $"{academicSession}/{academicSession2}",
                         };
                         saveData.pastPresident.Add(data14);
-                        
+                        _ = await saveData.SaveChangesAsync() > 0;
                     }
-                   result = await saveData.SaveChangesAsync() > 0;
                 }
                 else
                 {
-                    if (model.Office ==GetPastExecutive.President.ToString()) 
-                    {
-                        var preData = _context.pastExecutive.Find(model.Id);
-                        if (preData != null)
-                        {
-                            preData.SurnameExcos = model.Surname;
-                            preData.SurnameExcos = model.Othernames;
-                            preData.AcademicSectionDate = $"{model.AcademicSessionDate}/{model.AcademicSessionDate2}";
-                            _ = saveData.Update(preData);
-                            _ = await saveData.SaveChangesAsync();
-                        }
-                    }
                     var esmaf = _context.eSMAF.Find(model.Id);
                     if (esmaf == null)
-                    
                     {
                         throw new("Not Found");
                     }
@@ -315,13 +298,10 @@ namespace Infrastructure.Service
                     esmaf.YearOfEntry = yearOfEntry;
                     esmaf.YearOfGraduation = yearOfGraduation;
                     esmaf.UnitServed = model.UnitServed;
-                    esmaf.AcademicSessionDate = academicSession;
-                    esmaf.AcademicSessionDate2 = academicSession2;
 
                     result = await saveData.SaveChangesAsync()>0 ;
 
                 }
-                
                 
                 return result;
              }

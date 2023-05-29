@@ -4,6 +4,7 @@ using DataContextStructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataContextStructure.Migrations
 {
     [DbContext(typeof(ESMContext))]
-    partial class ESMContextModelSnapshot : ModelSnapshot
+    [Migration("20221228115317_init6")]
+    partial class init6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -314,12 +316,6 @@ namespace DataContextStructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
-                    b.Property<int>("AcademicSessionDate")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AcademicSessionDate2")
-                        .HasColumnType("int");
-
                     b.Property<string>("CourseOfStudy")
                         .HasColumnType("nvarchar(max)");
 
@@ -348,6 +344,7 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UnitServed")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("YearOfEntry")

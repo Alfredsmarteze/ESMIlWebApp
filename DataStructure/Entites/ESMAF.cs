@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +8,7 @@ namespace DataStructure.Entites
 {
     public class ESMAF
     {
-        
-        public int Id { get; set; }
+        public  int? Id { get; set; }
         public string? Surname { get; set; }
         public string? Othernames { get; set; }
         public string? Gender { get; set; }
@@ -25,8 +22,8 @@ namespace DataStructure.Entites
         public string? UnitServed { get; set; }
         public int AcademicSessionDate { get; set; }
         public int AcademicSessionDate2 { get; set; }
-        public virtual  PastExecutive PastExcos { get; set; }
-      //  public int PastId { get; set; }
+        public PastExecutive PastExcos { get; set; }
+        public int?  PastId { get; set; }
     }
     
 }

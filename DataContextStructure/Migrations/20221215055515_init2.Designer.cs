@@ -4,6 +4,7 @@ using DataContextStructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataContextStructure.Migrations
 {
     [DbContext(typeof(ESMContext))]
-    partial class ESMContextModelSnapshot : ModelSnapshot
+    [Migration("20221215055515_init2")]
+    partial class init2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -314,12 +316,6 @@ namespace DataContextStructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
-                    b.Property<int>("AcademicSessionDate")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AcademicSessionDate2")
-                        .HasColumnType("int");
-
                     b.Property<string>("CourseOfStudy")
                         .HasColumnType("nvarchar(max)");
 
@@ -348,6 +344,7 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UnitServed")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("YearOfEntry")
@@ -524,14 +521,14 @@ namespace DataContextStructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EsmafId"), 1L, 1);
 
-                    b.Property<string>("AcademicSectionDate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("AcademicSectionDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("AcademicSectionDate2")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("FullAcademicSectionDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -540,9 +537,6 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OthernameExcos")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SurnameExcos")
@@ -903,38 +897,6 @@ namespace DataContextStructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("prayerUnit");
-                });
-
-            modelBuilder.Entity("DataStructure.Entites.ProgramTable", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Cordinator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Note")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ProgramDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Programme")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Speaker")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("programTable");
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PublicityAndEditorialUnit", b =>

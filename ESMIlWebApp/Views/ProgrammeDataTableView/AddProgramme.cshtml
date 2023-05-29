@@ -30,13 +30,13 @@
         <br>
 
         <div class="row">
-            <div class="col-4">
-                <div class="form-group datediv">
-                    <label>Programme Date </label>
+            <div class="col-lg-4">
+                <div class="form-group mg-b-10-force">
+                    <label for="">Programme Date </label>
                     <div class="ate-input">
-                        @*<div class="ate-input">*@
+                        <div class="ate-input">
                             <input type="text" class="date form-control" placeholder="Date" id="txtProgrammeDate">
-                        @*</div>*@
+                        </div>
                     </div>
                 </div>
             </div><!-- col-4 -->
@@ -46,19 +46,12 @@
                     <input class="form-control" id="txtNote" type="text" placeholder="">
                 </div>
             </div>
-            <div class="col-4">
-                <div class="form-group">
-                    <label class="form-label">Programme Status</label>
-                    <vc:programme-status></vc:programme-status>
-                </div>
-            </div>
-            
+            <br />
         </div>
         
-        <div class="text-center btnsave">
-            
+        <div class="text-center">
+            <br />
             <button class="btn btn-primary" type="submit" id="saveRecord">Save</button>
-            
         </div>
     </form>
 </div>
@@ -81,7 +74,6 @@
                 Programme: $.trim($("#txtProgramme").val()),
                 Note: $.trim($("#txtNote").val()),
                 ProgrammeDate: $.trim($("#txtProgrammeDate").val()),
-                ProgrammeStatus: $("#drpProgrammeStatus").val(),
             }
 
             $.ajax({
