@@ -9,13 +9,11 @@ namespace ESMIlWebApp.Controllers.Unit
 {
     public class ESMAFController : Controller
     {
-        private readonly IUnitRepository _unitRepository;
-        private readonly IQueryRepository _queryRepository;
+        private readonly IEsmafRepository _queryRepository;
         private readonly ILogger<ESMAFController> _logger;
         string errorMessage = string.Empty;
-        public ESMAFController(ILogger<ESMAFController> logger, IUnitRepository unitRepository, IQueryRepository queryRepository)
+        public ESMAFController(ILogger<ESMAFController> logger, IEsmafRepository queryRepository)
         {
-            _unitRepository = unitRepository;
             _queryRepository = queryRepository;
             _logger = logger;
         }
@@ -34,9 +32,8 @@ namespace ESMIlWebApp.Controllers.Unit
                     payload = EncryptionExtensions.EncryptStringAES(payload);
                 var payloadd = EncryptionExtensions.DecryptStringAES(payload);
                 var model = JsonConvert.DeserializeObject<EsmafData>(payloadd);
-              //  var getId = _queryRepository.GetId(model.Id);
                 
-                var saveEsmaf =await _unitRepository.AddOrUpdateESMAfAsync(model);
+                var saveEsmaf =await _queryRepository.AddOrUpdateESMAfAsync(model);
                 if (model.Id>0)
                 {
                     return Json(new ResponseModel { message = $"{model.Surname}'s record successfully updated ", hasError = false, statusCode = (int)HttpStatusCode.OK });
@@ -47,7 +44,7 @@ namespace ESMIlWebApp.Controllers.Unit
             {
 
                 _logger.LogError("Error", e);
-                errorMessage = e.InnerException.Message;
+                errorMessage = e.Message;
             }
             return Json(new ResponseModel { message = $"Error Message {Environment.NewLine}{errorMessage}", hasError = true, statusCode = (int)HttpStatusCode.BadRequest });
         }
@@ -67,7 +64,7 @@ namespace ESMIlWebApp.Controllers.Unit
                     int skip = start != null ? Convert.ToInt32(start) : 0;
                     int totalRecord = 0;
 
-                    var esmafRecord = _unitRepository.ListAllEsmafAsync().ToList();
+                    var esmafRecord = _queryRepository.ListAllEsmafAsync().ToList();
 
                     if (!string.IsNullOrWhiteSpace(search.ToString()))
                     {

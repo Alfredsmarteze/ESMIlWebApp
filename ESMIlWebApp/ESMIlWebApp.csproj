@@ -26,6 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\ProgrammeDataTable\ProgrammeTableController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Views\Shared\Components\_ViewImports.cshtml" />
     <Content Remove="Views\Shared\_ViewImports.cshtml" />
     <Content Remove="Views\Shared\_ViewStart.cshtml" />

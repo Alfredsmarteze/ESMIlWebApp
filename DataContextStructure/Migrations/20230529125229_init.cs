@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataContextStructure.Migrations
 {
-    public partial class InitialModel : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -216,240 +216,6 @@ namespace DataContextStructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_loginInfo", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "pastBibleStudyCordinators",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_pastBibleStudyCordinators", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "pastChoralUnitCordinator",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_pastChoralUnitCordinator", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "pastDMECordinator",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_pastDMECordinator", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "pastDramaUnitCordinator",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_pastDramaUnitCordinator", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "pastPrayerUnitCordinator",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_pastPrayerUnitCordinator", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "pastPresident",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_pastPresident", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "pastPublicityUnitCordinator",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_pastPublicityUnitCordinator", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "pastSecretary",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_pastSecretary", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "pastTechnicalUnitCordinator",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_pastTechnicalUnitCordinator", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "pastTransportUnitCordinator",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_pastTransportUnitCordinator", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "pastTreasurer",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_pastTreasurer", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "pastUsheringUnitCordinator",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_pastUsheringUnitCordinator", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "pastWelfareUnitCordinator",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_pastWelfareUnitCordinator", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -797,6 +563,106 @@ namespace DataContextStructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "pastBibleStudyCordinators",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EsmafId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pastBibleStudyCordinators", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_pastBibleStudyCordinators_eSMAF_EsmafId",
+                        column: x => x.EsmafId,
+                        principalTable: "eSMAF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "pastChoralUnitCordinator",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EsmafId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pastChoralUnitCordinator", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_pastChoralUnitCordinator_eSMAF_EsmafId",
+                        column: x => x.EsmafId,
+                        principalTable: "eSMAF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "pastDMECordinator",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EsmafId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pastDMECordinator", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_pastDMECordinator_eSMAF_EsmafId",
+                        column: x => x.EsmafId,
+                        principalTable: "eSMAF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "pastDramaUnitCordinator",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EsmafId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pastDramaUnitCordinator", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_pastDramaUnitCordinator_eSMAF_EsmafId",
+                        column: x => x.EsmafId,
+                        principalTable: "eSMAF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "pastExecutive",
                 columns: table => new
                 {
@@ -816,6 +682,231 @@ namespace DataContextStructure.Migrations
                     table.PrimaryKey("PK_pastExecutive", x => x.Id);
                     table.ForeignKey(
                         name: "FK_pastExecutive_eSMAF_EsmafId",
+                        column: x => x.EsmafId,
+                        principalTable: "eSMAF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "pastPrayerUnitCordinator",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EsmafId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pastPrayerUnitCordinator", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_pastPrayerUnitCordinator_eSMAF_EsmafId",
+                        column: x => x.EsmafId,
+                        principalTable: "eSMAF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "pastPresident",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EsmafId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pastPresident", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_pastPresident_eSMAF_EsmafId",
+                        column: x => x.EsmafId,
+                        principalTable: "eSMAF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "pastPublicityUnitCordinator",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EsmafId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pastPublicityUnitCordinator", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_pastPublicityUnitCordinator_eSMAF_EsmafId",
+                        column: x => x.EsmafId,
+                        principalTable: "eSMAF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "pastSecretary",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EsmafId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pastSecretary", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_pastSecretary_eSMAF_EsmafId",
+                        column: x => x.EsmafId,
+                        principalTable: "eSMAF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "pastTechnicalUnitCordinator",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EsmafId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pastTechnicalUnitCordinator", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_pastTechnicalUnitCordinator_eSMAF_EsmafId",
+                        column: x => x.EsmafId,
+                        principalTable: "eSMAF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "pastTransportUnitCordinator",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EsmafId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pastTransportUnitCordinator", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_pastTransportUnitCordinator_eSMAF_EsmafId",
+                        column: x => x.EsmafId,
+                        principalTable: "eSMAF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "pastTreasurer",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EsmafId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pastTreasurer", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_pastTreasurer_eSMAF_EsmafId",
+                        column: x => x.EsmafId,
+                        principalTable: "eSMAF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "pastUsheringUnitCordinator",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EsmafId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pastUsheringUnitCordinator", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_pastUsheringUnitCordinator_eSMAF_EsmafId",
+                        column: x => x.EsmafId,
+                        principalTable: "eSMAF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "pastWelfareUnitCordinator",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EsmafId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pastWelfareUnitCordinator", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_pastWelfareUnitCordinator_eSMAF_EsmafId",
                         column: x => x.EsmafId,
                         principalTable: "eSMAF",
                         principalColumn: "Id",
@@ -862,8 +953,73 @@ namespace DataContextStructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_pastBibleStudyCordinators_EsmafId",
+                table: "pastBibleStudyCordinators",
+                column: "EsmafId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pastChoralUnitCordinator_EsmafId",
+                table: "pastChoralUnitCordinator",
+                column: "EsmafId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pastDMECordinator_EsmafId",
+                table: "pastDMECordinator",
+                column: "EsmafId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pastDramaUnitCordinator_EsmafId",
+                table: "pastDramaUnitCordinator",
+                column: "EsmafId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_pastExecutive_EsmafId",
                 table: "pastExecutive",
+                column: "EsmafId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pastPrayerUnitCordinator_EsmafId",
+                table: "pastPrayerUnitCordinator",
+                column: "EsmafId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pastPresident_EsmafId",
+                table: "pastPresident",
+                column: "EsmafId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pastPublicityUnitCordinator_EsmafId",
+                table: "pastPublicityUnitCordinator",
+                column: "EsmafId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pastSecretary_EsmafId",
+                table: "pastSecretary",
+                column: "EsmafId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pastTechnicalUnitCordinator_EsmafId",
+                table: "pastTechnicalUnitCordinator",
+                column: "EsmafId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pastTransportUnitCordinator_EsmafId",
+                table: "pastTransportUnitCordinator",
+                column: "EsmafId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pastTreasurer_EsmafId",
+                table: "pastTreasurer",
+                column: "EsmafId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pastUsheringUnitCordinator_EsmafId",
+                table: "pastUsheringUnitCordinator",
+                column: "EsmafId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pastWelfareUnitCordinator_EsmafId",
+                table: "pastWelfareUnitCordinator",
                 column: "EsmafId");
         }
 

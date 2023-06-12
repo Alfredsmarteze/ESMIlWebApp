@@ -20,7 +20,7 @@ builder.Services.AddTransient<IUnitRepository, UnitRepository>();
 builder.Services.AddTransient<IAccountRepository, AccountRepository>();
 builder.Services.AddTransient<IEmailRepository, EmailRepository>();
 builder.Services.AddTransient<IProgrammeTableRepository, ProgrammeTableRepository>();
-builder.Services.AddTransient<IQueryRepository, QueryRepository>();
+builder.Services.AddTransient<IEsmafRepository, EsmafRepository>();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(opt =>
 {
     opt.Password.RequireDigit = true;

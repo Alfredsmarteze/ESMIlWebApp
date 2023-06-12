@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataContextStructure.Migrations
 {
     [DbContext(typeof(ESMContext))]
-    [Migration("20230517143241_InitialModel")]
-    partial class InitialModel
+    [Migration("20230612005612_progrmTbl")]
+    partial class progrmTbl
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -435,6 +435,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
@@ -448,6 +451,8 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
 
                     b.ToTable("pastChoralUnitCordinator");
                 });
@@ -466,6 +471,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
@@ -479,6 +487,8 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
 
                     b.ToTable("pastDMECordinator");
                 });
@@ -497,6 +507,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
@@ -510,6 +523,8 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
 
                     b.ToTable("pastDramaUnitCordinator");
                 });
@@ -567,6 +582,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
@@ -580,6 +598,8 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
 
                     b.ToTable("pastPrayerUnitCordinator");
                 });
@@ -598,6 +618,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
@@ -611,6 +634,8 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
 
                     b.ToTable("pastPresident");
                 });
@@ -629,6 +654,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
@@ -642,6 +670,8 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
 
                     b.ToTable("pastPublicityUnitCordinator");
                 });
@@ -660,6 +690,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
@@ -673,6 +706,8 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
 
                     b.ToTable("pastSecretary");
                 });
@@ -691,6 +726,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
@@ -704,6 +742,8 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
 
                     b.ToTable("pastTechnicalUnitCordinator");
                 });
@@ -722,6 +762,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
@@ -735,6 +778,8 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
 
                     b.ToTable("pastTransportUnitCordinator");
                 });
@@ -753,6 +798,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
@@ -766,6 +814,8 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
 
                     b.ToTable("pastTreasurer");
                 });
@@ -784,6 +834,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
@@ -797,6 +850,8 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
 
                     b.ToTable("pastUsheringUnitCordinator");
                 });
@@ -815,6 +870,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
@@ -828,6 +886,8 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
 
                     b.ToTable("pastWelfareUnitCordinator");
                 });
@@ -925,6 +985,10 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Programme")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProgrammeStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -1357,6 +1421,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
@@ -1370,6 +1437,8 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
 
                     b.ToTable("pastBibleStudyCordinators");
                 });
@@ -1537,7 +1606,150 @@ namespace DataContextStructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("DataStructure.Entites.PastChoralUnitCordinator", b =>
+                {
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ESMAF");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.PastDMECordinator", b =>
+                {
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ESMAF");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.PastDramaUnitCordinator", b =>
+                {
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ESMAF");
+                });
+
             modelBuilder.Entity("DataStructure.Entites.PastExecutive", b =>
+                {
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ESMAF");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.PastPrayerUnitCordinator", b =>
+                {
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ESMAF");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.PastPresident", b =>
+                {
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ESMAF");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.PastPublicityUnitCordinator", b =>
+                {
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ESMAF");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.PastSecretary", b =>
+                {
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ESMAF");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.PastTechnicalUnitCordinator", b =>
+                {
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ESMAF");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.PastTransportUnitCordinator", b =>
+                {
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ESMAF");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.PastTreasurer", b =>
+                {
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ESMAF");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.PastUsheringUnitCordinator", b =>
+                {
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ESMAF");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.PastWelfareUnitCordinator", b =>
+                {
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ESMAF");
+                });
+
+            modelBuilder.Entity("DataStructure.PastBibleStudyCordinator", b =>
                 {
                     b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
                         .WithMany()

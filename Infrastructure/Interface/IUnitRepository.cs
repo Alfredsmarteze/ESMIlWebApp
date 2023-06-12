@@ -9,8 +9,6 @@ namespace Infrastructure.Interface
 {
     public interface IUnitRepository
     {
-        Task AddUpdateESMAfAsync<T>(T pastExecutiveData);
-        Task<bool> AddOrUpdateESMAfAsync(EsmafData pastExecutiveData);
         Task<bool> AddOrUpdateFirstTimerAsync(FirstTimerData firstTimerData);
         Task<bool> AddOrUpdateTransportUnitAsync(TransportUnitData transportUnitData);
         Task<bool> AddOrUpdateUsheringUnitAsync(UsheringUnitData usheringUnitData);
@@ -22,7 +20,6 @@ namespace Infrastructure.Interface
         Task<bool> AddOrUpdatePrayerUnitAsync(PrayerUnitDTOData prayerUnitDTO);
         Task<bool> AddOrUpdateChoralUnitAsync(ChoralUnitData choralUnitData);
         IQueryable<FirstTimerDTO> ListAllFirstTimerAsync();
-        IQueryable<ESMAFDTO>ListAllEsmafAsync();
         IQueryable<TransportUnitDTO> ListAllTransportUnitAsync();
         IQueryable<UsheringUnitDTO> ListAllUsheringUnitAsync();
         IQueryable<TechnicalUnitDTO> ListAllTechnicalUnitAsync();

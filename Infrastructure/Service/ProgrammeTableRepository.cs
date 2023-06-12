@@ -33,6 +33,7 @@ namespace Infrastructure.Service
                     ProgramDate = splitDate,
                     Programme=programmeTableData.Programme,
                     Note = programmeTableData.Note,
+                    ProgrammeStatus= programmeTableData.ProgrammeStatus,
                 };
                 _context.programTable.Add(addData);
                 result = await _context.SaveChangesAsync() > 0;
@@ -46,6 +47,7 @@ namespace Infrastructure.Service
                     getId.Cordinator=programmeTableData.Cordinator;
                     getId.Programme = programmeTableData.Programme;
                     getId.ProgramDate = splitDate;
+                    getId.ProgrammeStatus = programmeTableData.ProgrammeStatus;
                     result = await _context.SaveChangesAsync() > 0;    
                 }
                     
@@ -64,6 +66,7 @@ namespace Infrastructure.Service
                         Programme=s.Programme,//==null ? "" : s.Programme,
                         Note=s.Note,//==null ? "": s.Note,
                         ProgrammeDate=s.ProgramDate,//==null ? null:s.ProgramDate,
+                        ProgrammeStatus=s.ProgrammeStatus,
                     }); 
         }
     }
