@@ -7,10 +7,12 @@ namespace ESMIlWebApp.Controllers.UnitManagement
 
     public class UnitManagementController : Controller
     {
-        private IUnitRepository _unitRepository;
-        public UnitManagementController(IUnitRepository unitRepository)
+        private readonly IUnitRepository _unitRepository;
+        private IEsmafRepository _esmafRepository;
+        public UnitManagementController(IEsmafRepository esmafRepository, IUnitRepository unitRepository)
         {
             _unitRepository = unitRepository;
+            _esmafRepository = esmafRepository;
         }
         public IActionResult Index()
         {
@@ -35,7 +37,7 @@ namespace ESMIlWebApp.Controllers.UnitManagement
                 return View();
             }
             var id = int.Parse(rowId);
-            model=_unitRepository.ListAllEsmafAsync().Where(s=>s.Id==id).FirstOrDefault();
+            model=_esmafRepository.ListAllEsmafAsync().Where(s=>s.Id==id).FirstOrDefault();
             return View(model);
         }
         [Route("View/ESMAF/Data")]
@@ -49,7 +51,8 @@ namespace ESMIlWebApp.Controllers.UnitManagement
                 return View();
             }
             var id = int.Parse(rowId);
-            model=_unitRepository.ListAllEsmafAsync().Where(s=>s.Id==id).FirstOrDefault();
+            model=
+                _esmafRepository.ListAllEsmafAsync().Where(s=>s.Id==id).FirstOrDefault();
             return View(model);
         }
         [HttpGet]

@@ -16,6 +16,7 @@ namespace ESMIlWebApp.ViewComponents
         {
             List<ProgrammeStatusModel> reason = new List<ProgrammeStatusModel>()
             {
+                new ProgrammeStatusModel{Value="Select value"},
                 new ProgrammeStatusModel{Value="Done"},
                 new ProgrammeStatusModel{Value="Pending"},
             };
