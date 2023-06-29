@@ -6,7 +6,7 @@
     <form id="clearFrm">
         <div class="row">
             <div class="col-4">
-                <div class="form-group">
+                <div class="form-group required">
                     <label class="form-label">Speaker</label>
                     <input id="rowId" type="hidden">
                     <input class="form-control" id="txtSpeaker" type="text" placeholder="">
@@ -14,13 +14,13 @@
 
             </div>
             <div class="col-4">
-                <div class="form-group">
+                <div class="form-group required">
                     <label class="form-label">Cordinator</label>
                     <input class="form-control" id="txtCordinator" type="text" placeholder="">
                 </div>
             </div>
             <div class="col-4">
-                <div class="form-group">
+                <div class="form-group required">
                     <label class="form-label">Programme</label>
                     <input class="form-control" id="txtProgramme" type="text" placeholder="">
                 </div>
@@ -31,7 +31,7 @@
 
         <div class="row">
             <div class="col-lg-4">
-                <div class="form-group mg-b-10-force">
+                <div class="form-group mg-b-10-force required">
                     <label for="">Programme Date </label>
                     <div class="ate-input">
                         <div class="ate-input">
@@ -48,9 +48,10 @@
             </div>
             <br />
             <div class="col-4">
-                <div class="form-group">
+                <div class="form-group required">
                     <label class="form-label">Status</label>
-                    <div id="warning"> <vc:programme-status></vc:programme-status></div>
+                    <div id="warning" height> </div>
+                        <vc:programme-status></vc:programme-status>
                 </div>
             </div>
             <br />
@@ -74,17 +75,46 @@
         $("#saveRecord").click(function (e) {
             e.preventDefault();
 
-            if ($("#drpProgrammeStatus").val()=="Select value")
-            {
-                Swal.fire('Please select a value', '', 'warning');
-                $("#drpProgrammeStatus").css({ 'background-color': 'yellow' });
-                //document.getElementById("#warning").style.color = "blue";
+            if ($("#drpProgrammeStatus").val() == "Select value") {
+                Swal.fire('Please select a value.', '', 'warning');
+                $("#warning").css({'background-color': 'orange', 'height': '7px', 'width': '100%' });
                 return;
             }
             else{
-                $("#drpProgrammeStatus").css({ 'background-color': '' });
+                $("#warning").css({ 'background-color': '', 'height': '', 'width': '' });
             }
-            
+            if (!$("#txtProgrammeDate").val()) {
+                Swal.fire('Please select a date.', '', 'warning');
+                $("#txtProgrammeDate").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtProgrammeDate").css({ 'background-color': '' });
+            }
+            if (!$("#txtSpeaker").val()) {
+                Swal.fire('Please input a value.', '', 'warning');
+                $("#txtSpeaker").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtSpeaker").css({ 'background-color': '' });
+            }
+            if (!$("#txtProgramme").val()) {
+                Swal.fire('Please input a value.', '', 'warning');
+                $("#txtProgramme").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtProgramme").css({ 'background-color': '' });
+            }
+            if (!$("#txtCordinator").val()) {
+                Swal.fire('Please input a value.', '', 'warning');
+                $("#txtCordinator").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtCordinator").css({ 'background-color': '' });
+            }
             var body = {
                 Id: $("#rowId").val() == "" ? 0 : $.trim($("#rowId").val()),
                 Speaker: $.trim($("#txtSpeaker").val()),
@@ -105,9 +135,6 @@
                         Swal.fire(response.message, '', 'success');
                         $("#clearFrm").clearForm();
                     }
-                    //else if(response.warning == false) {
-                    //    Swal.fire(response.message, '', 'warning');
-                    //}
                     else if(response.hasError == true) {
                         Swal.fire(response.message, '', 'error');
                     }

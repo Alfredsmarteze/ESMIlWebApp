@@ -96,7 +96,7 @@ namespace ESMIlWebApp.Controllers.ProgrammeDataTable
             {
                 _logger.LogError("Error", ex.Message);
                 errorMessage = ex.Message;
-                return Json(new ResponseModel { message = $"Error Message: {errorMessage}",  statusCode = (int)HttpStatusCode.Conflict });
+                return Json(new ResponseModel { message = $"Error Message: {errorMessage}", hasError=true,  statusCode = (int)HttpStatusCode.Conflict });
             }
             
             

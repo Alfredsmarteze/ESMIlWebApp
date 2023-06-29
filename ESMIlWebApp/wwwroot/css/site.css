@@ -7,6 +7,9 @@
     font-family: 'Bungee Shade', cursive;
     font-size:28px;
 }
+.required label::after {
+    content: "*";
+}
 .welcome {
     font-family: 'Sedgwick Ave Display', cursive;
     padding:3rem;
