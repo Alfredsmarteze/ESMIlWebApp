@@ -1,0 +1,139 @@
+﻿@{
+    ViewData["Title"] = "General Member";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<style>
+
+</style>
+
+<button class="btn btn-primary btn-rounded" id="newRecord">Capture New Record</button>
+<br>
+<br>
+<div class="table-responsive">
+    @*<div style="overflow-x:scroll">*@
+    <table id="generalMemberTable" width="100%" class="stripe hover">
+        <thead>
+            <tr>
+                @* <th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>*@
+                <th>Actions</th>
+                <th>Surname</th>
+                <th>Firstname</th>
+                <th>Othername</th>
+                <th>Gender</th>
+                <th>State Of Origin</th>
+                <th>LGA</th>
+                <th>Phone Number </th>
+                <th>Email </th>
+                <th>Department</th>
+                <th>Faculty</th>
+                <th>Ambition</th>
+                <th>Hostel Address</th>
+                <th>Home Address</th>
+                <th>Social Media Address</th>
+                <th>Date Join ESM</th>
+                <th>Year of Entry</th>
+                <th>Date Of Birth</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    @*</div>*@
+</div>
+
+
+
+@using (Html.BeginForm("ViewGeneralMember", "GeneralMemberDataView", FormMethod.Post, new { id = "viewGeneralMemberForm", target = "_blank" }))
+{
+    <input type="hidden" name="viewRecordId" id="viewRecordId">
+}
+@using (Html.BeginForm("UpdateGeneralMember", "GeneralMemberDataView", FormMethod.Post, new { id = "updateGeneralMemberForm", target = "_blank" }))
+{
+    <input type="hidden" name="updateRecordId" id="updateRecordId">
+}
+
+
+@section scripts{
+    <script>
+
+        var table = $("#generalMemberTable").DataTable({
+            columnDefs: [{
+                targets: [12, 13],
+                render: $.fn.dataTable.render.ellipsis(16)
+            }],
+            "lengthMenu": [[7, 20, 25, 50, -1], [7, 20, 25, 50, "All"]],
+            "processing": true, // for show progress bar
+            "serverSide": true, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            "paginate": true,
+            "scrollX": true,
+            // colReorder: false,
+            //  rowReorder:false,
+            //select: true,
+            //dom: 'Bfrtip', , new{area="Unit"}
+            "ajax": {
+                "url": "@Url.Action("GetAllGeneralMember","GeneralMember")",
+                "type": "POST",
+                "datatype": "json",
+                "data": function (arg) { }
+            },
+            "columns": [
+                {
+                    "data": null, "name": "Action", "defaultContent": '<div class="btn-group mr-1 mb-1">' +
+                        "<button aria-expanded='false' aria-haspopup='true' class='btn btn-white dropdown-toggle' data-toggle='dropdown' id='dropdownMenuDetail' type='button'></button>" +
+                        "<div aria-labelledby='dropdownMenuButton6' class='dropdown-menu'>" +
+                        "<a class='dropdown-item' href='#' id='changeRecord' title='Update record'><i class='fa fa-edit'></i>&nbsp; Update record</a>" +
+                        "<a class='dropdown-item' href='#' id='viewRecord' title='View record'><i class='fa fa-info-circle'></i>&nbsp; View record</a>" +
+                        "</div>" +
+                        '</div>'
+
+                },
+
+                { "data": "surname", "name": "surname", "autoWidth": false },
+                { "data": "firstname", "name": "firstname", "autoWidth": false },
+                { "data": "othername", "name": "othername", "autoWidth": false },
+                { "data": "gender", "name": "gender", "autoWidth": false },
+                { "data": "stateOfOrigin", "name": "stateOfOrigin", "autoWidth": false },
+                { "data": "lga", "name": "lga", "autoWidth": false },
+                { "data": "phoneNumber", "name": "phoneNumber", "autoWidth": false },
+                { "data": "email", "name": "email", "autoWidth": false },
+                { "data": "courseOfStudy", "name": "courseOfStudy", "autoWidth": false },
+                { "data": "faculty", "name": "faculty", "autoWidth": false },
+                { "data": "ambition", "name": "ambition", "autoWidth": false },
+                { "data": "hostelAddress", "name": "hostelAddress", "autoWidth": false },
+                { "data": "houseAddress", "name": "houseAddress", "autoWidth": false },
+                { "data": "socialMediaAddress", "name": "socialMediaAddress", "autoWidth": false },
+                { "data": "strYearJoinESM", "name": "strYearJoinESM", "autoWidth": false },
+                { "data": "strYearOfEntry", "name": "strYearOfEntry", "autoWidth": false },
+                { "data": "strDateOfBirth", "name": "strDateOfBirth", "autoWidth": false }
+
+            ],
+
+        });
+
+        $('#generalMemberTable tbody').on('click', '#viewRecord', function (e) {
+            e.preventDefault();
+            var data = table.row($(this).parents('tr')).data();
+            $("#viewRecordId").val(data.id);
+            $("#viewGeneralMemberForm").submit();
+
+        });
+
+        $('#generalMemberTable tbody').on('click', '#changeRecord', function (e) {
+            e.preventDefault();
+            var data = table.row($(this).parents('tr')).data();
+            $("#updateRecordId").val(data.id);
+            $("#updateGeneralMemberForm").submit();
+
+        });
+
+        $('#newRecord').on('click', function (e) {
+            e.preventDefault();
+            var returnUrl = '@Url.Action("CreateGeneralMember", "GeneralMember")';
+            window.location.href = returnUrl;
+        });
+
+    </script>
+   }

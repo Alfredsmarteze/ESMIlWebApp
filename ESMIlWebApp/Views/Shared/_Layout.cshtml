@@ -8,26 +8,20 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/datatables/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="~/lib/datatables/css/dataTables.bootstrap4.min.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/jquery-datetimepicker/jquery.datetimepicker.css" />
     <link rel="stylesheet" href="~/css/custom2.css"/>
-    @*<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">*@
-    @*<link rel="stylesheet" href="~/lib/select2/css/select2.css" />*@
     <link rel="stylesheet" href="~/jqueryui/jquery-ui.min.css" />
     <link rel="stylesheet" href=~/css/dataTableSheet.css/>
-    @*<link rel="stylesheet" href=~/css/main.css>*@
     <link rel="stylesheet" href=~/css/StyleSheet.css/>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    @*<link rel="stylesheet" href="~/lib/datatables.net-bs5/dataTables.bootstrap5.css.min.css" />*@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ESMIlWebApp.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand text-bright" asp-area="" asp-controller="Home" asp-action="Index">ESM UniIlorin PS Chapter</a>
+                <a class="navbar-brand text-bright" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/image/esmLogodownload.jpeg" width="70" height="50" />ESM UniIlorin PS Chapter</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -71,17 +65,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Our ESMAF Data</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="ProgrammeDataTableView" asp-action="AllProgramme">Our Programme</a>
-                        </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="ProgrammeDataTableView" asp-action="OurProgramme">Our Programme</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="ProgrammeDataTableView" asp-action="AddProgramme">Our Programme</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="GeneralMemberDataView" asp-action="GeneralMember">Members</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="ESMAFDataView" asp-action="AllPastExecutive">Our Past Executive</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="About">About</a>
@@ -89,17 +81,32 @@
                         
                         
                         @if(signInManager.IsSignedIn(User))
-                         {
-                        <li class="nav-item text-white" style="margin-top:7px">@*margin-left:15px;*@
+                        {
+                            <li class="nav-item text-white" style="margin-top:7px">@*margin-left:15px;*@
                             <form method="post" asp-action="Logout" asp-controller="Account">
                                 <button type="submit" class="nav-link btn btn-link py-0" style="width:auto">
                                     <span style="color:white"> Logout @User.Identity.Name</span>
                                 </button>
                             </form>
-                        </li>
+                            </li>
                             
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="UnitManagement" asp-action="FirstTimer">First Timer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="UnitManagement" asp-action="Esmaf">Our ESMAF Data</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="GeneralMemberDataView" asp-action="AllGeneralMember">Full Member Detail</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="TestimonyView" asp-action="AllTestimony">Testimony</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="ProgrammeDataTableView" asp-action="AllProgramme">Our Programme</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="ProgrammeDataTableView" asp-action="AddProgramme">Our Programme</a>
                             </li>
                             <li class="dropdown crea " style="margin-left:15px; margin-top:7px">
                                 <a href="#" class="dropdown-toggle text-white" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Units Records</a>
@@ -134,17 +141,16 @@
                                     </li>
                                 </ul>
                             </li>
-                        <li class="nav-item">
+                            <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-                        </li>
-                         }
-                         else
-                         {
-
-                        <li class="nav-item list-unstyled float-right">
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item list-unstyled float-right">
                             <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                        </li>
-                         }
+                            </li>
+                        }
 
 
                     </ul>
@@ -173,55 +179,26 @@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/slib/popper.js/dist/umd/popper.min.js"></script>
-
-  
-    
     <script src="~/jqueryui/jquery-ui.min.js" ></script>
-    @*<script src="~/lib/datatables.net/jquery.dataTables.js" ></script>*@
     <script src="~/lib/datatables/js/jquery.dataTables.min.js" ></script>
-
-
-
-    
-@*<script src=~/lib/bootstrap/dist/js/bootstrap.js/bootstrap.bundle.js></script>*@
-
-@*uncomment when publishing*@
+    @*comment when publishing*@
+    <script src="~/slib/popper.js/dist/umd/popper.min.js"></script>
+    @*uncomment when publishing*@
 @*<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>   *@
-       
-
-    @*<script src="~/lib/datatables/js/dataTables.dataTables.min.js" ></script>*@
     <script src="~/lib/datatables/js/datatables.bootstrap4.min.js" ></script>
     <script src=~/lib/bootstrap/dist/js/bootstrap.min.js></script>
     <script src="~/jquery-datetimepicker/jquery.datetimepicker.js"></script>
     <script src="https://cdn.datatables.net/plug-ins/1.12.1/dataRender/ellipsis.js"></script>
-     
     <script src=~/lib/bootstrap/dist/js/util.js></script>
     <script src=~/lib/bootstrap/dist/js/dropdown.js></script>
-     
-
-    
-    @*<script src="~/js/select2/js/select2.js"></script>*@
-  
-@*    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
-    
-    @*<scrip src="~/lib/datatables.net-bs5/dataTables.bootstrap5.min.js"></scrip>*@
-    @*<script src="~/lib/datatables.net-bs/dataTables.bootstrap.js"></script>*@
-    @*<scrip src="~/lib/datatables.net-bs5/dataTables.bootstrap5.min.js"></scrip>*@
-    @*<script src="~/lib/dropdown.js/jquery.dropdown.js"></script>*@
     <script src="~/js/dependencies.min.js"></script>
     <script src="~/js/JavaScriptUtils.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/bootbox.js/bootbox.min.js"></script>
     <script src="~/bootbox/bootbox.locales.min.js"></script>
-    <script src="~/lib/font-awesome/js/all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  @*  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>*@
     
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -16,11 +16,15 @@ builder.Services.AddDbContext<ESMContext>(x => x.UseSqlServer(connectionString))
 
 builder.Services.AddRazorPages();   
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<ITestimonyRepository, TestimonyRepository>();
 builder.Services.AddTransient<IUnitRepository, UnitRepository>();
 builder.Services.AddTransient<IAccountRepository, AccountRepository>();
 builder.Services.AddTransient<IEmailRepository, EmailRepository>();
+builder.Services.AddTransient<IGeneralMemberRepository, GeneralMemberRepository>();
 builder.Services.AddTransient<IProgrammeTableRepository, ProgrammeTableRepository>();
 builder.Services.AddTransient<IEsmafRepository, EsmafRepository>();
+
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(opt =>
 {
     opt.Password.RequireDigit = true;

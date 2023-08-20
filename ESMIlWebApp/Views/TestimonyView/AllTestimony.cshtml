@@ -1,0 +1,159 @@
+﻿@{
+    ViewData["Title"] = "Testimony";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<style>
+
+</style>
+
+<button class="btn btn-primary btn-rounded" id="newRecord">Capture New Record</button>
+<br>
+<br>
+<div class="container-fluid">
+    <form>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group mg-b-10-force">
+                    <label class="form-control-label">No Of Testimony To Display</label> 
+                    <input id="rowId" type="hidden">
+                    <vc:testimony-number-to-display></vc:testimony-number-to-display>
+                </div>
+            </div>
+        </div><br>
+        <div class="row-2">
+            
+            <button class="btn btn-primary" type="submit" id="saveRecord">Display</button>
+        </div>
+    </form>
+</div><br>
+<div class="table-responsive">
+    <table id="testimonyTable" width="100%" class="stripe hover">
+        <thead>
+            <tr>
+                <th>Actions</th>
+                <th>ID</th>
+                <th>Surname</th>
+                <th>Firstname</th>
+                <th>Department</th>
+                <th>The Goodnews </th>
+                <th>Testimony Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+
+
+@using (Html.BeginForm("View", "TetimonyView", FormMethod.Post, new { id = "viewTestimonyForm", target = "_blank" }))
+{
+    <input type="hidden" name="viewRecordId" id="viewRecordId">
+}
+@using (Html.BeginForm("Update", "TestimonyView", FormMethod.Post, new { id = "updateTestimonyForm", target = "_blank" }))
+{
+    <input type="hidden" name="updateRecordId" id="updateRecordId">
+}
+
+
+@section scripts{
+    <script>
+
+        var table = $("#testimonyTable").DataTable({
+            columnDefs: [{
+                targets: [5],
+                render: $.fn.dataTable.render.ellipsis(30)
+            }],
+            "lengthMenu": [[7, 20, 25, 50, -1], [7, 20, 25, 50, "All"]],
+            "processing": true, // for show progress bar
+            "serverSide": true, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            "paginate": true,
+            "scrollX": true,
+            // colReorder: false,
+            //  rowReorder:false,
+            //select: true,
+            //dom: 'Bfrtip', , new{area="Unit"}
+            "ajax": {
+                "url": "@Url.Action("GetAllTestimony","Testimony")",
+                "type": "POST",
+                "datatype": "json",
+                "data": function (arg) { }
+            },
+            "columns": [
+                {
+                    "data": null, "name": "Action", "defaultContent": '<div class="btn-group mr-1 mb-1">' +
+                        "<button aria-expanded='false' aria-haspopup='true' class='btn btn-white dropdown-toggle' data-toggle='dropdown' id='dropdownMenuDetail' type='button'></button>" +
+                        "<div aria-labelledby='dropdownMenuButton6' class='dropdown-menu'>" +
+                        "<a class='dropdown-item' href='#' id='changeRecord' title='Update record'><i class='fa fa-edit'></i>&nbsp; Update record</a>" +
+                        "<a class='dropdown-item' href='#' id='viewRecord' title='View record'><i class='fa fa-info-circle'></i>&nbsp; View record</a>" +
+                        "</div>" +
+                        '</div>'
+
+                },
+
+                { "data": "id", "name": "id", "autoWidth": false },
+                { "data": "surname", "name": "surname", "autoWidth": false },
+                { "data": "firstname", "name": "firstname", "autoWidth": false },
+                { "data": "department", "name": "department", "autoWidth": false },
+                { "data": "theGoodNews", "name": "theGoodnews", "autoWidth": false },
+                { "data": "strDate", "name": "strDate", "autoWidth": false }
+
+            ],
+
+        });
+
+
+
+
+        $('#testimonyTable tbody').on('click', '#viewRecord', function (e) {
+            e.preventDefault();
+            var data = table.row($(this).parents('tr')).data();
+            $("#viewRecordId").val(data.id);
+            $("#viewTestimonyForm").submit();
+
+        });
+
+        $('#testimonyTable tbody').on('click', '#changeRecord', function (e) {
+            e.preventDefault();
+            var data = table.row($(this).parents('tr')).data();
+            $("#updateRecordId").val(data.id);
+            $("#updateTestimonyForm").submit();
+
+        });
+
+        $('#newRecord').on('click', function (e) {
+            e.preventDefault();
+            var returnUrl = '@Url.Action("CreateNewTestimony", "TestimonyView")';
+            window.location.href = returnUrl;
+        });
+
+        $('#saveRecord').on('click', function(e)
+        {
+        e.preventDefault();
+         var body={
+                Id: $("#rowId").val() == "" ? 0 : $.trim($("#rowId").val()),
+                Number: $("#drpTestimony").val(),
+         }
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("TestimonyNumber","Testimony")",
+                dataType: "Json",
+                data: { payload: JSON.stringify(body) },
+                success: function (result) {
+                    if (result.hasError == false) {
+                        Swal.fire(result.message, '', 'success');
+                       }
+                    else if (result.hasError == true) {
+                        Swal.fire(result.message, '', 'error');
+                    }
+
+                },
+
+            });
+        });
+
+    </script>
+   }

@@ -11,5 +11,6 @@ namespace Infrastructure.Interface
     {
         Task<bool> AddOrUpdateESMAfAsync(EsmafData pastExecutiveData);
         IQueryable<ESMAFDTO> ListAllEsmafAsync();
+        IQueryable<PastExecutiveDTO> ListAllPastExecutive();
     }
 }

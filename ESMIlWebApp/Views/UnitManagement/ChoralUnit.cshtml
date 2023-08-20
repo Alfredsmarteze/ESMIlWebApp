@@ -16,7 +16,6 @@
                 <tr>
                @* <th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>*@
                     <th>Actions</th>
-                    <th>ID</th>
                     <th>Surname</th>
                     <th>Firstname</th>
                     <th>Middlename</th>
@@ -72,7 +71,7 @@
       
         var table =$("#choralTable").DataTable({
         columnDefs: [ {
-        targets: [12,13],
+        targets: [11,12],
         render: $.fn.dataTable.render.ellipsis(10)
         } ],
         "lengthMenu":[[7,20,25,50, -1],[7,20,25,50,"All"]],
@@ -111,7 +110,6 @@
         //    'render':function(data, type, row, full, meta){
         //return '<img src="'+data.photo+'" alt="Passport" style="height:50px; width:50px;"/>';
         //}},
-        {"data":"id", "name":"id", "autoWidth":false},
         {"data":"surname", "name":"surname", "autoWidth":false},
         {"data":"firstname", "name":"firstname", "autoWidth":false},
         {"data":"middlename", "name":"middlename", "autoWidth":false},

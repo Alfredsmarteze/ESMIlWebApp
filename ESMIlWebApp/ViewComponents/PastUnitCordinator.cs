@@ -32,6 +32,8 @@ namespace ESMIlWebApp.ViewComponents
                new PastUnitCordinatorModel {Value="UsheringUnitCordinator"},
                new PastUnitCordinatorModel {Value="PublicityUnitCordinator"},
                new PastUnitCordinatorModel {Value="TransportUnitCordinator"},
+               new PastUnitCordinatorModel {Value="SisterUnitCordinator"},
+               new PastUnitCordinatorModel {Value="BrotherUnitCordinator"},
             };
             return pastUnitCordinators.ToList();
         }

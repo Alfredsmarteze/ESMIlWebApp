@@ -60,13 +60,13 @@ namespace Infrastructure.Service
             return (from s in _context.programTable
                     select new ProgrammeTableDTO
                     {
-                        Id = s.Id,//==null ? 0 :s.Id,
-                        Speaker=s.Speaker,//==null ? "" : s.Speaker,
-                        Cordinator=s.Cordinator,//==null ? "" :s.Cordinator,
-                        Programme=s.Programme,//==null ? "" : s.Programme,
-                        Note=s.Note,//==null ? "": s.Note,
-                        ProgrammeDate=s.ProgramDate,//==null ? null:s.ProgramDate,
-                        ProgrammeStatus=s.ProgrammeStatus,
+                        Id = s.Id==null ? 0 :s.Id,
+                        Speaker=s.Speaker==null ? "" : s.Speaker,
+                        Cordinator=s.Cordinator==null ? "" :s.Cordinator,
+                        Programme=s.Programme==null ? "" : s.Programme,
+                        Note=s.Note==null ? "": s.Note,
+                        ProgrammeDate=s.ProgramDate==null ? null:s.ProgramDate,
+                        ProgrammeStatus=s.ProgrammeStatus == null ? "" : s.ProgrammeStatus,
                     }); 
         }
     }

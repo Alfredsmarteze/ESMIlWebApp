@@ -1,4 +1,7 @@
-﻿using DataStructure;
+﻿using DataContextStructure;
+using DataStructure;
+using DataStructure.Entites;
+using DataStructure.ViewModel;
 using ESMIlWebApp.Models;
 using ESMIlWebApp.Ultilities;
 using Infrastructure.Interface;
@@ -15,18 +18,22 @@ namespace ESMIlWebApp.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
-
-        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IAccountRepository accountRepository)
+        private readonly ITestimonyRepository _testimonyRepository;
+        private readonly ESMContext _context;
+        public HomeController(ESMContext context, ITestimonyRepository testimonyRepository, ILogger<HomeController> logger, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IAccountRepository accountRepository)
         {
             this._accountRepository = accountRepository;
             _logger = logger;
             this._userManager = userManager;
             this._signInManager = signInManager;
+            this._testimonyRepository=testimonyRepository;
+            this._context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+          var no= _testimonyRepository.TestimonyNumberToDisplay();
+                return View(no);
         }
         public IActionResult Index1()
         {

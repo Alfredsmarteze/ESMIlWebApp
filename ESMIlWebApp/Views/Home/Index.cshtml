@@ -1,4 +1,4 @@
-﻿@model DataStructure.ViewModel.PrayerUnitDTO
+﻿@model IEnumerable< DataStructure.Entites.Testimony>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -52,7 +52,21 @@
 <br />
  <div class="container">
      <h5 class="card-header text-center">Testimonies</h5>
-     <div class="row card-group">
+    @foreach (var item in Model)
+    {
+        <div class="col">
+           <div class="card">
+            
+             
+            <article class="card-body" style="font-size:x-large">@item.TheGoodNews  </article>
+            <small class="card-footer h5"> @item.Firstname, @item.Department</small>
+             
+           </div>
+        </div>
+        <br>
+    }
+</div>
+     @*<div class="row card-group">
          <div class="col card text-center">
              <p class="card-body">God did a very wonderful thinngs in my life, I trusted God for break-through in my family and God did it
                  miraculously, the break-through was financial break-through. Not just that alone my GP has been awesome, 
@@ -79,7 +93,7 @@
             </p>
             <footer class="card-footer"> Sis Chiyere</footer>
         </div>
-     </div>
+     </div>*@
  </div>
 
 <br />

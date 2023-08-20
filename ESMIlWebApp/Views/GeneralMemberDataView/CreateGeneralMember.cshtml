@@ -1,0 +1,231 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4 class="text-muted">General Member</h4>
+
+<br />
+<div class="container hideForm" style="background-color:lightblue">
+    <h5 class="text-primary">Capture new record</h5>
+    <div class="row">
+        <form id="clearFrm">
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="form-label">Surname</label>
+                        <input id="rowId" type="hidden">
+                        <input class="form-control" id="txtSurname" type="text" placeholder="">
+                    </div>
+
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="form-label">Firstname</label>
+                        <input class="form-control" id="txtFirstname" type="text" placeholder="">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="form-label">Otherename</label>
+                        <input class="form-control" id="txtOthername" type="text" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group mg-b-10-force">
+                        <label class="form-control-label">Gender</label>
+                        <vc:gender></vc:gender>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group mg-b-10-force">
+                        <label for="">Phone Number</label>
+                        <div class="">
+                            <div class="">
+                                <input type="text" class="form-control" placeholder="" id="txtPhoneNumber">
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- col-4 -->
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input class="form-control" id="txtEmail" type="text" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group mg-b-10-force">
+                        <label class="form-control-label">State of origin</label>
+                        <vc:state></vc:state>
+                    </div>
+                </div>
+            
+                <div class="col-lg-4">
+                    <div class="form-group mg-b-10-force">
+                        <label class="form-control-label">LGA</label>
+                        <vc:lga></vc:lga>
+                    </div>
+                </div>
+            </div>
+                       
+            <br />
+            <div class="row">
+
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="form-label">Hostel Address</label>
+                        <input class="form-control" id="txtHostelAddress" type="text" placeholder="">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="form-label">Home Address</label>
+                        <input class="form-control" id="txtHomeAddress" type="text" placeholder="">
+                    </div>
+                </div>
+
+                <div />
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="form-label">Course of Study</label>
+                        <input class="form-control" id="txtCourseOfStudy" type="text" placeholder="">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="form-label">Faculty</label>
+                        <input class="form-control" id="txtFaculty" type="text" placeholder="">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="form-label">Ambition</label>
+                        <input class="form-control" id="txtAmbition" type="text" placeholder="">
+                    </div>
+                </div>
+            </div>               <br/>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="form-label">Social Media Address</label>
+                        <input class="form-control" id="txtSocialMediaAddress" type="text" placeholder="">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group mg-b-10-force">
+                        <label for="">Date Join ESM</label>
+                        <div class="ate-input">
+                            <div class="ate-input">
+                                <input type="text" class="date form-control" placeholder="" id="txtDateJoinESM">
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- col-4 -->
+                <div class="col-lg-4">
+                    <div class="form-group mg-b-10-force">
+                        <label for="">Year Of Entry</label>
+                        <div class="ate-input">
+                            <div class="ate-input">
+                                <input type="text" class="date form-control" placeholder="" id="txtYearOfEntry">
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- col-4 -->
+                <div class="col-lg-4">
+                    <div class="form-group mg-b-10-force">
+                        <label for="">Date Of Birth</label>
+                        <div class="ate-input">
+                            <div class="ate-input">
+                                <input type="text" class="date form-control" placeholder="" id="txtDateOfBirth">
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- col-4 -->
+            </div>
+
+            <div class="text-center">
+                <br />
+                <button class="btn btn-primary" type="submit" id="saveRecord">Save</button>
+                <br />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+        var saveUrl = "@Url.Action("AddOrUpdateGeneralMember","GeneralMember", new {area="Unit"})";
+        $(document).ready(function () {
+            
+        });
+        $.fn.clearForm = function () {
+            this.each(function () { this.reset() })
+        }
+        $("#saveRecord").click(function (e) {
+            e.preventDefault();
+
+            var body = {
+                Id: $("#rowId").val() == "" ? 0 : $.trim($("#rowId").val()),
+                Surname: $.trim($("#txtSurname").val()),
+                Firstname: $.trim($("#txtFirstname").val()),
+                Othername: $.trim($("#txtOthername").val()),
+                Middlename: $.trim($("#txtMiddlename").val()),
+                DateOfBirth: $.trim($("#txtDateOfBirth").val()),
+                Gender: $("#drpGender").val(),
+                Email: $.trim($("#txtEmail").val()),
+                PhoneNumber: $.trim($("#txtPhoneNumber").val()),
+                StateOfOrigin: $("#drpState").val(),
+                Ambition: $("#txtAmbition").val(),
+                YearOfEntry: $.trim($("#txtYearOfEntry").val()),
+                LGA: $("#drpLga").val(),
+                SocialMediaAddress: $.trim($("#txtSocialMediaAddress").val()),
+                HostelAddress: $.trim($("#txtHostelAddress").val()),
+                HouseAddress: $.trim($("#txtHomeAddress").val()),
+                YearJoinESM: $.trim($("#txtDateJoinESM").val()),
+                CourseOfStudy: $.trim($("#txtCourseOfStudy").val()),
+                Faculty: $.trim($("#txtFaculty").val()),
+            }
+            var payload = SiteUtils.encrypt(JSON.stringify(body)).toString();
+            SiteUtils.post({ payload: payload }, saveUrl).then(function (response) {
+                if (response.hasError == false) {
+                    Swal.fire(response.message, '', 'success');
+                    $("#clearFrm").clearForm();
+                }
+                else if (response.hasError == true) {
+                    Swal.fire(response.message, '', 'error');
+                }
+            })
+            //$.ajax({
+            //  type: "POST",
+            //  url:saveUrl,
+            //  data:JSON.stringify(body),
+            //  dataType:'json',
+            //  //contentType:'application/json; charset=utf-8',
+            //  success: function(data)
+            //  {
+            //  alert(data.message)
+            //  },
+            //  error:function()
+            //  {
+            //  alert("An error occured")
+            //  }
+            //});
+        });
+        jQuery('.date').datepicker({
+            timepicker: false,
+            format: 'Y/m/d',
+            changeYear: true,
+            changeMonth: true,
+            yearRange: "2002:2023"
+        })
+
+    </script>
+}

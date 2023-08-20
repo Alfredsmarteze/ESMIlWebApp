@@ -160,6 +160,42 @@ namespace DataContextStructure.Migrations
                     b.ToTable("bibleStudyUnit");
                 });
 
+            modelBuilder.Entity("DataStructure.Entites.BrotherCordinator", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AcademicSectionDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OthernameExcos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SurnameExcos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
+
+                    b.ToTable("brotherCordinator");
+                });
+
             modelBuilder.Entity("DataStructure.Entites.ChoralUnit", b =>
                 {
                     b.Property<int>("Id")
@@ -402,6 +438,70 @@ namespace DataContextStructure.Migrations
                     b.ToTable("firstTimer");
                 });
 
+            modelBuilder.Entity("DataStructure.Entites.GeneralMember", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Ambition")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CourseOfStudy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Faculty")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Firstname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HostelAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HouseAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lga")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Othername")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SocialMediaAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StateOfOrigin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("YearJoinESM")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("YearOfEntry")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("generalMember");
+                });
+
             modelBuilder.Entity("DataStructure.Entites.Lga", b =>
                 {
                     b.Property<int>("Id")
@@ -538,11 +638,17 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("AcademicSectionDate")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Department")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EsmafId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Faculty")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
@@ -1072,6 +1178,42 @@ namespace DataContextStructure.Migrations
                     b.ToTable("publicityAndEditorialUnit");
                 });
 
+            modelBuilder.Entity("DataStructure.Entites.SisterCordinator", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AcademicSectionDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OthernameExcos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SurnameExcos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
+
+                    b.ToTable("sisterCordinator");
+                });
+
             modelBuilder.Entity("DataStructure.Entites.State", b =>
                 {
                     b.Property<int>("Id")
@@ -1160,6 +1302,50 @@ namespace DataContextStructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("technicalUnit");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.Testimony", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Department")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Firstname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TestimonyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TheGoodNews")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("testimony");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.TestimonyNumber", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("testimonyNumber");
                 });
 
             modelBuilder.Entity("DataStructure.Entites.TransportUnit", b =>
@@ -1604,6 +1790,17 @@ namespace DataContextStructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("DataStructure.Entites.BrotherCordinator", b =>
+                {
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ESMAF");
+                });
+
             modelBuilder.Entity("DataStructure.Entites.PastChoralUnitCordinator", b =>
                 {
                     b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
@@ -1737,6 +1934,17 @@ namespace DataContextStructure.Migrations
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastWelfareUnitCordinator", b =>
+                {
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ESMAF");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.SisterCordinator", b =>
                 {
                     b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
                         .WithMany()

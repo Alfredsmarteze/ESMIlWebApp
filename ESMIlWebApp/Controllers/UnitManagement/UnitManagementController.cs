@@ -51,8 +51,7 @@ namespace ESMIlWebApp.Controllers.UnitManagement
                 return View();
             }
             var id = int.Parse(rowId);
-            model=
-                _esmafRepository.ListAllEsmafAsync().Where(s=>s.Id==id).FirstOrDefault();
+            model=  _esmafRepository.ListAllEsmafAsync().Where(s=>s.Id==id).FirstOrDefault();
             return View(model);
         }
         [HttpGet]

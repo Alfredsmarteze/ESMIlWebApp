@@ -167,7 +167,7 @@
     $(document).ready(function(){
     $("#drpGender").val('@Model.Gender').trigger('change');
     $("#drpState").val('@Model.StateOfOrigin').trigger('change');
-    $("#drpState").val('@Model.LGA').trigger('change');
+    $("#drpLga").val('@Model.LGA').trigger('change');
     $("#drpUnit").val('@Model.PreviousUnit').trigger('change');
     });
     $("#btnSaveRecord").click(function(e)
@@ -185,7 +185,7 @@
             PhoneNumber02:$.trim($("#txtPhoneNumber02").val()),
             StateOfOrigin:$("#drpState").val(),
             Ambition:$("#txtAmbition").val(),
-            LGA:$("#drpState").val(),
+            LGA:$("#drpLga").val(),
             PreviousUnit:$("#drpUnit").val(),
             PositionInFamily:$.trim($("#txtPositionInFamily").val()),
             SocialMediaAddress:$.trim($("#txtSocialMediaAddress").val()),

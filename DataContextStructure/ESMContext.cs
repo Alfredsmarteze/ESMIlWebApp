@@ -5,11 +5,10 @@ using DataStructure;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Reflection.Emit;
 using System.Reflection.Metadata;
-//using System.Data.Entity;
 
 namespace DataContextStructure
 {
-    public class ESMContext :IdentityDbContext<ApplicationUser>
+    public class ESMContext:IdentityDbContext<ApplicationUser>
     {
         public ESMContext(DbContextOptions<ESMContext> options) : base(options)
         {
@@ -17,8 +16,12 @@ namespace DataContextStructure
 
 
             // using var context = new ESMContext(contextOptions);
-
         }
+        public DbSet<GeneralMember> generalMember { get; set; }
+        public DbSet<BrotherCordinator> brotherCordinator { get; set; }
+        public DbSet<SisterCordinator> sisterCordinator { get; set; }
+        public DbSet<TestimonyNumber> testimonyNumber { get; set; }
+        public DbSet<Testimony> testimony { get; set; }
         public DbSet<ProgramTable> programTable { get; set; }
         public DbSet<PastDramaUnitCordinator> pastDramaUnitCordinator { get; set; }
         public DbSet<PastTreasurer> pastTreasurer { get; set; }

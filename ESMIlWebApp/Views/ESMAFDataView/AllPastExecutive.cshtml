@@ -1,0 +1,129 @@
+﻿@{
+    ViewData["Title"] = "Past Executive";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+
+<br>
+<div class="table-responsive">
+    <table id="pastExecutiveTable" width="100%" class="stripe hover">
+        <thead>
+            <tr>
+                <th>Surname</th>
+                <th>Othernames</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Office</th>
+                <th>Academic Section</th>
+                <th>Course of Study</th>
+                <th>Faculty</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+
+
+@using (Html.BeginForm("View", "View", FormMethod.Post, new { id = "viewTestimonyForm", target = "_blank" }))
+{
+    <input type="hidden" name="viewRecordId" id="viewRecordId">
+}
+@using (Html.BeginForm("Update", "TestimonyView", FormMethod.Post, new { id = "updateTestimonyForm", target = "_blank" }))
+{
+    <input type="hidden" name="updateRecordId" id="updateRecordId">
+}
+
+
+@section scripts{
+    <script>
+
+        var table = $("#pastExecutiveTable").DataTable({
+            columnDefs: [{
+               // targets: [5],
+               // render: $.fn.dataTable.render.ellipsis(10)
+            }],
+            "lengthMenu": [[7, 20, 25, 50, -1], [7, 20, 25, 50, "All"]],
+            "processing": true, // for show progress bar
+            "serverSide": true, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            "paginate": true,
+            "scrollX": true,
+            // colReorder: false,
+            //  rowReorder:false,
+            //select: true,
+            //dom: 'Bfrtip', , new{area="Unit"}
+            "ajax": {
+                "url": "@Url.Action("GetAllPastExecutive","ESMAF")",
+                "type": "POST",
+                "datatype": "json",
+                "data": function (arg) { }
+            },
+            "columns": [
+                { "data": "surnameExcos", "name": "surnameExcos", "autoWidth": false },
+                { "data": "othernameExcos", "name": "othernameExcos", "autoWidth": false },
+                { "data": "gender", "name": "gender", "autoWidth": false },
+                { "data": "email", "name": "email", "autoWidth": false },
+                { "data": "phone", "name": "phone", "autoWidth": false },
+                { "data": "office", "name": "office", "autoWidth": false },
+                { "data": "academicSectionDate", "name": "academicSectionDate", "autoWidth": false },
+                { "data": "department", "name": "department", "autoWidth": false },
+                { "data": "faculty", "name": "faculty", "autoWidth": false }
+            ],
+
+        });
+
+
+
+
+        $('#testimonyTable tbody').on('click', '#viewRecord', function (e) {
+            e.preventDefault();
+            var data = table.row($(this).parents('tr')).data();
+            $("#viewRecordId").val(data.id);
+            $("#viewTestimonyForm").submit();
+
+        });
+
+        $('#testimonyTable tbody').on('click', '#changeRecord', function (e) {
+            e.preventDefault();
+            var data = table.row($(this).parents('tr')).data();
+            $("#updateRecordId").val(data.id);
+            $("#updateTestimonyForm").submit();
+
+        });
+
+        $('#newRecord').on('click', function (e) {
+            e.preventDefault();
+            var returnUrl = '@Url.Action("CreateNewTestimony", "TestimonyView")';
+            window.location.href = returnUrl;
+        });
+
+        $('#saveRecord').on('click', function (e) {
+            e.preventDefault();
+            var body = {
+                Id: $("#rowId").val() == "" ? 0 : $.trim($("#rowId").val()),
+                Number: $("#drpTestimony").val(),
+            }
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("","")",
+                dataType: "Json",
+                data: { payload: JSON.stringify(body) },
+                success: function (result) {
+                    if (result.hasError == false) {
+                        Swal.fire(result.message, '', 'success');
+                    }
+                    else if (result.hasError == true) {
+                        Swal.fire(result.message, '', 'error');
+                    }
+
+                },
+
+            });
+        });
+
+    </script>
+   }

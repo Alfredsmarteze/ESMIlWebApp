@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using DataStructure;
 using static DataStructure.ViewModel.EsmafData;
+using DataStructure.Enum;
 
 namespace Infrastructure.Service
 {
@@ -42,6 +43,7 @@ namespace Infrastructure.Service
                         HouseAddress = d.HouseAddress == null ? "" : d.HouseAddress,
                         PhoneNumber = d.PhoneNumber == null ? "" : d.PhoneNumber,
                         CourseOfStudy = d.CourseOfStudy == null ? "" : d.CourseOfStudy,
+                        Faculty=d.Faculty==null? "":d.Faculty,
                         YearOfEntry = d.YearOfEntry == null ? null : d.YearOfEntry,
                         YearOfGraduation = d.YearOfGraduation == null ? null : d.YearOfGraduation,
                         AcademicSessionDate = d.AcademicSessionDate,
@@ -79,18 +81,21 @@ namespace Infrastructure.Service
                     };
                     saveData.eSMAF.Add(data);
                     result = await _context.SaveChangesAsync() > 0;
-                    var data2 = new PastExecutive // The of this capture is to gather all executive in one table.
+                    if (model.Office != null)
                     {
-                        SurnameExcos = model.Surname,
-                        OthernameExcos = model.Othernames,
-                        Gender = model.Gender,
-                        Phone = model.PhoneNumber,
-                        Email = model.Email,
-                        Office = model.Office,
-                        EsmafId = data.Id.Value,
-                        AcademicSectionDate = $"{academicSession}/{academicSession2}"
-                    };
-                    saveData.pastExecutive.Add(data2);
+                        var data2 = new PastExecutive // The essence of this capture is to gather all executive in one table.
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            Phone = model.PhoneNumber,
+                            Email = model.Email,
+                            Office = model.Office,
+                            EsmafId = data.Id.Value,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}"
+                        };
+                        saveData.pastExecutive.Add(data2);
+                    }
                     if (model.Office == GetPastExecutive.BibleStudyCordinator.ToString())
                     {
                         var data3 = new PastBibleStudyCordinator
@@ -275,6 +280,36 @@ namespace Infrastructure.Service
                         };
                         saveData.pastPresident.Add(data14);
                     }
+                    else if (model.Office == GetPastExecutive.BrotherUnitCordinator.ToString())
+                    {
+
+                        var data15 = new BrotherCordinator
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}",
+                            EsmafId = data.Id.Value,
+                        };
+                        saveData.brotherCordinator.Add(data15);
+                    }
+                    else if (model.Office == GetPastExecutive.SisterUnitCordinator.ToString())
+                    {
+
+                        var data16 = new SisterCordinator
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}",
+                            EsmafId = data.Id.Value,
+                        };
+                        saveData.sisterCordinator.Add(data16);
+                    }
                     result = await saveData.SaveChangesAsync() > 0;
                 }
                 else
@@ -429,18 +464,49 @@ namespace Infrastructure.Service
                         welfareCord.PhoneNumber = model.PhoneNumber;
                         result = await saveData.SaveChangesAsync() > 0;
                     }
+                    var sisterCord = _context.sisterCordinator.Find(model.Id);
+                    if (sisterCord != null)
+                    {
+                        sisterCord.Email = model.Email;
+                        sisterCord.SurnameExcos = model.Surname;
+                        sisterCord.OthernameExcos = model.Othernames;
+                        sisterCord.PhoneNumber = model.PhoneNumber;
+                        sisterCord.AcademicSectionDate = $"{academicSession}/{academicSession2}";
+                        sisterCord.PhoneNumber = model.PhoneNumber;
+                        result = await saveData.SaveChangesAsync() > 0;
+                    }
+                    var brotherCord = _context.brotherCordinator.Find(model.Id);
+                    if (brotherCord != null)
+                    {
+                        brotherCord.Email = model.Email;
+                        brotherCord.SurnameExcos = model.Surname;
+                        brotherCord.OthernameExcos = model.Othernames;
+                        brotherCord.PhoneNumber = model.PhoneNumber;
+                        brotherCord.AcademicSectionDate = $"{academicSession}/{academicSession2}";
+                        brotherCord.PhoneNumber = model.PhoneNumber;
+                        result = await saveData.SaveChangesAsync() > 0;
+                    }
                 }
 
                 return result;
             }
 
         }
-
-
-        public Task AddUpdateESMAfAsync<T>(T pastExecutiveData)
+                       
+        public IQueryable<PastExecutiveDTO> ListAllPastExecutive()
         {
-            throw new NotImplementedException();
+            return (from s in _context.pastExecutive select new PastExecutiveDTO { 
+            
+                SurnameExcos=s.SurnameExcos,
+                OthernameExcos=s.OthernameExcos,
+                Gender=s.Gender,
+                Email=s.Email,
+                Office=s.Office,
+                AcademicSectionDate=s.AcademicSectionDate,
+                Phone=s.Phone,
+                Department=s.Department,
+                Faculty=s.Faculty,
+            });
         }
-
     }
 }
