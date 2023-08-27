@@ -24,8 +24,10 @@ namespace DataStructure.ViewModel
         public string? Faculty { get; set; }
         public string? Ambition { get; set; }
         public DateTime? YearOfEntry { get; set; }
+        public DateTime? YearOfGraduation { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public DateTime? YearJoinESM { get; set; }
+        public string strYOG { get { if (YearOfGraduation.HasValue) { return YearOfGraduation.Value.ToString("MM/dd/yyyy"); } else { return string.Empty; } } }
         public string strYearOfEntry { get { if (YearOfEntry.HasValue) { return YearOfEntry.Value.ToString("MM/dd/yyyy"); } else { return string.Empty; } } }
         public string strYearJoinESM { get { if (YearJoinESM.HasValue) { return YearJoinESM.Value.ToString("MM/dd/yyyy"); } else { return string.Empty; } } } 
         public string strDateOfBirth { get { if (DateOfBirth.HasValue) { return DateOfBirth.Value.ToString("MM/dd/yyyy"); } else { return string.Empty; } } } 
@@ -50,6 +52,7 @@ namespace DataStructure.ViewModel
         public string? Faculty { get; set; }
         public string YearOfEntry { get; set; }
         public string YearJoinESM { get; set; }
+        public string YearOfGraduation { get; set; }
         public string DateOfBirth { get; set; }
     }
 

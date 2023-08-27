@@ -34,7 +34,10 @@ namespace Infrastructure.Service
                 var splitDateJoinOrVisit= model.JoiningVisitingDate.Split('/');
                 jDate = new DateTime(int.Parse(splitDateJoinOrVisit[2]), int.Parse(splitDateJoinOrVisit[0]), int.Parse(splitDateJoinOrVisit[1]));
             }
-            
+            if (jDate.Year > DateTime.UtcNow.Year||jDate.Month>DateTime.UtcNow.Month||jDate.Day>DateTime.UtcNow.Day)
+            {
+                throw new($"You cannot join ESM in year {jDate.Year}. Please input correct date");
+            }
             if (model.Id<1)
             {
                 var data = new FirstTimer
@@ -102,6 +105,36 @@ namespace Infrastructure.Service
             {
                 var splitDateJoin = model.DateJoinESM.Split('/');
                 dateJoin = new DateTime(int.Parse(splitDateJoin[2]), int.Parse(splitDateJoin[0]), int.Parse(splitDateJoin[1]));
+            }
+            if (dateJoin.Year > DateTime.Now.Year || dateJoin.Month > DateTime.Now.Month || dateJoin.Day > DateTime.Now.Day)
+            {
+                throw new($"You cannot join ESM in year {dateJoin.Year}. Please select correct date.");
+            }
+            if (dateJoin.Year == DateTime.Now.Year)
+            {
+                if (dateJoin.Month == DateTime.Now.Month)
+                {
+                    if (dateJoin.Day == DateTime.Now.Day)
+                    { }
+                    else if (dateJoin.Day > DateTime.Now.Day)
+                    { throw new($"You cannot join ESM on this future day {dateJoin.Day}. Please input correct date."); }
+                }
+            }
+            if (bdate.Year > dateJoin.Year || bdate.Year == DateTime.Now.Year)
+            {
+                throw new($"Your date of birth cannot be in year {bdate.Year.ToString()}. please select correct date.");
+            }
+            if (bdate.Year - DateTime.Now.Year < 14)
+            {
+                var yr = DateTime.Now.Year - bdate.Year;
+                if (yr == 1)
+                {
+                    throw new($"{yr} year old! Please select correct date of birth");
+                }
+                else if (yr > 1 && yr < 14)
+                {
+                    throw new($"{yr} years old! Please select correct date of birth");
+                }
             }
             if (model.Id < 1)
             {
@@ -218,7 +251,36 @@ namespace Infrastructure.Service
                 var splitDateJoin = model.DateJoinESM.Split('/');
                 dateJoin = new DateTime(int.Parse(splitDateJoin[2]), int.Parse(splitDateJoin[0]), int.Parse(splitDateJoin[1]));
             }
-
+            if (dateJoin.Year > DateTime.Now.Year || dateJoin.Month > DateTime.Now.Month || dateJoin.Day > DateTime.Now.Day)
+            {
+                throw new($"You cannot join ESM in year {dateJoin.Year}. Please select correct date.");
+            }
+            if (dateJoin.Year == DateTime.Now.Year)
+            {
+                if (dateJoin.Month == DateTime.Now.Month)
+                {
+                    if (dateJoin.Day == DateTime.Now.Day)
+                    { }
+                    else if (dateJoin.Day > DateTime.Now.Day)
+                    { throw new($"You cannot join ESM on this future day {dateJoin.Day}. Please input correct date."); }
+                }
+            }
+            if (bdate.Year > dateJoin.Year || bdate.Year == DateTime.Now.Year)
+            {
+                throw new($"Your date of birth cannot be in year {bdate.Year.ToString()}. please select correct date.");
+            }
+            if (bdate.Year - DateTime.Now.Year < 14)
+            {
+                var yr = DateTime.Now.Year - bdate.Year;
+                if (yr == 1)
+                {
+                    throw new($"{yr} year old! Please select correct date of birth");
+                }
+                else if (yr > 1 && yr < 14)
+                {
+                    throw new($"{yr} years old! Please select correct date of birth");
+                }
+            }
             if (model.Id < 1)
             {
 
@@ -367,7 +429,36 @@ namespace Infrastructure.Service
                 var splitDateJoin = model.DateJoinESM.Split('/');
                 dateJoin = new DateTime(int.Parse(splitDateJoin[2]), int.Parse(splitDateJoin[0]), int.Parse(splitDateJoin[1]));
             }
-
+            if (dateJoin.Year > DateTime.Now.Year || dateJoin.Month > DateTime.Now.Month || dateJoin.Day > DateTime.Now.Day)
+            {
+                throw new($"You cannot join ESM in year {dateJoin.Year}. Please select correct date.");
+            }
+            if (dateJoin.Year == DateTime.Now.Year)
+            {
+                if (dateJoin.Month == DateTime.Now.Month)
+                {
+                    if (dateJoin.Day == DateTime.Now.Day)
+                    { }
+                    else if (dateJoin.Day > DateTime.Now.Day)
+                    { throw new($"You cannot join ESM on this future day {dateJoin.Day}. Please input correct date."); }
+                }
+            }
+            if (bdate.Year > dateJoin.Year || bdate.Year == DateTime.Now.Year)
+            {
+                throw new($"Your date of birth cannot be in year {bdate.Year}. please select correct date.");
+            }
+            if (bdate.Year - DateTime.Now.Year < 14)
+            {
+                var yr = DateTime.Now.Year - bdate.Year;
+                if (yr == 1)
+                {
+                    throw new($"{yr} year old! Please select correct date of birth");
+                }
+                else if (yr > 1 && yr < 14)
+                {
+                    throw new($"{yr} years old! Please select correct date of birth");
+                }
+            }
             if (model.Id < 1)
             {
 
@@ -499,7 +590,36 @@ namespace Infrastructure.Service
                 var splitDateJoin = model.DateJoinESM.Split('/');
                 dateJoin = new DateTime(int.Parse(splitDateJoin[2]), int.Parse(splitDateJoin[0]), int.Parse(splitDateJoin[1]));
             }
-
+            if (dateJoin.Year > DateTime.Now.Year || dateJoin.Month > DateTime.Now.Month || dateJoin.Day > DateTime.Now.Day)
+            {
+                throw new($"You cannot join ESM in year {dateJoin.Year}. Please select correct date.");
+            }
+            if (dateJoin.Year == DateTime.Now.Year)
+            {
+                if (dateJoin.Month == DateTime.Now.Month)
+                {
+                    if (dateJoin.Day == DateTime.Now.Day)
+                    { }
+                    else if (dateJoin.Day > DateTime.Now.Day)
+                    { throw new($"You cannot join ESM on this future day {dateJoin.Day}. Please input correct date."); }
+                }
+            }
+            if (bdate.Year > dateJoin.Year || bdate.Year == DateTime.Now.Year)
+            {
+                throw new($"Your date of birth cannot be in year {bdate.Year.ToString()}. please select correct date.");
+            }
+            if (bdate.Year - DateTime.Now.Year < 14)
+            {
+                var yr = DateTime.Now.Year - bdate.Year;
+                if (yr == 1)
+                {
+                    throw new($"{yr} year old! Please select correct date of birth");
+                }
+                else if (yr >1 && yr < 14)
+                {
+                    throw new($"{yr} years old! Please select correct date of birth");
+                }
+            }
             if (model.Id < 1)
             {
 
@@ -619,7 +739,36 @@ namespace Infrastructure.Service
                 var splitDateJoin = model.DateJoinESM.Split('/');
                 dateJoin = new DateTime(int.Parse(splitDateJoin[2]), int.Parse(splitDateJoin[0]), int.Parse(splitDateJoin[1]));
             }
-
+            if (dateJoin.Year > DateTime.Now.Year || dateJoin.Month>DateTime.Now.Month|| dateJoin.Day>DateTime.Now.Day)
+            {
+                throw new($"You cannot join ESM in year {dateJoin.Year}. Please select correct date.");
+            }
+            if (dateJoin.Year == DateTime.Now.Year)
+            {
+                if (dateJoin.Month == DateTime.Now.Month)
+                {
+                    if (dateJoin.Day == DateTime.Now.Day)
+                    { }
+                    else if (dateJoin.Day > DateTime.Now.Day)
+                    { throw new($"You cannot join ESM on this future day {dateJoin.Day}. Please input correct date."); }
+                }
+            }
+            if (bdate.Year > dateJoin.Year || bdate.Year == DateTime.Now.Year)
+            {
+                throw new($"Your date of birth cannot be in year {bdate.Year.ToString()}. please select correct date.");
+            }
+            if (bdate.Year - DateTime.Now.Year < 14)
+            {
+                var yr = DateTime.Now.Year - bdate.Year;
+                if (yr == 1)
+                {
+                    throw new($"{yr} year old! Please select correct date of birth");
+                }
+                else if (yr>1 && yr<14)
+                {
+                    throw new($"{yr} years old! Please select correct date of birth");
+                } 
+            }
             if (model.Id < 1)
             {
 
@@ -739,7 +888,36 @@ namespace Infrastructure.Service
                 var splitDateJoin = model.DateJoinESM.Split('/');
                 dateJoin = new DateTime(int.Parse(splitDateJoin[2]), int.Parse(splitDateJoin[0]), int.Parse(splitDateJoin[1]));
             }
-
+            if (dateJoin.Year > DateTime.Now.Year || dateJoin.Month > DateTime.Now.Month || dateJoin.Day > DateTime.Now.Day)
+            {
+                throw new($"You cannot join ESM in year {dateJoin.Year}. Please select correct date.");
+            }
+            if (dateJoin.Year == DateTime.Now.Year)
+            {
+                if (dateJoin.Month == DateTime.Now.Month)
+                {
+                    if (dateJoin.Day == DateTime.Now.Day)
+                    { }
+                    else if (dateJoin.Day > DateTime.Now.Day)
+                    { throw new($"You cannot join ESM on this future day {dateJoin.Day}. Please input correct date."); }
+                }
+            }
+            if (bdate.Year > dateJoin.Year || bdate.Year == DateTime.Now.Year)
+            {
+                throw new($"Your date of birth cannot be in year {bdate.Year.ToString()}. please select correct date.");
+            }
+            if (bdate.Year - DateTime.Now.Year < 14)
+            {
+                var yr = DateTime.Now.Year - bdate.Year;
+                if (yr == 1)
+                {
+                    throw new($"{yr} year old! Please select correct date of birth");
+                }
+                else if (yr > 1 && yr < 14)
+                {
+                    throw new($"{yr} years old! Please select correct date of birth");
+                }
+            }
             if (model.Id < 1)
             {
 
@@ -817,7 +995,36 @@ namespace Infrastructure.Service
                 var splitDateJoin = model.DateJoinESM.Split('/');
                 dateJoin = new DateTime(int.Parse(splitDateJoin[2]), int.Parse(splitDateJoin[0]), int.Parse(splitDateJoin[1]));
             }
-
+            if (dateJoin.Year > DateTime.Now.Year || dateJoin.Month > DateTime.Now.Month || dateJoin.Day > DateTime.Now.Day)
+            {
+                throw new($"You cannot join ESM in year {dateJoin.Year}. Please select correct date.");
+            }
+            if (dateJoin.Year == DateTime.Now.Year)
+            {
+                if (dateJoin.Month == DateTime.Now.Month)
+                {
+                    if (dateJoin.Day == DateTime.Now.Day)
+                    { }
+                    else if (dateJoin.Day > DateTime.Now.Day)
+                    { throw new($"You cannot join ESM on this future day {dateJoin.Day}. Please input correct date."); }
+                }
+            }
+            if (bdate.Year > dateJoin.Year || bdate.Year == DateTime.Now.Year)
+            {
+                throw new($"Your date of birth cannot be in year {bdate.Year.ToString()}. please select correct date.");
+            }
+            if (bdate.Year - DateTime.Now.Year < 14)
+            {
+                var yr = DateTime.Now.Year - bdate.Year;
+                if (yr == 1)
+                {
+                    throw new($"{yr} year old! Please select correct date of birth");
+                }
+                else if (yr > 1 && yr < 14)
+                {
+                    throw new($"{yr} years old! Please select correct date of birth");
+                }
+            }
             if (model.Id < 1)
             {
 
@@ -969,7 +1176,36 @@ namespace Infrastructure.Service
                 var splitDateJoin = model.DateJoinESM.Split('/');
                 dateJoin = new DateTime(int.Parse(splitDateJoin[2]), int.Parse(splitDateJoin[0]), int.Parse(splitDateJoin[1]));
             }
-
+            if (dateJoin.Year > DateTime.Now.Year || dateJoin.Month > DateTime.Now.Month || dateJoin.Day > DateTime.Now.Day)
+            {
+                throw new($"You cannot join ESM in year {dateJoin.Year}. Please select correct date.");
+            }
+            if (dateJoin.Year == DateTime.Now.Year)
+            {
+                if (dateJoin.Month == DateTime.Now.Month)
+                {
+                    if (dateJoin.Day == DateTime.Now.Day)
+                    { }
+                    else if (dateJoin.Day > DateTime.Now.Day)
+                    { throw new($"You cannot join ESM on this future day {dateJoin.Day}. Please input correct date."); }
+                }
+            }
+            if (bdate.Year > dateJoin.Year || bdate.Year == DateTime.Now.Year)
+            {
+                throw new($"Your date of birth cannot be in year {bdate.Year.ToString()}. please select correct date.");
+            }
+            if (bdate.Year - DateTime.Now.Year < 14)
+            {
+                var yr = DateTime.Now.Year - bdate.Year;
+                if (yr == 1)
+                {
+                    throw new($"{yr} year old! Please select correct date of birth");
+                }
+                else if (yr > 1 && yr < 14)
+                {
+                    throw new($"{yr} years old! Please select correct date of birth");
+                }
+            }
             if (model.Id < 1)
             {
 
@@ -1081,7 +1317,36 @@ namespace Infrastructure.Service
                 var splitDateJoin = model.DateJoinESM.Split('/');
                 dateJoin = new DateTime(int.Parse(splitDateJoin[2]), int.Parse(splitDateJoin[0]), int.Parse(splitDateJoin[1]));
             }
-
+            if (dateJoin.Year > DateTime.Now.Year || dateJoin.Month > DateTime.Now.Month || dateJoin.Day > DateTime.Now.Day)
+            {
+                throw new($"You cannot join ESM in year {dateJoin.Year}. Please select correct date.");
+            }
+            if (dateJoin.Year == DateTime.Now.Year)
+            {
+                if (dateJoin.Month == DateTime.Now.Month)
+                {
+                    if (dateJoin.Day == DateTime.Now.Day)
+                    { }
+                    else if (dateJoin.Day > DateTime.Now.Day)
+                    { throw new($"You cannot join ESM on this future day {dateJoin.Day}. Please input correct date."); }
+                }
+            }
+            if (bdate.Year > dateJoin.Year || bdate.Year == DateTime.Now.Year)
+            {
+                throw new($"Your date of birth cannot be in year {bdate.Year.ToString()}. please select correct date.");
+            }
+            if (bdate.Year - DateTime.Now.Year < 14)
+            {
+                var yr = DateTime.Now.Year - bdate.Year;
+                if (yr == 1)
+                {
+                    throw new($"{yr} year old! Please select correct date of birth");
+                }
+                else if (yr > 1 && yr < 14)
+                {
+                    throw new($"{yr} years old! Please select correct date of birth");
+                }
+            }
             if (model.Id < 1)
             {
 

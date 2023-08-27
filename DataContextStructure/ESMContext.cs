@@ -17,10 +17,14 @@ namespace DataContextStructure
 
             // using var context = new ESMContext(contextOptions);
         }
+        public DbSet<PastVicePresident> pastVicePresident { get; set; }
+        public DbSet<PastOrganizingSecretary> pastOrganizingSecretary { get; set; }   
+        public DbSet<PastFinancialSecretary> pastFinancialSecretary { get; set; }
+        public DbSet<PastChoralSecretary> pastChoralSecretary { get; set; }
         public DbSet<GeneralMember> generalMember { get; set; }
-        public DbSet<BrotherCordinator> brotherCordinator { get; set; }
-        public DbSet<SisterCordinator> sisterCordinator { get; set; }
-        public DbSet<TestimonyNumber> testimonyNumber { get; set; }
+        public DbSet<PastBrotherCordinator> brotherCordinator { get; set; }
+        public DbSet<PastSisterCordinator> sisterCordinator { get; set; }
+        public DbSet<TestimonyNumber> numberTestimony { get; set; }
         public DbSet<Testimony> testimony { get; set; }
         public DbSet<ProgramTable> programTable { get; set; }
         public DbSet<PastDramaUnitCordinator> pastDramaUnitCordinator { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataStructure.Entites
 {
-    public class SisterCordinator
+    public class PastFinancialSecretary
     {
         public int Id { get; set; }
         public string? SurnameExcos { get; set; }

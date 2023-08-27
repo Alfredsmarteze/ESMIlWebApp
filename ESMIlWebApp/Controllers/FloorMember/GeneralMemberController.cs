@@ -83,6 +83,7 @@ namespace ESMIlWebApp.Controllers.ESMAF
                       || s.PhoneNumber.ToLower().Contains(search)
                       || s.strYearJoinESM.ToLower().Contains(search)
                       || s.strYearOfEntry.ToLower().Contains(search)
+                      || s.strYOG.ToLower().Contains(search)
                       || s.strDateOfBirth.ToLower().Contains(search)
                       || s.Gender.ToLower().Contains(search)
                       || s.HostelAddress.ToLower().Contains(search)
@@ -114,7 +115,7 @@ namespace ESMIlWebApp.Controllers.ESMAF
                 _logger.LogError("Error", e.Message);
                 errorMessage = e.Message;
             }
-            return Json(new ResponseModel { message = $" Error:\a {errorMessage}" });
+            return Json(new ResponseModel {hasError = true, message = $" Error:\a {errorMessage}" });
 
 
         }

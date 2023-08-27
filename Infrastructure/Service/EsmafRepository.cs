@@ -283,7 +283,7 @@ namespace Infrastructure.Service
                     else if (model.Office == GetPastExecutive.BrotherUnitCordinator.ToString())
                     {
 
-                        var data15 = new BrotherCordinator
+                        var data15 = new PastBrotherCordinator
                         {
                             SurnameExcos = model.Surname,
                             OthernameExcos = model.Othernames,
@@ -298,7 +298,7 @@ namespace Infrastructure.Service
                     else if (model.Office == GetPastExecutive.SisterUnitCordinator.ToString())
                     {
 
-                        var data16 = new SisterCordinator
+                        var data16 = new PastSisterCordinator
                         {
                             SurnameExcos = model.Surname,
                             OthernameExcos = model.Othernames,
@@ -309,6 +309,66 @@ namespace Infrastructure.Service
                             EsmafId = data.Id.Value,
                         };
                         saveData.sisterCordinator.Add(data16);
+                    }
+                    else if (model.Office == GetPastExecutive.VicePrisident.ToString())
+                    {
+
+                        var data17 = new PastVicePresident
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}",
+                            EsmafId = data.Id.Value,
+                        };
+                        saveData.pastVicePresident.Add(data17);
+                    }
+                    else if (model.Office == GetPastExecutive.FinancialSecretary.ToString())
+                    {
+
+                        var data18 = new PastFinancialSecretary
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}",
+                            EsmafId = data.Id.Value,
+                        };
+                        saveData.pastFinancialSecretary.Add(data18);
+                    }
+                    else if (model.Office == GetPastExecutive.ChoralSecretary.ToString())
+                    {
+
+                        var data19 = new PastChoralSecretary
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}",
+                            EsmafId = data.Id.Value,
+                        };
+                        saveData.pastChoralSecretary.Add(data19);
+                    }
+                    else if (model.Office == GetPastExecutive.OrganizingSecretary.ToString())
+                    {
+
+                        var data20 = new PastOrganizingSecretary
+                        {
+                            SurnameExcos = model.Surname,
+                            OthernameExcos = model.Othernames,
+                            Gender = model.Gender,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            AcademicSectionDate = $"{academicSession}/{academicSession2}",
+                            EsmafId = data.Id.Value,
+                        };
+                        saveData.pastOrganizingSecretary.Add(data20);
                     }
                     result = await saveData.SaveChangesAsync() > 0;
                 }
@@ -486,8 +546,52 @@ namespace Infrastructure.Service
                         brotherCord.PhoneNumber = model.PhoneNumber;
                         result = await saveData.SaveChangesAsync() > 0;
                     }
-                }
+                    var vicePresident = _context.pastVicePresident.Find(model.Id);
+                    if (vicePresident != null)
+                    {
+                        vicePresident.Email = model.Email;
+                        vicePresident.SurnameExcos = model.Surname;
+                        vicePresident.OthernameExcos = model.Othernames;
+                        vicePresident.PhoneNumber = model.PhoneNumber;
+                        vicePresident.AcademicSectionDate = $"{academicSession}/{academicSession2}";
+                        vicePresident.PhoneNumber = model.PhoneNumber;
+                        result = await saveData.SaveChangesAsync() > 0;
+                    }
 
+                    var financialSecretary = _context.pastFinancialSecretary.Find(model.Id);
+                    if (financialSecretary != null)
+                    {
+                        financialSecretary.Email = model.Email;
+                        financialSecretary.SurnameExcos = model.Surname;
+                        financialSecretary.OthernameExcos = model.Othernames;
+                        financialSecretary.PhoneNumber = model.PhoneNumber;
+                        financialSecretary.AcademicSectionDate = $"{academicSession}/{academicSession2}";
+                        financialSecretary.PhoneNumber = model.PhoneNumber;
+                        result = await saveData.SaveChangesAsync() > 0;
+                    }
+                    var choralSecretary = _context.pastChoralSecretary.Find(model.Id);
+                    if (choralSecretary != null)
+                    {
+                        choralSecretary.Email = model.Email;
+                        choralSecretary.SurnameExcos = model.Surname;
+                        choralSecretary.OthernameExcos = model.Othernames;
+                        choralSecretary.PhoneNumber = model.PhoneNumber;
+                        choralSecretary.AcademicSectionDate = $"{academicSession}/{academicSession2}";
+                        choralSecretary.PhoneNumber = model.PhoneNumber;
+                        result = await saveData.SaveChangesAsync() > 0;
+                    }
+                    var organizingSecretary = _context.pastOrganizingSecretary.Find(model.Id);
+                    if (organizingSecretary != null)
+                    {
+                        organizingSecretary.Email = model.Email;
+                        organizingSecretary.SurnameExcos = model.Surname;
+                        organizingSecretary.OthernameExcos = model.Othernames;
+                        organizingSecretary.PhoneNumber = model.PhoneNumber;
+                        organizingSecretary.AcademicSectionDate = $"{academicSession}/{academicSession2}";
+                        organizingSecretary.PhoneNumber = model.PhoneNumber;
+                        result = await saveData.SaveChangesAsync() > 0;
+                    }
+                }
                 return result;
             }
 

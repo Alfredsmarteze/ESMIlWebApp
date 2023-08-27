@@ -87,7 +87,7 @@ namespace ESMIlWebApp.Controllers.Unit
                 _logger.LogError("Error", e.Message);
                 errorMessage = e.Message;
             }
-            return Json(new ResponseModel { message = $" Error:\a {errorMessage}" });
+            return Json(new ResponseModel {hasError = true, message = $" Error:\a {errorMessage}" });
         }
         public async Task<IActionResult> AddOrUpdateTechnicalUnitData(string payload)
         {
@@ -115,7 +115,7 @@ namespace ESMIlWebApp.Controllers.Unit
                 _logger.LogError("Error", ex.Message);
                 errorMessage = ex.Message;
             }
-            return Json(new ResponseModel { message = $"Error: {errorMessage}", statusCode = (int)HttpStatusCode.Conflict });
+            return Json(new ResponseModel {hasError = true, message = $"Error: {errorMessage}", statusCode = (int)HttpStatusCode.Conflict });
         }
 
 
@@ -139,7 +139,7 @@ namespace ESMIlWebApp.Controllers.Unit
                 _logger.LogError("Error", ex);
                 errorMessage = ex.Message;
             }
-            return Json(new ResponseModel { message = $" Errror Message: {errorMessage}", statusCode = (int)HttpStatusCode.NotImplemented });
+            return Json(new ResponseModel {hasError = true, message = $" Errror Message: {errorMessage}", statusCode = (int)HttpStatusCode.NotImplemented });
         }
     }
 }

@@ -160,42 +160,6 @@ namespace DataContextStructure.Migrations
                     b.ToTable("bibleStudyUnit");
                 });
 
-            modelBuilder.Entity("DataStructure.Entites.BrotherCordinator", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("AcademicSectionDate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EsmafId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OthernameExcos")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SurnameExcos")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EsmafId");
-
-                    b.ToTable("brotherCordinator");
-                });
-
             modelBuilder.Entity("DataStructure.Entites.ChoralUnit", b =>
                 {
                     b.Property<int>("Id")
@@ -497,6 +461,9 @@ namespace DataContextStructure.Migrations
                     b.Property<DateTime>("YearOfEntry")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("YearOfGraduation")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.ToTable("generalMember");
@@ -517,6 +484,78 @@ namespace DataContextStructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("lga");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.PastBrotherCordinator", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AcademicSectionDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OthernameExcos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SurnameExcos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
+
+                    b.ToTable("brotherCordinator");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.PastChoralSecretary", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AcademicSectionDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OthernameExcos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SurnameExcos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
+
+                    b.ToTable("pastChoralSecretary");
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastChoralUnitCordinator", b =>
@@ -672,6 +711,78 @@ namespace DataContextStructure.Migrations
                     b.ToTable("pastExecutive");
                 });
 
+            modelBuilder.Entity("DataStructure.Entites.PastFinancialSecretary", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AcademicSectionDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OthernameExcos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SurnameExcos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
+
+                    b.ToTable("pastFinancialSecretary");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.PastOrganizingSecretary", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AcademicSectionDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OthernameExcos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SurnameExcos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
+
+                    b.ToTable("pastOrganizingSecretary");
+                });
+
             modelBuilder.Entity("DataStructure.Entites.PastPrayerUnitCordinator", b =>
                 {
                     b.Property<int>("Id")
@@ -816,6 +927,42 @@ namespace DataContextStructure.Migrations
                     b.ToTable("pastSecretary");
                 });
 
+            modelBuilder.Entity("DataStructure.Entites.PastSisterCordinator", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AcademicSectionDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OthernameExcos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SurnameExcos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
+
+                    b.ToTable("sisterCordinator");
+                });
+
             modelBuilder.Entity("DataStructure.Entites.PastTechnicalUnitCordinator", b =>
                 {
                     b.Property<int>("Id")
@@ -958,6 +1105,42 @@ namespace DataContextStructure.Migrations
                     b.HasIndex("EsmafId");
 
                     b.ToTable("pastUsheringUnitCordinator");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.PastVicePresident", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AcademicSectionDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EsmafId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OthernameExcos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SurnameExcos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EsmafId");
+
+                    b.ToTable("pastVicePresident");
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastWelfareUnitCordinator", b =>
@@ -1178,42 +1361,6 @@ namespace DataContextStructure.Migrations
                     b.ToTable("publicityAndEditorialUnit");
                 });
 
-            modelBuilder.Entity("DataStructure.Entites.SisterCordinator", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("AcademicSectionDate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EsmafId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OthernameExcos")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SurnameExcos")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EsmafId");
-
-                    b.ToTable("sisterCordinator");
-                });
-
             modelBuilder.Entity("DataStructure.Entites.State", b =>
                 {
                     b.Property<int>("Id")
@@ -1345,7 +1492,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("testimonyNumber");
+                    b.ToTable("numberTestimony");
                 });
 
             modelBuilder.Entity("DataStructure.Entites.TransportUnit", b =>
@@ -1790,7 +1937,18 @@ namespace DataContextStructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("DataStructure.Entites.BrotherCordinator", b =>
+            modelBuilder.Entity("DataStructure.Entites.PastBrotherCordinator", b =>
+                {
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ESMAF");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.PastChoralSecretary", b =>
                 {
                     b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
                         .WithMany()
@@ -1845,6 +2003,28 @@ namespace DataContextStructure.Migrations
                     b.Navigation("ESMAF");
                 });
 
+            modelBuilder.Entity("DataStructure.Entites.PastFinancialSecretary", b =>
+                {
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ESMAF");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.PastOrganizingSecretary", b =>
+                {
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ESMAF");
+                });
+
             modelBuilder.Entity("DataStructure.Entites.PastPrayerUnitCordinator", b =>
                 {
                     b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
@@ -1879,6 +2059,17 @@ namespace DataContextStructure.Migrations
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastSecretary", b =>
+                {
+                    b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
+                        .WithMany()
+                        .HasForeignKey("EsmafId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ESMAF");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.PastSisterCordinator", b =>
                 {
                     b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
                         .WithMany()
@@ -1933,7 +2124,7 @@ namespace DataContextStructure.Migrations
                     b.Navigation("ESMAF");
                 });
 
-            modelBuilder.Entity("DataStructure.Entites.PastWelfareUnitCordinator", b =>
+            modelBuilder.Entity("DataStructure.Entites.PastVicePresident", b =>
                 {
                     b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
                         .WithMany()
@@ -1944,7 +2135,7 @@ namespace DataContextStructure.Migrations
                     b.Navigation("ESMAF");
                 });
 
-            modelBuilder.Entity("DataStructure.Entites.SisterCordinator", b =>
+            modelBuilder.Entity("DataStructure.Entites.PastWelfareUnitCordinator", b =>
                 {
                     b.HasOne("DataStructure.Entites.ESMAF", "ESMAF")
                         .WithMany()

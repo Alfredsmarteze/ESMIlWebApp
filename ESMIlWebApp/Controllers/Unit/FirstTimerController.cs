@@ -70,7 +70,7 @@ namespace ESMIlWebApp.Controllers.Unit
                     _logger.LogError("Error", e.Message);
                     errorMessage = e.Message;
                 }
-                return Json(new ResponseModel { message = $" Error:\a {errorMessage}" });
+                return Json(new ResponseModel {hasError = true, message = $" Error:\a {errorMessage}" });
             
 
         }
@@ -103,7 +103,7 @@ namespace ESMIlWebApp.Controllers.Unit
                 _logger.LogError("Error", e.Message);
                 errorMessage = e.Message;
             }
-            return Json(new ResponseModel { message = $"Error\n{errorMessage}", statusCode = (int)HttpStatusCode.BadRequest });
+            return Json(new ResponseModel {hasError = true, message = $"Error\n{errorMessage}", statusCode = (int)HttpStatusCode.BadRequest });
         }
     }
 }

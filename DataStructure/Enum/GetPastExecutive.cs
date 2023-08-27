@@ -22,6 +22,10 @@ namespace DataStructure.Enum
         PublicityUnitCordinator = 12,
         TransportUnitCordinator = 13,
         SisterUnitCordinator=14,
-        BrotherUnitCordinator=15
+        BrotherUnitCordinator=15,
+        VicePrisident=16,
+        ChoralSecretary=17,
+        OrganizingSecretary=18,
+        FinancialSecretary=19,
     }
 }

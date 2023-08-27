@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h4 class="text-muted">General Member</h4>
+<h4 class="text-muted"> ESMITES General Member</h4>
 
 <br />
 <div class="container hideForm" style="background-color:lightblue">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-4">
                     <div class="form-group">
-                        <label class="form-label">Otherename</label>
+                        <label class="form-label">Othername</label>
                         <input class="form-control" id="txtOthername" type="text" placeholder="">
                     </div>
                 </div>
@@ -60,6 +60,7 @@
                 <div class="col-lg-4">
                     <div class="form-group mg-b-10-force">
                         <label class="form-control-label">State of origin</label>
+                        <div id="warning" height> </div>
                         <vc:state></vc:state>
                     </div>
                 </div>
@@ -67,6 +68,7 @@
                 <div class="col-lg-4">
                     <div class="form-group mg-b-10-force">
                         <label class="form-control-label">LGA</label>
+                        <div id="warning2" height> </div>
                         <vc:lga></vc:lga>
                     </div>
                 </div>
@@ -118,6 +120,8 @@
                         <input class="form-control" id="txtSocialMediaAddress" type="text" placeholder="">
                     </div>
                 </div>
+            </div>
+                <div class="row">
                 <div class="col-lg-4">
                     <div class="form-group mg-b-10-force">
                         <label for="">Date Join ESM</label>
@@ -140,6 +144,16 @@
                 </div><!-- col-4 -->
                 <div class="col-lg-4">
                     <div class="form-group mg-b-10-force">
+                        <label for="">Year Of Graduation</label>
+                        <div class="ate-input">
+                            <div class="ate-input">
+                                <input type="text" class="date form-control" placeholder="" id="txtYearOfGraduation">
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- col-4 -->
+                <div class="col-lg-4">
+                    <div class="form-group mg-b-10-force">
                         <label for="">Date Of Birth</label>
                         <div class="ate-input">
                             <div class="ate-input">
@@ -153,8 +167,9 @@
             <div class="text-center">
                 <br />
                 <button class="btn btn-primary" type="submit" id="saveRecord">Save</button>
-                <br />
+                
             </div>
+            <br />
         </form>
     </div>
 </div>
@@ -172,6 +187,95 @@
         $("#saveRecord").click(function (e) {
             e.preventDefault();
 
+            if (!$("#txtSurname").val()) {
+                Swal.fire('Please input a value. Surname cannot be empty.', '', 'warning');
+                $("#txtSurname").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtSurname").css({ 'background-color': '' });
+            }
+            if (!$("#txtFirstname").val()) {
+                Swal.fire('Please input a value. Firstname cannot be empty.', '', 'warning');
+                $("#txtFirstname").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtFirstname").css({ 'background-color': '' });
+            }
+            if (!$("#txtOthername").val()) {
+                Swal.fire('Please input a value. Othername cannot be empty.', '', 'warning');
+            $("#txtOthername").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtOthername").css({ 'background-color': '' });
+            }
+            if (!$("#txtPhoneNumber").val()) {
+                Swal.fire('Please input a value. Phone Number cannot be empty.', '', 'warning');
+                $("#txtPhoneNumber").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtPhoneNumber").css({ 'background-color': '' });
+            }
+            if (!$("#drpState").val()) {
+                Swal.fire('Please select your State of origin.', '', 'warning');
+                $("#warning").css({ 'background-color': 'orange', 'height': '7px', 'width': '100%' });
+                return;
+            }
+            else {
+                $("#warning").css({ 'background-color': '', 'height': '', 'width': '' });
+            }
+            if (!$("#drpLga").val()) {
+                Swal.fire('Please select your LGA.', '', 'warning');
+                $("#warning2").css({ 'background-color': 'orange', 'height': '7px', 'width': '100%' });
+                return;
+            }
+            else {
+                $("#warning").css({ 'background-color': '', 'height': '', 'width': '' });
+            }
+            if (!$("#txtHostelAddress").val()) {
+                Swal.fire('Please input a value. Hostel address cannot be empty.', '', 'warning');
+                $("#txtHostelAddress").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtHostelAddress").css({ 'background-color': '' });
+            }
+            if (!$("#txtHomeAddress").val()) {
+                Swal.fire('Please input a value. Home address cannot be empty.', '', 'warning');
+                $("#txtHomeAddress").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtHomeAddress").css({ 'background-color': '' });
+            }
+            if (!$("#txtCourseOfStudy").val()) {
+                Swal.fire('Please input a value. Course of Study cannot be empty.', '', 'warning');
+                $("#txtCourseOfStudy").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtCourseOfStudy").css({ 'background-color': '' });
+            }
+            if (!$("#txtFaculty").val()) {
+                Swal.fire('Please input a value. Faculty cannot be empty.', '', 'warning');
+                $("#txtFaculty").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtFaculty").css({ 'background-color': '' });
+            }
+            if (!$("#txtDateJoinESM").val()) {
+                Swal.fire('Please select date you joined ESM.', '', 'warning');
+                $("#txtDateJoinESM").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtDateJoinESM").css({ 'background-color': '' });
+            }
+            
             var body = {
                 Id: $("#rowId").val() == "" ? 0 : $.trim($("#rowId").val()),
                 Surname: $.trim($("#txtSurname").val()),
@@ -185,6 +289,7 @@
                 StateOfOrigin: $("#drpState").val(),
                 Ambition: $("#txtAmbition").val(),
                 YearOfEntry: $.trim($("#txtYearOfEntry").val()),
+                YearOfGraduation: $.trim($("#txtYearOfGraduation").val()),
                 LGA: $("#drpLga").val(),
                 SocialMediaAddress: $.trim($("#txtSocialMediaAddress").val()),
                 HostelAddress: $.trim($("#txtHostelAddress").val()),
@@ -224,7 +329,7 @@
             format: 'Y/m/d',
             changeYear: true,
             changeMonth: true,
-            yearRange: "2002:2023"
+            yearRange: "1970:2033"
         })
 
     </script>

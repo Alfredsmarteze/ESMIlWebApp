@@ -24,6 +24,7 @@ namespace DataStructure.Entites
         public string? Faculty { get; set; }
         public string? Ambition { get; set; }
         public DateTime YearOfEntry { get; set; }
+        public DateTime YearOfGraduation { get; set; }
         public DateTime YearJoinESM { get; set; }
         public DateTime DateOfBirth { get; set; }
     }

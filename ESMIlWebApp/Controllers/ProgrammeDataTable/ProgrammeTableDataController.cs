@@ -67,7 +67,7 @@ namespace ESMIlWebApp.Controllers.ProgrammeDataTable
                 _logger.LogError("Error", e.Message);
                 errorMessage = e.Message;
             }
-            return Json(new ResponseModel { message = $" Error:\a {errorMessage}" });
+            return Json(new ResponseModel {hasError = true, message = $" Error:\a {errorMessage}" });
         }
 
         public async Task<IActionResult> AddOrUpdateProgrammeData(string payload)

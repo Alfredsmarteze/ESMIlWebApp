@@ -60,6 +60,7 @@
         <div class="col-lg-4">
            <div class="form-group mg-b-10-force">
               <label class="form-control-label">LGA</label>
+           <div id="warning2" height> </div>
           <vc:lga></vc:lga> 
           </div>
         </div>
@@ -170,6 +171,95 @@
         {
             e.preventDefault();
 
+            if (!$("#txtSurname").val()) {
+                Swal.fire('Please input a value. Surname cannot be empty.', '', 'warning');
+                $("#txtSurname").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtSurname").css({ 'background-color': '' });
+            }
+            if (!$("#txtFirstname").val()) {
+                Swal.fire('Please input a value. Firstname cannot be empty.', '', 'warning');
+                $("#txtFirstname").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtFirstname").css({ 'background-color': '' });
+            }
+            if (!$("#txtMiddlename").val()) {
+                Swal.fire('Please input a value. Middlename cannot be empty.', '', 'warning');
+                $("#txtMiddlename").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtMiddlename").css({ 'background-color': '' });
+            }
+            if (!$("#txtPhoneNumber01").val()) {
+                Swal.fire('Please input a value. Phone Number 1 cannot be empty.', '', 'warning');
+                $("#txtPhoneNumber01").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtPhoneNumber01").css({ 'background-color': '' });
+            }
+            if (!$("#drpLga").val()) {
+                Swal.fire('Please select your LGA.', '', 'warning');
+                $("#warning2").css({ 'background-color': 'orange', 'height': '7px', 'width': '100%' });
+                return;
+            }
+            else {
+                $("#warning2").css({ 'background-color': '', 'height': '', 'width': '' });
+            }
+            if (!$("#drpState").val()) {
+                Swal.fire('Please select your state of origin.', '', 'warning');
+                $("#warning").css({ 'background-color': 'orange', 'height': '7px', 'width': '100%' });
+                return;
+            }
+            else {
+                $("#warning").css({ 'background-color': '', 'height': '', 'width': '' });
+            }
+            if (!$("#txtAmbition").val()) {
+                Swal.fire('Please input a value. Ambition cannot be empty.', '', 'warning');
+                $("#txtAmbition").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtAmbition").css({ 'background-color': '' });
+            }
+            if (!$("#txtHostelAddress").val()) {
+                Swal.fire('Please input a value. Hostel address cannot be empty.', '', 'warning');
+                $("#txtHostelAddress").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtHostelAddress").css({ 'background-color': '' });
+            }
+            if (!$("#txtHomeAddress").val()) {
+                Swal.fire('Please input a value. Home address cannot be empty.', '', 'warning');
+                $("#txtHomeAddress").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtHomeAddress").css({ 'background-color': '' });
+            }
+            if (!$("#txtDateJoinESM").val()) {
+                Swal.fire('Please input a value. Date you joined ESM is needed.', '', 'warning');
+                $("#txtDateJoinESM").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtDateJoinESM").css({ 'background-color': '' });
+            }
+            if (!$("#txtCourseOfStudy").val()) {
+                Swal.fire('Please input a value. Course of study cannot be empty.', '', 'warning');
+                $("#txtCourseOfStudy").css({ 'background-color': 'orange' });
+                return;
+            }
+            else {
+                $("#txtCourseOfStudy").css({ 'background-color': '' });
+            }
+
             var body={
             Id:$("#rowId").val() == "" ? 0: $.trim($("#rowId").val()),
             Surname:$.trim($("#txtSurname").val()),
@@ -214,7 +304,10 @@
           //})  
         jQuery('.date').datepicker({
         timepicker:false,
-        format:'Y/m/d'
+        format:'Y/m/d',
+        changeYear: true,
+        changeMonth: true,
+        yearRange: "1970:2025"
         })
 
     </script>

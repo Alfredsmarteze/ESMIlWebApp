@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataContextStructure.Migrations
 {
-    public partial class init : Migration
+    public partial class InitialMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -191,6 +191,36 @@ namespace DataContextStructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "generalMember",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Firstname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Othername = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateOfOrigin = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Lga = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HouseAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HostelAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SocialMediaAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CourseOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Faculty = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Ambition = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    YearOfEntry = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    YearOfGraduation = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    YearJoinESM = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_generalMember", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "lga",
                 columns: table => new
                 {
@@ -216,6 +246,19 @@ namespace DataContextStructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_loginInfo", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "numberTestimony",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Number = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_numberTestimony", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -260,6 +303,7 @@ namespace DataContextStructure.Migrations
                     Programme = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Cordinator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Note = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProgrammeStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProgramDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -358,6 +402,23 @@ namespace DataContextStructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_technicalUnit", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "testimony",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Firstname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Department = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TheGoodNews = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TestimonyDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_testimony", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -563,6 +624,31 @@ namespace DataContextStructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "brotherCordinator",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EsmafId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_brotherCordinator", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_brotherCordinator_eSMAF_EsmafId",
+                        column: x => x.EsmafId,
+                        principalTable: "eSMAF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "pastBibleStudyCordinators",
                 columns: table => new
                 {
@@ -581,6 +667,31 @@ namespace DataContextStructure.Migrations
                     table.PrimaryKey("PK_pastBibleStudyCordinators", x => x.Id);
                     table.ForeignKey(
                         name: "FK_pastBibleStudyCordinators_eSMAF_EsmafId",
+                        column: x => x.EsmafId,
+                        principalTable: "eSMAF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "pastChoralSecretary",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EsmafId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pastChoralSecretary", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_pastChoralSecretary_eSMAF_EsmafId",
                         column: x => x.EsmafId,
                         principalTable: "eSMAF",
                         principalColumn: "Id",
@@ -675,6 +786,8 @@ namespace DataContextStructure.Migrations
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Office = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Department = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Faculty = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EsmafId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -682,6 +795,56 @@ namespace DataContextStructure.Migrations
                     table.PrimaryKey("PK_pastExecutive", x => x.Id);
                     table.ForeignKey(
                         name: "FK_pastExecutive_eSMAF_EsmafId",
+                        column: x => x.EsmafId,
+                        principalTable: "eSMAF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "pastFinancialSecretary",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EsmafId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pastFinancialSecretary", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_pastFinancialSecretary_eSMAF_EsmafId",
+                        column: x => x.EsmafId,
+                        principalTable: "eSMAF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "pastOrganizingSecretary",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EsmafId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pastOrganizingSecretary", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_pastOrganizingSecretary_eSMAF_EsmafId",
                         column: x => x.EsmafId,
                         principalTable: "eSMAF",
                         principalColumn: "Id",
@@ -889,6 +1052,31 @@ namespace DataContextStructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "pastVicePresident",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EsmafId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pastVicePresident", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_pastVicePresident_eSMAF_EsmafId",
+                        column: x => x.EsmafId,
+                        principalTable: "eSMAF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "pastWelfareUnitCordinator",
                 columns: table => new
                 {
@@ -907,6 +1095,31 @@ namespace DataContextStructure.Migrations
                     table.PrimaryKey("PK_pastWelfareUnitCordinator", x => x.Id);
                     table.ForeignKey(
                         name: "FK_pastWelfareUnitCordinator_eSMAF_EsmafId",
+                        column: x => x.EsmafId,
+                        principalTable: "eSMAF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "sisterCordinator",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OthernameExcos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicSectionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EsmafId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_sisterCordinator", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_sisterCordinator_eSMAF_EsmafId",
                         column: x => x.EsmafId,
                         principalTable: "eSMAF",
                         principalColumn: "Id",
@@ -953,8 +1166,18 @@ namespace DataContextStructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_brotherCordinator_EsmafId",
+                table: "brotherCordinator",
+                column: "EsmafId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_pastBibleStudyCordinators_EsmafId",
                 table: "pastBibleStudyCordinators",
+                column: "EsmafId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pastChoralSecretary_EsmafId",
+                table: "pastChoralSecretary",
                 column: "EsmafId");
 
             migrationBuilder.CreateIndex(
@@ -975,6 +1198,16 @@ namespace DataContextStructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_pastExecutive_EsmafId",
                 table: "pastExecutive",
+                column: "EsmafId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pastFinancialSecretary_EsmafId",
+                table: "pastFinancialSecretary",
+                column: "EsmafId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pastOrganizingSecretary_EsmafId",
+                table: "pastOrganizingSecretary",
                 column: "EsmafId");
 
             migrationBuilder.CreateIndex(
@@ -1018,8 +1251,18 @@ namespace DataContextStructure.Migrations
                 column: "EsmafId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_pastVicePresident_EsmafId",
+                table: "pastVicePresident",
+                column: "EsmafId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_pastWelfareUnitCordinator_EsmafId",
                 table: "pastWelfareUnitCordinator",
+                column: "EsmafId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_sisterCordinator_EsmafId",
+                table: "sisterCordinator",
                 column: "EsmafId");
         }
 
@@ -1044,6 +1287,9 @@ namespace DataContextStructure.Migrations
                 name: "bibleStudyUnit");
 
             migrationBuilder.DropTable(
+                name: "brotherCordinator");
+
+            migrationBuilder.DropTable(
                 name: "choralUnit");
 
             migrationBuilder.DropTable(
@@ -1053,13 +1299,22 @@ namespace DataContextStructure.Migrations
                 name: "firstTimer");
 
             migrationBuilder.DropTable(
+                name: "generalMember");
+
+            migrationBuilder.DropTable(
                 name: "lga");
 
             migrationBuilder.DropTable(
                 name: "loginInfo");
 
             migrationBuilder.DropTable(
+                name: "numberTestimony");
+
+            migrationBuilder.DropTable(
                 name: "pastBibleStudyCordinators");
+
+            migrationBuilder.DropTable(
+                name: "pastChoralSecretary");
 
             migrationBuilder.DropTable(
                 name: "pastChoralUnitCordinator");
@@ -1072,6 +1327,12 @@ namespace DataContextStructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "pastExecutive");
+
+            migrationBuilder.DropTable(
+                name: "pastFinancialSecretary");
+
+            migrationBuilder.DropTable(
+                name: "pastOrganizingSecretary");
 
             migrationBuilder.DropTable(
                 name: "pastPrayerUnitCordinator");
@@ -1098,6 +1359,9 @@ namespace DataContextStructure.Migrations
                 name: "pastUsheringUnitCordinator");
 
             migrationBuilder.DropTable(
+                name: "pastVicePresident");
+
+            migrationBuilder.DropTable(
                 name: "pastWelfareUnitCordinator");
 
             migrationBuilder.DropTable(
@@ -1113,10 +1377,16 @@ namespace DataContextStructure.Migrations
                 name: "register");
 
             migrationBuilder.DropTable(
+                name: "sisterCordinator");
+
+            migrationBuilder.DropTable(
                 name: "state");
 
             migrationBuilder.DropTable(
                 name: "technicalUnit");
+
+            migrationBuilder.DropTable(
+                name: "testimony");
 
             migrationBuilder.DropTable(
                 name: "transportUnit");

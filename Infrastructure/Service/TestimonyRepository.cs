@@ -68,7 +68,7 @@ namespace Infrastructure.Service
             int no = int.Parse(model.Number);
             bool result= true;
 
-          var del=  _context.testimonyNumber.FirstOrDefault();
+          var del=  _context.numberTestimony.FirstOrDefault();
             if (model.Id < 1)
             {
 
@@ -76,7 +76,7 @@ namespace Infrastructure.Service
                 {
                     Number =no,
                 };
-                _context.testimonyNumber.Add(bData);
+                _context.numberTestimony.Add(bData);
                 _context.Remove(del);
                 result = await _context.SaveChangesAsync() > 0;
             }
@@ -106,7 +106,7 @@ namespace Infrastructure.Service
 
         public IQueryable TestimonyNumberToDisplay()
         {
-         var no=   _context.testimonyNumber.OrderByDescending(s=>s.Id).FirstOrDefault();
+         var no=   _context.numberTestimony.OrderByDescending(s=>s.Id).FirstOrDefault();
             int no2 = (int)TestimonyNumberEnum.Two;
             int no3=  (int)TestimonyNumberEnum.Three;
             int no4 = (int)TestimonyNumberEnum.Four;
