@@ -5,6 +5,7 @@ using ESMIlWebApp.Models;
 using DataStructure.ViewModel;
 using System.Net;
 using Newtonsoft.Json;
+using System.Data.Entity;
 
 namespace ESMIlWebApp.Controllers.Unit
 {
@@ -95,10 +96,16 @@ namespace ESMIlWebApp.Controllers.Unit
         {
             try
             {
+                var state= Request.Form["Surname"].FirstOrDefault();
                 var model = new PrayerUnitDTOData();
                 
                 payload = EncryptionExtensions.DecryptStringAES(payload);
                 var newModel = JsonConvert.DeserializeObject<PrayerUnitDTOData>(payload);
+
+                if (newModel != null) 
+                {
+                    var getState = newModel.StateOfOrigin;
+                }
                 var savePrayerUnitData = await _repository.AddOrUpdatePrayerUnitAsync(newModel);
                 
                 if (savePrayerUnitData)
@@ -142,6 +149,27 @@ namespace ESMIlWebApp.Controllers.Unit
                 errorMessage = ex.Message;
             }
             return Json(new ResponseModel {hasError = true, message = $" Errror Message: {errorMessage}", statusCode=(int)HttpStatusCode.NotImplemented});
+        }
+        public IActionResult ActionState(string statename)
+        {
+            var exceptionMessage = string.Empty;
+
+            try
+            {
+                if (statename == null)
+                {
+                    return Json(new ResponseModel { message = "Bad request" });
+                }
+                var ret=  _repository.GetState(statename);
+
+                return Json(ret);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error", ex);
+                errorMessage = ex.Message;
+            }
+            return Json(new ResponseModel { hasError = true, message = $" Errror Message: {errorMessage}", statusCode = (int)HttpStatusCode.NotImplemented });
         }
     }
 }

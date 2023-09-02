@@ -559,13 +559,22 @@ namespace Infrastructure.Service
         }
         public IQueryable<StateDTO> ListState()
         {
+           
             return _context.state.AsNoTracking().Select(s => new StateDTO
             {
                 StateName = s.StateName
             });
 
         }
-        public IQueryable<LgaDTO> ListLga() 
+
+        public IQueryable GetState(string stateName)
+        {
+            var st = _context.lga.Where(s => s.LgaName == stateName).Select(d => d.LgaName);
+            
+            return st; 
+        }
+
+        public IQueryable<LgaDTO> ListLga()
         {
             return _context.lga.AsNoTracking().Select(s => new LgaDTO
             {

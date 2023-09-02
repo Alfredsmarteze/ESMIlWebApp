@@ -65,7 +65,9 @@
         <div class="col-lg-4">
            <div class="form-group mg-b-10-force">
               <label class="form-control-label">State of origin</label>
-          <vc:state></vc:state> 
+           <div id="warning" height> </div>
+          @*<select class="form-select" id="states"></select>*@
+              <vc:state></vc:state> 
           </div>
         </div>
         </div>
@@ -74,7 +76,8 @@
            <div class="form-group mg-b-10-force">
               <label class="form-control-label">LGA</label>
           <div id="warning2" height> </div>
-          <vc:lga></vc:lga> 
+          <select class="form-select" id="lgaa"></select>
+          @*<vc:lga></vc:lga>*@ 
           </div>
         </div>
         </div>
@@ -166,7 +169,7 @@
         <div class="text-center">
             <br/>
         <button class="btn btn-primary" type="submit" id="saveRecord">Save</button>
-        </div>
+        </div><br>
         </form>
     </div>
 </div>
@@ -175,14 +178,81 @@
    @* <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>*@
     @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
     <script>
-  
+        $("#drpState").on('change', function(e){
+            e.preventDefault();
+            var dataObject = JSON.stringify({
+                'statename': $('#drpState').val(),
+            });
+
+           jQuery(function getlga(a) {
+                var aL = a.length;
+                var values = [];
+                for (var i = 0; i < aL; i++) {
+                    values.push(a[i][2].split(":", 1)[0]);
+                }
+                return values.join('');
+            });
+
+            $.ajax({
+            url: "@Url.Action("ActionState","PrayerUnit", new {area="Unit"})",
+            type: 'POST',
+            async: false,
+            dataType: 'text',
+            data: { 
+                  statename: $("#drpState").val(),
+                },
+            success: function (response) {
+                    if (response.length > 0) {
+                    $('#lgaa').html('');
+                    var options = '';
+                    options += '<option value="Select">Select LGA</option>';
+                        for (var i = 0; i < response.length; i++) {
+                            options += '<option value="' + response[i] + '">' + getlga(response[i]) + '</option>';
+                    }
+                    $('#lgaa').append(options);
+                                            
+                        $('#lgaa').find('option').remove().end().append(options);
+
+
+                }
+                    //console.log(data);
+            },
+            error: function (xhr) { }    
+          });
+        });
+            
+
+        //var option = '';
+
+        //var states = $.nigeria.states();
+        //for (var i = 0; i < states.length; i++) {
+        //    option += '<option value="' + states[i] + '">' + $.ucfirst(states[i]) + '</option>';
+        //}
+        //$('#lga').append(option).on('change', function () {
+
+        //    var option = '';
+        //    option += '<option value="">Local government</option>';
+
+        //    var lga = eval('$.nigeria.' + this.value);
+
+        //    for (var i = 0; i < lga.length; i++) {
+        //        option += '<option value="' + lga[i] + '">' + $.ucfirst(lga[i]) + '</option>';
+        //    }
+
+        //    $('#lga').find('option')
+        //        .remove()
+        //        .end().append(option);
+
+        //}).trigger('change');
+
         var saveUrl="@Url.Action("AddOrUpdatePrayerUnitData","PrayerUnit", new {area="Unit"})";
          $(document).ready(function() {
          $(".hideForm").hide();
          $(".showForm").on('click', function() { 
               $('.hideForm').toggle();
          })
-    });
+        });
+
         $.fn.clearForm=function(){
             this.each(function(){this.reset()})
         }
@@ -222,7 +292,7 @@
             else {
                 $("#txtPhoneNumber01").css({ 'background-color': '' });
             }
-            if (!$("#drpLga").val()) {
+            if (!$("#lga").val()) {
                 Swal.fire('Please select your LGA.', '', 'warning');
                 $("#warning2").css({ 'background-color': 'orange', 'height': '7px', 'width': '100%' });
                 return;
@@ -230,7 +300,7 @@
             else {
                 $("#warning2").css({ 'background-color': '', 'height': '', 'width': '' });
             }
-            if (!$("#drpState").val()) {
+            if (!$("#states").val()) {
                 Swal.fire('Please select your state of origin.', '', 'warning');
                 $("#warning").css({ 'background-color': 'orange', 'height': '7px', 'width': '100%' });
                 return;
@@ -289,9 +359,9 @@
             Email:$.trim($("#txtEmail").val()),
             PhoneNumber01:$.trim($("#txtPhoneNumber01").val()),
             PhoneNumber02:$.trim($("#txtPhoneNumber02").val()),
-            StateOfOrigin:$("#drpState").val(),
+            StateOfOrigin:$.trim($("#states").val()),
             Ambition:$("#txtAmbition").val(),
-            LGA:$("#drpLga").val(),
+            LGA:$.trim($("#lga").val()),
             PreviousUnit:$("#drpUnit").val(),
             PositionInFamily:$.trim($("#txtPositionInFamily").val()),
             SocialMediaAddress:$.trim($("#txtSocialMediaAddress").val()),

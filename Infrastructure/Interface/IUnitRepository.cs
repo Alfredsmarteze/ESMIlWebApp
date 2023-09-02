@@ -39,6 +39,7 @@ namespace Infrastructure.Interface
         string DeleteChoralUnitById(int id);
         string DeletePrayerUnitById(int ids);
         IQueryable<StateDTO> ListState();
+        IQueryable GetState(string stateName);
         IQueryable<LgaDTO> ListLga();   
         
         

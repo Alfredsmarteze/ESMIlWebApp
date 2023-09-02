@@ -1,0 +1,22 @@
+﻿  var option = '';
+
+        var states = $.nigeria.states();
+        for (var i = 0; i < states.length; i++) {
+            option += '<option value="' + states[i] + '">' + $.ucfirst(states[i]) + '</option>';
+        }
+        $('#lga').append(option).on('change', function () {
+
+            var option = '';
+            option += '<option value="">Local government</option>';
+
+            var lga = eval('$.nigeria.' + this.value);
+
+            for (var i = 0; i < lga.length; i++) {
+                option += '<option value="' + lga[i] + '">' + $.ucfirst(lga[i]) + '</option>';
+            }
+
+            $('#lga').find('option')
+                .remove()
+                .end().append(option);
+
+        }).trigger('change');

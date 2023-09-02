@@ -40,22 +40,23 @@
           </div>
         </div>
         <div class="col-lg-4">
-                            <div class="form-group mg-b-10-force">
-                                <label for="">Date Of Birth</label>
-                                <div class="ate-input">
-                                    <div class="ate-input">
-                                        <input type="text" class="date form-control" placeholder="" id="txtDateofBirth" value="@Model.strDateOfBirth">
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- col-4 -->
+           <div class="form-group mg-b-10-force">
+               <label for="">Date Of Birth</label>
+               <div class="ate-input">
+                   <div class="ate-input">
+                     <input type="text" class="date form-control" placeholder="" id="txtDateofBirth" value="@Model.strDateOfBirth">
+                   </div>
+               </div>
+           </div>
+        </div><!-- col-4 -->
         </div>
         <br>
         <div class="row">
         <div class="col-lg-4">
            <div class="form-group mg-b-10-force">
               <label class="form-control-label">State of origin</label>
-          <vc:state></vc:state> 
+              <div id="warning" height> </div>
+              <select id="states" class="form-select"></select> 
           </div>
         </div>
         </div>
@@ -64,7 +65,7 @@
            <div class="form-group mg-b-10-force">
               <label class="form-control-label">LGA</label>
            <div id="warning2" height> </div>
-          <vc:lga></vc:lga> 
+          <select id="lga" class="form-select"></select> 
           </div>
         </div>
         </div>
@@ -143,21 +144,22 @@
             </div>
         </div>
         <div class="col-lg-4">
-                            <div class="form-group mg-b-10-force">
-                                <label for="">Date Join ESM</label>
-                                <div class="ate-input">
-                                    <div class="ate-input">
-                                        <input type="text" class="date form-control" value="@Model.strDateJoinESM" placeholder="" id="txtDateJoinESM">
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- col-4 -->
+             <div class="form-group mg-b-10-force">
+                  <label for="">Date Join ESM</label>
+                 <div class="ate-input">
+                    <div class="ate-input">
+                       <input type="text" class="date form-control" value="@Model.strDateJoinESM" placeholder="" id="txtDateJoinESM">
+                    </div>
+                </div>
+             </div>
+        </div><!-- col-4 -->
         </div>
             
         </div>
         </form>
     </div>
     <button class="btn float-right" id="btnSaveRecord">Save</button>
+    <br/>
 </div>
 
 
@@ -165,10 +167,34 @@
 <script>
     var saveUrl="@Url.Action("AddOrUpdatePrayerUnitData","PrayerUnit", new {area="Unit"})";
     
+        var option = '';
+
+        var states = $.nigeria.states();
+        for (var i = 0; i < states.length; i++) {
+            option += '<option value="' + states[i] + '">' + $.ucfirst(states[i]) + '</option>';
+        }
+        $('#states').append(option).on('change', function () {
+
+            var option = '';
+            option += '<option value="">Local government</option>';
+
+            var lga = eval('$.nigeria.' + this.value);
+
+            for (var i = 0; i < lga.length; i++) {
+                option += '<option value="' + lga[i] + '">' + $.ucfirst(lga[i]) + '</option>';
+            }
+
+            $('#lga').find('option')
+                .remove()
+                .end().append(option);
+
+        }).trigger('change');
+
+
     $(document).ready(function(){
     $("#drpGender").val('@Model.Gender').trigger('change');
-    $("#drpState").val('@Model.StateOfOrigin').trigger('change');
-    $("#drpLga").val('@Model.LGA').trigger('change');
+    $("#states").val('@Model.StateOfOrigin').trigger('change');
+    $("#lga").val('@Model.LGA').trigger('change');
     $("#drpUnit").val('@Model.PreviousUnit').trigger('change');
     });
     $("#btnSaveRecord").click(function(e)
@@ -207,7 +233,7 @@
             else {
                 $("#txtPhoneNumber01").css({ 'background-color': '' });
             }
-            if (!$("#drpLga").val()) {
+            if (!$("#lga").val()) {
                 Swal.fire('Please select your LGA.', '', 'warning');
                 $("#warning2").css({ 'background-color': 'orange', 'height': '7px', 'width': '100%' });
                 return;
@@ -215,7 +241,7 @@
             else {
                 $("#warning2").css({ 'background-color': '', 'height': '', 'width': '' });
             }
-            if (!$("#drpState").val()) {
+            if (!$("#states").val()) {
                 Swal.fire('Please select your state of origin.', '', 'warning');
                 $("#warning").css({ 'background-color': 'orange', 'height': '7px', 'width': '100%' });
                 return;
@@ -274,9 +300,9 @@
             Email:$.trim($("#txtEmail").val()),
             PhoneNumber01:$.trim($("#txtPhoneNumber01").val()),
             PhoneNumber02:$.trim($("#txtPhoneNumber02").val()),
-            StateOfOrigin:$("#drpState").val(),
-            Ambition:$("#txtAmbition").val(),
-            LGA:$("#drpLga").val(),
+            StateOfOrigin:$.trim($("#states").val()),
+            Ambition:$.trim($("#txtAmbition").val()),
+            LGA:$.trim($("#lga").val()),
             PreviousUnit:$("#drpUnit").val(),
             PositionInFamily:$.trim($("#txtPositionInFamily").val()),
             SocialMediaAddress:$.trim($("#txtSocialMediaAddress").val()),
