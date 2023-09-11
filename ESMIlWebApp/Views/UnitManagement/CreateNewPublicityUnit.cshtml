@@ -61,8 +61,8 @@
            <div class="form-group mg-b-10-force">
               <label class="form-control-label">LGA</label>
           <div id="warning2" height> </div>
-          <vc:lga></vc:lga> 
-          </div>
+            <select class="form-select" id="lga"></select>
+           </div>
         </div>
         </div>
         <br/>
@@ -118,12 +118,7 @@
             <input class="form-control" id="txtAmbition" type="text" placeholder="">
             </div>
         </div>
-        <div class="col-4">
-            <div class="form-group">
-            <label class="form-label">Unit</label>
-            <vc:unit></vc:unit>
-            </div>
-        </div>
+        
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Previous Unit</label>
@@ -165,7 +160,33 @@
 
 @section scripts{
      <script>
-  
+
+        $("#drpState").on('change', function (e) {
+            e.preventDefault();
+            var dataObject = { statename: $('#drpState').val(), }
+
+            $.ajax({
+                url: "@Url.Action("GetLga","LgaState", new {area="Unit"})",
+                type: 'POST',
+                async: false,
+                dataType: 'json',
+                data: dataObject,
+                success: function (response) {
+                    if (response.length > 0) {
+                        $('#lga').html('');
+                        var options = '';
+                        options += '<option value="Select">Select LGA</option>';
+                        for (var i = 0; i < response.length; i++) {
+                            options += '<option value=' + response[i] + '>' + response[i] + '</option>';
+                        }
+                        $('#lga').append(options);
+
+                    }
+                },
+                error: function (xhr) { }
+            });
+        });
+
         var saveUrl="@Url.Action("AddOrUpdatePublicityUnitData","PublicityUnit", new {area="Unit"})";
 
         $.fn.clearForm=function(){
@@ -210,7 +231,7 @@
             else {
                 $("#txtPhoneNumber01").css({ 'background-color': '' });
             }
-            if (!$("#drpLga").val()) {
+            if (!$("#lga").val()) {
                 Swal.fire('Please select your LGA.', '', 'warning');
                 $("#warning2").css({ 'background-color': 'orange', 'height': '7px', 'width': '100%' });
                 return;
@@ -279,8 +300,8 @@
             PhoneNumber02:$.trim($("#txtPhoneNumber02").val()),
             Ambition:$.trim($("#txtAmbition").val()),
             StateOfOrigin:$("#drpState").val(),
-            LGA:$("#drpLga").val(),
-            Unit:$("#drpUnit").val(),
+            LGA:$.trim($("#lga").val()),
+           /// Unit:$("#drpUnit").val(),
             PreviousUnit:$("#drpUnit").val(),
             PositionInFamily:$.trim($("#txtPositionInFamily").val()),
             SocialMediaAddress:$.trim($("#txtSocialMediaAddress").val()),
