@@ -173,6 +173,16 @@ namespace Infrastructure.Service
                 {
                     throw new("Not found");
                 }
+                //var checkLga = _context.lga.Any(s => s.LgaName == model.LGA);
+                //if (!checkLga)
+                //{
+                //    throw new("Please input correct LGA.");
+                //}
+                //var checkState = _context.state.Any(s => s.StateName == model.StateOfOrigin);
+                //if (!checkState)
+                //{
+                //    throw new("Please input correct State of Origin.");
+                //}
                 bibleStudyData.Surname = model.Surname;
                 bibleStudyData.Firstname = model.Firstname;
                 bibleStudyData.Middlename = model.Middlename;
@@ -317,6 +327,16 @@ namespace Infrastructure.Service
                 {
                     throw new("Not found");
                 }
+               //var checkLga= _context.lga.Any(s => s.LgaName == model.LGA);
+               // if (!checkLga)
+               // {
+               //     throw new("Please input correct LGA.");
+               // }
+               // var checkState = _context.state.Any(s => s.StateName == model.StateOfOrigin);
+               // if (!checkState)
+               // {
+               //     throw new("Please input correct State of Origin.");
+               // }
                 prayerData.Surname = model.Surname;
                 prayerData.Firstname = model.Firstname;
                 prayerData.Middlename = model.Middlename;
@@ -495,6 +515,16 @@ namespace Infrastructure.Service
                 {
                     throw new("Not found");
                 }
+                //var checkLga = _context.lga.Any(s => s.LgaName == model.LGA);
+                //if (!checkLga)
+                //{
+                //    throw new("Please input correct LGA.");
+                //}
+                //var checkState = _context.state.Any(s => s.StateName == model.StateOfOrigin);
+                //if (!checkState)
+                //{
+                //    throw new("Please input correct State of Origin.");
+                //}
                 prayerData.Surname = model.Surname;
                 prayerData.Firstname = model.Firstname;
                 prayerData.Middlename = model.Middlename;
@@ -569,7 +599,7 @@ namespace Infrastructure.Service
 
         public IQueryable GetState(string stateName)
         {
-            var st = _context.lga.Where(s => s.LgaName == stateName).Select(d => d.LgaName);
+            var st= _context.lga.Where(s => s.LgaName == stateName).Select(d =>d.LgaName);
             
             return st; 
         }
@@ -665,6 +695,16 @@ namespace Infrastructure.Service
                 {
                     throw new("Not found");
                 }
+                //var checkLga = _context.lga.Any(s => s.LgaName == model.LGA);
+                //if (!checkLga)
+                //{
+                //    throw new("Please input correct LGA.");
+                //}
+                //var checkState = _context.state.Any(s => s.StateName == model.StateOfOrigin);
+                //if (!checkState)
+                //{
+                //    throw new("Please input correct State of Origin.");
+                //}
                 prayerData.Surname = model.Surname;
                 prayerData.Firstname = model.Firstname;
                 prayerData.Middlename = model.Middlename;
@@ -814,6 +854,16 @@ namespace Infrastructure.Service
                 {
                     throw new("Not found");
                 }
+                //var checkLga = _context.lga.Any(s => s.LgaName == model.LGA);
+                //if (!checkLga)
+                //{
+                //    throw new("Please input correct LGA.");
+                //}
+                //var checkState = _context.state.Any(s => s.StateName == model.StateOfOrigin);
+                //if (!checkState)
+                //{
+                //    throw new("Please input correct State of Origin.");
+                //}
                 publicityData.Surname = model.Surname;
                 publicityData.Firstname = model.Firstname;
                 publicityData.Middlename = model.Middlename;
@@ -963,6 +1013,16 @@ namespace Infrastructure.Service
                 {
                     throw new("Not found");
                 }
+                //var checkLga = _context.lga.Any(s => s.LgaName == model.LGA);
+                //if (!checkLga)
+                //{
+                //    throw new("Please input correct LGA.");
+                //}
+                //var checkState = _context.state.Any(s => s.StateName == model.StateOfOrigin);
+                //if (!checkState)
+                //{
+                //    throw new("Please input correct State of Origin.");
+                //}
                 technicalData.Surname = model.Surname;
                 technicalData.Firstname = model.Firstname;
                 technicalData.Middlename = model.Middlename;
@@ -1070,6 +1130,16 @@ namespace Infrastructure.Service
                 {
                     throw new("Not found");
                 }
+                //var checkLga = _context.lga.Any(s => s.LgaName == model.LGA);
+                //if (!checkLga)
+                //{
+                //    throw new("Please input correct LGA.");
+                //}
+                //var checkState = _context.state.Any(s => s.StateName == model.StateOfOrigin);
+                //if (!checkState)
+                //{
+                //    throw new("Please input correct State of Origin.");
+                //}
                 welfareData.Surname = model.Surname;
                 welfareData.Firstname = model.Firstname;
                 welfareData.Middlename = model.Middlename;
@@ -1251,6 +1321,16 @@ namespace Infrastructure.Service
                 {
                     throw new("Not found");
                 }
+                //var checkLga = _context.lga.Any(s => s.LgaName == model.LGA);
+                //if (!checkLga)
+                //{
+                //    throw new("Please input correct LGA.");
+                //}
+                //var checkState = _context.state.Any(s => s.StateName == model.StateOfOrigin);
+                //if (!checkState)
+                //{
+                //    throw new("Please input correct State of Origin.");
+                //}
                 usheringData.Surname = model.Surname;
                 usheringData.Firstname = model.Firstname;
                 usheringData.Middlename = model.Middlename;
@@ -1392,6 +1472,16 @@ namespace Infrastructure.Service
                 {
                     throw new("Not found");
                 }
+                //var checkLga = _context.lga.Any(s => s.LgaName == model.LGA);
+                //if (!checkLga)
+                //{
+                //    throw new("Please input correct LGA.");
+                //}
+                //var checkState = _context.state.Any(s => s.StateName == model.StateOfOrigin);
+                //if (!checkState)
+                //{
+                //    throw new("Please input correct State of Origin.");
+                //}
                 transportUnitData.Surname = model.Surname;
                 transportUnitData.Firstname = model.Firstname;
                 transportUnitData.Middlename = model.Middlename;

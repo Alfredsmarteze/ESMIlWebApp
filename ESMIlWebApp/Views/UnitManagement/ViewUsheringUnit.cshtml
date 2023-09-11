@@ -55,15 +55,16 @@
         <div class="col-lg-4">
            <div class="form-group mg-b-10-force">
               <label class="form-control-label">State of origin</label>
-          <vc:state></vc:state> 
-          </div>
+               <input class="form-control" id="txtPhoneNumber01" type="text" value="@Model.StateOfOrigin" readonly>
+            </div>
         </div>
         </div>
         <div class="row">
         <div class="col-lg-4">
            <div class="form-group mg-b-10-force">
               <label class="form-control-label">LGA</label>
-          <vc:lga></vc:lga> 
+              <input class="form-control" id="txtPhoneNumber01" type="text" value="@Model.LGA" readonly>
+              @*<vc:lga></vc:lga>*@ 
           </div>
         </div>
         </div>
@@ -161,8 +162,8 @@
 
         $(document).ready(function () {
             $("#drpGender").val('@Model.Gender').trigger('change');
-            $("#drpState").val('@Model.StateOfOrigin').trigger('change');
-            $("#drpLga").val('@Model.LGA').trigger('change');
+            //$("#drpState").val('@Model.StateOfOrigin').trigger('change');
+            //$("#drpLga").val('@Model.LGA').trigger('change');
             $("#drpUnit").val('@Model.PreviousUnit').trigger('change');
         });
 

@@ -16,6 +16,7 @@
                 <tr>
                @* <th class="check-col" align="center"><input type="checkbox" name=selectAll value="1" id="example-select-all"></th>*@
                     <th>Actions</th>
+                    <th>ID</th>
                     <th>Surname</th>
                     <th>Firstname</th>
                     <th>Middlename</th>
@@ -35,19 +36,8 @@
                     <th>Social Media Address</th>
                     <th>Ambition</th>
                     <th>Date Join ESM</th>
-                    <th></th>
                 </tr>
             </thead>
-            @*<thead>
-                <tr>
-                    @*<th></th>
-                    <th></th>
-                    <th></th>
-                    <th><input class="form-control search-input" data-column="" type="text"></th>
-                    <th><input class="form-control search-input" data-column="" type="text"></th>
-                    <th><input class="form-control search-input" data-column="" type="text"></th>
-                </tr>
-            </thead>*@
             <tbody>
             </tbody>
         </table>
@@ -110,6 +100,7 @@
         //    'render':function(data, type, row, full, meta){
         //return '<img src="'+data.photo+'" alt="Passport" style="height:50px; width:50px;"/>';
         //}},
+        { "data": "id", "name": "id", "autoWidth": false },
         {"data":"surname", "name":"surname", "autoWidth":false},
         {"data":"firstname", "name":"firstname", "autoWidth":false},
         {"data":"middlename", "name":"middlename", "autoWidth":false},
@@ -129,54 +120,39 @@
         {"data":"socialMediaAddress", "name":"socialMediaAddress", "autoWidth":false},
         {"data":"ambition", "name":"ambition", "autoWidth":false},
         {"data":"strDateJoinESM", "name":"strDateJOinESM", "autoWidth":false},
-        {"data":null,"sTitle": "Action",
-        "render": function (data, type, row, meta)
-         {
-           if (row)
-           {
-            return`<button class=" btn btn-danger" onclick='DeleteStd(${row.id})'>Delete</button>`
-           }
-           return ''
-         }
-         },
         ],
-      }); 
-   
-         function DeleteStd(id){
-            var postId={
-            "payload":id
-            }
-            bootbox.confirm({
-                 message:       "Are you sure you want to DELETE this record?",
-                 buttons: {
-                 cancel: {
-                 label: '<i class="fa fa-times"></i> Cancel'
-                },
-                confirm: {
-                label: '<i class="fa fa-check"></i> Confirm'
+      });
+
+        $('#technicalTable tbody').on('click', '#deleteRecord', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var data = table.row($(this).parents('tr')).data();
+                    var dataId = { "payload": data.id }
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("ActionButton", "TechnicalUnit", new { area = "Unit" })",
+                        datatype: "JSON",
+                        data: dataId,
+                    });
+                    window.location.reload();
+                    Swal.fire(
+                        'Deleted!',
+                        'Record has been deleted.',
+                        'success'
+                    );
+
                 }
-    },
-    callback: function (result) {
-        if(result){
-           $.ajax({
-                    type: "POST",
-                    url: "@Url.Action("ActionButton", "TechnicalUnit", new { area = "Unit" })",
-                    datatype: "JSON",
-                    data:postId,
-                    
-                });
-               bootbox.alert("You have successfully deleted the record.", function(){ 
-                window.location.reload(); 
-                });
-                }
-                else{
-                bootbox.alert("Record not deleted.");
-                }
-    }
-});
-         
-    }
-        
+            })
+        });
 
 
          $('#technicalTable tbody').on('click', '#viewRecord', function (e) {

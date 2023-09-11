@@ -19,7 +19,7 @@ namespace ESMIlWebApp.ViewComponents
         }
         List<LgaDTO> GetAllLga() 
         {
-            return _unitRepository.ListLga().ToList();
+          return _unitRepository.ListLga().ToList();
         }
     }
 }

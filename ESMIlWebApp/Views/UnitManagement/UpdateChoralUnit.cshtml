@@ -55,16 +55,17 @@
         <div class="col-lg-4">
            <div class="form-group mg-b-10-force">
               <label class="form-control-label">State of origin</label>
-          <vc:state></vc:state> 
-          </div>
+                <input class="form-control" id="txtState" type="text" value="@Model.StateOfOrigin" readonly placeholder="">
+            </div>
         </div>
         </div>
         <div class="row">
         <div class="col-lg-4">
            <div class="form-group mg-b-10-force">
               <label class="form-control-label">LGA</label>
-          <div id="warning2" height> </div>
-          <vc:lga></vc:lga> 
+            <input class="form-control" id="txtLga" type="text" value="@Model.LGA" readonly placeholder="">
+          @*<div id="warning2" height> </div>*@
+         @* <vc:lga></vc:lga> *@
           </div>
         </div>
         </div>
@@ -167,8 +168,6 @@
     
     $(document).ready(function(){
     $("#drpGender").val('@Model.Gender').trigger('change');
-    $("#drpState").val('@Model.StateOfOrigin').trigger('change');
-    $("#drpLga").val('@Model.LGA').trigger('change');
     $("#drpUnit").val('@Model.PreviousUnit').trigger('change');
     });
     $("#btnSaveRecord").click(function(e)
@@ -207,22 +206,22 @@
             else {
                 $("#txtPhoneNumber01").css({ 'background-color': '' });
             }
-            if (!$("#drpLga").val()) {
-                Swal.fire('Please select your LGA.', '', 'warning');
-                $("#warning2").css({ 'background-color': 'orange', 'height': '7px', 'width': '100%' });
-                return;
-            }
-            else {
-                $("#warning2").css({ 'background-color': '', 'height': '', 'width': '' });
-            }
-            if (!$("#drpState").val()) {
-                Swal.fire('Please select your state of origin.', '', 'warning');
-                $("#warning").css({ 'background-color': 'orange', 'height': '7px', 'width': '100%' });
-                return;
-            }
-            else {
-                $("#warning").css({ 'background-color': '', 'height': '', 'width': '' });
-            }
+            //if (!$("#txtLga").val()) {
+            //    Swal.fire('Please select your LGA.', '', 'warning');
+            //    $("#txtLga").css({ 'background-color': 'orange', 'height': '7px', 'width': '100%' });
+            //    return;
+            //}
+            //else {
+            //    $("#txtLga").css({ 'background-color': '', 'height': '', 'width': '' });
+            //}
+            //if (!$("#txtState").val()) {
+            //    Swal.fire('Please select your state of origin.', '', 'warning');
+            //    $("#txtState").css({ 'background-color': 'orange', 'height': '7px', 'width': '100%' });
+            //    return;
+            //}
+            //else {
+            //    $("#txtState").css({ 'background-color': '', 'height': '', 'width': '' });
+            //}
             if (!$("#txtAmbition").val()) {
                 Swal.fire('Please input a value. Ambition cannot be empty.', '', 'warning');
                 $("#txtAmbition").css({ 'background-color': 'orange' });
@@ -274,9 +273,9 @@
             Email:$.trim($("#txtEmail").val()),
             PhoneNumber01:$.trim($("#txtPhoneNumber01").val()),
             PhoneNumber02:$.trim($("#txtPhoneNumber02").val()),
-            StateOfOrigin:$("#drpState").val(),
+        //    StateOfOrigin:$.trim($("#txtState").val()),
             Ambition:$("#txtAmbition").val(),
-            LGA:$("#drpLga").val(),
+          //  LGA:$.trim($("#txtLga").val()),
             PreviousUnit:$("#drpUnit").val(),
             PositionInFamily:$.trim($("#txtPositionInFamily").val()),
             SocialMediaAddress:$.trim($("#txtSocialMediaAddress").val()),
