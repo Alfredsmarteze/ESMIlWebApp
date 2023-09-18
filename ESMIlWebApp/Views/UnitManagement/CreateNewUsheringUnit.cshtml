@@ -224,15 +224,15 @@
                 $("#txtPhoneNumber01").css({ 'background-color': '' });
             }
             if (!$("#lga").val()) {
-                Swal.fire('Please select your LGA.', '', 'warning');
+                swal.fire('please select your lga.', '', 'warning');
                 $("#warning2").css({ 'background-color': 'orange', 'height': '7px', 'width': '100%' });
                 return;
             }
             else {
                 $("#warning2").css({ 'background-color': '', 'height': '', 'width': '' });
             }
-            if (!$("#drpState").val()) {
-                Swal.fire('Please select your state of origin.', '', 'warning');
+            if (!$("#drpstate").val()) {
+                swal.fire('please select your state of origin.', '', 'warning');
                 $("#warning").css({ 'background-color': 'orange', 'height': '7px', 'width': '100%' });
                 return;
             }

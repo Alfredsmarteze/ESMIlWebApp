@@ -39,62 +39,52 @@
         </div>
  </div>
      
-    <p class="lead address" style="padding:0.8rem">
-        ECWA Student Ministry (ESM) Unilorin Permanent Site (PS) is a gathering of sons and daughters of Most High God under the ministry of Evangelical Church Winning All (ECWA)... The life style of Jesus you are to live happily in your daily activities.
-        There are some resources here that have been written specially for you, to help you
-        understand christianity, and to live the life of our Lord Jesus Christ.
-        I am telling you that it is possible for you to live the life Jesus Christ lived in this earth.
-    </p>
+    <article class="lead address" style="padding:0.8rem" id="lga">
+      
+    </article>
 </div>
+
 <br />
 <br />
 <br />
 <br />
- <div class="container">
+<div class="container " >
      <h5 class="card-header text-center">Testimonies</h5>
     @foreach (var item in Model)
     {
-        <div class="col">
+        <div class="col" id="centre">
            <div class="card">
             
              
             <article class="card-body" style="font-size:x-large">@item.TheGoodNews  </article>
-            <small class="card-footer h5"> @item.Firstname, @item.Department</small>
+            <small class="card-footer h6"> @item.Firstname, @item.Department</small>
              
            </div>
         </div>
         <br>
     }
 </div>
-     @*<div class="row card-group">
+<h5 class="card-header text-center">Announcement</h5>
+<div class="row card-group">
          <div class="col card text-center">
-             <p class="card-body">God did a very wonderful thinngs in my life, I trusted God for break-through in my family and God did it
-                 miraculously, the break-through was financial break-through. Not just that alone my GP has been awesome, 
-                 when I calculated it I was like oh my God, this is your hands in my academics. What a miracle working God.
-                 Truely scripture is true- "Those that put their trust in God, their face will never be put to shame."
-             </p>
-             <footer class="card-footer"> Sis Chiyere</footer>
+             <article class="card-body" id="annOne">
+                 
+             </article>
+             @*<footer class="card-footer"> </footer>*@
          </div>
         <div class="col card text-center">
-            <p class="card-body">
-                God did a very wonderful thinngs in my life, I trusted God for break-through in my family and God did it
-                miraculously, the break-through was financial break-through. Not just that alone my GP has been awesome,
-                when I calculated it I was like oh my God, this is your hands in my academics. What a miracle working God.
-                Truely scripture is true- "Those that put their trust in God, their face will never be put to shame."
-            </p>
-            <footer class="card-footer"> Sis Chiyere</footer>
+        <article class="card-body" id="annTwo">
+              
+            </article>
+            @*<footer class="card-footer"> </footer>*@
         </div>
         <div class="col card text-center">
-            <p class="card-body">
-                God did a very wonderful thinngs in my life, I trusted God for break-through in my family and God did it
-                miraculously, the break-through was financial break-through. Not just that alone my GP has been awesome,
-                when I calculated it I was like oh my God, this is your hands in my academics. What a miracle working God.
-                Truely scripture is true- "Those that put their trust in God, their face will never be put to shame."
-            </p>
-            <footer class="card-footer"> Sis Chiyere</footer>
+        <article class="card-body" id="annThree">
+               
+            </article>
+           @* <footer class="card-footer"> </footer>*@
         </div>
-     </div>*@
- </div>
+     </div>
 
 <br />
 <br />
@@ -118,7 +108,7 @@
             </div>
         </div>
     </div>
-    
+   
 
     @* Free Style Animation *@
     @*<div id="ball" class="animate rounded-circle text-succes h3 text-center">
@@ -128,6 +118,58 @@
 </div>
 @section scripts{
 <script>
+        
+        $.ajax({
+            url: "@Url.Action("GetPresidentCharge","AdminControl")",
+            type: 'post',
+            async: false,
+            dataType: 'json',
+             data: 'dataObject', 
+            success: function (response) {
+                data=response;
+                $('#lga').append(data);
+           },
+            error: function (xhr) { }
+        });
 
+        $.ajax({
+            url: "@Url.Action("GetAnnouncementOne","AdminControl")",
+            type: 'post',
+            async: false,
+            dataType: 'json',
+            data: 'dataObject',
+            success: function (response) {
+                data = response;
+                $('#annOne').append(data);
+            },
+            error: function (xhr) { }
+        });
+
+        $.ajax({
+            url: "@Url.Action("GetAnnouncementTwo","AdminControl")",
+            type: 'post',
+            async: false,
+            dataType: 'json',
+            data: 'dataObject',
+            success: function (response) {
+                data = response;
+                $('#annTwo').append(data);
+            },
+            error: function (xhr) { }
+        });
+
+        $.ajax({
+            url: "@Url.Action("GetAnnouncementThree","AdminControl")",
+            type: 'post',
+            async: false,
+            dataType: 'json',
+            data: 'dataObject',
+            success: function (response) {
+                data = response;
+                $('#annThree').append(data);
+            },
+            error: function (xhr) { }
+        });
+        
 </script>
 }

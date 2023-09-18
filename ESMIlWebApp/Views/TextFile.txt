@@ -1,0 +1,34 @@
+﻿
+  @*ECWA Student Ministry (ESM) Unilorin Permanent Site (PS) is a gathering of sons and daughters of Most High God under the ministry of Evangelical Church Winning All (ECWA)... The life style of Jesus you are to live happily in your daily activities.
+        There are some resources here that have been written specially for you, to help you
+        understand christianity, and to live the life of our Lord Jesus Christ.
+        I am telling you that it is possible for you to live the life Jesus Christ lived in this earth.*@
+
+   @*<div class="row card-group">
+         <div class="col card text-center">
+             <p class="card-body">God did a very wonderful thinngs in my life, I trusted God for break-through in my family and God did it
+                 miraculously, the break-through was financial break-through. Not just that alone my GP has been awesome, 
+                 when I calculated it I was like oh my God, this is your hands in my academics. What a miracle working God.
+                 Truely scripture is true- "Those that put their trust in God, their face will never be put to shame."
+             </p>
+             <footer class="card-footer"> Sis Chiyere</footer>
+         </div>
+        <div class="col card text-center">
+            <p class="card-body">
+                God did a very wonderful thinngs in my life, I trusted God for break-through in my family and God did it
+                miraculously, the break-through was financial break-through. Not just that alone my GP has been awesome,
+                when I calculated it I was like oh my God, this is your hands in my academics. What a miracle working God.
+                Truely scripture is true- "Those that put their trust in God, their face will never be put to shame."
+            </p>
+            <footer class="card-footer"> Sis Chiyere</footer>
+        </div>
+        <div class="col card text-center">
+            <p class="card-body">
+                God did a very wonderful thinngs in my life, I trusted God for break-through in my family and God did it
+                miraculously, the break-through was financial break-through. Not just that alone my GP has been awesome,
+                when I calculated it I was like oh my God, this is your hands in my academics. What a miracle working God.
+                Truely scripture is true- "Those that put their trust in God, their face will never be put to shame."
+            </p>
+            <footer class="card-footer"> Sis Chiyere</footer>
+        </div>
+     </div>*@

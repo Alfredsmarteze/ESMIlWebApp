@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataContextStructure.Migrations
 {
     [DbContext(typeof(ESMContext))]
-    [Migration("20230827184837_InitialMigrations")]
-    partial class InitialMigrations
+    [Migration("20230916210148_Init5")]
+    partial class Init5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1252,6 +1252,46 @@ namespace DataContextStructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("prayerUnit");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.PresidentCharge", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Charge")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ChargeDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CourseOfStudy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Faculty")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Firstname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Session")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("presidentCharge");
                 });
 
             modelBuilder.Entity("DataStructure.Entites.ProgramTable", b =>

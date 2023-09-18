@@ -29,7 +29,10 @@ namespace Infrastructure.Service
                 var splitDateOfTestimony = model.TestimonyDate.Split('/');
                 bdate = new DateTime(int.Parse(splitDateOfTestimony[2]), int.Parse(splitDateOfTestimony[0]), int.Parse(splitDateOfTestimony[1]));
             }
-
+            if (bdate.Year > DateTime.Now.Year || bdate.Month > DateTime.Now.Month || bdate.Day > DateTime.Now.Day)
+            {
+                throw new($"{bdate.Day}/{bdate.Month}/{bdate.Year} not okay. Please select correct date.");
+            }
             if (model.Id < 1)
             {
 
@@ -119,17 +122,17 @@ namespace Infrastructure.Service
                 }
                 else if (no.Number ==no3)
                 {
-                var three=   GetTestimonyToDisplay(3);
+                var three=   GetTestimonyToDisplay(no3);
                     return three;
                 }
                 else if(no.Number == no4) 
                 {
-                  var four=  GetTestimonyToDisplay(4);
+                  var four=  GetTestimonyToDisplay(no4);
                     return four;
                 }
                 else if (no.Number==no5)
                 {
-                  var five=  GetTestimonyToDisplay(5);
+                  var five=  GetTestimonyToDisplay(no5);
                     return five;
                 };
             return TestimonyNumberToDisplay();

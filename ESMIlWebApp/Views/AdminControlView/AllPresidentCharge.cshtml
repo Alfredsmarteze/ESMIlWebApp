@@ -1,0 +1,119 @@
+﻿@{
+    ViewData["Title"] = "All president charge";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<style>
+
+</style>
+
+<button class="btn btn-primary btn-rounded" id="newRecord">Capture New Record</button>
+<br>
+<br>
+
+<div class="table-responsive">
+    <table id="presidentChargeTable" width="100%" class="stripe hover">
+        <thead>
+            <tr>
+                <th>Actions</th>
+                <th>ID</th>
+                <th>Surname</th>
+                <th>Firstname</th>
+                <th>Course Of Study</th>
+                <th>Faculty</th>
+                <th>Session</th>
+                <th>Charge</th>
+                <th>Charge Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+
+
+@using (Html.BeginForm("ViewPresidentCharge", "AdminControlView", FormMethod.Post, new { id = "viewPresidentChargeForm", target = "_blank" }))
+{
+    <input type="hidden" name="viewRecordId" id="viewRecordId">
+}
+@using (Html.BeginForm("UpdatePresidentCharge", "AdminControlView", FormMethod.Post, new { id = "updatePresidentChargeForm", target = "_blank" }))
+{
+    <input type="hidden" name="updateRecordId" id="updateRecordId">
+}
+
+
+@section scripts{
+    <script>
+
+        var table = $("#presidentChargeTable").DataTable({
+            columnDefs: [{
+                targets: [5],
+                render: $.fn.dataTable.render.ellipsis(30)
+            }],
+            "lengthMenu": [[7, 20, 25, 50, -1], [7, 20, 25, 50, "All"]],
+            "processing": true, // for show progress bar
+            "serverSide": true, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            "paginate": true,
+            "scrollX": true,
+            // colReorder: false,
+            //  rowReorder:false,
+            //select: true,
+            //dom: 'Bfrtip', , new{area="Unit"}
+            "ajax": {
+                "url": "@Url.Action("GetAllPresidentCharge","AdminControl")",
+                "type": "POST",
+                "datatype": "json",
+                "data": function (arg) { }
+            },
+            "columns": [
+                {
+                    "data": null, "name": "Action", "defaultContent": '<div class="btn-group mr-1 mb-1">' +
+                        "<button aria-expanded='false' aria-haspopup='true' class='btn btn-white dropdown-toggle' data-toggle='dropdown' id='dropdownMenuDetail' type='button'></button>" +
+                        "<div aria-labelledby='dropdownMenuButton6' class='dropdown-menu'>" +
+                        "<a class='dropdown-item' href='#' id='changeRecord' title='Update record'><i class='fa fa-edit'></i>&nbsp; Update record</a>" +
+                        "<a class='dropdown-item' href='#' id='viewRecord' title='View record'><i class='fa fa-info-circle'></i>&nbsp; View record</a>" +
+                        "</div>" +
+                        '</div>'
+
+                },
+
+                { "data": "id", "name": "id", "autoWidth": false },
+                { "data": "surname", "name": "surname", "autoWidth": false },
+                { "data": "firstname", "name": "firstname", "autoWidth": false },
+                { "data": "courseOfStudy", "name": "courseOfStudy", "autoWidth": false },
+                { "data": "faculty", "name": "faculty", "autoWidth": false },
+                { "data": "session", "name": "session", "autoWidth": false },
+                { "data": "charge", "name": "charge", "autoWidth": false },
+                { "data": "strChargeDate", "name": "strChargeDate", "autoWidth": false },
+
+            ],
+
+        });
+
+        $('#presidentChargeTable tbody').on('click', '#viewRecord', function (e) {
+            e.preventDefault();
+            var data = table.row($(this).parents('tr')).data();
+            $("#viewRecordId").val(data.id);
+            $("#viewPresidentChargeForm").submit();
+
+        });
+
+        $('#presidentChargeTable tbody').on('click', '#changeRecord', function (e) {
+            e.preventDefault();
+            var data = table.row($(this).parents('tr')).data();
+            $("#updateRecordId").val(data.id);
+            $("#updatePresidentChargeForm").submit();
+
+        });
+
+        $('#newRecord').on('click', function (e) {
+            e.preventDefault();
+            var returnUrl = '@Url.Action("CreateNewPresidentCharge", "AdminControlView")';
+            window.location.href = returnUrl;
+        });
+
+    </script>
+   }

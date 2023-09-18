@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataContextStructure.Migrations
 {
-    public partial class InitialMigrations : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -291,6 +291,25 @@ namespace DataContextStructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_prayerUnit", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "presidentCharge",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Firstname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Charge = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Session = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ChargeDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CourseOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Faculty = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_presidentCharge", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -1366,6 +1385,9 @@ namespace DataContextStructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "prayerUnit");
+
+            migrationBuilder.DropTable(
+                name: "presidentCharge");
 
             migrationBuilder.DropTable(
                 name: "programTable");

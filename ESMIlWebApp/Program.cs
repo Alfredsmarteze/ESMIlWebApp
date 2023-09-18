@@ -17,6 +17,7 @@ builder.Services.AddDbContext<ESMContext>(x => x.UseSqlServer(connectionString))
 builder.Services.AddRazorPages();   
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddTransient<IAdminControl, AdminControlRepository>();
 builder.Services.AddTransient<ITestimonyRepository, TestimonyRepository>();
 builder.Services.AddTransient<IUnitRepository, UnitRepository>();
 builder.Services.AddTransient<IAccountRepository, AccountRepository>();

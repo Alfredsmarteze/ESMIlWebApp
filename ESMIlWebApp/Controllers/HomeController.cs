@@ -8,6 +8,7 @@ using Infrastructure.Interface;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Data.Entity;
 using System.Diagnostics;
 
 namespace ESMIlWebApp.Controllers
@@ -29,7 +30,7 @@ namespace ESMIlWebApp.Controllers
             this._testimonyRepository=testimonyRepository;
             this._context = context;
         }
-
+       
         public IActionResult Index()
         {
           var no= _testimonyRepository.TestimonyNumberToDisplay();

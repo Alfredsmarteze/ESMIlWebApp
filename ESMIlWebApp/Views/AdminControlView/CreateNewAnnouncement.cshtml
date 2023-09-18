@@ -1,0 +1,89 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4 class="text-muted"> Announcement</h4>
+<h5 class="text-muted">Capture new record</h5>
+
+<div class="container" style="background-color:lightblue">
+    <form id="clearFrm" class="justify-content-center">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="form-label">Announcement One</label>
+                    <input id="rowId" type="hidden">
+                    <textarea class="form-control" id="txtAnnouncementOne" type="text" placeholder=""></textarea>
+                </div>
+
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="form-label">Announcement Two</label>
+                    <textarea class="form-control" id="txtAnnouncementTwo" type="text" placeholder=""></textarea>
+                </div>
+            </div>
+
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="form-control-label">Announcement Three</label>
+                    <textarea class="form-control" id="txtAnnouncementThree" type="text" placeholder=""></textarea>
+                </div>
+            </div>
+
+        </div>
+        <br />
+        
+        <br />
+
+
+        <div class="text-center">
+            <br />
+            <button class="btn btn-primary" type="submit" id="saveRecord">Save</button>
+        </div>
+        <br />
+    </form>
+</div>
+
+
+@section scripts{
+
+    <script>
+
+        var saveUrl = "@Url.Action("AddOrUpdateAnnouncement","AdminControl")";
+        $.fn.clearForm = function () {
+            this.each(function () { this.reset(); })
+        }
+        $("#saveRecord").click(function (e) {
+            e.preventDefault();
+
+            var body = {
+                AnnouncementOne: $.trim($("#txtAnnouncementOne").val()),
+                AnnouncementTwo: $.trim($("#txtAnnouncementTwo").val()),
+                AnnouncementThree: $.trim($("#txtAnnouncementThree").val()),
+             }
+
+            $.ajax({
+                type: "POST",
+                url: saveUrl,
+                dataType: "Json",
+                data: { payload: JSON.stringify(body) },
+                success: function (result) {
+                    if (result.hasError == false) {
+                        Swal.fire(result.message, '', 'success');
+                        $("#clearFrm").each(function () {
+                            this.reset();
+                        })
+                    }
+                    else if (result.hasError == true) {
+                        Swal.fire(result.message, '', 'error');
+                    }
+
+                },
+
+            });
+        });
+       
+    </script>
+}

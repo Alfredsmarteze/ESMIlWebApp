@@ -27,34 +27,47 @@
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
-                    <label class="form-control-label">Goodnews</label>
-                    <textarea class="form-control" id="txtGoodnews" type="text" placeholder=""></textarea>
+                    <label class="form-control-label">Charge</label>
+                    <textarea class="form-control" id="txtCharge" type="text" placeholder=""></textarea>
                 </div>
             </div>
-                 
+
             <div class="col-6">
                 <div class="form-group">
-                    <label class="form-label">Department</label>
-                    <input class="form-control" id="txtDepartment" type="text" placeholder="">
+                    <label class="form-label">Course Of Study</label>
+                    <input class="form-control" id="txtCourseOfStudy" type="text" placeholder="">
                 </div>
             </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="form-label">Faculty</label>
+                    <input class="form-control" id="txtFaculty" type="text" placeholder="">
+                </div>
+            </div>
+            
         </div>
         <br />
         <div class="row">
             <div class="col-6 justify-content-center">
                 <div class="form-group mg-b-10-force">
-                    <label for="">Date </label>
+                    <label for="">Charge Date </label>
                     <div class="ate-input">
                         <div class="ate-input">
-                            <input type="text" class="date form-control" placeholder="Date" id="txtTestimonyDate">
+                            <input type="text" class="date form-control" placeholder="Date" id="txtChargeDate">
                         </div>
                     </div>
                 </div>
-            </div><!-- col-4 -->
+            </div><!-- col-6 -->
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="form-label">Session</label>
+                    <span>e.g 2022/2023</span><input class="form-control" id="txtSession" type="text" placeholder="">
+                </div>
+            </div>
         </div>
         <br />
-        
-        
+
+
         <div class="text-center">
             <br />
             <button class="btn btn-primary" type="submit" id="saveRecord">Save</button>
@@ -68,7 +81,7 @@
 
     <script>
 
-        var saveUrl = "@Url.Action("AddUpdateTestimomy","Testimony")";
+        var saveUrl = "@Url.Action("AddOrUpdateCharge","AdminControl")";
         $.fn.clearForm = function () {
             this.each(function () { this.reset(); })
         }
@@ -76,12 +89,13 @@
             e.preventDefault();
 
             var body = {
-                Id: $("#rowId").val() == "" ? 0 : $.trim($("#rowId").val()),
                 Surname: $.trim($("#txtSurname").val()),
                 Firstname: $.trim($("#txtFirstname").val()),
-                TestimonyDate: $.trim($("#txtTestimonyDate").val()),
-                Department: $.trim($("#txtDepartment").val()),
-                TheGoodNews: $.trim($("#txtGoodnews").val())
+                ChargeDate: $.trim($("#txtChargeDate").val()),
+                CourseOfStudy: $.trim($("#txtCourseOfStudy").val()),
+                Faculty: $.trim($("#txtFaculty").val()),
+                Charge: $.trim($("#txtCharge").val()),
+                Session: $.trim($("#txtSession").val())
             }
 
             $.ajax({
