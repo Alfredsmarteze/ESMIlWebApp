@@ -116,12 +116,12 @@ namespace ESMIlWebApp.Controllers
         {
             var user = new ApplicationUser { UserName = register.UserName, Email = register.Email };
             var userEmaill=  _accountRepository.EmailExist(register);
-            if (userEmaill !=null)
+            if (userEmaill != null)
             {
-                ViewBag.MailExist = $"This Email {register.Email} cannot be used becuase it exist already";
+                ViewBag.MailExist = $"The email cannot be used becuase it exist already.";
                 return View();
             }
-            
+
             var userdata = await _userManager.CreateAsync(user, register.Password );
 
             if (userdata.Succeeded)
@@ -135,7 +135,7 @@ namespace ESMIlWebApp.Controllers
                 var mailLink = string.Format($"<h2><span style='color:blue'>Kindly click on the below link to verify your email</span></h2> \n <span style='border-color:green'><button style='border-style:groove,background-color:white'>{confirmationLink}</button></span>");
                 if (confirmationLink != null)
                 {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                  //  await _signInManager.SignInAsync(user, isPersistent: false);
                     _emailRepository.SendEmail(user.Email, mailLink);
                     return RedirectToAction("MailSent", "Account");
                 }
@@ -195,7 +195,7 @@ namespace ESMIlWebApp.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login details");
+                    ModelState.AddModelError(string.Empty, "Invalid login details or  you are yet to confirm registration mail sent to you.");
                 }
                 // }
                  return View(loginInfo);

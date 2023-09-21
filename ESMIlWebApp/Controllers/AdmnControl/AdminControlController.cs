@@ -5,6 +5,9 @@ using System.Net;
 using DataStructure.ViewModel;
 using Newtonsoft.Json;
 using NuGet.Protocol.Core.Types;
+using Microsoft.AspNetCore.Identity;
+using DataStructure;
+using NuGet.Protocol;
 
 namespace ESMIlWebApp.Controllers.AdmnControl
 {
@@ -12,9 +15,11 @@ namespace ESMIlWebApp.Controllers.AdmnControl
     {
         private readonly IAdminControl _adminControl;
         private readonly ILogger<AdminControlController> _logger;
+        private readonly SignInManager<ApplicationUser> _signInManager; 
         private string errorMessage = string.Empty;
-        public AdminControlController(IAdminControl adminControl, ILogger<AdminControlController> logger)
+        public AdminControlController(SignInManager<ApplicationUser> signInManager, IAdminControl adminControl, ILogger<AdminControlController> logger)
         {
+            _signInManager= signInManager;
             _adminControl = adminControl;
             _logger = logger;
         }
@@ -116,15 +121,20 @@ namespace ESMIlWebApp.Controllers.AdmnControl
             }
             return Json(new ResponseModel { hasError = true, message = $"Error\n{errorMessage}", statusCode = (int)HttpStatusCode.BadRequest });
         }
+
+        
+
         [HttpPost]
         public async Task<IActionResult> AddOrUpdateAnnouncement(string payload)
         {
-            try
+            try 
             {
                 if (payload != null)
                     payload = EncryptionExtensions.EncryptStringAES(payload);
                 var payloadd = EncryptionExtensions.DecryptStringAES(payload);
                 var newModel = JsonConvert.DeserializeObject<AnnouncementData>(payloadd);
+                newModel.Announcer = User.Identity.Name;
+               
                 var saveAnnouncement = await _adminControl.AddOrUpdateAnnouncement(newModel);
                 if (saveAnnouncement)
                 {

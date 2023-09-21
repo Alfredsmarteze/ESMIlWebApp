@@ -28,6 +28,11 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1 justify-content-end">
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
                          <li class="dropdown crea " style="margin-left:15px; margin-top:7px">
                             <a href="#" class="dropdown-toggle text-white" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Units</a>
                             <ul class="dropdown-menu flex-grow-1" role="menu">
@@ -62,19 +67,23 @@
                                </ul>
                         </li>
                         
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                       
+                        <li class="dropdown crea" style="margin-left:15px; margin-top:7px">
+                            <a href="#" class="dropdown-toggle text-white" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Our Records</a>
+
+                            <ul class="dropdown-menu flex-grow-1" role="menu">
+                                <li class="nav-item">
+                                    <a class="nav-link text-primary" asp-area="" asp-controller="ProgrammeDataTableView" asp-action="OurProgramme">Our Programme</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-primary" asp-area="" asp-controller="GeneralMemberDataView" asp-action="GeneralMember">Members</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-primary" asp-area="" asp-controller="ESMAFDataView" asp-action="AllPastExecutive">Our Past Executive</a>
+                                </li>
+                            </ul>
                         </li>
-                        
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="ProgrammeDataTableView" asp-action="OurProgramme">Our Programme</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="GeneralMemberDataView" asp-action="GeneralMember">Members</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="ESMAFDataView" asp-action="AllPastExecutive">Our Past Executive</a>
-                        </li>
+                       
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="About">About</a>
                         </li>
@@ -89,25 +98,31 @@
                                 </button>
                             </form>
                             </li>
+                            <li class="dropdown crea" style="margin-left:15px; margin-top:7px">
+                                <a href="#" class="dropdown-toggle text-white" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Various Records</a>
+
+                                <ul class="dropdown-menu flex-grow-1" role="menu">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-primary" asp-area="" asp-controller="UnitManagement" asp-action="FirstTimer">First Timer</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-primary" asp-area="" asp-controller="UnitManagement" asp-action="Esmaf">Our ESMAF Data</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-primary" asp-area="" asp-controller="GeneralMemberDataView" asp-action="AllGeneralMember">Full Member Detail</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-primary" asp-area="" asp-controller="TestimonyView" asp-action="AllTestimony">Testimony</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-primary" asp-area="" asp-controller="ProgrammeDataTableView" asp-action="AllProgramme">Our Programme</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-primary" asp-area="" asp-controller="ProgrammeDataTableView" asp-action="AddProgramme">Our Programme</a>
+                                    </li>
+                                </ul>
+                            </li>
                             
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="UnitManagement" asp-action="FirstTimer">First Timer</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="UnitManagement" asp-action="Esmaf">Our ESMAF Data</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="GeneralMemberDataView" asp-action="AllGeneralMember">Full Member Detail</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="TestimonyView" asp-action="AllTestimony">Testimony</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="ProgrammeDataTableView" asp-action="AllProgramme">Our Programme</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="ProgrammeDataTableView" asp-action="AddProgramme">Our Programme</a>
-                            </li>
                             <li class="dropdown crea " style="margin-left:15px; margin-top:7px">
                                 <a href="#" class="dropdown-toggle text-white" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Units Records</a>
 

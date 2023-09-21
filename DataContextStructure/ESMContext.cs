@@ -8,7 +8,7 @@ using System.Reflection.Metadata;
 
 namespace DataContextStructure
 {
-    public class ESMContext:IdentityDbContext<ApplicationUser>
+    public class ESMContext : IdentityDbContext<ApplicationUser>
     {
         public ESMContext(DbContextOptions<ESMContext> options) : base(options)
         {

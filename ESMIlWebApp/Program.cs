@@ -35,7 +35,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(opt =>
     opt.Password.RequireUppercase = true;
     opt.Password.RequireNonAlphanumeric = false;
 
-    opt.SignIn.RequireConfirmedAccount = false;
+    opt.SignIn.RequireConfirmedAccount = true;
 })
     .AddEntityFrameworkStores<ESMContext>()
     .AddDefaultTokenProviders();

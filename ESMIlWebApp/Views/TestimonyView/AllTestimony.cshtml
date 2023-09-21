@@ -47,11 +47,11 @@
 
 
 
-@using (Html.BeginForm("View", "TetimonyView", FormMethod.Post, new { id = "viewTestimonyForm", target = "_blank" }))
+@using (Html.BeginForm("ViewTestimony", "TestimonyView", FormMethod.Post, new { id = "viewTestimonyForm", target = "_blank" }))
 {
     <input type="hidden" name="viewRecordId" id="viewRecordId">
 }
-@using (Html.BeginForm("Update", "TestimonyView", FormMethod.Post, new { id = "updateTestimonyForm", target = "_blank" }))
+@using (Html.BeginForm("UpdateTestimony", "TestimonyView", FormMethod.Post, new { id = "updateTestimonyForm", target = "_blank" }))
 {
     <input type="hidden" name="updateRecordId" id="updateRecordId">
 }

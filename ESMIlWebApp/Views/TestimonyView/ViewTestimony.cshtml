@@ -1,0 +1,59 @@
+﻿@model DataStructure.ViewModel.TestimonyDTO
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4 class="text-muted">View Testimony</h4>
+
+<div class="container" style="background-color:lightblue">
+    <form id="clearFrm" class="justify-content-center">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="form-label">Surname</label>
+                    <input id="rowId" value="@Model.Id" type="hidden">
+                    <input class="form-control" id="txtSurname" value="@Model.Surname" readonly type="text" placeholder="">
+                </div>
+
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="form-label">Firstname</label>
+                    <input class="form-control" id="txtFirstname" value="@Model.Firstname" readonly type="text" placeholder="">
+                </div>
+            </div>
+
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="form-control-label">Goodnews</label>
+                    <textarea class="form-control" id="txtGoodnews" type="text" readonly placeholder="">@Model.TheGoodNews</textarea>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="form-label">Department</label>
+                    <input class="form-control" id="txtDepartment" type="text" readonly value="@Model.Department" placeholder="">
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-6 justify-content-center">
+                <div class="form-group mg-b-10-force">
+                    <label for="">Date </label>
+                    <div class="ate-input">
+                        <div class="ate-input">
+                            <input type="text" class="date form-control" placeholder="Date" readonly value="@Model.strDate" id="txtTestimonyDate">
+                        </div>
+                    </div>
+                </div>
+            </div><!-- col-4 -->
+        </div>
+        <br />
+
+
+    </form>
+</div>

@@ -48,7 +48,7 @@ namespace Infrastructure.Service
 
         public IQueryable EmailExist(Register register)
         {
-            var emailExist=   esmContext.Users.Where(s => s.Email == register.Email);
+            var emailExist = esmContext.Users.Where(s => s.Email == register.Email);
             if (emailExist.Any())
             {
                 return emailExist;

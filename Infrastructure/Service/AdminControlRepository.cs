@@ -28,7 +28,8 @@ namespace Infrastructure.Service
             {
                 var data = new Announcement
                 {
-                    Announcer = _context.Users.FirstOrDefault().UserName,
+                    //Announcer = _context.Users.FirstOrDefault().UserName,
+                    Announcer=model.Announcer,
                     AnnouncementOne = model.AnnouncementOne,
                     AnnouncementThree = model.AnnouncementThree,
                     AnnouncementTwo = model.AnnouncementTwo,
@@ -46,7 +47,7 @@ namespace Infrastructure.Service
                 }
                 {
                  getId.AnnouncementOne=model.AnnouncementOne;
-                    getId.Announcer = _context.Users.FirstOrDefault().UserName;
+                    getId.Announcer = model.Announcer;
                     getId.AnnouncementTwo=model.AnnouncementTwo;
                     getId.AnnouncementThree=model.AnnouncementThree;
                     getId.AnnouncementDate=DateTime.Now;
@@ -156,7 +157,7 @@ namespace Infrastructure.Service
         {
             return (from p in _context.announcement select new AnnouncementDTO 
             {
-               Announcer = _context.Users.FirstOrDefault().UserName,
+               Announcer = p.Announcer,
                AnnouncementDate = p.AnnouncementDate,
                AnnouncementThree= p.AnnouncementThree,
                AnnouncementTwo= p.AnnouncementTwo,

@@ -111,7 +111,6 @@ namespace DataContextStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Announcer")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

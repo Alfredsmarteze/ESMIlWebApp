@@ -5,10 +5,27 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataContextStructure.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "announcement",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AnnouncementOne = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AnnouncementTwo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AnnouncementThree = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Announcer = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AnnouncementDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_announcement", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -303,7 +320,7 @@ namespace DataContextStructure.Migrations
                     Firstname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Charge = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Session = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ChargeDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ChargeDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CourseOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Faculty = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -1287,6 +1304,9 @@ namespace DataContextStructure.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "announcement");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
