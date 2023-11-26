@@ -6,6 +6,7 @@ using DataStructure.ViewModel;
 using System.Net;
 using Newtonsoft.Json;
 using System.Data.Entity;
+using DataStructure.FileUpload;
 
 namespace ESMIlWebApp.Controllers.Unit
 {
@@ -92,20 +93,26 @@ namespace ESMIlWebApp.Controllers.Unit
             }
             return Json(new ResponseModel{ hasError = true, message = $" Error:\a {errorMessage}" });
         }
-        public async Task<IActionResult> AddOrUpdatePrayerUnitData(string payload)
+        public async Task<IActionResult> AddOrUpdatePrayerUnitData(UploadFile payload)
         {
             try
             {
-                var state= Request.Form["Surname"].FirstOrDefault();
+                
                 var model = new PrayerUnitDTOData();
                 
-                payload = EncryptionExtensions.DecryptStringAES(payload);
-                var newModel = JsonConvert.DeserializeObject<PrayerUnitDTOData>(payload);
+           //  var   ppayload = EncryptionExtensions.DecryptStringAES(payload.FileData);
+                var newModel = JsonConvert.DeserializeObject<PrayerUnitDTOData>(payload.FileData);
 
-                if (newModel != null) 
+                if(payload.File.Length>0)
                 {
-                    var getState = newModel.StateOfOrigin;
+                    using (var ms =new MemoryStream())
+                    {
+                        payload.File.CopyTo(ms);
+                        var fileBytes=ms.ToArray();
+                        newModel.Photo = fileBytes;
+                    }
                 }
+               
                 var savePrayerUnitData = await _repository.AddOrUpdatePrayerUnitAsync(newModel);
                 
                 if (savePrayerUnitData)

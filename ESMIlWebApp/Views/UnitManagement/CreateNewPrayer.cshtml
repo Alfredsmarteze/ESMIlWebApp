@@ -18,7 +18,7 @@
 <div class="container hideForm" style="background-color:lightblue">
     <h5 class="text-primary">Capture new record</h5>
     <div class="row">
-        <form id="clearFrm">
+        <form id="clearFrm" enctype="multipart/form-data">
         <div class="row">
         <div class="col-4">
             <div class="form-group">
@@ -132,7 +132,15 @@
             <input class="form-control" id="txtAmbition" type="text" placeholder="">
             </div>
         </div>
-        
+          <div class="col-4">
+           <div class="form-group">
+              <label class="form-label">Photo</label>
+                <input class="form-control" id="txtFile" type="file" value="Upload File">
+           </div>
+          </div>
+          <div class="col-4">
+              <img id="imgViewer" width="200" height="200" style="border:1px solid #000000;"/>
+          </div>
         <div class="col-4">
             <div class="form-group">
             <label class="form-label">Previous Unit</label>
@@ -213,98 +221,110 @@
         $.fn.clearForm=function(){
             this.each(function(){this.reset()})
         }
+
+        $("#txtFile").change(function(event)
+        {
+            var files=event.target.files;
+            $("#imgViewer").attr("src",window.URL.createObjectURL(files[0]));
+        });
+
         $("#saveRecord").click(function(e)
         {
             e.preventDefault();
 
-            if (!$("#txtSurname").val()) {
-                Swal.fire('Please input a value. Surname cannot be empty.', '', 'warning');
-                $("#txtSurname").css({ 'background-color': 'orange' });
-                return;
-            }
-            else {
-                $("#txtSurname").css({ 'background-color': '' });
-            }
-            if (!$("#txtFirstname").val()) {
-                Swal.fire('Please input a value. Firstname cannot be empty.', '', 'warning');
-                $("#txtFirstname").css({ 'background-color': 'orange' });
-                return;
-            }
-            else {
-                $("#txtFirstname").css({ 'background-color': '' });
-            }
-            if (!$("#txtMiddlename").val()) {
-                Swal.fire('Please input a value. Middlename cannot be empty.', '', 'warning');
-                $("#txtMiddlename").css({ 'background-color': 'orange' });
-                return;
-            }
-            else {
-                $("#txtMiddlename").css({ 'background-color': '' });
-            }
-            if (!$("#txtPhoneNumber01").val()) {
-                Swal.fire('Please input a value. Phone Number 1 cannot be empty.', '', 'warning');
-                $("#txtPhoneNumber01").css({ 'background-color': 'orange' });
-                return;
-            }
-            else {
-                $("#txtPhoneNumber01").css({ 'background-color': '' });
-            }
-            if (!$("#lga").val() ||$("#lga").val() == "Select") {
-                Swal.fire('Please select your LGA.', '', 'warning');
-                $("#warning2").css({ 'background-color': 'orange', 'height': '7px', 'width': '100%' });
-                return;
-            }
-            else {
-                $("#warning2").css({ 'background-color': '', 'height': '', 'width': '' });
-            }
-            if (!$("#drpState").val()) {
-                Swal.fire('Please select your state of origin.', '', 'warning');
-                $("#warning").css({ 'background-color': 'orange', 'height': '7px', 'width': '100%' });
-                return;
-            }
-            else {
-                $("#warning").css({ 'background-color': '', 'height': '', 'width': '' });
-            }
-            if (!$("#txtAmbition").val()) {
-                Swal.fire('Please input a value. Ambition cannot be empty.', '', 'warning');
-                $("#txtAmbition").css({ 'background-color': 'orange' });
-                return;
-            }
-            else {
-                $("#txtAmbition").css({ 'background-color': '' });
-            }
-            if (!$("#txtHostelAddress").val()) {
-                Swal.fire('Please input a value. Hostel address cannot be empty.', '', 'warning');
-                $("#txtHostelAddress").css({ 'background-color': 'orange' });
-                return;
-            }
-            else {
-                $("#txtHostelAddress").css({ 'background-color': '' });
-            }
-            if (!$("#txtHomeAddress").val()) {
-                Swal.fire('Please input a value. Home address cannot be empty.', '', 'warning');
-                $("#txtHomeAddress").css({ 'background-color': 'orange' });
-                return;
-            }
-            else {
-                $("#txtHomeAddress").css({ 'background-color': '' });
-            }
-            if (!$("#txtDateJoinESM").val()) {
-                Swal.fire('Please input a value. Date you joined ESM is needed.', '', 'warning');
-                $("#txtDateJoinESM").css({ 'background-color': 'orange' });
-                return;
-            }
-            else {
-                $("#txtDateJoinESM").css({ 'background-color': '' });
-            }
-            if (!$("#txtCourseOfStudy").val()) {
-                Swal.fire('Please input a value. Course of study cannot be empty.', '', 'warning');
-                $("#txtCourseOfStudy").css({ 'background-color': 'orange' });
-                return;
-            }
-            else {
-                $("#txtCourseOfStudy").css({ 'background-color': '' });
-            }
+            //if (!$("#txtSurname").val()) {
+            //    Swal.fire('Please input a value. Surname cannot be empty.', '', 'warning');
+            //    $("#txtSurname").css({ 'background-color': 'orange' });
+            //    return;
+            //}
+            //else {
+            //    $("#txtSurname").css({ 'background-color': '' });
+            //}
+            //if (!$("#txtFirstname").val()) {
+            //    Swal.fire('Please input a value. Firstname cannot be empty.', '', 'warning');
+            //    $("#txtFirstname").css({ 'background-color': 'orange' });
+            //    return;
+            //}
+            //else {
+            //    $("#txtFirstname").css({ 'background-color': '' });
+            //}
+            //if (!$("#txtMiddlename").val()) {
+            //    Swal.fire('Please input a value. Middlename cannot be empty.', '', 'warning');
+            //    $("#txtMiddlename").css({ 'background-color': 'orange' });
+            //    return;
+            //}
+            //else {
+            //    $("#txtMiddlename").css({ 'background-color': '' });
+            //}
+            //if (!$("#txtPhoneNumber01").val()) {
+            //    Swal.fire('Please input a value. Phone Number 1 cannot be empty.', '', 'warning');
+            //    $("#txtPhoneNumber01").css({ 'background-color': 'orange' });
+            //    return;
+            //}
+            //else {
+            //    $("#txtPhoneNumber01").css({ 'background-color': '' });
+            //}
+           /// //if (!$("#lga").val() ||$("#lga").val() == "Select") {
+            //    Swal.fire('Please select your LGA.', '', 'warning');
+            //    $("#warning2").css({ 'background-color': 'orange', 'height': '7px', 'width': '100%' });
+            //    return;
+            //}
+            //else {
+            //    $("#warning2").css({ 'background-color': '', 'height': '', 'width': '' });
+            //}
+            //if (!$("#drpState").val()) {
+            //    Swal.fire('Please select your state of origin.', '', 'warning');
+            //    $("#warning").css({ 'background-color': 'orange', 'height': '7px', 'width': '100%' });
+            //    return;
+            //}
+            //else {
+            //    $("#warning").css({ 'background-color': '', 'height': '', 'width': '' });
+          ////  //}
+            //if (!$("#txtAmbition").val()) {
+            //    Swal.fire('Please input a value. Ambition cannot be empty.', '', 'warning');
+            //    $("#txtAmbition").css({ 'background-color': 'orange' });
+            //    return;
+            //}
+            //else {
+            //    $("#txtAmbition").css({ 'background-color': '' });
+            //}
+            //if (!$("#txtHostelAddress").val()) {
+            //    Swal.fire('Please input a value. Hostel address cannot be empty.', '', 'warning');
+            //    $("#txtHostelAddress").css({ 'background-color': 'orange' });
+            //    return;
+            //}
+            //else {
+            //    $("#txtHostelAddress").css({ 'background-color': '' });
+            //}
+            //if (!$("#txtHomeAddress").val()) {
+            //    Swal.fire('Please input a value. Home address cannot be empty.', '', 'warning');
+            //    $("#txtHomeAddress").css({ 'background-color': 'orange' });
+            //    return;
+            //}
+            //else {
+            //    $("#txtHomeAddress").css({ 'background-color': '' });
+            //}
+            //if (!$("#txtDateJoinESM").val()) {
+            //    Swal.fire('Please input a value. Date you joined ESM is needed.', '', 'warning');
+            //    $("#txtDateJoinESM").css({ 'background-color': 'orange' });
+            //    return;
+            //}
+            //else {
+            //    $("#txtDateJoinESM").css({ 'background-color': '' });
+            //}
+            //if (!$("#txtCourseOfStudy").val()) {
+            //    Swal.fire('Please input a value. Course of study cannot be empty.', '', 'warning');
+            //    $("#txtCourseOfStudy").css({ 'background-color': 'orange' });
+            //    return;
+            //}
+            //else {
+            //    $("#txtCourseOfStudy").css({ 'background-color': '' });
+            //}
+           
+
+          //  var formData = new FormData();
+
+          //  formData.append("data", JSON.stringify(data));
 
             var body={
             Id:$("#rowId").val() == "" ? 0: $.trim($("#rowId").val()),
@@ -327,33 +347,50 @@
             DateJoinESM:$.trim($("#txtDateJoinESM").val()),
             CourseOfStudy:$.trim($("#txtCourseOfStudy").val()),
             }
-            var payload=SiteUtils.encrypt(JSON.stringify(body)).toString();
-            SiteUtils.post({payload:payload}, saveUrl).then(function (response){
-                if (response.hasError == false) 
-                {
-                    Swal.fire(response.message, '', 'success');
-                    $("#clearFrm").clearForm();
-                }
-                else if (response.hasError == true) 
-                {
-                    Swal.fire(response.message, '', 'error');
-                }
-            })
-            //$.ajax({
-            //  type: "POST",
-            //  url:saveUrl,
-            //  data:JSON.stringify(body),
-            //  dataType:'json',
-            //  //contentType:'application/json; charset=utf-8',
-            //  success: function(data)
-            //  {
-            //  alert(data.message)
-            //  },
-            //  error:function()
-            //  {
-            //  alert("An error occured")
-            //  }
-            //});
+          
+            var files = $("#txtFile").prop("files");
+            var formData = new FormData();
+            for (var i = 0; i < files.length; i++) {
+                formData.append("file", files[i]);
+            }
+            formData.append("FileData", JSON.stringify(body))
+
+            $.ajax({
+                type: "POST",
+                url: saveUrl,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (result) {
+                    if (result.hasError == false) {
+                        Swal.fire(result.message, '', 'success');
+                        $("#clearFrm").each(function () {
+                            this.reset();
+                        })
+                    }
+                    else if (result.hasError == true) {
+                        Swal.fire(result.message, '', 'error');
+                    }
+
+                },
+
+
+            });
+
+
+            //  var payload = SiteUtils.encrypt(JSON.stringify(body)).toString();
+            //SiteUtils.post({payload:formData}, saveUrl).then(function (response){
+            //    if (response.hasError == false) 
+            //    {
+            //        Swal.fire(response.message, '', 'success');
+            //        $("#clearFrm").clearForm();
+            //    }
+            //    else if (response.hasError == true) 
+            //    {
+            //        Swal.fire(response.message, '', 'error');
+            //    }
+            //})
+          
         });
          jQuery('.date').datepicker({
         timepicker:false,

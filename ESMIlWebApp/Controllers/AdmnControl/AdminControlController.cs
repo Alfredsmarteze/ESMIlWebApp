@@ -8,6 +8,10 @@ using NuGet.Protocol.Core.Types;
 using Microsoft.AspNetCore.Identity;
 using DataStructure;
 using NuGet.Protocol;
+using System.Text;
+using System.IO;
+using Cake.Core.IO;
+using DataStructure.FileUpload;
 
 namespace ESMIlWebApp.Controllers.AdmnControl
 {
@@ -122,19 +126,62 @@ namespace ESMIlWebApp.Controllers.AdmnControl
             return Json(new ResponseModel { hasError = true, message = $"Error\n{errorMessage}", statusCode = (int)HttpStatusCode.BadRequest });
         }
 
-        
-
         [HttpPost]
-        public async Task<IActionResult> AddOrUpdateAnnouncement(string payload)
+        public async Task<IActionResult> EventImageDisplay(string payload)
         {
-            try 
+            try
             {
                 if (payload != null)
                     payload = EncryptionExtensions.EncryptStringAES(payload);
                 var payloadd = EncryptionExtensions.DecryptStringAES(payload);
-                var newModel = JsonConvert.DeserializeObject<AnnouncementData>(payloadd);
+                //  JsonConvert.DeserializeObject < typeof(payloadd) > (Encoding.UTF8.GetString(payloadd));
+            //    byte[] jsonString = Encoding.UTF32.GetString(payloadd);
+
+                byte[] serializedObject = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payloadd));
+            //    var dffdf = System.IO.File.ReadAllText(payloadd);
+                var newModel = JsonConvert.DeserializeObject<EventImageData>(System.IO.File.ReadAllText(payloadd));//(JsonConvert.DeserializeObject<string>(payloadd));// ToString();
+
+                var saveEventImage = await _adminControl.AddOrUpdateEventImage(newModel);
+                if (saveEventImage)
+                {
+                    if (newModel.Id > 0)
+                    {
+                        return Json(new ResponseModel { message = $"Successfully Updated Image", hasError = false, statusCode = (int)HttpStatusCode.OK });
+                    }
+                    return Json(new ResponseModel { message = $"Successfully saved Image!", hasError = false, statusCode = (int)HttpStatusCode.OK });
+                }
+                else
+                {
+                    return Json(new ResponseModel { message = "Not successful", hasError = true, statusCode = (int)HttpStatusCode.BadRequest });
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Error", e.Message);
+                errorMessage = e.Message;
+            }
+            return Json(new ResponseModel { hasError = true, message = $"Error\n{errorMessage}", statusCode = (int)HttpStatusCode.BadRequest });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddOrUpdateAnnouncement(UploadFile payload)
+        {
+            try 
+            {
+              //  if (payload != null)
+                //var ppayload = EncryptionExtensions.EncryptStringAES(payload.FileData);
+                //var payloadd = EncryptionExtensions.DecryptStringAES(ppayload);
+                var newModel = JsonConvert.DeserializeObject<AnnouncementData>(payload.FileData);
                 newModel.Announcer = User.Identity.Name;
-               
+                if (payload.File.Length > 0)
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        payload.File.CopyTo(ms);
+                        var fileBytes = ms.ToArray();
+                        newModel.Photo = fileBytes;
+                    }
+                }
                 var saveAnnouncement = await _adminControl.AddOrUpdateAnnouncement(newModel);
                 if (saveAnnouncement)
                 {

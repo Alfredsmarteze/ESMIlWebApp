@@ -17,7 +17,8 @@ namespace DataContextStructure
 
             // using var context = new ESMContext(contextOptions);
         }
-        public DbSet<Announcement> announcement { get; set; }
+        public DbSet<EventImage> eventImage { get; set; }
+      //  public DbSet<Announcement> announcement { get; set; }
         public DbSet<PresidentCharge> presidentCharge { get; set; }
         public DbSet<PastVicePresident> pastVicePresident { get; set; }
         public DbSet<PastOrganizingSecretary> pastOrganizingSecretary { get; set; }   

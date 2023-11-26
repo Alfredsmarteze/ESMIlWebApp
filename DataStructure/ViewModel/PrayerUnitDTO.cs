@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +58,8 @@ namespace DataStructure.ViewModel
         public string PreviousUnit { get; set; }
         public string PositionInFamily { get; set; }
         public string SocialMediaAddress { get; set; }
+        public string Img { get;set; }
         public IFormFile Image { get; set; }
-        public string Photo { get; set; }
+        public byte[] Photo { get; set; }
     }
 }

@@ -1,0 +1,89 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4 class="text-muted"> Testimony</h4>
+<h5 class="text-muted">Capture new record</h5>
+
+<div class="container" style="background-color:lightblue">
+    <form id="clearFrm" class="justify-content-center" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="form-label">Event Name</label>
+                    <input id="rowId" type="hidden">
+                    <input class="form-control" id="txteventname" type="text" placeholder="">
+                </div>
+
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="form-label">Image</label>
+                    <input class="form-control" id="fileImage" type="file" placeholder="">
+                    <img id="blah" src="#" alt="your image" />
+                </div>
+            </div>
+            
+        </div>
+        <br />
+        <br />
+        <div class="text-center">
+            <br />
+            <button class="btn btn-primary" type="submit" id="saveRecord">Save</button>
+        </div>
+        
+    </form>
+</div>
+
+
+@section scripts{
+
+    <script>
+
+        var saveUrl = "@Url.Action("EventImageDisplay","AdminControl")";
+        $.fn.clearForm = function () {
+            this.each(function () { this.reset(); })
+        }
+        $("#saveRecord").click(function (e) {
+            e.preventDefault();
+
+
+
+            var body = {
+                EventName: $.trim($("#txteventname").val()),
+                File: $("#fileImage")[0].files[0],
+            }
+            //var fd = new FormData();
+            //fd.append('eventName', $("#txteventname").val())
+            //fd.append('file', $("#fileImage")[0].files[0]);
+            console.log(body);
+            $.ajax({
+                type: "POST",
+                url: saveUrl,
+
+                data: { payload: JSON.stringify(body) },
+                success: function (result) {
+                    if (result.hasError == false) {
+                        Swal.fire(result.message, '', 'success');
+                        $("#clearFrm").each(function () {
+                            this.reset();
+                        })
+                    }
+                    else if (result.hasError == true) {
+                        Swal.fire(result.message, '', 'error');
+                    }
+
+                },
+
+            });
+        });
+        jQuery('.date').datepicker({
+            timepicker: false,
+            format: 'Y/d/m',
+        });
+
+    </script>
+}

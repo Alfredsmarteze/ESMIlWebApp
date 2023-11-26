@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Server.IIS.Core;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -58,6 +59,43 @@ namespace Infrastructure.Service
            return result;
         }
 
+        public async Task<bool> AddOrUpdateEventImage(EventImageData eventImageData)
+        {
+            bool result;
+            using (var memoryStream = new MemoryStream())
+            {
+                await eventImageData.File.CopyToAsync(memoryStream);
+                if (memoryStream.Length < 2097152)
+                {
+                    // Upload the file if less than 2 MB
+                    if (eventImageData.Id < 1)
+                    {
+                        var file = new EventImage()
+                        {
+                            EventName = eventImageData.EventName,
+                            EventDescriptionImage = memoryStream.ToArray()
+                        };
+
+                        _context.eventImage.Add(file);
+                        result = await _context.SaveChangesAsync() > 0;
+                        //}
+                    }
+                    else
+                    {
+                        var getId = _context.eventImage.Find(eventImageData.Id);
+                        {
+
+                            getId.EventName = eventImageData.EventName;
+                            getId.EventDescriptionImage = memoryStream.ToArray();
+                        }
+                        result = await _context.SaveChangesAsync() > 0;
+                    }
+
+                }
+                else { throw new("Image file cannot be more than 2MB"); }
+            }
+            return result;
+        }
         public async Task<bool> AddOrUpdatePresidentCharge(PresidentChargeData model)
         {
             bool result;
@@ -111,7 +149,7 @@ namespace Infrastructure.Service
 
         public IQueryable GetAnnouncementOne()
         {
-            var ret = _context.announcement.OrderBy(s => s.Id).LastOrDefault().AnnouncementOne
+             var ret = _context.announcement.OrderBy(s => s.Id).LastOrDefault().AnnouncementOne
                .AsQueryable();
             if (ret == null)
             {

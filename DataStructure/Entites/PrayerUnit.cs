@@ -14,11 +14,12 @@ namespace DataStructure.Entites
         public string? Middlename { get; set; }
         public string? Gender { get; set; }
         public string? PhoneNumber01 { get; set; }
-        public string? PhoneNumber02  { get; set; }
+        public string? PhoneNumber02 { get; set; }
         public string? Email { get; set; }
         public string? Ambition { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public DateTime? DateJoinESM { get; set; }
+        public DateTime? CreatedOn { get; set; }
         public string? HostelAddress { get; set; }
         public string? HomeAddress { get; set; }
         public string? CourseOfStudy { get; set; }
@@ -28,6 +29,6 @@ namespace DataStructure.Entites
         public string? StateOfOrigin { get; set; }
         public string? LGA { get; set; }
         public string? SocialMediaAddress { get; set; }
-        public string? Photo { get; set; }
+        public byte[] Photo { get; set; }
      }
 }

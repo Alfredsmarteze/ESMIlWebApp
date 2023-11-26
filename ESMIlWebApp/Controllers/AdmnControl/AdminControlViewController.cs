@@ -15,11 +15,12 @@ namespace ESMIlWebApp.Controllers.AdmnControl
         {
             return View();
         }
-
+        [HttpGet]
+        [Route("New/EventImage")]
+        public IActionResult EventImage() => View();
         [HttpGet]
         [Route("New/Announcement")]
         public IActionResult CreateNewAnnouncement() => View();
-
         [HttpGet]
         [Route("All/Announcement")]
         public IActionResult AllAnnouncement() => View();

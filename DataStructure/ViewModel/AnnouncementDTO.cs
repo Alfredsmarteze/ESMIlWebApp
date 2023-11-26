@@ -37,5 +37,6 @@ namespace DataStructure.ViewModel
         public string AnnouncementThree { get; set; }
         public DateTime AnnouncementDate { get; set; }
         public string Announcer { get; set; }
+        public byte[] Photo { get; set; }   
     }
 }

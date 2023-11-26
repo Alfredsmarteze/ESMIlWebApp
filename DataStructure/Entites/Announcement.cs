@@ -14,5 +14,6 @@ namespace DataStructure.Entites
         public string AnnouncementThree { get; set; }
         public string? Announcer { get; set; }
         public DateTime AnnouncementDate { get; set; }
+        public byte EventImage { get; set; }
     }
 }

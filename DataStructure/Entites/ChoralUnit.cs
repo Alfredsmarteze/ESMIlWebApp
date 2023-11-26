@@ -19,6 +19,7 @@ namespace DataStructure.Entites
         public string? StateOfOrigin { get; set; }
         public string? LGA { get; set; }
         public string? Email { get; set; }
+        public DateTime? CreatedOn { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public DateTime? DateJoinESM { get; set; }
         public string? HostelAddress { get; set; }

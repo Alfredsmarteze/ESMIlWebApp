@@ -10,6 +10,7 @@ namespace Infrastructure.Interface
    public  interface IAdminControl
     {
         Task<bool> AddOrUpdatePresidentCharge(PresidentChargeData presidentChargeData);
+        Task<bool> AddOrUpdateEventImage(EventImageData eventImageData);
         IQueryable GetPresidentCharge();
         IQueryable GetAnnouncementOne();
         IQueryable GetAnnouncementTwo();

@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using DataStructure;
 using static DataStructure.ViewModel.EsmafData;
+using System.Security.Cryptography;
 
 namespace Infrastructure.Service
 {
@@ -160,6 +161,7 @@ namespace Infrastructure.Service
                     PreviousUnit = model.PreviousUnit,
                     PositionInFamily = model.PositionInFamily,
                     SocialMediaAddress = model.SocialMediaAddress,
+                    CreatedOn=DateTime.Now,
 
                 };
                 _context.bibleStudyUnit.Add(Data);
@@ -314,6 +316,7 @@ namespace Infrastructure.Service
                     DateJoinESM = dateJoin,
                     PreviousUnit = model.PreviousUnit,
                     PositionInFamily = model.PositionInFamily,
+                    CreatedOn=DateTime.Now,
                     SocialMediaAddress = model.SocialMediaAddress,
                 };
                 _context.prayerUnit.Add(pData);
@@ -428,7 +431,7 @@ namespace Infrastructure.Service
                         DateOfBirth = s.DateOfBirth == null ? null : s.DateOfBirth,
                         PositionInFamily = s.PositionInFamily == null ? "" : s.PositionInFamily,
                         SocialMediaAddress = s.SocialMediaAddress == null ? "" : s.SocialMediaAddress,
-                        Photo = s.Photo == null ? "" : s.Photo,
+                       // Photo = s.Photo == null ? 0 : s.Photo,
                     });
         }
         public async Task<bool> AddOrUpdateChoralUnitAsync(ChoralUnitData model)
@@ -502,6 +505,7 @@ namespace Infrastructure.Service
                     DateJoinESM = dateJoin,
                     PreviousUnit = model.PreviousUnit,
                     PositionInFamily = model.PositionInFamily,
+                    CreatedOn=DateTime.Now,
                     SocialMediaAddress = model.SocialMediaAddress,
                 };
                 _context.choralUnit.Add(bData);
@@ -614,7 +618,7 @@ namespace Infrastructure.Service
         public async Task<bool> AddOrUpdateDMEUnitAsync(DMEUnitData model)
         {
             bool result;
-            //DateTime? bdate = null;
+
             var bdate = new DateTime();
             if (!string.IsNullOrEmpty(model.DateOfBirth))
             {
@@ -673,6 +677,7 @@ namespace Infrastructure.Service
                     Gender = model.Gender,
                     StateOfOrigin = model.StateOfOrigin,
                     LGA = model.LGA,
+                    CreatedOn=DateTime.Now,
                     Ambition = model.Ambition,
                     HomeAddress = model.HomeAddress,
                     HostelAddress = model.HostelAddress,
@@ -835,6 +840,7 @@ namespace Infrastructure.Service
                     Ambition = model.Ambition,
                     HomeAddress = model.HomeAddress,
                     HostelAddress = model.HostelAddress,
+                    CreatedOn=DateTime.Now,
                     CourseOfStudy = model.CourseOfStudy,
                     Unit = model.Unit,
                     DateOfBirth = bdate,
@@ -997,6 +1003,7 @@ namespace Infrastructure.Service
                     CourseOfStudy = model.CourseOfStudy,
                     Unit = model.Unit,
                     DateOfBirth = bdate,
+                    CreatedOn=DateTime.Now,
                     DateJoinESM = dateJoin,
                     PreviousUnit = model.PreviousUnit,
                     PositionInFamily = model.PositionInFamily,
@@ -1105,6 +1112,7 @@ namespace Infrastructure.Service
                     PhoneNumber01 = model.PhoneNumber01,
                     PhoneNumber02 = model.PhoneNumber02,
                     Email = model.Email,
+                    CreatedOn=DateTime.Now,
                     Gender = model.Gender,
                     StateOfOrigin = model.StateOfOrigin,
                     LGA = model.LGA,
@@ -1306,6 +1314,7 @@ namespace Infrastructure.Service
                     Unit = model.Unit,
                     DateOfBirth = bdate,
                     DateJoinESM = dateJoin,
+                    CreatedOn=DateTime.Now,
                     PreviousUnit = model.PreviousUnit,
                     PositionInFamily = model.PositionInFamily,
                     SocialMediaAddress = model.SocialMediaAddress,
@@ -1450,6 +1459,7 @@ namespace Infrastructure.Service
                     Gender = model.Gender,
                     StateOfOrigin = model.StateOfOrigin,
                     LGA = model.LGA,
+                    CreatedOn=DateTime.Now,
                     Ambition = model.Ambition,
                     HomeAddress = model.HomeAddress,
                     HostelAddress = model.HostelAddress,

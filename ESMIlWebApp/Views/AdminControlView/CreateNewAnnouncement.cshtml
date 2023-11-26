@@ -31,7 +31,15 @@
                     <textarea class="form-control" id="txtAnnouncementThree" type="text" placeholder=""></textarea>
                 </div>
             </div>
-
+            <div class="col-4">
+                <div class="form-group">
+                    <label class="form-label">Photo</label>
+                    <input class="form-control" id="txtFile" type="file" value="Upload File">
+                </div>
+            </div>
+            <div class="col-4">
+                <img id="imgViewer" width="200" height="200" style="border:1px solid #000000;" />
+            </div>
         </div>
         <br />
         
@@ -55,21 +63,39 @@
         $.fn.clearForm = function () {
             this.each(function () { this.reset(); })
         }
+
+
+        $("#txtFile").change(function (event) {
+            var files = event.target.files;
+            $("#imgViewer").attr("src", window.URL.createObjectURL(files[0]));
+        });
+
+
         $("#saveRecord").click(function (e) {
             e.preventDefault();
 
+            var files = $("#txtFile").prop("files");
+            var formData = new FormData();
+            for (var i = 0; i < files.length; i++) {
+                formData.append("file", files[i]);
+            }
+            
             var body = {
                 AnnouncementOne: $.trim($("#txtAnnouncementOne").val()),
                 AnnouncementTwo: $.trim($("#txtAnnouncementTwo").val()),
                 AnnouncementThree: $.trim($("#txtAnnouncementThree").val()),
-             }
+             };
+
+            formData.append("FileData", JSON.stringify(body))
+
 
             $.ajax({
                 type: "POST",
                 url: saveUrl,
-                dataType: "Json",
-                data: { payload: JSON.stringify(body) },
-                success: function (result) {
+                data:formData,
+                processData:false,
+                contentType:false,
+               success: function (result) {
                     if (result.hasError == false) {
                         Swal.fire(result.message, '', 'success');
                         $("#clearFrm").each(function () {
@@ -79,8 +105,9 @@
                     else if (result.hasError == true) {
                         Swal.fire(result.message, '', 'error');
                     }
-
+                  
                 },
+              
 
             });
         });

@@ -15,7 +15,8 @@ var connectionString = builder.Configuration.GetConnectionString("Connection");
 builder.Services.AddDbContext<ESMContext>(x => x.UseSqlServer(connectionString));
 
 builder.Services.AddRazorPages();   
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(s => { s.JsonSerializerOptions.PropertyNameCaseInsensitive = true; s.JsonSerializerOptions.PropertyNamingPolicy = null; });
 
 builder.Services.AddTransient<IAdminControl, AdminControlRepository>();
 builder.Services.AddTransient<ITestimonyRepository, TestimonyRepository>();

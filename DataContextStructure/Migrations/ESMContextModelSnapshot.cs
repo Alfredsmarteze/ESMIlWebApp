@@ -115,7 +115,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("announcement");
+                    b.ToTable("announcement", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.BibleStudyUnit", b =>
@@ -188,7 +188,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("bibleStudyUnit");
+                    b.ToTable("bibleStudyUnit", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.ChoralUnit", b =>
@@ -261,7 +261,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("choralUnit");
+                    b.ToTable("choralUnit", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.DmeUnit", b =>
@@ -334,7 +334,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("dmeUnit");
+                    b.ToTable("dmeUnit", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.ESMAF", b =>
@@ -389,7 +389,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("eSMAF");
+                    b.ToTable("eSMAF", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.FirstTimer", b =>
@@ -430,7 +430,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("firstTimer");
+                    b.ToTable("firstTimer", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.GeneralMember", b =>
@@ -497,7 +497,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("generalMember");
+                    b.ToTable("generalMember", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.Lga", b =>
@@ -514,7 +514,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("lga");
+                    b.ToTable("lga", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastBrotherCordinator", b =>
@@ -550,7 +550,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("brotherCordinator");
+                    b.ToTable("brotherCordinator", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastChoralSecretary", b =>
@@ -586,7 +586,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("pastChoralSecretary");
+                    b.ToTable("pastChoralSecretary", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastChoralUnitCordinator", b =>
@@ -622,7 +622,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("pastChoralUnitCordinator");
+                    b.ToTable("pastChoralUnitCordinator", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastDMECordinator", b =>
@@ -658,7 +658,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("pastDMECordinator");
+                    b.ToTable("pastDMECordinator", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastDramaUnitCordinator", b =>
@@ -694,7 +694,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("pastDramaUnitCordinator");
+                    b.ToTable("pastDramaUnitCordinator", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastExecutive", b =>
@@ -739,7 +739,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("pastExecutive");
+                    b.ToTable("pastExecutive", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastFinancialSecretary", b =>
@@ -775,7 +775,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("pastFinancialSecretary");
+                    b.ToTable("pastFinancialSecretary", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastOrganizingSecretary", b =>
@@ -811,7 +811,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("pastOrganizingSecretary");
+                    b.ToTable("pastOrganizingSecretary", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastPrayerUnitCordinator", b =>
@@ -847,7 +847,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("pastPrayerUnitCordinator");
+                    b.ToTable("pastPrayerUnitCordinator", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastPresident", b =>
@@ -883,7 +883,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("pastPresident");
+                    b.ToTable("pastPresident", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastPublicityUnitCordinator", b =>
@@ -919,7 +919,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("pastPublicityUnitCordinator");
+                    b.ToTable("pastPublicityUnitCordinator", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastSecretary", b =>
@@ -955,7 +955,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("pastSecretary");
+                    b.ToTable("pastSecretary", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastSisterCordinator", b =>
@@ -991,7 +991,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("sisterCordinator");
+                    b.ToTable("sisterCordinator", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastTechnicalUnitCordinator", b =>
@@ -1027,7 +1027,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("pastTechnicalUnitCordinator");
+                    b.ToTable("pastTechnicalUnitCordinator", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastTransportUnitCordinator", b =>
@@ -1063,7 +1063,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("pastTransportUnitCordinator");
+                    b.ToTable("pastTransportUnitCordinator", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastTreasurer", b =>
@@ -1099,7 +1099,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("pastTreasurer");
+                    b.ToTable("pastTreasurer", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastUsheringUnitCordinator", b =>
@@ -1135,7 +1135,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("pastUsheringUnitCordinator");
+                    b.ToTable("pastUsheringUnitCordinator", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastVicePresident", b =>
@@ -1171,7 +1171,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("pastVicePresident");
+                    b.ToTable("pastVicePresident", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PastWelfareUnitCordinator", b =>
@@ -1207,7 +1207,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("pastWelfareUnitCordinator");
+                    b.ToTable("pastWelfareUnitCordinator", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PrayerUnit", b =>
@@ -1280,7 +1280,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("prayerUnit");
+                    b.ToTable("prayerUnit", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PresidentCharge", b =>
@@ -1320,7 +1320,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("presidentCharge");
+                    b.ToTable("presidentCharge", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.ProgramTable", b =>
@@ -1356,7 +1356,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("programTable");
+                    b.ToTable("programTable", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.PublicityAndEditorialUnit", b =>
@@ -1429,7 +1429,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("publicityAndEditorialUnit");
+                    b.ToTable("publicityAndEditorialUnit", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.State", b =>
@@ -1446,7 +1446,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("state");
+                    b.ToTable("state", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.TechnicalUnit", b =>
@@ -1519,7 +1519,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("technicalUnit");
+                    b.ToTable("technicalUnit", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.Testimony", b =>
@@ -1547,7 +1547,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("testimony");
+                    b.ToTable("testimony", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.TestimonyNumber", b =>
@@ -1563,7 +1563,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("numberTestimony");
+                    b.ToTable("numberTestimony", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.TransportUnit", b =>
@@ -1636,7 +1636,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("transportUnit");
+                    b.ToTable("transportUnit", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.UsheringUnit", b =>
@@ -1709,7 +1709,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("usheringUnit");
+                    b.ToTable("usheringUnit", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Entites.WelfareUnit", b =>
@@ -1782,7 +1782,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("welfareUnit");
+                    b.ToTable("welfareUnit", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.LoginInfo", b =>
@@ -1806,7 +1806,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("loginInfo");
+                    b.ToTable("loginInfo", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.PastBibleStudyCordinator", b =>
@@ -1842,7 +1842,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasIndex("EsmafId");
 
-                    b.ToTable("pastBibleStudyCordinators");
+                    b.ToTable("pastBibleStudyCordinators", (string)null);
                 });
 
             modelBuilder.Entity("DataStructure.Register", b =>
@@ -1872,7 +1872,7 @@ namespace DataContextStructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("register");
+                    b.ToTable("register", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
