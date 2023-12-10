@@ -1,4 +1,5 @@
-﻿using DataStructure.ViewModel;
+﻿using DataStructure.Entites;
+using DataStructure.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,9 @@ namespace Infrastructure.Interface
         Task<bool> AddOrUpdatePresidentCharge(PresidentChargeData presidentChargeData);
         Task<bool> AddOrUpdateEventImage(EventImageData eventImageData);
         IQueryable GetPresidentCharge();
-        IQueryable GetAnnouncementOne();
-        IQueryable GetAnnouncementTwo();
-        IQueryable GetAnnouncementThree();
+        Announcement GetAnnouncementOne();
+        Announcement DisplayImage();
+        byte[] ConvertImage(string sBase);
         IQueryable<PresidentChargeDTO> ListAllPresidentChargeAsync();
         Task<bool> AddOrUpdateAnnouncement(AnnouncementData announcementData);
         IQueryable<AnnouncementDTO> ListAllAnnouncement();

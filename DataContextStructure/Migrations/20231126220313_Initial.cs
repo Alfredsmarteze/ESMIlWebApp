@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataContextStructure.Migrations
 {
-    public partial class init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,7 +19,8 @@ namespace DataContextStructure.Migrations
                     AnnouncementTwo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AnnouncementThree = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Announcer = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AnnouncementDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    AnnouncementDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EventImage = table.Column<byte>(type: "tinyint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -83,6 +84,7 @@ namespace DataContextStructure.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateJoinESM = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     HostelAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HomeAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CourseOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -113,6 +115,7 @@ namespace DataContextStructure.Migrations
                     StateOfOrigin = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LGA = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateJoinESM = table.Column<DateTime>(type: "datetime2", nullable: true),
                     HostelAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -147,6 +150,7 @@ namespace DataContextStructure.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateJoinESM = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     HostelAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HomeAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CourseOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -180,11 +184,26 @@ namespace DataContextStructure.Migrations
                     UnitServed = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AcademicSessionDate = table.Column<int>(type: "int", nullable: false),
                     AcademicSessionDate2 = table.Column<int>(type: "int", nullable: false),
+                    Image = table.Column<byte>(type: "tinyint", nullable: false),
                     PastId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_eSMAF", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "eventImage",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EventName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EventDescriptionImage = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_eventImage", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -230,7 +249,8 @@ namespace DataContextStructure.Migrations
                     YearOfEntry = table.Column<DateTime>(type: "datetime2", nullable: false),
                     YearOfGraduation = table.Column<DateTime>(type: "datetime2", nullable: false),
                     YearJoinESM = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Image = table.Column<byte>(type: "tinyint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -294,6 +314,7 @@ namespace DataContextStructure.Migrations
                     Ambition = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateJoinESM = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     HostelAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HomeAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CourseOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -303,7 +324,7 @@ namespace DataContextStructure.Migrations
                     StateOfOrigin = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LGA = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SocialMediaAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -365,6 +386,7 @@ namespace DataContextStructure.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateJoinESM = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     HostelAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HomeAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CourseOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -426,6 +448,7 @@ namespace DataContextStructure.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateJoinESM = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     HostelAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HomeAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CourseOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -475,6 +498,7 @@ namespace DataContextStructure.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateJoinESM = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     HostelAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HomeAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CourseOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -507,6 +531,7 @@ namespace DataContextStructure.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateJoinESM = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     HostelAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HomeAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CourseOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -539,6 +564,7 @@ namespace DataContextStructure.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateJoinESM = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     HostelAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HomeAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CourseOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -1333,6 +1359,9 @@ namespace DataContextStructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "dmeUnit");
+
+            migrationBuilder.DropTable(
+                name: "eventImage");
 
             migrationBuilder.DropTable(
                 name: "firstTimer");

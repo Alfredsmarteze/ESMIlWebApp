@@ -82,9 +82,14 @@
         <article class="card-body" id="annThree">
                
             </article>
-           @* <footer class="card-footer"> </footer>*@
+        @* <footer class="card-footer"> </footer> style="border:1px solid #000000" *@
         </div>
+
+     </div><br/>
+     <div class="text-center">
+    <img id="imgViewer" class="responsiveImg" />
      </div>
+      
 
 <br />
 <br />
@@ -98,6 +103,7 @@
                 <p>Monday <span class="text-black"></span><img src="~/image/download530pmIcon (2).jpeg" height="50" width="50"/> 5:30PM - 7:30PM</p><br/>
                 <p>Wenesday <span class="text-black"></span><img src="~/image/download530pmIcon (2).jpeg" height="50" width="50" /> 5:30PM - 7:30PM</p>
             </div>
+            
         </div>
     </div>
     <div class="col card bg-dark text-white">
@@ -140,33 +146,42 @@
             data: 'dataObject',
             success: function (response) {
                 data = response;
-                $('#annOne').append(data);
+                $('#annOne').append(data.AnnouncementOne);
             },
             error: function (xhr) { }
         });
 
         $.ajax({
-            url: "@Url.Action("GetAnnouncementTwo","AdminControl")",
+            url: "@Url.Action("GetAnnouncementOne","AdminControl")",
             type: 'post',
             async: false,
             dataType: 'json',
             data: 'dataObject',
             success: function (response) {
                 data = response;
-                $('#annTwo').append(data);
+                $('#annTwo').append(data.AnnouncementTwo);
             },
             error: function (xhr) { }
         });
 
         $.ajax({
-            url: "@Url.Action("GetAnnouncementThree","AdminControl")",
+            url: "@Url.Action("GetAnnouncementOne","AdminControl")",
             type: 'post',
             async: false,
             dataType: 'json',
             data: 'dataObject',
             success: function (response) {
                 data = response;
-                $('#annThree').append(data);
+                $('#annThree').append(data.AnnouncementThree);
+            },
+            error: function (xhr) { }
+        });
+        $.ajax({
+            url: "@Url.Action("GetImage","AdminControl")",
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                $("#imgViewer").attr("src", "data:image/jpg;base64," + data.EventImage + "");
             },
             error: function (xhr) { }
         });

@@ -64,28 +64,12 @@ namespace ESMIlWebApp.Controllers.AdmnControl
             return Json(new ResponseModel { hasError = true, message = $"Error\n{errorMessage}", statusCode = (int)HttpStatusCode.BadRequest });
         }
         [HttpPost]
-        public IActionResult GetAnnouncementTwo()
+        public IActionResult GetImage() 
         {
             try
             {
-                var ret = _adminControl.GetAnnouncementTwo();
-                
-                return Json(ret);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError("Error", e.Message);
-                errorMessage = e.Message;
-            }
-            return Json(new ResponseModel { hasError = true, message = $"Error\n{errorMessage}", statusCode = (int)HttpStatusCode.BadRequest });
-        }
-        [HttpPost]
-        public IActionResult GetAnnouncementThree()
-        {
-            try
-            {
-                var ret = _adminControl.GetAnnouncementThree();
-                
+                var ret=_adminControl.DisplayImage();
+                 ret.EventImage = _adminControl.ConvertImage(Convert.ToBase64String(ret.EventImage));
                 return Json(ret);
             }
             catch (Exception e)

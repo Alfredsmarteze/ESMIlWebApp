@@ -4,6 +4,7 @@ using DataContextStructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataContextStructure.Migrations
 {
     [DbContext(typeof(ESMContext))]
-    partial class ESMContextModelSnapshot : ModelSnapshot
+    [Migration("20231126220313_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,17 +115,8 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("Announcer")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("DisplayImage")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<byte[]>("DisplayImage2")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<byte[]>("DisplayImage3")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<byte[]>("EventImage")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<byte>("EventImage")
+                        .HasColumnType("tinyint");
 
                     b.HasKey("Id");
 
@@ -387,8 +380,8 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("HouseAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<byte>("Image")
+                        .HasColumnType("tinyint");
 
                     b.Property<string>("Othernames")
                         .HasColumnType("nvarchar(max)");
@@ -513,8 +506,8 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("HouseAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<byte>("Image")
+                        .HasColumnType("tinyint");
 
                     b.Property<string>("Lga")
                         .HasColumnType("nvarchar(max)");

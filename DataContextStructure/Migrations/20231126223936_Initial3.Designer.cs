@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataContextStructure.Migrations
 {
     [DbContext(typeof(ESMContext))]
-    [Migration("20230920211617_init")]
-    partial class init
+    [Migration("20231126223936_Initial3")]
+    partial class Initial3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -115,6 +115,18 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("Announcer")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("DisplayImage")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("DisplayImage2")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("DisplayImage3")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("EventImage")
+                        .HasColumnType("varbinary(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("announcement");
@@ -133,6 +145,9 @@ namespace DataContextStructure.Migrations
 
                     b.Property<string>("CourseOfStudy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateJoinESM")
                         .HasColumnType("datetime2");
@@ -207,6 +222,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("CourseOfStudy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("DateJoinESM")
                         .HasColumnType("datetime2");
 
@@ -279,6 +297,9 @@ namespace DataContextStructure.Migrations
 
                     b.Property<string>("CourseOfStudy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateJoinESM")
                         .HasColumnType("datetime2");
@@ -368,6 +389,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("HouseAddress")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("Othernames")
                         .HasColumnType("nvarchar(max)");
 
@@ -392,6 +416,27 @@ namespace DataContextStructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("eSMAF");
+                });
+
+            modelBuilder.Entity("DataStructure.Entites.EventImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<byte[]>("EventDescriptionImage")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("EventName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("eventImage");
                 });
 
             modelBuilder.Entity("DataStructure.Entites.FirstTimer", b =>
@@ -469,6 +514,9 @@ namespace DataContextStructure.Migrations
 
                     b.Property<string>("HouseAddress")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Lga")
                         .HasColumnType("nvarchar(max)");
@@ -1226,6 +1274,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("CourseOfStudy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("DateJoinESM")
                         .HasColumnType("datetime2");
 
@@ -1259,8 +1310,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("PhoneNumber02")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Photo")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("Photo")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("PositionInFamily")
                         .HasColumnType("nvarchar(max)");
@@ -1375,6 +1427,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("CourseOfStudy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("DateJoinESM")
                         .HasColumnType("datetime2");
 
@@ -1464,6 +1519,9 @@ namespace DataContextStructure.Migrations
 
                     b.Property<string>("CourseOfStudy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateJoinESM")
                         .HasColumnType("datetime2");
@@ -1582,6 +1640,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("CourseOfStudy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("DateJoinESM")
                         .HasColumnType("datetime2");
 
@@ -1655,6 +1716,9 @@ namespace DataContextStructure.Migrations
                     b.Property<string>("CourseOfStudy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("DateJoinESM")
                         .HasColumnType("datetime2");
 
@@ -1727,6 +1791,9 @@ namespace DataContextStructure.Migrations
 
                     b.Property<string>("CourseOfStudy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateJoinESM")
                         .HasColumnType("datetime2");

@@ -27,6 +27,6 @@ namespace DataStructure.Entites
         public DateTime YearOfGraduation { get; set; }
         public DateTime YearJoinESM { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public byte Image { get; set; }
+        public byte[]? Image { get; set; }
     }
 }

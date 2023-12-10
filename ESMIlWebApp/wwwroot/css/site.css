@@ -23,6 +23,10 @@
     font-family: 'Gaegu', cursive;
     font-size:25px;
 }
+.responsiveImg {
+    width: 50%;
+    height: auto;
+}
 html {
     font-size: 14px;
 }

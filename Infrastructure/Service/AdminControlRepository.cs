@@ -29,12 +29,13 @@ namespace Infrastructure.Service
             {
                 var data = new Announcement
                 {
-                    //Announcer = _context.Users.FirstOrDefault().UserName,
+                    
                     Announcer=model.Announcer,
                     AnnouncementOne = model.AnnouncementOne,
                     AnnouncementThree = model.AnnouncementThree,
                     AnnouncementTwo = model.AnnouncementTwo,
                     AnnouncementDate = DateTime.Now,
+                    EventImage=model.Photo
                 };
                 _context.announcement.Add(data);
                 result=await _context.SaveChangesAsync()>0;
@@ -147,37 +148,25 @@ namespace Infrastructure.Service
             return result;   
         }
 
-        public IQueryable GetAnnouncementOne()
+        public byte[] ConvertImage(string sBase64String)
         {
-             var ret = _context.announcement.OrderBy(s => s.Id).LastOrDefault().AnnouncementOne
-               .AsQueryable();
-            if (ret == null)
+            byte[] bytes = null;
+            if (!string.IsNullOrEmpty(sBase64String))
             {
-                throw new("No record found.");
+                bytes=Convert.FromBase64String(sBase64String);
             }
-            return ret;
+            return bytes;
         }
 
-        public IQueryable GetAnnouncementThree()
+        public Announcement DisplayImage()
         {
-            var ret = _context.announcement.OrderBy(s => s.Id).LastOrDefault().AnnouncementThree
-                .AsQueryable();
-            if (ret == null)
-            {
-                throw new("No record found.");
-            }
-            return ret; ;
+             return _context.announcement.OrderBy(s => s.Id).LastOrDefault();
+          
         }
 
-        public IQueryable GetAnnouncementTwo()
+        public Announcement GetAnnouncementOne()
         {
-            var ret = _context.announcement.OrderBy(s => s.Id).LastOrDefault().AnnouncementTwo
-               .AsQueryable();
-            if (ret == null)
-            {
-                throw new("No record found.");
-            }
-            return ret;
+            return _context.announcement.OrderBy(s => s.Id).LastOrDefault();
         }
 
         public IQueryable GetPresidentCharge()
